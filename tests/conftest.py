@@ -110,7 +110,11 @@ for _sub in ("sab_pe_shak", "yt_scheduler", "comment_checker"):
 def no_socket(monkeypatch):
     """Galti se bhi internet par request na jaaye (Instagram / Telegram / YouTube)."""
     import socket
+    real_connect = socket.socket.connect
 
-    def blocked(*a, **k):
+    def blocked(self, addr, *a, **k):
+        # Windows asyncio andar hi andar 127.0.0.1 se judta hai - wo internet nahi hai
+        if isinstance(addr, tuple) and addr and addr[0] in ("127.0.0.1", "::1", "localhost"):
+            return real_connect(self, addr, *a, **k)
         raise RuntimeError("test mein network band hai")
     monkeypatch.setattr(socket.socket, "connect", blocked)

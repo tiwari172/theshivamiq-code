@@ -4,6 +4,7 @@
 #   py make_full_reel.py "<story folder>" "<NN Title>" --from 5     step 5 se dobara (pehle wale skip)
 #   py make_full_reel.py "<story folder>" "<NN Title>" --dry-run    sirf batao kya karega, kuch mat chalao
 #   py make_full_reel.py "<story folder>" "<NN Title>" --force      check_reel PROBLEM ke bawajood render (sirf user bole)
+#   --tak 6                    step 6 (render) ke baad ruk jao - story folder mein kuch copy nahi
 #   --style pop|rise|slide     CSV ki STYLE row (default rise)
 #   --haan                     purani MP4 / CSV replace karne ka sawaal mat poocho, seedha "haan"
 #
@@ -317,6 +318,8 @@ class Reel:
             todo = [n for n in STEPS if not self.is_done(n)]
             if todo:                       # ek step dobara -> uske baad wale bhi dobara
                 todo = [n for n in STEPS if n >= todo[0]]
+        if self.o.get("tak"):              # --tak N: step N ke baad ruk jao
+            todo = [n for n in todo if n <= self.o["tak"]]
         return todo
 
     def go(self):
@@ -333,13 +336,16 @@ class Reel:
             for n in todo:
                 say(f"  {n}. " + self.describe(n))
             return True
-        if 7 in todo:
+        if 7 in todo and not dry:
             self.copy_ok = self.ask_copy()      # render se pehle hi pooch lo, baad mein wait na karna pade
         if self.o["from"]:
             self.st.undo_from(self.o["from"])
         for n in todo:
             say(f"\n--- STEP {n}: {STEPS[n]} ---")
             getattr(self, f"step{n}")()
+        if self.o.get("tak") and self.o["tak"] < 8:
+            say(f"\n--tak {self.o['tak']}: yahin ruk gaye. Aage ke liye:  --from {self.o['tak'] + 1}")
+            return True
         self.summary()
         return True
 
@@ -372,19 +378,19 @@ class Reel:
 
 
 def parse_args(argv):
-    opts = {"from": None, "dry": "--dry-run" in argv, "force": "--force" in argv, "yes": "--haan" in argv,
+    opts = {"from": None, "tak": None, "dry": "--dry-run" in argv, "force": "--force" in argv, "yes": "--haan" in argv,
             "style": "rise"}
     pos, i = [], 0
     while i < len(argv):
         a = argv[i]
-        if a in ("--from", "--style"):
+        if a in ("--from", "--tak", "--style"):
             if i + 1 >= len(argv):
                 raise Stop(f"{a} ke baad number / naam do")
             v = argv[i + 1]
-            if a == "--from":
+            if a in ("--from", "--tak"):
                 if not v.isdigit() or int(v) not in STEPS:
-                    raise Stop(f"--from ke baad 1 se 8 ka number do (diya: {v})")
-                opts["from"] = int(v)
+                    raise Stop(f"{a} ke baad 1 se 8 ka number do (diya: {v})")
+                opts[a[2:]] = int(v)
             else:
                 opts["style"] = v.lower()
             i += 2
