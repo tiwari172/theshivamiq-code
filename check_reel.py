@@ -10,7 +10,7 @@
 #   - image ka background safed dabba to nahi (_CUT chahiye)
 #   - image screen ke neeche kat to nahi rahi (_UP chahiye)
 
-import glob, os, sys
+import glob, os, re, sys
 from PIL import Image, ImageChops, ImageDraw
 import make_reel as R
 
@@ -49,7 +49,8 @@ def white_box(path):
 
 def cut_bottom(path, asset_id):
     """image ka neeche wala kinara chipka hai aur ye character (S..) nahi -> screen ke neeche katega"""
-    if asset_id.upper().startswith("S") or asset_id.upper().endswith("_UP"):
+    # sirf Shivam (S01, S16, S2_17 ...) chhodo; SOFA / SAFE jaise "S" wale prop bhi check hon
+    if re.match(r"S\d", asset_id.upper()) or asset_id.upper().endswith("_UP"):
         return False
     a = Image.open(path).convert("RGBA").getchannel("A")
     box = a.getbbox()
@@ -58,9 +59,12 @@ def cut_bottom(path, asset_id):
 
 
 def check(case):
-    rows = R.read_csv(os.path.join(R.CASES, case + ".csv"))
-    layers = R.build_layers(rows)
-    end = max(r["end"] for r in rows)
+    path = os.path.join(R.CASES, case + ".csv")
+    if not os.path.exists(path):
+        return [f"CSV nahi mili: cases\\{case}.csv (naam check karo)"], []
+    rows = R.read_csv(path)
+    if not rows:
+        return ["CSV mein koi row nahi hai (sirf header / STYLE)"], []
     problems = []          # ye hon to render mat karo
     warnings = []          # image wale: dekh lo, shayad theek ho (jaise bed ka neeche chipakna)
 
@@ -79,14 +83,21 @@ def check(case):
         if not a or a in seen:
             continue
         seen.add(a)
-        p = R.find_file(R.ASSETS, a, [".png", ".PNG"])
+        p = R.find_file(R.ASSETS, a, R.asset_exts(r))
         if not p:
             problems.append(f"line {r['line']}: image '{a}.png' assets mein nahi hai")
             continue
+        if "bg" in r["effects"]:
+            continue       # poori screen wali photo: safed / kinara check nahi
         if white_box(p):
             warnings.append(f"line {r['line']}: '{a}' ka background safed hai -> {a}_CUT banao")
         if cut_bottom(p, a):
             warnings.append(f"line {r['line']}: '{a}' ka neeche wala kinara chipka hai -> {a}_UP banao")
+
+    # gayab image wali rows aage ke check mein mat lo (upar PROBLEM aa chuka, warna yahan crash hota)
+    missing = {r["asset"] for r in rows if r["asset"] and not R.find_file(R.ASSETS, r["asset"], R.asset_exts(r))}
+    layers = [L for L in R.build_layers(rows) if L.asset not in missing]
+    end = max(r["end"] for r in rows)
 
     # 3. har hisse (jab screen par kuch badle) ke beech mein: text image ke upar? khaali screen?
     cuts = sorted({0.0, end} | {r["start"] for r in rows} | {r["end"] for r in rows})
@@ -114,8 +125,9 @@ def check(case):
                 img_rows = [L.asset for L in layers if L.start <= tt < L.end]
                 problems.append(f"{tt:.1f}s: text (line {txt_rows}) image {img_rows} ke upar aa raha hai")
                 break
-            has_img = img_a.getbbox() is not None or any(
-                r["asset"] and "bg" in r["effects"] and r["start"] <= tt < r["end"] for r in rows)
+            has_img = img_a.getbbox() is not None or any(   # gayab image bhi image hi hai (PROBLEM upar aa chuka)
+                r["asset"] and ("bg" in r["effects"] or r["asset"] in missing) and r["start"] <= tt < r["end"]
+                for r in rows)
             if not has_img and txt_a.getbbox() is not None:
                 problems.append(f"{a:.1f}-{b:.1f}s: screen par sirf text hai, koi image nahi (pichhli image aage badhao)")
                 break

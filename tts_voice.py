@@ -9,10 +9,12 @@
 #   pause = line ke baad kitne second chup
 #   text  = Devanagari mein likho (Hindi awaaz sahi bolti hai)
 # '#' se shuru line = comment
+#
+# DHYAAN: user ne ye free awaaz REJECT ki hai (CLAUDE.md). Reel ke liye ElevenLabs (eleven_voice.py) hi use karo.
 
-import asyncio, os, subprocess, sys, tempfile
-import edge_tts
+import asyncio, os, subprocess, sys
 from make_reel import FFMPEG, audio_duration
+from voice_queue import slot
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 VOICE_NAME = "hi-IN-MadhurNeural"   # mard ki awaaz  (aurat: hi-IN-SwaraNeural)
@@ -37,6 +39,7 @@ def sign(n):
 
 
 async def speak(text, mood, path):
+    import edge_tts      # sirf yahan chahiye (script padhne / test ke liye install zaroori nahi)
     rate, pitch, vol = MOODS[mood]
     await edge_tts.Communicate(text, VOICE_NAME, rate=sign(rate + BASE_RATE) + "%",
                                pitch=sign(pitch) + "Hz", volume=sign(vol) + "%").save(path)
@@ -50,20 +53,43 @@ def trim(src, dst):
                    check=True)
 
 
-def main():
-    case = sys.argv[1]
+def read_script(path):
+    """mood | pause | text wali lines padho"""
+    if not os.path.exists(path):
+        sys.exit(f"Script nahi mili: {path}")
     lines = []
-    with open(os.path.join(BASE, "voice_scripts", case + ".txt"), encoding="utf-8") as f:
+    with open(path, encoding="utf-8-sig") as f:
         for n, raw in enumerate(f, 1):
             raw = raw.strip()
             if not raw or raw.startswith("#"):
                 continue
+            if raw.count("|") < 2:
+                sys.exit(f"line {n}: 'mood | pause | text' format nahi hai: {raw[:40]}")
             mood, pause, text = [p.strip() for p in raw.split("|", 2)]
             if mood not in MOODS:
                 sys.exit(f"line {n}: mood '{mood}' galat hai. {' / '.join(MOODS)} likho.")
-            lines.append((mood, float(pause), text))
+            try:
+                lines.append((mood, float(pause), text))
+            except ValueError:
+                sys.exit(f"line {n}: pause '{pause}' number hona chahiye (jaise 0.4)")
+    if not lines:
+        sys.exit(f"Script mein koi line nahi: {path}")
+    return lines
 
-    tmp = tempfile.mkdtemp()
+
+def main():
+    if len(sys.argv) < 2:
+        sys.exit('Aise chalao: python tts_voice.py "03 29 February ki Shaadi"')
+    if hasattr(sys.stdout, "reconfigure"):   # Devanagari line print karte waqt crash na ho
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    print("DHYAAN: ye free awaaz user ne reject ki hai -> reel ke liye eleven_voice.py use karo.", file=sys.stderr)
+    case = sys.argv[1]
+    lines = read_script(os.path.join(BASE, "voice_scripts", case + ".txt"))
+    with slot("voice") as tmp:      # $TEMP nahi (CLAUDE.md), apna alag slot folder; kaam ke baad saaf
+        make_voice(case, lines, tmp)
+
+
+def make_voice(case, lines, tmp):
     parts, t = [], 0.0
     print("  time           mood      text")
     for i, (mood, pause, text) in enumerate(lines):
@@ -81,6 +107,7 @@ def main():
         fc += f"[{i}:a]apad=pad_dur={pause if i < len(parts) - 1 else 0.3}[p{i}];"
         labels += f"[p{i}]"
     fc += f"{labels}concat=n={len(parts)}:v=0:a=1[o]"
+    os.makedirs(os.path.join(BASE, "voice"), exist_ok=True)
     out = os.path.join(BASE, "voice", case + ".m4a")
     cmd += ["-filter_complex", fc, "-map", "[o]", "-c:a", "aac", "-b:a", "192k", out]
     subprocess.run(cmd, check=True)

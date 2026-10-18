@@ -21,6 +21,7 @@ CASES = os.path.join(BASE, "cases")
 OUTPUT = os.path.join(BASE, "output")
 SFX = os.path.join(BASE, "sfx")
 BG_FILE = os.path.join(ASSETS, "BG_MAIN.png")
+COMMON_MUSIC = r"C:\Users\Hp\Desktop\reels story\Common\bg music.mp3"   # music\ khaali ho to ye
 
 FONT_FILE = r"C:\Windows\Fonts\ariblk.ttf"   # channel ka ek hi font
 FONT_SIZE = 72
@@ -89,12 +90,17 @@ def find_ffmpeg():
 
 FFMPEG = find_ffmpeg()
 FFPROBE = os.path.join(os.path.dirname(FFMPEG), "ffprobe.exe")
+if not os.path.exists(FFPROBE):         # ffmpeg kisi aur jagah se mila (ya Linux) -> PATH wala ffprobe
+    FFPROBE = shutil.which("ffprobe") or FFPROBE
 
 
 def audio_duration(path):
     out = subprocess.run([FFPROBE, "-v", "error", "-show_entries", "format=duration",
                           "-of", "csv=p=0", path], capture_output=True, text=True)
-    return float(out.stdout.strip())
+    try:
+        return float(out.stdout.strip())
+    except ValueError:
+        sys.exit(f"Audio file ki length nahi padh paaya (file kharab / khaali?): {path}\n{out.stderr.strip()}")
 
 
 def mean_db(path):
@@ -164,6 +170,16 @@ def out_scale(time_left):
 
 
 # ---------- CSV ----------
+def parse_focus(v):
+    """focus column 'x;y' -> (x, y). Khaali = (0.5, 0.3)"""
+    if not v:
+        return (0.5, 0.3)
+    parts = tuple(float(p) for p in v.split(";"))
+    if len(parts) != 2:
+        raise ValueError(f"focus '{v}' mein 2 number chahiye")
+    return parts
+
+
 def read_csv(path):
     global POP_STYLE
     POP_STYLE = "pop"
@@ -191,12 +207,12 @@ def read_csv(path):
                     # naye (optional) columns
                     "sfx": r.get("sfx", "").lower(),
                     "color": (r.get("color") or "white").lower(),
-                    "focus": tuple(float(v) for v in r["focus"].split(";")) if r.get("focus") else (0.5, 0.3),
+                    "focus": parse_focus(r.get("focus", "")),
                     # sirf text wali line mein 'size' = font size
                     "font": float(r["size"]) if r.get("size") and not r.get("asset_id") else FONT_SIZE,
                 }
             except (KeyError, ValueError) as e:
-                sys.exit(f"CSV line {i} mein galti hai ({e}). start/end number hone chahiye.")
+                sys.exit(f"CSV line {i} mein galti hai ({e}). start/end/size number hone chahiye, focus 'x;y' (jaise 0.5;0.3).")
             if row["end"] <= row["start"]:
                 sys.exit(f"CSV line {i}: end ({row['end']}) start ({row['start']}) se bada hona chahiye.")
             if row["pos"] not in POSITIONS:
@@ -444,10 +460,15 @@ def draw_weather(frame, kind, t, strength):
 
 
 # ---------- checks ----------
+def asset_exts(row):
+    """'bg' wali poori-screen image .jpg bhi ho sakti hai (load_bg leta hai)"""
+    return [".png", ".PNG", ".jpg"] if "bg" in row["effects"] else [".png", ".PNG"]
+
+
 def check_case(case, rows, layers, duration):
     problems = []
     for r in rows:
-        if r["asset"] and not find_file(ASSETS, r["asset"], [".png", ".PNG"]):
+        if r["asset"] and not find_file(ASSETS, r["asset"], asset_exts(r)):
             problems.append(f"line {r['line']}: image '{r['asset']}.png' assets folder mein nahi hai")
         if r["sfx"] and not find_file(SFX, r["sfx"], [".wav", ".mp3"]):
             problems.append(f"line {r['line']}: sound '{r['sfx']}' sfx folder mein nahi hai")
@@ -469,13 +490,26 @@ def check_case(case, rows, layers, duration):
 
 
 # ---------- main render ----------
+def find_music(case):
+    """music\\<case>.mp3, warna music\\ ki pehli mp3/m4a, warna Common\\bg music.mp3"""
+    return find_file(MUSIC, case, [".mp3", ".m4a", ".wav"]) or \
+        next(iter(sorted(glob.glob(os.path.join(MUSIC, "*.mp3")) + glob.glob(os.path.join(MUSIC, "*.m4a")))), None) or \
+        (COMMON_MUSIC if os.path.exists(COMMON_MUSIC) else None)
+
+
 def render(case):
     csv_path = os.path.join(CASES, case + ".csv")
+    if not os.path.exists(csv_path):
+        print(f"[{case}] CSV nahi mili: cases\\{case}.csv (naam check karo)")
+        return False
     voice = find_file(VOICE, case, [".mp3", ".m4a", ".wav"])
     if not voice:
         print(f"[{case}] voice file nahi mili: voice\\{case}.mp3 (ya .m4a/.wav) rakho")
         return False
     rows = read_csv(csv_path)
+    if not rows:
+        print(f"[{case}] CSV mein koi row nahi hai (sirf header / STYLE)")
+        return False
     layers = build_layers(rows)
     duration = max(audio_duration(voice), max(r["end"] for r in rows))
     if not check_case(case, rows, layers, duration):
@@ -484,8 +518,9 @@ def render(case):
     if not check_reel.report(case) and "--force" not in sys.argv:
         return False
 
-    music = find_file(MUSIC, case, [".mp3", ".m4a", ".wav"]) or \
-        next(iter(sorted(glob.glob(os.path.join(MUSIC, "*.mp3")) + glob.glob(os.path.join(MUSIC, "*.m4a")))), None)
+    music = find_music(case)
+    if not music:
+        print(f"[{case}] DHYAAN DO: music nahi mila! music\\ folder mein 'bg music.mp3' rakho (reel bina music banegi)")
     mutes = [(r["start"], r["start"] + 1.0) for r in rows if "music_off" in r["effects"]]
     nights = [(r["start"], r["end"]) for r in rows if "night" in r["effects"]]
     weathers = [(r["start"], r["end"], k) for r in rows for k in WEATHER_COUNT if k in r["effects"]]
@@ -579,10 +614,16 @@ def render(case):
                 frame = Image.blend(frame, white_full, flash)
             last_bytes = frame.convert("RGB").tobytes()
             last_key = key
-        proc.stdin.write(last_bytes)
+        try:
+            proc.stdin.write(last_bytes)
+        except OSError:                 # FFmpeg beech mein band ho gaya (error upar dikhega)
+            break
         if n % (FPS * 5) == 0:
             print(f"   {int(100 * n / total)}%", flush=True)
-    proc.stdin.close()
+    try:
+        proc.stdin.close()
+    except OSError:
+        pass
     proc.wait()
     if proc.returncode != 0:
         print(f"[{case}] FFmpeg fail hua")

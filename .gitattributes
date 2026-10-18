@@ -1,0 +1,2 @@
+# Windows .bat files hamesha CRLF (LF wali .bat mein goto/label kabhi kabhi fail hota hai)
+*.bat text eol=crlf
