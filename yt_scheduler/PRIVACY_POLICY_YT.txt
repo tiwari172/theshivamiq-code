@@ -1,0 +1,50 @@
+=====================================================================
+PAGE 1 - PRIVACY POLICY  (Google Site par "Privacy Policy" page mein copy karo)
+<aapka email> ki jagah apna email likho. Baaki text mat badlo.
+=====================================================================
+Privacy Policy – theshivamiq uploader
+Last updated: 18 October 2026
+
+1. What this app is
+"theshivamiq uploader" is a private desktop tool used only by the owner of the
+YouTube channel "theshivamiq" (https://www.youtube.com/@theshivamiq) to upload
+and schedule the channel's own Shorts. It is not a public app. Nobody else signs
+in to it.
+
+2. YouTube API Services
+This app uses YouTube API Services. By using it, the user agrees to be bound by
+the YouTube Terms of Service: https://www.youtube.com/t/terms
+Google's Privacy Policy applies to the data Google processes:
+https://policies.google.com/privacy
+
+3. What data the app uses
+The app asks only for the "youtube.upload" permission. It sends the owner's own
+video files, title, description, tags and schedule time to YouTube. It reads
+nothing else from YouTube or Google. It does not read, collect, store or share
+any data about other people.
+
+4. What is stored and where
+- The OAuth sign-in token is stored only in a file on the owner's own computer.
+- After an upload, only the YouTube video ID and upload status are written into
+  the owner's own Excel sheet on the same computer.
+Nothing is sold, shared with third parties, or used for advertising.
+
+5. How to remove access / delete data
+Access can be removed at any time from the Google security settings page:
+https://security.google.com/settings/security/permissions
+Deleting the token file on the computer also removes the app's access.
+The stored video IDs can be deleted from the Excel sheet at any time.
+
+6. Contact
+Email: <aapka email>
+
+=====================================================================
+PAGE 2 - TERMS  (Google Site par "Terms" page mein copy karo)
+=====================================================================
+Terms of Use – theshivamiq uploader
+
+"theshivamiq uploader" is a personal tool for use only by the owner of the
+"theshivamiq" YouTube channel. It uses YouTube API Services. By using this
+tool you agree to be bound by the YouTube Terms of Service:
+https://www.youtube.com/t/terms
+Contact: <aapka email>

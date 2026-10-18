@@ -3,7 +3,7 @@ Follower: /start -> Instagram username -> code reel par comment -> Telegram join
 -> sab sahi to verified.txt mein naam + rank milta hai.  /rank se apna rank.
 Chalao: run_bot.bat  (window khuli rakho)
 """
-import os, re, sys, json, time, random, subprocess
+import os, re, sys, json, time, random, subprocess, html, shutil
 from datetime import datetime, timedelta, timezone
 import requests
 import ig_api
@@ -19,6 +19,7 @@ YT_LINK = "https://www.youtube.com/@theshivamiq?sub_confirmation=1"
 IG_LINK = "https://www.instagram.com/theshivamiq/"
 CHECKER_HOUR = 9          # roz subah 9 baje (IST) leaderboard update
 SHAK_PER_DAY = 15
+CHECKER_TIMEOUT = 45 * 60   # checker isse zyada chale to roko (bot atka na rahe)
 IG_CHECK = False          # Instagram code comment wala check (False = admin khud naam dekhta hai)
 IST = timezone(timedelta(hours=5, minutes=30))
 
@@ -29,10 +30,13 @@ def log(*a):
 
 # ------------------------------------------------------------ token / telegram
 def bot_token():
-    with open(ig_api.ENV, encoding="utf-8-sig") as f:
-        for line in f:
-            if line.strip().startswith("TG_BOT_TOKEN="):
-                return line.split("=", 1)[1].strip()
+    try:
+        with open(ig_api.ENV, encoding="utf-8-sig") as f:
+            for line in f:
+                if line.strip().startswith("TG_BOT_TOKEN="):
+                    return line.split("=", 1)[1].strip().strip('"').strip("'")
+    except OSError:
+        sys.exit(".env file nahi mili: " + ig_api.ENV)
     sys.exit(".env mein TG_BOT_TOKEN nahi mila")
 
 
@@ -43,12 +47,19 @@ def tg(method, _timeout=30, _files=None, **params):
     for k, v in list(params.items()):
         if isinstance(v, (dict, list)):
             params[k] = json.dumps(v)
-    try:
-        r = requests.post("https://api.telegram.org/bot%s/%s" % (TOKEN, method), data=params, files=_files, timeout=_timeout)
-        d = r.json()
-    except Exception as e:      # message mein URL (token) ho sakta hai, isliye sirf type
-        log("Telegram connection problem:", type(e).__name__)
-        return None
+    for attempt in range(2):
+        try:
+            r = requests.post("https://api.telegram.org/bot%s/%s" % (TOKEN, method), data=params, files=_files, timeout=_timeout)
+            d = r.json()
+        except Exception as e:      # message mein URL (token) ho sakta hai, isliye sirf type
+            log("Telegram connection problem:", type(e).__name__)
+            return None
+        # 429 = bahut tez message: Telegram jitna kahe utna ruk kar ek baar dobara (file upload dobara nahi)
+        retry = (d.get("parameters") or {}).get("retry_after") if d.get("error_code") == 429 else None
+        if retry and attempt == 0 and not _files:
+            time.sleep(min(int(retry), 60) + 1)
+            continue
+        break
     if not d.get("ok"):
         log("Telegram error (%s): %s" % (method, d.get("description")))
         return None
@@ -171,6 +182,7 @@ def in_channel(user_id):
 
 # ------------------------------------------------------------ rank text
 def rank_text(ig):
+    ig = html.escape(ig or "")   # "/rank <kuch bhi>" se HTML toot kar jawab gayab na ho
     rk = load(RANKS, {})
     d = rk.get("users", {}).get(ig.lower())
     if not d:
@@ -179,7 +191,7 @@ def rank_text(ig):
                 "<i>Data update: %s</i>") % (ig, rk.get("updated", "-"))
     ok = ig.lower() in verified_set()
     if ok:
-        rank = d["rank"] or "Abhi koi rank nahi (3 sahi par Junior Detective)"
+        rank = html.escape(d["rank"]) or "Abhi koi rank nahi (3 sahi par Junior Detective)"
     else:
         rank = ("🔒 " + d["would"] + " (verify poora karo to milega)") if d["would"] else \
             "Abhi koi rank nahi (3 sahi par Junior Detective)"
@@ -192,7 +204,7 @@ def rank_text(ig):
             "⚡ Jaldi jawab = zyada points: reel ke baad 30 sec mein sahi = +10, 1 min = +8 ... 1 ghante tak bonus.\n"
             "🥇 Reel par pehle 3 sahi = +10 / +7 / +5\n"
             "<i>Data update: %s</i>") % (
-        d["name"], rank, d.get("pts", 0), d["pos"], d.get("pts_live", 0), d.get("pts_week", 0), d["sahi"],
+        html.escape(d["name"]), rank, d.get("pts", 0), d["pos"], d.get("pts_live", 0), d.get("pts_week", 0), d["sahi"],
         d.get("day_streak", 0), d.get("best_day_streak", 0), d["streak"], rk.get("updated", "-"))
 
 
@@ -259,6 +271,9 @@ def do_check(st, uid, chat):
     finish_if_done(st, uid, chat)
 
 
+_admin_fail = {}   # galat /admin PIN ki ginti (sirf memory mein, file format same)
+
+
 def handle_message(st, msg):
     chat = msg["chat"]["id"]
     if msg["chat"].get("type") != "private":
@@ -269,6 +284,8 @@ def handle_message(st, msg):
 
     # ---- admin
     if text.startswith("/admin"):
+        if _admin_fail.get(uid, 0) >= 5:      # PIN ka andaaza lagane wale ko roko
+            return
         if text.split()[-1] == st["admin_pin"]:
             st["admin"] = chat
             save_state(st)
@@ -276,6 +293,10 @@ def handle_message(st, msg):
                        "/update – abhi leaderboard banao\n/shak – shak wale comments\n"
                        "/week – Somvaar wali report\n/month – mahine ki report\n"
                        "/pending – baaki YouTube screenshots\n/stats – ginti")
+        else:
+            _admin_fail[uid] = _admin_fail.get(uid, 0) + 1
+            if _admin_fail[uid] >= 5:
+                log("Galat /admin PIN 5 baar (user id %s) – ab ignore" % uid)
         return
     if chat == st.get("admin"):
         if text == "/stats":
@@ -341,8 +362,9 @@ def handle_message(st, msg):
         forward_yt(st, uid)
         return
 
-    # ---- instagram username
-    if u.get("step") == "ig" or (not u.get("ig_ok") and re.fullmatch(r"@?[A-Za-z0-9._]{2,30}", text)):
+    # ---- instagram username (verified ho chuka ho to "ok" / "thanks" jaise message se naam na badle)
+    if u.get("step") == "ig" or (not u.get("done") and not u.get("ig_ok")
+                                 and re.fullmatch(r"@?[A-Za-z0-9._]{2,30}", text)):
         ig = text.lstrip("@").lower()
         if not re.fullmatch(r"[a-z0-9._]{2,30}", ig):
             send(chat, "Ye sahi Instagram username nahi lag raha. Sirf username bhejo, jaise <code>riya_123</code>")
@@ -416,9 +438,22 @@ def maybe_run_checker(st, force=False):
         return
     log("Comment checker chala raha hoon (leaderboard update)...")
     env = dict(os.environ, PYTHONIOENCODING="utf-8")
-    r = subprocess.run([sys.executable, "-u", os.path.join(HERE, "checker.py")], cwd=HERE, env=env,
-                       stdin=subprocess.DEVNULL, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    try:
+        r = subprocess.run([sys.executable, "-u", os.path.join(HERE, "checker.py")], cwd=HERE, env=env,
+                           stdin=subprocess.DEVNULL, capture_output=True, text=True, encoding="utf-8", errors="replace",
+                           timeout=CHECKER_TIMEOUT)
+    except subprocess.TimeoutExpired:
+        # atka hua checker bot ko hamesha ke liye na roke; aaj dobara nahi chalega
+        log("Checker %d min mein khatam nahi hua – roka" % (CHECKER_TIMEOUT // 60))
+        st["checker_day"] = today
+        save_state(st)
+        if st.get("admin"):
+            send(st["admin"], "⚠️ Comment checker %d min mein khatam nahi hua, roka gaya. /update se dobara chalao."
+                 % (CHECKER_TIMEOUT // 60))
+        return
     out = (r.stdout or "").strip().splitlines()
+    if r.returncode != 0 and r.stderr:
+        out += r.stderr.strip().splitlines()[-3:]
     log("Checker khatam (code %s)\n%s" % (r.returncode, "\n".join(out[-4:])))
     st["checker_day"] = today
     save_state(st)
@@ -426,10 +461,10 @@ def maybe_run_checker(st, force=False):
     if not adm:
         return
     if r.returncode != 0:
-        send(adm, "⚠️ Comment checker mein problem:\n<code>%s</code>" % "\n".join(out[-6:])[-800:])
+        send(adm, "⚠️ Comment checker mein problem:\n<code>%s</code>" % html.escape("\n".join(out[-6:])[-800:]))
         return
     res = [l.strip() for l in out if " : jawab" in l or "Partner:" in l or "Week:" in l or "shoutout" in l]
-    send(adm, "📊 <b>Aaj ka leaderboard</b>\n<code>%s</code>" % "\n".join(res[:6] + res[-3:]))
+    send(adm, "📊 <b>Aaj ka leaderboard</b>\n<code>%s</code>" % html.escape("\n".join(res[:6] + res[-3:])))
     xl = os.path.join(HERE, "leaderboard.xlsx")
     try:
         with open(xl, "rb") as f:
@@ -497,18 +532,26 @@ def send_shak(st, limit):
     send(adm, "🤔 <b>%d shak wale comments</b> – har ek par Sahi/Galat dabao.%s" % (
         len(todo), ("\n(%d aur baaki: /shak)" % left) if left > 0 else ""))
     for x in todo:
-        send(adm, "📁 Case <b>%s</b>  (sahi: %s / no. %s)\n👤 @%s\n💬 %s" % (
-            x["case"], x["answer"], x["number"], x["u"], x["text"].replace("&", "&amp;").replace("<", "&lt;")),
+        ok = send(adm, "📁 Case <b>%s</b>  (sahi: %s / no. %s)\n👤 @%s\n💬 %s" % (
+            x["case"], html.escape(str(x["answer"])), x["number"], x["u"], x["text"].replace("&", "&amp;").replace("<", "&lt;")),
             [[{"text": "✅ Sahi", "callback_data": "sk:%s:S" % x["cid"]},
               {"text": "❌ Galat", "callback_data": "sk:%s:G" % x["cid"]}]])
-        st["shak_sent"].append(x["cid"])
+        if ok:     # message nahi gaya to "bhej diya" mat maano – agli baar dobara aayega
+            st["shak_sent"].append(x["cid"])
     st["shak_sent"] = st["shak_sent"][-5000:]
     save_state(st)
 
 
 def save_decision(cid, verdict):
     p = os.path.join(DATA, "state.json")
-    cst = load(p, {})
+    cst = load(p, None)
+    if cst is None:
+        if os.path.exists(p):
+            # state.json kharab hai: {} likh kar purani yaadein (memory, rank_history) mat mitao
+            bad = p + ".kharab-" + datetime.now().strftime("%Y%m%d_%H%M%S")
+            shutil.copy2(p, bad)
+            log("[!] state.json kharab thi, copy:", os.path.basename(bad))
+        cst = {}
     cst.setdefault("decisions", {})[cid] = verdict
     tmp = p + ".new"
     with open(tmp, "w", encoding="utf-8") as f:

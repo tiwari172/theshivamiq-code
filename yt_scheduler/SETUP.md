@@ -28,6 +28,7 @@ Aapke laptop mein Python 3.14 pehle se hai – kuch karna nahi.
   - Videos: `C:\Users\Hp\Desktop\theshivamiq code\output`
   - Excel: `C:\Users\Hp\Desktop\theshivamiq code\yt_scheduler\schedule.xlsx`
 - Apni Excel ya to is folder mein `schedule.xlsx` naam se rakho, ya `.env` mein `EXCEL_PATH=` ke aage asli path likho (quotes mat lagana).
+- (Optional) `.env` mein `YT_CONTAINS_SYNTHETIC_MEDIA=Haan` likhoge to YouTube ko bataya jaayega ki video mein AI (asli jaisi dikhne wali) cheez hai; `Nahi` = nahi hai; khaali/na likho = script kuch nahi bhejti (pehle jaisa).
 - Excel ke `video_filename` column mein **exact file naam** likho, jaise `01 Ghup Andhera.mp4`.
 - `schedule_datetime` = `2026-10-14 08:00:00` (India time).
 - Script sirf "Post Schedule" sheet ke ye 4 columns badalti hai: `status, log_message, youtube_video_id, processed_at`.
@@ -73,7 +74,8 @@ Theek ho to aage se `3 UPLOAD.bat`.
 
 ## Rules jo script khud follow karti hai
 - Sirf wo rows: status khaali/PENDING, target_platform YOUTUBE ya BOTH, time abhi se 30+ min aage. Sabse pehle wala time pehle.
-- Roz max 6 upload (`quota_state.json`, UTC date se – India mein subah 5:30 baje reset). 6 ke baad: "Aaj ka quota khatam (6/6). Kal phir chalao."
+- Roz max 6 upload (`quota_state.json`). YouTube ka quota **Pacific Time** ki aadhi raat par reset hota hai = India mein **dopahar ~12:30** (Mar–Nov) / **~1:30** (Nov–Mar). Script bhi ab isi hisaab se ginti hai. 6 ke baad: "Aaj ka quota khatam (6/6). Kal phir chalao."
+- Ek saath do baar nahi chalti: chalte waqt `scheduler.lock` banti hai. Doosri window khologe to "Scheduler pehle se chal raha hai" aayega (warna same video 2 baar upload ho sakti thi). Koi window na chal rahi ho aur phir bhi ye aaye to `scheduler.lock` delete karo (6 ghante se purani lock khud hat jaati hai).
 - Har upload ke turant baad Excel save. Excel khuli ho to shuru mein hi: "schedule.xlsx Excel me khuli hai, pehle band karo."
 - Beech mein save fail ho to `pending_updates.json` mein data rakhti hai; agli baar chalane par khud Excel mein daal deti hai.
 - Har cheez `scheduler.log` mein bhi likhi jaati hai.
@@ -82,7 +84,8 @@ Theek ho to aage se `3 UPLOAD.bat`.
 ## Common errors
 | Error | Matlab / kya karein |
 |---|---|
-| `quotaExceeded` | Aaj ka YouTube quota khatam. Row PENDING rehti hai. Kal (subah 5:30 IST ke baad) chalao. |
+| `quotaExceeded` | Aaj ka YouTube quota khatam. Row PENDING rehti hai. Dopahar ~1:30 IST ke baad dobara chalao. |
+| `Scheduler pehle se chal raha hai` | Doosri black window abhi upload kar rahi hai – usse khatam hone do. Koi window nahi to `scheduler.lock` delete karo. |
 | `invalidPublishAt` / publishAt must be in the future | Schedule time nikal gaya ya bahut paas hai. Excel mein time aage karo → `5 RETRY FAILED.bat` → phir upload. |
 | `Excel me khuli hai, pehle band karo` / PermissionError | Excel band karo (Task Manager mein bhi Excel na chal raha ho), phir chalao. |
 | `invalid_grant` / token expired | `token.json` delete karo, dobara chalao → browser login. Har hafte aaye to step 4 ka "In production" check karo. |

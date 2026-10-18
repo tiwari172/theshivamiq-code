@@ -17,12 +17,16 @@ STEP 0 - PEHLE YE TAYYAR RAKHO
     "Project info" box -> "Project number" (12 digit jaisa) copy karke rakho.
 [ ] Apne YouTube channel ka link (jaise https://www.youtube.com/@theshivamiq).
 [ ] Ek PRIVACY POLICY page ka link. Google aksar maangta hai.
-    Aasaan tareeka: sites.google.com -> naya site -> ek page par likho:
-      "theshivamiq uploader is a private tool used only by the owner of the
-       theshivamiq YouTube channel to upload and schedule its own videos.
-       It does not collect, store or share any data of other users.
-       OAuth tokens are stored only on the owner's personal computer.
-       Contact: <aapka email>"
+    Aasaan tareeka: sites.google.com -> naya site -> do page banao:
+      Page 1 "Privacy Policy" + Page 2 "Terms" -> dono ka text is folder ki
+      file "PRIVACY_POLICY_YT.txt" se copy-paste karo (apna email bhar do).
+    ZAROORI: YouTube ki policy ke hisaab se privacy policy mein ye 3 cheezein
+    HONI CHAHIYE (PRIVACY_POLICY_YT.txt mein pehle se hain, mat hatana):
+      1) "uses YouTube API Services" likha ho
+      2) Google Privacy Policy ka link: https://policies.google.com/privacy
+      3) Access hatane ka link: https://security.google.com/settings/security/permissions
+    Aur Terms page mein YouTube Terms of Service ka link: https://www.youtube.com/t/terms
+    (Pehle wale chhote text mein ye nahi the - audit reject ho sakta tha.)
     -> Publish -> link copy karo.
     Isi link ko OAuth consent screen (Branding) mein "Privacy policy link" mein bhi daal do.
 [ ] 3-4 screenshots (ya 1-2 min ki screen recording):
@@ -73,8 +77,8 @@ project are not locked as private.
 Screenshots / video : STEP 0 wale attach karo (ya Google Drive link
                       "Anyone with the link can view" karke do).
 Privacy policy link  : STEP 0 wala link.
-Terms of Service     : maange to wahi Google Site par ek "Terms" page bana
-                      kar link do (2-3 line: "Personal tool, owner use only").
+Terms of Service     : maange to wahi Google Site wale "Terms" page ka link do
+                      (text PRIVACY_POLICY_YT.txt ke neeche wale hisse mein).
 
 Aakhir mein policies wale checkbox padh kar tick karo -> Submit.
 
