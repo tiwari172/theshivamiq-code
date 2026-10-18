@@ -327,7 +327,8 @@ class Reel:
         dry = self.o["dry"]
         say(f"\n=== {self.name} ===\nStory: {self.story}")
         for n, title in STEPS.items():
-            say(f"  {n}. {title:36s} {'CHALEGA' if n in todo else 'skip (ho chuka)'}")
+            later = self.o.get("tak") and n > self.o["tak"]
+            say(f"  {n}. {title:36s} {'CHALEGA' if n in todo else 'nahi (--tak)' if later else 'skip (ho chuka)'}")
         if not todo:
             say("\nSab steps pehle se ho chuke. Dobara chahiye to --from <step number> lagao.")
             return True
