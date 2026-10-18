@@ -3,7 +3,11 @@
 #   py sps.py all           -> saare taiyaar Parts
 #   py sps.py cover SS-001 1 -> sirf cover
 # Saari settings: settings.txt (isi folder mein)
-import os, sys, re, glob, json, math, shutil, subprocess, difflib, unicodedata, datetime, html, winreg
+import os, sys, re, glob, json, math, shutil, subprocess, difflib, unicodedata, datetime, html
+try:
+    import winreg          # sirf Windows par hota hai
+except ImportError:
+    winreg = None
 
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
@@ -33,13 +37,21 @@ S = load_settings()
 
 
 def num(k):
-    return float(S[k])
+    if k not in S:
+        sys.exit(f"settings.txt mein '{k} = ...' wali line nahi mili (galti se mit gayi?). Wapas likho.")
+    try:
+        return float(S[k])
+    except ValueError:
+        sys.exit(f"settings.txt mein '{k} = {S[k]}' number nahi hai. Sirf number likho (jaise 0.5, comma nahi).")
 
 
 def yes(k):
     return S.get(k, "").strip().lower() in ("haan", "han", "yes", "y", "1", "true")
 
 
+for _k in ("series_folder", "excel_file"):
+    if _k not in S:
+        sys.exit(f"settings.txt mein '{_k} = ...' wali line nahi mili (galti se mit gayi?). Wapas likho.")
 SERIES = os.environ.get("SPS_SERIES") or S["series_folder"]  # test ke liye env se badal sakte hain
 EXCEL = os.path.join(SERIES, S["excel_file"])
 STORY_ROOT = os.path.dirname(SERIES)          # ...\reels story
@@ -59,15 +71,28 @@ def find_ffmpeg():
                                   "Gyan.FFmpeg*", "*", "bin", "ffmpeg.exe"))
     if hits:
         return hits[0]
-    sys.exit("FFmpeg nahi mila. PowerShell mein chalao:  winget install Gyan.FFmpeg")
+    return None
 
 
-FFMPEG = find_ffmpeg()
-FFPROBE = os.path.join(os.path.dirname(FFMPEG), "ffprobe.exe")
+def find_ffprobe(ffmpeg):
+    if not ffmpeg:
+        return None
+    for name in ("ffprobe.exe", "ffprobe"):   # Windows / Linux
+        p = os.path.join(os.path.dirname(ffmpeg), name)
+        if os.path.isfile(p):
+            return p
+    return shutil.which("ffprobe") or os.path.join(os.path.dirname(ffmpeg), "ffprobe.exe")
+
+
+FFMPEG = find_ffmpeg()          # na mile to main() mein saaf message
+FFPROBE = find_ffprobe(FFMPEG)
 
 
 def fresh_env():
     env = dict(os.environ)
+    env["PYTHONIOENCODING"] = "utf-8"
+    if winreg is None:     # Linux / Mac: PATH jaisa hai waisa
+        return env
     parts = []
     for hive, key in ((winreg.HKEY_LOCAL_MACHINE, r"SYSTEM\CurrentControlSet\Control\Session Manager\Environment"),
                       (winreg.HKEY_CURRENT_USER, "Environment")):
@@ -84,7 +109,10 @@ def fresh_env():
 def duration_of(path):
     out = subprocess.run([FFPROBE, "-v", "error", "-show_entries", "format=duration", "-of", "csv=p=0", path],
                          capture_output=True, text=True)
-    return float(out.stdout.strip())
+    try:
+        return float(out.stdout.strip())
+    except ValueError:
+        raise RuntimeError(f"file ki lambai nahi padh paaya (kharab / adhoori file?): {path}") from None
 
 
 def find_common():
@@ -137,12 +165,22 @@ def col(headers, *starts):
     return None
 
 
+def at(row, i):
+    """row[i], par column na ho ya row chhoti ho to "" (crash nahi)."""
+    return cell(row[i]) if i is not None and i < len(row) else ""
+
+
 def same_part(row, ci, pi, case, part):
-    return cell(row[ci]).upper() == case.upper() and cell(row[pi]) == str(part)
+    return at(row, ci).upper() == case.upper() and at(row, pi) == str(part)
 
 
 def load_excel():
-    wb = openpyxl.load_workbook(EXCEL, read_only=True, data_only=True)
+    if not os.path.isfile(EXCEL):
+        sys.exit(f"Excel nahi mili: {EXCEL}\n(settings.txt mein series_folder / excel_file check karo)")
+    try:
+        wb = openpyxl.load_workbook(EXCEL, read_only=True, data_only=True)
+    except PermissionError:
+        sys.exit(f"Excel khul nahi rahi (shayad OneDrive sync / lock): {EXCEL}")
     data = {n: read_sheet(wb, n) for n in ("Edit Timeline", "Scripts", "Cover Design", "Tracker")}
     wb.close()
     return data
@@ -152,8 +190,10 @@ def part_list(X):
     hd, rows = X["Edit Timeline"]
     ci, pi = col(hd, "Case"), col(hd, "Part")
     seen = []
+    if ci is None or pi is None:
+        return seen
     for r in rows:
-        k = (cell(r[ci]), cell(r[pi]))
+        k = (at(r, ci), at(r, pi))
         if k[0] and k[1] and k not in seen:
             seen.append(k)
     return seen
@@ -166,7 +206,7 @@ def get_shots(X, case, part):
         "png": ["PNG"], "pos": ["Position"], "size": ["Size"], "anim": ["Animation"], "mirror": ["Mirror"],
         "text": ["On-screen"], "ttype": ["Text Type"], "tpos": ["Text Position"], "sfx": ["SFX at", "XXX"],
         "sfxname": ["SFX"], "music": ["Music"], "overlay": ["Overlay"]}.items()}
-    c["sfxname"] = next(i for i, h in enumerate(hd) if h.upper() == "SFX")
+    c["sfxname"] = next((i for i, h in enumerate(hd) if h.upper() == "SFX"), None)
     shots, level = [], None
     for r in rows:
         if not same_part(r, c["case"], c["part"], case, part):
@@ -197,8 +237,8 @@ def get_script(X, case, part):
     ci, pi = col(hd, "Case"), col(hd, "Part")
     vo, cap, title = col(hd, "Voiceover"), col(hd, "Caption"), col(hd, "Title")
     for r in rows:
-        if same_part(r, ci, pi, case, part):
-            return cell(r[vo]), cell(r[cap]), cell(r[title])
+        if ci is not None and same_part(r, ci, pi, case, part):
+            return at(r, vo), at(r, cap), at(r, title)
     return "", "", ""
 
 
@@ -207,8 +247,8 @@ def get_cover_row(X, case, part):
     ci, pi = col(hd, "Case"), col(hd, "Part")
     for r in rows:
         if ci is not None and same_part(r, ci, pi, case, part):
-            return {"title": cell(r[col(hd, "Cover Title")]), "hook": cell(r[col(hd, "Cover Hook")]),
-                    "badge": cell(r[col(hd, "Badge")]), "png": cell(r[col(hd, "PNG")])}
+            return {"title": at(r, col(hd, "Cover Title")), "hook": at(r, col(hd, "Cover Hook")),
+                    "badge": at(r, col(hd, "Badge")), "png": at(r, col(hd, "PNG"))}
     return None
 
 
@@ -230,7 +270,10 @@ def is_pause(line):
 def transcribe(voice, cache, prompt):
     key = f"{os.path.getsize(voice)}_{int(os.path.getmtime(voice))}_{S['whisper_model']}"
     if os.path.exists(cache):
-        d = json.load(open(cache, encoding="utf-8"))
+        try:
+            d = json.load(open(cache, encoding="utf-8"))
+        except (OSError, ValueError):
+            d = {}          # kharab cache: Whisper dobara chalega
         if d.get("key") == key:
             return d["words"]
     log(f"  Whisper ({S['whisper_model']}) voice sun raha hai... (1-3 min)")
@@ -324,6 +367,8 @@ class Align:
 def build_timing(shots, al, vlen, n_lines):
     voiced = [s for s in shots if not s["cue"].startswith("(")]
     tail = [s for s in shots if s["cue"].startswith("(")]
+    if not voiced:   # saare shots "(...)" wale: pehla shot voice ke saath maan lo
+        voiced, tail = tail[:1], tail[1:]
     early = num("cue_early")
     ptr, line_ptr, found = 0, 0, 0
     for k, sh in enumerate(voiced):
@@ -688,6 +733,7 @@ def mark_excel(case, part):
         if "Story Status" not in wb.sheetnames:
             return
         ws = wb["Story Status"]
+        changed = 0
         hdr_row, cols = None, {}
         for r in range(1, 6):
             vals = [cell(c.value).lower() for c in ws[r]]
@@ -700,9 +746,15 @@ def mark_excel(case, part):
         cv = next((i for v, i in cols.items() if "video bani" in v), None)
         cc = next((i for v, i in cols.items() if v.startswith("case")), None)
         cp = next((i for v, i in cols.items() if v.startswith("part")), None)
+        if cc is None or cv is None:
+            return
         for r in range(hdr_row + 1, ws.max_row + 1):
             if cell(ws.cell(r, cc).value).upper() == case.upper() and (cp is None or cell(ws.cell(r, cp).value) == str(part)):
-                ws.cell(r, cv).value = "Haan"
+                if cell(ws.cell(r, cv).value).lower() != "haan":
+                    ws.cell(r, cv).value = "Haan"
+                    changed += 1
+        if not changed:     # kuch badla hi nahi to Excel dobara save mat karo
+            return
         bk = os.path.join(HERE, "excel_backup")
         os.makedirs(bk, exist_ok=True)
         shutil.copy2(EXCEL, os.path.join(bk, datetime.datetime.now().strftime("%Y%m%d_%H%M%S_") + os.path.basename(EXCEL)))
@@ -716,7 +768,9 @@ def mark_excel(case, part):
 
 # ============================== one part ==============================
 def part_folder(case, part):
-    hits = [d for d in glob.glob(os.path.join(SERIES, case + "*")) if os.path.isdir(d)]
+    # "SS-001 Title" mile, "SS-0010 ..." nahi
+    hits = [d for d in glob.glob(os.path.join(glob.escape(SERIES), glob.escape(case) + "*")) if os.path.isdir(d)
+            and not os.path.basename(d)[len(case):len(case) + 1].isalnum()]
     for d in hits:
         p = os.path.join(d, f"Part {part}")
         if os.path.isdir(p):
@@ -742,7 +796,7 @@ def make_part(X, case, part, report, cover_only=False, render=True):
     ov = os.path.join(pdir, f"SHOTS_{case}_P{part}.csv")
     if os.path.isfile(ov):
         import csv as _csv
-        rows = list(_csv.reader(open(ov, encoding="utf-8-sig")))
+        rows = [r for r in _csv.reader(open(ov, encoding="utf-8-sig")) if r] or [[]]
         shots, level = get_shots({"Edit Timeline": ([cell(h) for h in rows[0]], [tuple(r) for r in rows[1:]])}, case, part)
         log(f"  shots: {os.path.basename(ov)} (Excel ki jagah)")
     vo_text, cap_text, title = get_script(X, case, part)
@@ -802,6 +856,8 @@ def make_part(X, case, part, report, cover_only=False, render=True):
     if not font_ok:
         report.append(f"{case} P{part}: (sirf jaankari) Poppins-Bold.ttf nahi mila, Arial Bold lagaya")
     miss = list(dict.fromkeys(miss))
+    if cover_only and not cov:
+        report.append(f"{case} P{part}: Excel 'Cover Design' sheet mein is Part ki row nahi mili, cover nahi bana")
     if cover_only:
         miss = [m for m in miss if m.startswith("PNG") or m.startswith("cover")]
     if miss:
@@ -809,6 +865,9 @@ def make_part(X, case, part, report, cover_only=False, render=True):
         log("  [X] ye files nahi mili:\n    - " + "\n    - ".join(miss))
         preview_ok = os.environ.get("SPS_PREVIEW") and all(m.startswith("PNG") for m in miss)
         if yes("skip_missing") and not preview_ok:
+            return False
+        fatal = [m for m in miss if not m.startswith("PNG") and not m.startswith("SFX") and not m.startswith("cover")]
+        if fatal and not cover_only:   # voice / BG / music ke bina reel ban hi nahi sakti (crash se pehle ruko)
             return False
         if preview_ok:
             log("  PREVIEW: missing PNG ke bina bana raha hoon")
@@ -963,7 +1022,11 @@ def make_part(X, case, part, report, cover_only=False, render=True):
             except ValueError:
                 off = 0.0
             mx = sh["sfx"].split(":")[1] if ":" in sh["sfx"] else ""   # "SFX_RISER:0.9" = sirf 0.9 sec bajao
-            sfx_list.append((sfx_need[sh["sfx"]], max(sh["s"], sh["s"] + off), float(mx) if mx else 0))
+            try:
+                mx = float(mx) if mx.strip() else 0
+            except ValueError:
+                mx = 0
+            sfx_list.append((sfx_need[sh["sfx"]], max(sh["s"], sh["s"] + off), mx))
     cover_sec = num("cover_seconds") if os.path.isfile(cover_out) else 0.0
     overlays, ov_html, ovdir = [], "", os.path.join(common, "overlays")
     op = num("overlay_opacity") / 100
@@ -1058,12 +1121,14 @@ def make_part(X, case, part, report, cover_only=False, render=True):
         report.append(f"{case} P{part}: render fail hua (upar ka error dekho)")
         return False
     final = os.path.join(viddir, f"REEL_{case}_P{part}{'_PREVIEW' if os.environ.get('SPS_PREVIEW') else ''}.mp4")
-    if os.path.exists(final):
-        shutil.move(final, os.path.join(viddir, f"REEL_{case}_P{part}_purana.mp4"))
     br = num("bitrate_mbps")
+    enc = os.path.join(proj, "final_tmp.mp4")   # pehle yahan banao; fail ho to purani reel jaisi thi waisi rahe
     subprocess.run([FFMPEG, "-y", "-loglevel", "error", "-i", tmp_out, "-c:v", "libx264", "-preset", "medium",
                     "-b:v", f"{br:g}M", "-maxrate", f"{br + 2:g}M", "-bufsize", f"{br * 2:g}M", "-pix_fmt", "yuv420p",
-                    "-r", f"{int(num('fps'))}", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", final], check=True)
+                    "-r", f"{int(num('fps'))}", "-c:a", "aac", "-b:a", "192k", "-movflags", "+faststart", enc], check=True)
+    if os.path.exists(final):
+        shutil.move(final, os.path.join(viddir, f"REEL_{case}_P{part}_purana.mp4"))
+    shutil.move(enc, final)
     # check grid
     grid = os.path.join(proj, "CHECK.png")
     n_all = total + cover_sec
@@ -1089,9 +1154,14 @@ def write_report(report):
         log(f"\nreport: {p}")
 
 
+USAGE = "Use:  py sps.py SS-001 1   |   py sps.py all   |   py sps.py cover SS-001 1"
+
+
 def main(argv):
-    if not argv:
-        sys.exit("Use:  py sps.py SS-001 1   |   py sps.py all   |   py sps.py cover SS-001 1")
+    if not argv or (argv[0].lower() in ("cover", "project") and len(argv) < 2):
+        sys.exit(USAGE)
+    if not FFMPEG:
+        sys.exit("FFmpeg nahi mila. PowerShell mein chalao:  winget install Gyan.FFmpeg")
     X = load_excel()
     report = []
     if argv[0].lower() == "all":
@@ -1102,12 +1172,16 @@ def main(argv):
             if pdir and yes("make_all_skip_done") and any(os.path.isfile(f) for f in fins):
                 log(f"{case} P{part}: pehle se bani hai, skip")
                 continue
-            done += make_part(X, case, part, report)
+            try:   # ek Part ki galti se baaki Parts na rukein
+                done += make_part(X, case, part, report)
+            except Exception as e:
+                log(f"  [X] {case} P{part}: {type(e).__name__}: {e}")
+                report.append(f"{case} P{part}: beech mein galti - {type(e).__name__}: {e}")
         log(f"\n{done} reel(s) bani.")
     elif argv[0].lower() == "cover":
-        make_part(X, argv[1].upper(), argv[2], report, cover_only=True)
+        make_part(X, argv[1].upper(), argv[2] if len(argv) > 2 else "1", report, cover_only=True)
     elif argv[0].lower() == "project":
-        make_part(X, argv[1].upper(), argv[2], report, render=False)
+        make_part(X, argv[1].upper(), argv[2] if len(argv) > 2 else "1", report, render=False)
     else:
         make_part(X, argv[0].upper(), argv[1] if len(argv) > 1 else "1", report)
     write_report(report)

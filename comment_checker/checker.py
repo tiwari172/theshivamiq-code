@@ -64,7 +64,16 @@ def jload(p, default):
     try:
         with open(p, encoding="utf-8") as f:
             return json.load(f)
-    except (OSError, ValueError):
+    except ValueError:
+        # file kharab hai: chupchap {} se overwrite karne se pehle uski copy bacha lo (data na khoye)
+        bad = p + ".kharab-" + datetime.now().strftime("%Y%m%d_%H%M%S")
+        try:
+            os.replace(p, bad)
+            log("[!] %s kharab thi, copy rakh di: %s" % (os.path.basename(p), os.path.basename(bad)))
+        except OSError:
+            pass
+        return default
+    except OSError:
         return default
 
 
@@ -317,6 +326,8 @@ def read_shak_decisions(path):
     except ValueError:
         return out
     for r in rows:
+        if not r or len(r) <= max(fi, ii):
+            continue
         f = str(r[fi] or "").strip().lower()
         cid = str(r[ii] or "").strip()
         if cid and f in ("sahi", "galat", "s", "g", "right", "wrong", "yes", "no"):
@@ -365,6 +376,7 @@ def main():
                 log("Case %s ki koi reel nahi mili." % args.case)
                 return 1
         # 3) comments (purani reels jinka data pin ke baad aa chuka, unhe dobara nahi)
+        failed, ok_n, fail_run = [], 0, 0
         for i, m in enumerate(media, 1):
             s = store[m["id"]]
             age = NOW - ts(m["timestamp"])
@@ -373,11 +385,26 @@ def main():
                     datetime.fromisoformat(last_f) - ts(m["timestamp"]) > timedelta(days=10):
                 continue
             log("  [%d/%d] %s  comments la raha hoon (%s)..." % (i, len(media), m["case"], m.get("comments_count")))
-            s["comments"].update(fetch_comments(m["id"]))
+            try:
+                s["comments"].update(fetch_comments(m["id"]))
+                ok_n, fail_run = ok_n + 1, 0
+            except ig_api.IGError as e:
+                # ek reel ki network/limit galti se poora leaderboard na ruke: purane comments se kaam chalao
+                failed.append(m["case"])
+                fail_run += 1
+                log("  [!] %s ke comments nahi aaye (%s) – purana data use hoga, kal dobara try" % (m["case"], e))
+                if fail_run >= 2:
+                    if not ok_n:
+                        raise   # ek bhi reel nahi aayi = token/internet ki problem, admin ko PROBLEM dikhe
+                    log("  [!] Lagatar 2 reels fail (Instagram limit?) – baaki reels purane data se")
+                    break
+                continue
             s["fetched_at"] = NOW.isoformat()
             if age < timedelta(days=30) or "insights" not in s:
                 s["insights"] = fetch_insights(m["id"])
             jsave(COMMENTS_FILE, store)
+        if failed:
+            log("  [!] In reels ke comments is baar nahi aaye: %s" % ", ".join(failed))
 
     # 4) answer key (nayi cases khud judti hain)
     links = {}

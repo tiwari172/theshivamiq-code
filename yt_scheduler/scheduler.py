@@ -48,6 +48,8 @@ NEEDED_COLUMNS = (
     "target_platform", "status", "log_message", "youtube_video_id", "processed_at",
 )
 MAX_BACKUPS = 20
+QUOTA_TZ = ZoneInfo("America/Los_Angeles")   # YouTube ka daily quota Pacific Time ki aadhi raat par reset hota hai
+LOCK_STALE = timedelta(hours=6)              # isse purani lock file = pichhla run crash hua tha
 
 log = logging.getLogger("yt_scheduler")
 
@@ -79,6 +81,8 @@ class Config:
     pending_file: Path
     log_file: Path
     backup_dir: Path
+    synthetic_media: bool | None = None
+    lock_file: Path | None = None
 
 
 @dataclass
@@ -104,33 +108,63 @@ class Row:
 
 # ---------------------------------------------------------------- config / logging
 
+def zone(name: str) -> ZoneInfo:
+    """TIMEZONE ka naam -> ZoneInfo; galat naam ho to saaf message."""
+    try:
+        return ZoneInfo(name)
+    except Exception:
+        raise SystemExit(f".env mein TIMEZONE={name} samajh nahi aaya (Asia/Kolkata likho). "
+                         "Ya '0 INSTALL.bat' dobara chalao (tzdata).") from None
+
+
 def resolve_path(value: str) -> Path:
     """Relative path ko script folder ke hisaab se poora path banata hai."""
     p = Path(value.strip().strip('"')).expanduser()
     return p if p.is_absolute() else SCRIPT_DIR / p
 
 
+def env_num(name: str, default: str, kind: type = int) -> Any:
+    """.env ka number; khaali ya galat ho to saaf message (traceback nahi)."""
+    raw = (os.getenv(name) or "").strip() or default
+    try:
+        return kind(raw)
+    except ValueError:
+        raise SystemExit(f".env mein {name}={raw} number nahi hai. Sirf number likho (jaise {default}).") from None
+
+
+def env_yes_no(name: str) -> bool | None:
+    """Haan/Yes -> True, Nahi/No -> False, khaali -> None (YouTube ko kuch nahi bhejna)."""
+    raw = (os.getenv(name) or "").strip().lower()
+    if raw in ("haan", "han", "yes", "y", "true", "1"):
+        return True
+    if raw in ("nahi", "nahin", "no", "n", "false", "0"):
+        return False
+    return None
+
+
 def load_config() -> Config:
     """.env file (script ke bagal wali) se settings padhta hai."""
     load_dotenv(SCRIPT_DIR / ".env")
-    env = os.getenv
-    limit = int(env("DAILY_UPLOAD_LIMIT", "6"))
+    env = lambda name, default: (os.getenv(name) or "").strip() or default  # noqa: E731  (khaali = default)
+    limit = env_num("DAILY_UPLOAD_LIMIT", "6")
     return Config(
         video_dir=resolve_path(env("VIDEO_DIR", "output")),
         excel_path=resolve_path(env("EXCEL_PATH", "schedule.xlsx")),
         sheet_name=env("SHEET_NAME", "Post Schedule"),
-        tz=ZoneInfo(env("TIMEZONE", "Asia/Kolkata")),
+        tz=zone(env("TIMEZONE", "Asia/Kolkata")),
         client_secrets=resolve_path(env("YT_CLIENT_SECRETS_FILE", "client_secret.json")),
         token_file=resolve_path(env("YT_TOKEN_FILE", "token.json")),
         category_id=env("YT_CATEGORY_ID", "24"),
         daily_limit=max(0, min(limit, HARD_DAILY_CAP)),
-        min_sleep=float(env("MIN_SLEEP_SECONDS", "5")),
-        max_sleep=float(env("MAX_SLEEP_SECONDS", "15")),
-        max_retries=int(env("MAX_RETRIES", "5")),
+        min_sleep=env_num("MIN_SLEEP_SECONDS", "5", float),
+        max_sleep=env_num("MAX_SLEEP_SECONDS", "15", float),
+        max_retries=env_num("MAX_RETRIES", "5"),
         quota_file=SCRIPT_DIR / "quota_state.json",
         pending_file=SCRIPT_DIR / "pending_updates.json",
         log_file=SCRIPT_DIR / "scheduler.log",
         backup_dir=SCRIPT_DIR / "backups",
+        synthetic_media=env_yes_no("YT_CONTAINS_SYNTHETIC_MEDIA"),
+        lock_file=SCRIPT_DIR / "scheduler.lock",
     )
 
 
@@ -150,8 +184,9 @@ def setup_logging(log_file: Path) -> None:
 # ---------------------------------------------------------------- quota
 
 def utc_today() -> str:
-    """Aaj ki UTC date (YouTube quota UTC midnight par reset hota hai)."""
-    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    """Quota ka "aaj" - Pacific Time ki date (YouTube quota PT midnight par reset hota hai,
+    yaani India mein dopahar ~12:30 / 1:30). Naam purana hi rakha hai."""
+    return datetime.now(QUOTA_TZ).strftime("%Y-%m-%d")
 
 
 def load_quota(cfg: Config) -> dict[str, Any]:
@@ -175,6 +210,38 @@ def save_quota(cfg: Config, state: dict[str, Any]) -> None:
 def quota_left(cfg: Config, state: dict[str, Any]) -> int:
     """Aaj kitne upload aur ho sakte hain."""
     return max(0, cfg.daily_limit - int(state.get("uploads", 0)))
+
+
+# ---------------------------------------------------------------- ek saath do run nahi
+
+def take_lock(cfg: Config) -> None:
+    """scheduler.lock banata hai; doosra run chal raha ho to ruk jaata hai (warna same video 2 baar upload)."""
+    lock = cfg.lock_file
+    if lock is None:
+        return
+    for _ in range(2):
+        try:
+            fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+        except FileExistsError:
+            try:
+                age = datetime.now() - datetime.fromtimestamp(lock.stat().st_mtime)
+            except OSError:
+                continue
+            if age > LOCK_STALE:
+                log.warning("Purani scheduler.lock mili (pichhla run beech mein band hua tha) - hata raha hun.")
+                lock.unlink(missing_ok=True)
+                continue
+            raise SystemExit("Scheduler pehle se chal raha hai (doosri black window dekho). Wo khatam hone do. "
+                             "Agar koi window nahi chal rahi to yt_scheduler\\scheduler.lock delete karo.")
+        with os.fdopen(fd, "w") as f:
+            f.write(f"{os.getpid()} {datetime.now():%Y-%m-%d %H:%M:%S}\n")
+        return
+
+
+def release_lock(cfg: Config) -> None:
+    """scheduler.lock hata deta hai."""
+    if cfg.lock_file is not None:
+        cfg.lock_file.unlink(missing_ok=True)
 
 
 # ---------------------------------------------------------------- excel helpers
@@ -449,6 +516,7 @@ def build_body(row: Row, when: datetime, cfg: Config) -> dict[str, Any]:
             "privacyStatus": "private",
             "publishAt": to_utc_iso(when),
             "selfDeclaredMadeForKids": False,
+            **({"containsSyntheticMedia": cfg.synthetic_media} if cfg.synthetic_media is not None else {}),
         },
     }
 
@@ -667,9 +735,17 @@ def main() -> None:
         elif args.status:
             cmd_status(cfg)
         elif args.retry_failed:
-            cmd_retry_failed(cfg)
+            take_lock(cfg)
+            try:
+                cmd_retry_failed(cfg)
+            finally:
+                release_lock(cfg)
         else:
-            cmd_run(cfg, args.max)
+            take_lock(cfg)
+            try:
+                cmd_run(cfg, args.max)
+            finally:
+                release_lock(cfg)
     except SystemExit as e:
         if isinstance(e.code, str):
             log.error(e.code)

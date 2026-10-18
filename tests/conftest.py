@@ -98,3 +98,19 @@ def write_csv(path, rows):
         f.write("asset_id,start,end,position,size,text,effect,sfx,color,focus\n")
         for r in rows:
             f.write(r + "\n")
+
+# ---- sab_pe_shak / yt_scheduler / comment_checker tests ----
+for _sub in ("sab_pe_shak", "yt_scheduler", "comment_checker"):
+    _p = os.path.join(ROOT, _sub)
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
+
+
+@pytest.fixture(autouse=True)
+def no_socket(monkeypatch):
+    """Galti se bhi internet par request na jaaye (Instagram / Telegram / YouTube)."""
+    import socket
+
+    def blocked(*a, **k):
+        raise RuntimeError("test mein network band hai")
+    monkeypatch.setattr(socket.socket, "connect", blocked)
