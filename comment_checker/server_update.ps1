@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 $ip = "35.222.83.100"
 $key = "$env:USERPROFILE\.ssh\shivam_gcp"
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$files = "checker.py", "tg_bot.py", "answer_key.py", "ig_api.py", "textmatch.py"
+$files = "checker.py", "tg_bot.py", "answer_key.py", "ig_api.py", "textmatch.py", "yt_ocr.py"
 
 function Check($code, $what) {
     if ($code -ne 0) {
@@ -25,8 +25,12 @@ if ($mode -eq "wapas") {
 } else {
     Write-Host "1) Server par purani files ka backup..."
     $list = ($files -join " ")
-    Remote "cd ~/bot && b=backup_`$(date +%Y%m%d_%H%M%S) && mkdir -p `$b && cp $list `$b/ && echo Backup: ~/bot/`$b"
+    Remote "cd ~/bot && b=backup_`$(date +%Y%m%d_%H%M%S) && mkdir -p `$b && for f in $list; do [ -f `$f ] && cp `$f `$b/; done; echo Backup: ~/bot/`$b"
     Check $LASTEXITCODE "Backup"
+
+    Write-Host "1b) YouTube screenshot padhne ka tool (tesseract) - pehli baar 1-2 minute..."
+    Remote "which tesseract >/dev/null 2>&1 || (sudo apt-get update -qq && sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq tesseract-ocr tesseract-ocr-hin >/dev/null); tesseract --version 2>&1 | head -1"
+    Check $LASTEXITCODE "tesseract install"
 
     Write-Host "2) Naya code bhej raha hoon..."
     $paths = $files | ForEach-Object { Join-Path $here $_ }

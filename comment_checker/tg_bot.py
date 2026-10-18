@@ -3,10 +3,11 @@ Follower: /start -> Instagram username -> code reel par comment -> Telegram join
 -> sab sahi to verified.txt mein naam + rank milta hai.  /rank se apna rank.
 Chalao: run_bot.bat  (window khuli rakho)
 """
-import os, re, sys, json, time, random, subprocess, html, shutil
+import os, re, sys, json, time, random, subprocess, html, shutil, tempfile
 from datetime import datetime, timedelta, timezone
 import requests
 import ig_api
+import yt_ocr
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
@@ -21,6 +22,8 @@ CHECKER_HOUR = 9          # roz subah 9 baje (IST) leaderboard update
 SHAK_PER_DAY = 15
 CHECKER_TIMEOUT = 45 * 60   # checker isse zyada chale to roko (bot atka na rahe)
 IG_CHECK = False          # Instagram code comment wala check (False = admin khud naam dekhta hai)
+AUTO_YT = True            # YouTube screenshot bot khud padhe ("Subscribed" + "Shivam") – pass ho to admin ki zaroorat nahi
+AUTO_YT_TRIES = 2         # itni baar fail ho to screenshot admin ke paas (shayad OCR theek se nahi padh paaya)
 IST = timezone(timedelta(hours=5, minutes=30))
 
 
@@ -355,9 +358,14 @@ def handle_message(st, msg):
         if not u or not u.get("ig"):
             send(chat, "Pehle apna Instagram username bhejo.")
             return
+        if u.get("yt_ok"):
+            send(chat, "YouTube pehle hi confirm ho chuka hai ✅", status_msg(st, uid)[1])
+            return
         u["yt_photo"] = msg["photo"][-1]["file_id"]
         u["yt_wait"] = True
         save_state(st)
+        if AUTO_YT and auto_yt(st, uid, chat):
+            return
         send(chat, "📸 Screenshot mil gaya. Check hone ke baad bata denge ✅")
         forward_yt(st, uid)
         return
@@ -383,7 +391,70 @@ def handle_message(st, msg):
     send(chat, "Status dekhne ke liye <b>Check karo</b> dabao, ya /rank likho.", status_msg(st, uid)[1])
 
 
-def forward_yt(st, uid):
+def download_photo(file_id):
+    """Telegram se photo temp file mein. Fail = None."""
+    info = tg("getFile", file_id=file_id)
+    if not info or not info.get("file_path"):
+        return None
+    try:
+        r = requests.get("https://api.telegram.org/file/bot%s/%s" % (TOKEN, info["file_path"]), timeout=30)
+        r.raise_for_status()
+    except Exception as e:      # URL mein token hai, isliye sirf type
+        log("Photo download problem:", type(e).__name__)
+        return None
+    fd, path = tempfile.mkstemp(suffix=os.path.splitext(info["file_path"])[1] or ".jpg")
+    with os.fdopen(fd, "wb") as f:
+        f.write(r.content)
+    return path
+
+
+def auto_yt(st, uid, chat):
+    """Screenshot khud padho. True = maamla khatam (pass ya follower ko dobara bhejne ko bola).
+    False = admin ke paas bhejo (OCR nahi hai / download fail / baar baar fail / copy screenshot)."""
+    u = st["users"][uid]
+    path = download_photo(u["yt_photo"])
+    if not path:
+        return False
+    try:
+        h = yt_ocr.file_hash(path)
+        used = st.setdefault("yt_hash", {})
+        if used.get(h) and used[h] != uid:       # same screenshot kisi aur ne bheja tha = copy
+            log("YouTube screenshot copy lagta hai (@%s) – admin ko" % u.get("ig"))
+            return False
+        res = yt_ocr.check(path)
+    finally:
+        os.remove(path)
+    if res is None:
+        log("tesseract nahi hai – screenshot admin ko (server par: sudo apt-get install tesseract-ocr tesseract-ocr-hin)")
+        return False
+    ok, why = res
+    if ok:
+        used[h] = uid
+        u["yt_ok"] = True
+        u["yt_auto"] = True
+        save_state(st)
+        log("YouTube AUTO pass: @%s (%s)" % (u.get("ig"), why))
+        send(chat, "▶️ YouTube subscribe confirm ho gaya ✅ (bot ne screenshot check kiya)")
+        if st.get("admin"):
+            send(st["admin"], "🤖 Auto pass: @%s – YouTube screenshot mein %s" % (html.escape(u.get("ig") or ""), why))
+        do_check(st, uid, chat)
+        return True
+    u["yt_tries"] = u.get("yt_tries", 0) + 1
+    save_state(st)
+    log("YouTube auto fail %d: @%s (%s)" % (u["yt_tries"], u.get("ig"), why))
+    if u["yt_tries"] >= AUTO_YT_TRIES:
+        send(chat, "📸 Screenshot admin ke paas bhej diya, check karke bata denge ✅")
+        forward_yt(st, uid, note="Bot ko %s (%d baar)" % (why, u["yt_tries"]))
+        return True
+    u["yt_wait"] = False
+    save_state(st)
+    send(chat, "❌ Screenshot mein %s.\n\nYouTube par <b>theshivamiq</b> channel kholo, Subscribe dabao, "
+               "phir aisa screenshot bhejo jisme channel ka naam aur <b>Subscribed</b> button saaf dikhe." % why,
+         [[{"text": "▶️ YouTube subscribe", "url": YT_LINK}]])
+    return True
+
+
+def forward_yt(st, uid, note=""):
     adm = st.get("admin")
     u = st["users"][uid]
     if not adm:
@@ -391,8 +462,8 @@ def forward_yt(st, uid):
         return
     tg("sendPhoto", chat_id=adm, photo=u["yt_photo"],
        caption="Naya detective: @%s\nInstagram: https://www.instagram.com/%s/\n"
-               "Screenshot mein YouTube subscribed dikh raha hai, aur Instagram naam sahi lag raha hai?" % (
-                   u.get("ig"), u.get("ig")),
+               "Screenshot mein YouTube subscribed dikh raha hai, aur Instagram naam sahi lag raha hai?%s" % (
+                   u.get("ig"), u.get("ig"), ("\n(" + note + ")") if note else ""),
        reply_markup={"inline_keyboard": [[{"text": "✅ Sahi", "callback_data": "yt_ok:" + uid},
                                           {"text": "❌ Galat", "callback_data": "yt_no:" + uid}]]})
 
