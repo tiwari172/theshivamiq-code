@@ -9,9 +9,10 @@
 #          C = kaala + neon lime frame, stamp laal, hook safed + peela outline
 # Face: green-screen PNG ho to khud hara hata deta hai (chroma key + Gemini sitara saaf).
 
-import argparse, csv, os, random, re
+import argparse, os, random, sys
 import numpy as np
 from PIL import Image, ImageChops, ImageDraw, ImageFilter, ImageFont
+from make_cover import info      # reel naam -> case number, title, sawaal (dono cover mein same)
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 FACE_FILE = r"C:\Users\Hp\Desktop\reels story\sab pe shak\_common\S2_17.png"   # naya dark look
@@ -190,24 +191,6 @@ def cover(case_no, title, hook, out, style="A", face_file=FACE_FILE):
     return out
 
 
-def info(name, cat=None):
-    m = re.match(r"([A-Z]?\d{2})-(\d{3}) (.+)", name)
-    if m:
-        case_no, title = f"CASE #{m.group(1)}-{m.group(2)}", m.group(3)
-    else:
-        m = re.match(r"(\d{2}) (.+)", name)
-        case_no, title = f"CASE #{int(cat or 1):02d}-0{m.group(1)}", m.group(2)
-    hook = "KILLER KAUN?"
-    path = os.path.join(BASE, "cases", name + ".csv")
-    if os.path.exists(path):
-        for r in list(csv.reader(open(path, encoding="utf-8-sig")))[:8]:
-            txt = " ".join(r[5].split("\\n")).strip().upper() if len(r) > 5 else ""
-            if re.search(r"KAUN\?|PAKDO!", txt):
-                hook = txt
-                break
-    return case_no, title.upper(), hook
-
-
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("cmd", choices=["one", "options"])
@@ -217,12 +200,21 @@ def main():
     ap.add_argument("--hook")
     ap.add_argument("--face", default=FACE_FILE)
     a = ap.parse_args()
-    case_no, title, hook = info(a.name)
+    if a.cmd == "one" and not a.out:
+        ap.error('"one" ke saath out.png bhi do:  py make_cover2.py one "<reel naam>" "<out.png>" --style A')
+    for p in (a.face, LOGO_FILE):
+        if not os.path.exists(p):
+            sys.exit(f"Cover ke liye file nahi mili: {p}")
+    try:
+        case_no, title, hook = info(a.name)
+    except ValueError as e:
+        sys.exit(str(e))
     hook = (a.hook or hook).upper()
     if a.cmd == "one":
         print("bana:", cover(case_no, title, hook, a.out, a.style, a.face))
         return
     code = a.name.split(" ")[0]
+    os.makedirs(os.path.join(BASE, "output"), exist_ok=True)
     outs = []
     for k in STYLES:
         p = os.path.join(BASE, "output", f"{code} COVER {k}.png")

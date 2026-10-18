@@ -13,7 +13,10 @@ from make_reel import (ASSETS, OUTPUT, BG_FILE, FONT_FILE, W, H, COLORS, TEXT_ST
 
 
 def load(asset_id):
-    im = Image.open(find_file(ASSETS, asset_id, [".png", ".PNG"])).convert("RGBA")
+    path = find_file(ASSETS, asset_id, [".png", ".PNG"])
+    if not path:
+        sys.exit(f"image nahi mili: assets\\{asset_id}.png")
+    im = Image.open(path).convert("RGBA")
     return im.crop(im.getchannel("A").getbbox())
 
 
@@ -23,13 +26,18 @@ def fit(im, max_w, max_h):
 
 
 def options(name, items):
+    if not items:
+        sys.exit("options ke liye kam se kam ek  ID:Naam  do (jaise C001_ROHIT:Rohit)")
+    for item in items:
+        if ":" not in item:
+            sys.exit(f"'{item}' galat hai -> ID:Naam likho (jaise C001_ROHIT:Rohit)")
     col, fig_h, badge = W // len(items), 560, 110
     card = Image.new("RGBA", (W, fig_h + badge + 110), (0, 0, 0, 0))
     d = ImageDraw.Draw(card)
     num_font = ImageFont.truetype(FONT_FILE, 70)
     name_font = ImageFont.truetype(FONT_FILE, 46)
     for i, item in enumerate(items):
-        asset, label = item.split(":")
+        asset, label = item.split(":", 1)
         fig = fit(load(asset), col - 20, fig_h)
         x = i * col + (col - fig.width) // 2
         card.alpha_composite(fig, (x, badge + fig_h - fig.height))
@@ -61,8 +69,12 @@ def cover(title, asset, big, small):
 if __name__ == "__main__":
     kind = sys.argv[1] if len(sys.argv) > 1 else ""
     if kind == "options":
+        if len(sys.argv) < 4:
+            sys.exit("Aise likho: make_cards.py options C0NN_OPTIONS ID:Naam ID:Naam ...")
         options(sys.argv[2], sys.argv[3:])
     elif kind == "cover":
+        if len(sys.argv) < 6:
+            sys.exit('Aise likho: make_cards.py cover "<NN Title>" S16 "99% LOG FAIL!" "KILLER KAUN?"')
         cover(*sys.argv[2:6])
     else:
         sys.exit(__doc__ or "make_cards.py options ... / cover ...")

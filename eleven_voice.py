@@ -15,6 +15,7 @@ import os
 import re
 import sys
 import time
+import unicodedata
 import urllib.error
 import urllib.request
 
@@ -99,9 +100,9 @@ def credits(key):
 
 def voice_id(key, verbose=False):
     if os.path.exists(VOICE_FILE):
-        vid = open(VOICE_FILE, encoding="utf-8").read().split()[0]
-        if vid and not verbose:
-            return vid
+        saved = open(VOICE_FILE, encoding="utf-8").read().split()   # khaali file -> library se dobara dhoondho
+        if saved and not verbose:
+            return saved[0]
     voices = json.loads(call("/voices", key))["voices"]
     if verbose:
         print("\nAapki library ki voices:")
@@ -163,16 +164,25 @@ def _speak(key, vid, text, out_mp3):
 FIXED_WORDS = ("कमेंट", "comment", "नज़र से", "नजर से", "nazar se")
 
 
+def _nfc(s):
+    # "नज़र" ka ज़ do tarah type hota hai (ek akshar ya ज + ़) -> dono ko ek jaisa karke milao
+    return unicodedata.normalize("NFC", s).lower()
+
+
 def strip_fixed(text):
-    lines = [l for l in text.splitlines() if not any(w in l.lower() for w in FIXED_WORDS)]
+    words = [_nfc(w) for w in FIXED_WORDS]
+    lines = [l for l in text.splitlines() if not any(w in _nfc(l) for w in words)]
     return "\n".join(lines).strip()
 
 
 def story_nums(arg):
-    if "-" in arg:
-        a, b = arg.split("-")
-        return range(int(a), int(b) + 1)
-    return [int(arg)]
+    try:
+        if "-" in arg:
+            a, b = arg.split("-")
+            return range(int(a), int(b) + 1)
+        return [int(arg)]
+    except ValueError:
+        sys.exit(f"Story number '{arg}' samajh nahi aaya. Aise likho: 9  ya  9-12")
 
 
 def do_stories(key, cat, arg, reveal):
@@ -193,6 +203,8 @@ def do_stories(key, cat, arg, reveal):
             continue
         if main:
             jobs.append((f"Story {n:02d} main", main, os.path.join(folder, "VO_MAIN.mp3")))
+        else:
+            print(f"Story {n:02d}: voice ka text khaali mila (VO_*.txt / MAIN VOICEOVER section check karo), skip")
         if reveal:
             rev = section(text, "ANSWER REVEAL")
             if rev:
@@ -269,7 +281,7 @@ def main():
     if args[0] == "sfx":
         do_sfx(key)
         return
-    if len(args) < 2:
+    if len(args) < 2 or not args[0].isdigit():
         sys.exit("Aise likho:  python eleven_voice.py 1 9   (category, story)")
     do_stories(key, int(args[0]), args[1], False)   # reveal reels band (answer comment mein pin)
 

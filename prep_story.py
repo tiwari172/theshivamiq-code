@@ -19,7 +19,8 @@ PAD_BOTTOM = 20
 
 
 def md5(p):
-    return hashlib.md5(open(p, "rb").read()).hexdigest()
+    with open(p, "rb") as f:
+        return hashlib.md5(f.read()).hexdigest()
 
 
 def remove_white(src, dst):
@@ -64,7 +65,8 @@ def contact_sheet(ids, path):
 def main():
     if len(sys.argv) < 2:
         sys.exit('Chalao: py prep_story.py "<story folder>"')
-    story = sys.argv[1].rstrip("\\/")
+    # "...\Story 07\" likhne par Windows aakhri " ko bhi naam mein de deta hai -> hatao
+    story = sys.argv[1].strip().strip('"').rstrip("\\/")
     img_dir = os.path.join(story, "images")
     if not os.path.isdir(img_dir):
         sys.exit(f"images folder nahi mila: {img_dir}")
@@ -74,8 +76,11 @@ def main():
 
     final = {}          # story ka naam -> CSV mein lagane wala naam
     notes = []
+    os.makedirs(R.ASSETS, exist_ok=True)
     for f in sorted(os.listdir(img_dir)):
         if not f.lower().endswith(".png"):
+            if f.lower().endswith((".jpg", ".jpeg", ".webp")):
+                notes.append(f"{f}: PNG nahi hai, chhod diya (PNG mein save karke dobara chalao)")
             continue
         src = os.path.join(img_dir, f)
         a = os.path.splitext(f)[0]
@@ -106,6 +111,10 @@ def main():
             use = up
         final[os.path.splitext(f)[0]] = use
 
+    if not final:
+        for n in notes:
+            print("  *", n)
+        sys.exit(f"images folder mein koi PNG nahi mili: {img_dir}")
     os.makedirs(R.OUTPUT, exist_ok=True)
     sheet = os.path.join(R.OUTPUT, f"{os.path.basename(story)} {tag} - IMAGES.png")
     contact_sheet(list(final.values()), sheet)

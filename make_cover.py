@@ -134,11 +134,15 @@ def info(name, cat=None):
         case_no, title = f"CASE #{m.group(1)}-{m.group(2)}", m.group(3)
     else:
         m = re.match(r"(\d{2}) (.+)", name)
+        if not m:
+            raise ValueError(f"reel ka naam samajh nahi aaya: '{name}' (aisa hona chahiye: '10-004 Title' ya '04 Title')")
         case_no, title = f"CASE #{int(cat or 1):02d}-0{m.group(1)}", m.group(2)
     hook = "KILLER KAUN?"
     path = os.path.join(BASE, "cases", name + ".csv")
     if os.path.exists(path):
-        for r in list(csv.reader(open(path, encoding="utf-8-sig")))[:8]:
+        with open(path, encoding="utf-8-sig") as f:
+            head = list(csv.reader(f))[:8]
+        for r in head:
             txt = " ".join(r[5].split("\\n")).strip().upper() if len(r) > 5 else ""
             if re.search(r"KAUN\?|PAKDO!", txt):
                 hook = txt
@@ -146,36 +150,63 @@ def info(name, cat=None):
     return case_no, title.upper(), hook
 
 
+def category(folder):
+    m = re.search(r"Category (\d+)", folder)
+    return m.group(1) if m else None
+
+
+def check_files():
+    for p in (FACE_FILE, LOGO_FILE):
+        if not os.path.exists(p):
+            sys.exit(f"Cover ke liye file nahi mili: {p}")
+
+
 def main():
+    check_files()
     if len(sys.argv) > 1 and sys.argv[1] == "one":
-        cover(*info(sys.argv[2]), sys.argv[3])
+        if len(sys.argv) < 4:
+            sys.exit('Aise likho: py make_cover.py one "<reel naam>" "<out.png>"')
+        try:
+            c = info(sys.argv[2])
+        except ValueError as e:
+            sys.exit(str(e))
+        cover(*c, sys.argv[3])
         print("bana:", sys.argv[3])
         return
     if len(sys.argv) > 1 and sys.argv[1] == "redo":
         # jo Case File cover pehle se bane hain unhe naye logo ke saath dobara (same naam par) banao
         n = 0
         for folder in sorted(glob.glob(os.path.join(STORY_ROOT, "Category *", "Story *"))):
-            cat = re.search(r"Category (\d+)", folder).group(1)
+            cat = category(folder)
             for p in glob.glob(os.path.join(folder, "* - COVER*.png")):
                 name = re.sub(r" - COVER( NEW)?\.png$", "", os.path.basename(p))
                 if cat == "1" and p.endswith(" - COVER.png") and os.path.exists(p[:-4] + " NEW.png"):
                     continue   # Cat 1 ka purana design wala cover, user ne rakhne ko kaha tha
-                cover(*info(name, cat), p)
+                try:
+                    c = info(name, cat)
+                except ValueError as e:
+                    print("skip:", e)
+                    continue
+                cover(*c, p)
                 n += 1
         print(f"{n} cover naye logo ke saath dobara bane.")
         return
     made, skipped = 0, []
     for folder in sorted(glob.glob(os.path.join(STORY_ROOT, "Category *", "Story *"))):
-        mp4s = [p for p in glob.glob(os.path.join(folder, "*.mp4")) if "(v1)" not in p]
+        mp4s = sorted(p for p in glob.glob(os.path.join(folder, "*.mp4")) if "(v1)" not in p)
         if not mp4s:
             continue
         name = os.path.splitext(os.path.basename(mp4s[0]))[0]
+        cat = category(folder)
+        try:
+            c = info(name, cat)
+        except ValueError as e:
+            print("skip:", e)
+            continue
         out = os.path.join(folder, name + " - COVER.png")
         if os.path.exists(out):   # purana cover mat mitao
             out = os.path.join(folder, name + " - COVER NEW.png")
             skipped.append(name)
-        cat = re.search(r"Category (\d+)", folder).group(1)
-        c = info(name, cat)
         cover(*c, out)
         made += 1
         print(f"{c[0]}  {c[2]:<16} {c[1]}")

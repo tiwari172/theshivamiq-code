@@ -7,12 +7,38 @@
 #   from voice_queue import slot, safe_replace
 #   with slot("voice") as folder:  ...   # folder = is kaam ka apna temp folder
 
-import contextlib, msvcrt, os, shutil, sys, time
+import contextlib, os, shutil, sys, time
+
+try:
+    import msvcrt                      # Windows (laptop)
+except ImportError:                    # Linux / Mac (cloud test) -> fcntl wala lock
+    msvcrt = None
+    import fcntl
 
 BASE = os.path.dirname(os.path.abspath(__file__))
 WORK = os.path.join(BASE, "work")
 SLOTS = {"voice": 4, "eleven": 3}   # voice jodna/tighten = 4 ek saath, ElevenLabs API = 3 ek saath
 WAIT = 2                            # busy ho to kitne second baad dobara dekhe
+
+
+def _try_lock(f):
+    """file par lock lagao; koi aur pakde hue hai to False"""
+    try:
+        if msvcrt:
+            msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+        else:
+            fcntl.flock(f.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        return True
+    except OSError:
+        return False
+
+
+def _unlock(f):
+    with contextlib.suppress(OSError):
+        if msvcrt:
+            msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+        else:
+            fcntl.flock(f.fileno(), fcntl.LOCK_UN)
 
 
 def _log(msg):
@@ -27,9 +53,7 @@ def slot(kind="voice"):
         for i in range(1, n + 1):
             f = open(os.path.join(WORK, f"{kind}_slot{i}.lock"), "a+")
             f.seek(0)
-            try:
-                msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
-            except OSError:
+            if not _try_lock(f):
                 f.close()
                 continue
             folder = os.path.join(WORK, f"{kind}_slot{i}")
@@ -41,8 +65,7 @@ def slot(kind="voice"):
             finally:
                 shutil.rmtree(folder, ignore_errors=True)
                 f.seek(0)
-                with contextlib.suppress(OSError):
-                    msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+                _unlock(f)
                 f.close()
             return
         if not waited:
@@ -66,6 +89,12 @@ if __name__ == "__main__":
     # haath se audio kaatna/jodna bhi queue mein:  py voice_queue.py ffmpeg -i a.mp3 ... "SLOTDIR\x.wav"
     # SLOTDIR = is kaam ka apna alag folder (kaam khatam hote hi saaf; final file bahar likho)
     import subprocess
+    if len(sys.argv) < 2:
+        sys.exit('Aise chalao:  py voice_queue.py ffmpeg -i a.mp3 ... "SLOTDIR\\x.wav"')
+    cmd = sys.argv[1:]
+    if cmd[0].lower() in ("ffmpeg", "ffmpeg.exe") and not shutil.which(cmd[0]):
+        from make_reel import FFMPEG      # PATH mein nahi -> winget wala ffmpeg dhoondho
+        cmd[0] = FFMPEG
     with slot("voice") as folder:
-        code = subprocess.run([a.replace("SLOTDIR", folder) for a in sys.argv[1:]]).returncode
+        code = subprocess.run([a.replace("SLOTDIR", folder) for a in cmd]).returncode
     sys.exit(code)

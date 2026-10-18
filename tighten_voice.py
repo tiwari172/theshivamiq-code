@@ -23,9 +23,13 @@ def speech_chunks(path):
     out = subprocess.run([FFMPEG, "-hide_banner", "-i", path, "-af",
                           f"silencedetect=noise={SILENCE_DB}dB:d={MIN_SILENCE}", "-f", "null", "-"],
                          capture_output=True, text=True).stderr
-    starts = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", out)]
-    ends = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", out)]
-    total = audio_duration(path)
+    return chunks_from_log(out, audio_duration(path))
+
+
+def chunks_from_log(out, total):
+    """silencedetect ke log se bolne wale tukde. FFmpeg kabhi 'silence_start: -0.002' (minus) deta hai."""
+    starts = [max(0.0, float(x)) for x in re.findall(r"silence_start: (-?[\d.]+)", out)]
+    ends = [float(x) for x in re.findall(r"silence_end: (-?[\d.]+)", out)]
     chunks, cur = [], 0.0
     for s, e in zip(starts, ends + [total] * (len(starts) - len(ends))):
         if s > cur:
@@ -37,8 +41,12 @@ def speech_chunks(path):
 
 
 def main():
+    if len(sys.argv) < 3:
+        sys.exit('Aise chalao: py tighten_voice.py "voice\\purani.m4a" "voice\\nayi.m4a" [--end A-B]')
     src, dst = sys.argv[1], sys.argv[2]
     chunks = speech_chunks(src)
+    if not chunks:
+        sys.exit(f"Voice mein koi awaaz nahi mili (poori chup?): {src}")
     if "--end" in sys.argv:
         a, b = map(float, sys.argv[sys.argv.index("--end") + 1].split("-"))
         for cut in (a, b):   # jo tukda A ya B ke aar-paar hai use wahin todo
@@ -59,7 +67,8 @@ def main():
             t += GAP
     n = len(chunks) * 2 - 1
     fc = "".join(parts) + f"{labels}concat=n={n}:v=0:a=1,atempo={SPEED}[o]"
-    part = f"{dst[:-4]}.part{os.getpid()}{dst[-4:]}"   # poori bane tab hi final naam (dusri chat aadhi file na padhe)
+    root, ext = os.path.splitext(dst)
+    part = f"{root}.part{os.getpid()}{ext}"   # poori bane tab hi final naam (dusri chat aadhi file na padhe)
     subprocess.run([FFMPEG, "-v", "error", "-y", "-i", src, "-filter_complex", fc,
                     "-map", "[o]", "-c:a", "aac", "-b:a", "192k", part], check=True)
     safe_replace(part, dst)
