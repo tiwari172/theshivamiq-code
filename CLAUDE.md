@@ -35,6 +35,13 @@ Details: `REEL_EK_COMMAND.txt`. Draft CSV ke baad bhi frame grid zaroor dekho.
 8. **Check:** render ke baad `output\<NN Title> - CHECK.png` (16 frames ki grid) apne aap banti hai — sirf wahi ek image dekho: galat pose, khaali screen, kati hui image.
 9. **Copy:** MP4 + CSV (as `timing.csv`) story folder mein. Phir `py make_cover.py all` → naya "Case File" cover (logo + @theshivamiq) `<reel naam> - COVER.png` story folder mein. Sirf ek reel: `py make_cover.py one "<reel naam>" "<story folder>\<reel naam> - COVER.png"` (`all` purana cover nahi mitata, "- COVER NEW.png" bana deta hai). User ko MP4 bhejo. Memory update karo.
 
+## Ek command wala tareeka (2026-10-18 se, laptop par test hua)
+- `py make_full_reel.py "<story folder>" "<NN Title>"` → steps 2–9 khud (prep, build_voice, auto_csv DRAFT, cards, check, render, copy, cover).
+  `--tak 6` = render ke baad ruko (story folder mein kuch copy nahi), `--from N` = step N se dobara, `--dry-run`. VO_MAIN.mp3 pehle se chahiye.
+  auto_csv sirf DRAFT hai: CHECK.png dekho, hook caption ka tootna / CAPS emphasis haath se sudharo.
+- Helpers: `SETUP CHECK.bat` (doctor.py), `REEL STATUS.bat` (kaun si reel baaki), `CODE SYNC.bat` (GitHub sync + secret check), `CLEANUP.bat`.
+- Code GitHub par: private `tiwari172/theshivamiq-code`. Tests: `py -m pytest tests` (136 pass). Reports `REPORTS\` mein.
+
 ## Reel ka structure (har reel same)
 - Hook (0–4s): bada yellow sawaal (KILLER KAUN? / CHOR KAUN? / GALTI PAKDO!) + VO ki line, image `nopop`.
 - Crime scene (maut par `night` + `heartbeat`) → Shivam (S01, `whoosh`) → suspects `SUSPECT 1/4` yellow + naam + quote.
