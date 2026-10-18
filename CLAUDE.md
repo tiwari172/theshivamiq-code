@@ -11,6 +11,9 @@ Memory (`reels-story-folder-layout`, `folder-access-scope`, `user-profile`) zaro
 - Purani MP4 overwrite karne se pehle user se poocho (jab tak user ne khud redo na bola ho).
 
 ## Ek reel ke steps
+**Ek command (naya):** `py make_full_reel.py "<story folder>" "<NN Title>"` neeche ke saare steps (2-9) khud chalata hai,
+CSV `auto_csv.py` se DRAFT banti hai. Ruk jaaye to wajah padho, theek karo, wahi command dobara (`--from N`, `--dry-run`).
+Details: `REEL_EK_COMMAND.txt`. Draft CSV ke baad bhi frame grid zaroor dekho.
 1. **Padho:** `SCRIPT_*.txt` (voiceover, SCENE ORDER, ANSWER). Answer-reveal wala section ignore karo (answer reel nahi banti).
 2. **Images:** `py prep_story.py "<story folder>"` — ye khud: PNG `assets\` mein copy (same naam par alag image → `<ID>_<CCSS>`, overwrite nahi), safed background → `<ID>_CUT`, neeche chipka prop → `<ID>_UP`, aur `output\Story NN CCSS - IMAGES.png` contact sheet (cream bg par). Aakhir mein "CSV mein ye naam lagao" list deta hai — CSV mein wahi naam use karo. Contact sheet ek baar dekho (andar ghira safed jaise chain ka loop nahi hatta).
    - Chaudi image (leti hui body, sofa, options card) ka size ab tweak nahi karna: make_reel khud screen ke kinaron se 40px andar fit karta hai (`EDGE_MARGIN`).

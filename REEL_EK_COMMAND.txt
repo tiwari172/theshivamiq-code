@@ -1,0 +1,88 @@
+=====================================================
+  theshivamiq – EK COMMAND MEIN POORI REEL
+=====================================================
+
+KYA KARTA HAI
+-------------
+Ek command 8 kaam khud karti hai:
+  1. Story ki images taiyaar (prep_story)
+  2. Voice banana – ElevenLabs wali VO + CTA + Signature, 3 sec ka "Shivam soch raha hai" pause (build_voice)
+  3. CSV ka DRAFT apne aap (auto_csv) – hook, suspects, soch + tick, boom, options card, end
+  4. Options card + cover card (make_cards)
+  5. Check (check_reel) – galti ho to YAHIN ruk jaata hai, render nahi karta
+  6. Reel render (make_reel)
+  7. MP4 + timing.csv story folder mein
+  8. Naya "Case File" cover story folder mein (make_cover)
+
+
+PEHLE YE ZAROORI HAI
+--------------------
+Story folder mein ye hona chahiye:
+  - SCRIPT_*.txt
+  - images\ folder (PNG)
+  - VO_MAIN.mp3 + VO_MAIN_timing.json   (ElevenLabs voice)
+    Nahi hai to pehle:   py eleven_voice.py <category> <story>
+    (jaise Category 9, Story 10 ->  py eleven_voice.py 9 10)
+
+
+KAISE CHALANA HAI
+-----------------
+1. Code folder mein PowerShell kholo:
+      C:\Users\Hp\Desktop\theshivamiq code
+   (folder mein Shift + Right click -> "Open PowerShell window here")
+
+2. Ye command chalao (story folder aur reel ka naam apne hisaab se):
+
+   py make_full_reel.py "C:\Users\Hp\Desktop\reels story\Category 9\Story 10" "09-010 Til Gud ki Dopahar"
+
+3. Bas. Aakhir mein "REEL TAIYAAR" dikhega aur batayega:
+      - MP4 kahan hai
+      - frame check wali image (output\<naam> - CHECK.png) – ek baar ZAROOR dekho
+      - images ki contact sheet – safed dabba / kati image to nahi
+
+
+BEECH MEIN RUK GAYA TO?
+-----------------------
+"!! RUK GAYA:" ke baad saaf likha hoga kya theek karna hai.
+Jo steps ho chuke wo yaad rehte hain. Theek karke WAHI command dobara chalao –
+pehle wale steps apne aap skip ho jaayenge.
+
+  * check_reel ne PROBLEM batayi (text image ke upar, 3+ line text, khaali screen):
+      cases\<naam>.csv kholo, batayi hui line theek karo, phir wahi command dobara.
+      (CSV badli hai to check + render apne aap dobara honge.)
+
+  * Kisi khaas step se dobara chalana hai:
+      py make_full_reel.py "<story folder>" "<naam>" --from 6
+      (1 = images, 2 = voice, 3 = CSV, 4 = cards, 5 = check, 6 = render, 7 = copy, 8 = cover)
+
+
+SAWAAL JO POOCHHEGA (y = haan, n = nahi)
+----------------------------------------
+  * Story folder mein purani MP4 hai -> "Nayi reel daal dun?"  (render se PEHLE poochta hai)
+      n bola to nayi reel sirf output\ mein rahegi, story folder ki MP4 nahi chhedegi.
+  * cases\ mein CSV pehle se hai (haath se banayi) -> "Nayi DRAFT se replace karun?"
+      y bola to purani "<naam>.csv.old" ban jaati hai.
+  * Purana cover hai to mitata nahi, "<naam> - COVER NEW.png" banata hai.
+
+
+AUR OPTIONS
+-----------
+  --dry-run   sirf batata hai kya karega, kuch nahi chalata.
+  --from N    step N se dobara.
+  --style pop popup style (pop / rise / slide). Default: rise.
+  --haan      koi sawaal mat poocho, sab "haan" (purani MP4 replace ho jaayegi!).
+  --force     check_reel ki PROBLEM ke bawajood render. SIRF tab jab tum khud bolo.
+
+
+DHYAAN RAHE
+-----------
+  * CSV ek DRAFT hai. Render ke baad CHECK.png dekho: galat pose, khaali screen, kati image.
+    Kuch galat ho to CSV theek karo aur wahi command dobara chalao.
+  * Caption SCRIPT ke CAPTION (Roman) section se aate hain. Wo section na ho to Devanagari
+    se apne aap Roman banta hai – tab captions zaroor padh lo.
+  * Answer kabhi screen par nahi jaata (ANSWER section use hi nahi hota).
+  * Kaha tak pahunche wo cases\<naam>.state.json mein hai (story folder mein sirf MP4,
+    timing.csv aur cover jaate hain).
+
+Sirf CSV draft chahiye (bina render):
+   py auto_csv.py "<story folder>" "<naam>" --print

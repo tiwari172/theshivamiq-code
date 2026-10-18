@@ -42,3 +42,10 @@ __pycache__/
 **/renders/
 **/seg/
 .claude/
+
+# make_full_reel ki laptop wali state / logs
+cases/*.state.json
+cases/*.state.json.tmp
+cases/*.voice_times.txt
+cases/*.prep.txt
+cases/*.csv.old
