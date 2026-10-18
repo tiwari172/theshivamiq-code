@@ -1,0 +1,84 @@
+HOOK SERIES REEL GUIDE (worker ke liye) – H01-001 v2 / H01-002 v2 jaisa HUBAHU style
+=====================================================================================
+Naya style MAT banana. H01 v2 ka HyperFrames engine copy karo, sirf DATA badlo.
+H01 ki reels / projects / CSV ko HAATH MAT LAGANA. Excel kabhi edit mat karo. Memory edit mat karo.
+Koi file delete/overwrite nahi – pehle se ho to naya naam (v2) ya brain se poochho.
+
+PATHS
+- Code: C:\Users\Hp\Desktop\theshivamiq code\   (shell mein PowerShell PATH refresh:
+  $env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User'))
+  Git Bash se python chalao to: export PYTHONIOENCODING=utf-8
+- Story: C:\Users\Hp\Desktop\reels story\hooks\Category HXX\Story NN\  (SCRIPT_*.txt, VO_*.txt, VO_MAIN.mp3, images\)
+- Hook clip: hooks\Category HXX\HXX_hook_cut.mp4 (+ HOOK_INFO.txt)
+- MAIN EXCEL (sirf padhna): hooks\FINAL\theshivamiq_HOOKS_story03_to_12_FINAL2.xlsx
+  Scripts sheet = Caption Script (Roman), Scene Order, Answer.  Edit Timeline = shots ka order + text (timing sirf andaza).
+  Purani excel (story03_to_12.xlsx, _v2.xlsx) MAT use karna.
+- VOICE PEHLE SE BANI HAI (dobara mat banao): code\voice\<CASE> <Title>.m4a
+  = VO + CTA_HOOK_KATIL (H05: CTA_HOOK_CHOR) + SIGNATURE_HI, tighten + 3 sec soch pause "डिटेक्टिव शिवम" se pehle.
+  Har shabd ka time: code\voice\<CASE> <Title> - words.txt (THINK pause line bhi usme hai).
+  CTA aur Signature ka time words.txt mein nahi hai → faster-whisper (small, language hi, word_timestamps,
+  clip_timestamps=[pause ke baad]) se nikalo. CTA_HOOK ka text alag hai ("Katil kaun? Comment karo... follow karo") –
+  caption WAHI likho jo awaaz mein hai.
+- Reference projects: code\hyperframes\H01-002 Do Minute ka Andhera v2\  (sabse naya, isi ko copy karo)
+                      code\hyperframes\H01-001 Saadhe Barah v2\
+  Reference CSV: code\cases\H01-002 Do Minute ka Andhera v2.csv
+- Chori torch effect (sirf H05): code\hyperframes\fx-demo\index.html → template X "Torch ki Roshni".
+  Murder: engine mein already template B "Khoon ki Boondein" (T.crime). Blink wala laal effect KABHI nahi.
+
+STEPS (har story)
+1. Padho: SCRIPT_*.txt + Excel Scripts row + Edit Timeline rows. Suspect ginti, katil, clue line samjho
+   (answer sirf samajhne ke liye – screen par kabhi nahi).
+2. Images: py prep_story.py "<story folder>"  → assets\ mein copy + _CUT/_UP + output\ contact sheet. Contact sheet DEKHO.
+   Gemini sparkle (kone ka chhota 4-point star) bacha ho to hatao (alag chhota blob → transparent). Shivam poses/logo transparent hain.
+   Naam clash par prep_story <ID>_<CCSS> banata hai – CSV/project mein wahi naam.
+3. Project: copy "hyperframes\H01-002 Do Minute ka Andhera v2" → "hyperframes\<CASE> <Title>\" (snapshots, mix.wav, purani
+   story images mat le jao). Images ko transparent padding trim karke project assets\ mein daalo (H01 jaisa).
+   Hook: ffmpeg se HXX_hook_cut.mp4 → assets\hook.mp4 (scale=1080:1920,setsar=1, libx264 crf 16, aac 192k),
+   MAX 10.0 sec. Clip 10 sec se lambi ho to aakhri action (girna/punch) zaroor rakho – shuru se kaato, end se nahi
+   (jab tak end mein sirf bekaar frames na hon). OFF = hook length + 0.2.
+   index.html: <title>, root + audio data-duration = OFF + END, video data-duration = hook length.
+4. DATA block (index.html mein "// ===== DATA" se "/DATA" tak) – sirf yahi badlo:
+   - SCENES: {img, s, e, h (khade) ya w (chaude: lete hue / prop / photo / options), bottom, enter, push?, noexit?}
+     Khade character/Shivam: h 1000 bottom 140. Close-up S16/S17: h 1130 bottom 0 enter rise.
+     Leta hua / chauda prop: w 820-980 bottom 260-320. Options card: w 960 bottom 330. enter: fade/pop/drop/left/right/rise.
+     Pehla scene (bridge) = victim/hook jaisa pose, enter "fade". Suspects alternate left/right.
+   - P: captions [["Word", start, end], ...] – Caption Script (Roman) ke shabd, VO line N = caption line N,
+     time words.txt se. Ek phrase 2–6 shabd (screen par max 2 line). CAPS shabd (jaise "BIJLI") apne aap peela highlight –
+     sirf aam dramatic shabd CAPS karo; CLUE WALE SHABD aur suspect ke bayan kabhi CAPS nahi.
+   - T: hook (KILLER KAUN? / H05: CHOR KAUN? – bigtitle text engine mein "KILLER KAUN?" hai, H05 mein badlo),
+     caseChip, chips (chhote label, 1–1.5 sec, clue ka label kam se kam der), stamps, crime [death line ke time],
+     suspects [["SUSPECT 1/N","NAAM",s,e]...], dhyaan [clue/"lekin......" line], soch (pause start),
+     solved [KAATIL pakad liya], options [s,e,"1, 2 ya 3?" ya "1, 2, 3 ya 4?"], ctaPill time, brand time,
+     night/black/relight sirf jab story mein raat/andhera ho.
+   - "#cta span" ka text CTA awaaz se mel khaye (jaise "Answer COMMENT karo" / "FOLLOW karo").
+5. CSV: code\cases\<CASE> <Title>.csv (VOICE time, H01 CSV jaisa format: STYLE row, har scene row, sfx, soch ke
+   3 music_off rows, S06 flash+music_off boom, options ding, S16 noout). py check_reel.py "<CASE> <Title>" → OK chahiye.
+6. Options card: py make_cards.py options CHXX_001_OPTIONS ID:Naam ID:Naam ... (saare suspects, number ke saath).
+7. Audio: py hyperframes\build_audio_hook.py "hyperframes\<CASE> <Title>" "<CASE> <Title>" "hyperframes\<CASE> <Title>\assets\hook.mp4" <OFF>
+   (log mein "music: bg music.mp3" dikhna chahiye).
+8. npx --yes hyperframes@0.8.144 lint (0 error) → snapshot kuch times par dekh lo → render:
+   npx --yes hyperframes@0.8.144 render -o "code\output\<CASE> <Title>.mp4"  (~6 min)
+9. Check: ffmpeg fps=20/<len>,scale=216:384,tile=10x2 → output\<CASE> <Title> - CHECK.png, DEKHO:
+   galat pose, khaali screen, kati image, text image ke upar, answer leak, ek image do baar.
+10. Copy: MP4 → story folder "<CASE> <Title>.mp4"; timing.csv = CSV ke times + OFF, upar HOOK_CLIP row (0..hook len).
+    Cover (naya LOGO_ROUND logo apne aap lagta hai): py make_cover.py one "<CASE> <Title>" "<story folder>\<CASE> <Title> - COVER.png"
+11. Brain ko report: length, kya bana, koi dikkat/missing image.
+
+NIYAM (user ke, pakke)
+- Hook clip poori (max 10 s), asli awaaz 100%, upar koi text/music/VO nahi; phir 0.2 s black, phir cartoon.
+- Image BEWAJAH dobara nahi (user 2026-10-10): zaroorat ho to dobara aa sakti hai (jaise victim bridge + crime scene,
+  ya story mein wahi cheez phir se zaroori ho). Bas bina kaaran repeat mat karo – clue line par prop dobara dikhane
+  se behtar naya pose (S17 close-up). Shivam poses alag-alag rakho jahan ho sake.
+- Shivam pose mood se: S01 khada, S02 soch (sirf soch moment), S03 ishara, S04 magnifier, S05 notepad, S06 haathkadi
+  (sirf "pakad liya"), S07 muskurana, S08 chaunkna, S09 phone, S10 chalna, S11 kaagaz, S12 door dekhna, S15 jeb mein haath,
+  S16/S17 close-up (S16 end signature par).
+- Screen par sirf Roman. Devanagari kabhi nahi. Answer kabhi nahi. Clue line par zoom/highlight nahi
+  (zoom sirf aakhri clue shot mein agar Excel bole, jaise H08 photo).
+- Har suspect ke bolne par uska naam (nameplate) + "SUSPECT n/N".
+- End: Shivam SOCH (stopwatch, tick_fast, music off 3 s) → S06 "KAATIL pakad liya!" (H05: CHOR) + CASE SOLVED →
+  options card + CTA captions → S16 + logo + @theshivamiq + signature captions.
+- Music har reel mein. Reel 90 sec se kam.
+- Khaas: H05 chori (CHOR KAUN?, chor, torch template X, CTA_HOOK_CHOR). H06 Sharma ji = G_M_OLD_NOGLASSES
+  (G_M_OLD_GLASSES nahi). H04 = G_M_OLD_GLASSES. H09 hook mein "Algorithm X Aryan Kelvin" naam blur/crop.
+  H03 Ramu (G_M_GAMCHHA) ke nange pair crop nahi. H08 P_DHABA_PHOTO poori dikhao, zoom sirf aakhri clue shot.
+  H12 Suresh (G_M_ARCHER_C) ka tarkash crop nahi.

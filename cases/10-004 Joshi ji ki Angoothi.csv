@@ -1,0 +1,46 @@
+asset_id,start,end,position,size,text,effect,sfx,color,focus
+STYLE,0.00,1.00,,,pop,,,,
+C009_JOSHI,0.00,4.08,center,45,,nopop+night,,,
+,0.00,4.08,,90,CHOR KAUN?,nopop,,yellow,
+,0.14,2.09,,,"Teen log raat bhar
+jaag rahe the...",,,red,
+,2.09,4.08,,,"...aur EK ne kuch
+CHHUPAYA",,,red,
+S15,4.08,6.66,center,55,"Clue isi video
+mein hai.
+Dhyaan se dekhna!",,whoosh,yellow,
+P_TRAIN_COACH_IN,6.66,17.11,,,,bg,,,
+C009_JOSHI,6.66,9.69,center,45,"Jauhari JOSHI ji ki
+HEERE ki angoothi",,,,
+C009_JOSHI,9.69,11.24,center,45,"PEELE rumaal mein
+baandhi",,,yellow,
+C009_JOSHI,11.24,13.44,center,45,"Takiye ke neeche
+rakhkar so gaye",,,,
+C009_JOSHI,13.44,16.12,center,45,"Subah... RUMAAL
+bhi GAYAB",night,heartbeat,red,
+C009_JOSHI,16.12,17.11,center,45,...aur ANGOOTHI bhi!,night,,red,
+G_TTE,17.11,21.36,center,45,SUSPECT 1/3,,swish,yellow,
+,17.11,18.37,,,CHECKER SAHAB,,,,
+,18.37,21.36,,,"""CHART lekar coach
+mein ghoom raha tha""",,,,
+G_SHANTI,21.36,26.45,center,45,SUSPECT 2/3,,swish,yellow,
+,21.36,23.15,,,SHANTI BAI,,,,
+,23.15,25.53,,,"""Joshi ji ki
+NAUKRANI hoon""",,,,
+,25.53,26.45,,,"""...main kyun
+CHURAAUNGI?""",,,,
+C10-004_DEEPAK,26.45,31.37,center,50,SUSPECT 3/3,,swish,yellow,
+,26.45,27.53,,,DEEPAK,,,,
+,27.53,30.03,,,"""GENERAL coach ka
+musaafir hoon""",,,,
+,30.03,31.37,,,"""Maine kuch
+nahi kiya!""",,,,
+S03,31.37,33.23,center,55,"Shivam ne chor
+pakad liya!",flash+music_off,whoosh,yellow,
+,32.87,33.23,,,,,boom,,
+C1004_OPTIONS,33.23,35.89,center,38,"Chor kaun?
+1, 2 ya 3?
+Comment karo!",,ding,,
+,33.23,35.89,,56,Sahi answer kal pin hoga,,,yellow,
+S16,35.89,38.81,center,60,"Shivam ki nazar se
+koi nahi bachta.",noout,whoosh,,

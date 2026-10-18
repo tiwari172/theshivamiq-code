@@ -1,0 +1,4 @@
+# Agar reel ke caption mein galat case no. likha ho, yahan sahi case likho.
+# Format:  reel link (ya uska code) = sahi case
+# Example: https://www.instagram.com/reel/DeYs4YUCeLy/ = 12-001
+DeYs4YUCeLy = 12-001

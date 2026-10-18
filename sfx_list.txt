@@ -1,0 +1,19 @@
+# ElevenLabs sound effects ki list  ->  sfx\<naam>.mp3
+# naam | seconds | kaisi awaaz chahiye (English mein likho)
+# nayi line jodo aur VOICE BANAO.bat mein "sfx" chalao; jo pehle se bani hai woh dobara nahi banegi
+
+hit        | 1.5 | deep cinematic suspense hit, single dramatic boom, no music
+riser      | 3   | dark suspense riser building tension, cinematic
+reveal     | 2   | mystery reveal sting, short dramatic orchestral stab
+tick       | 3   | old clock ticking in a quiet room
+door       | 2   | old wooden door creaking open slowly
+knock      | 1.5 | three firm knocks on a wooden door
+footsteps  | 3   | slow footsteps on a wooden floor, indoor
+paper      | 1.5 | paper sheet being picked up and unfolded
+camera     | 1   | old camera shutter click with flash
+phone      | 2   | mobile phone vibrating on a table
+glass      | 1.5 | glass shattering on floor
+gasp       | 1   | crowd gasp in shock, short
+thunder    | 3   | distant thunder rumble at night
+typing     | 2   | fast typing on a keyboard
+lock_open  | 1.5 | heavy metal padlock unlocking with a sharp mechanical click, then a steel drawer sliding open

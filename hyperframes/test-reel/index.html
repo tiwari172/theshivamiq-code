@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>20-007 Mithai ka Dabba - HF</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "ShivBlack";
+        src: url("assets/fonts/ariblk.ttf") format("truetype");
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #f6ecd6; }
+      #root {
+        position: relative; width: 100%; height: 100%; overflow: hidden;
+        font-family: "ShivBlack", sans-serif; color: #fff;
+      }
+      .layer { position: absolute; inset: 0; }
+      #cam { position: absolute; inset: 0; transform-origin: 50% 55%; }
+      #bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      #night { background: radial-gradient(ellipse at 50% 40%, rgba(20,34,90,0.55), rgba(4,8,30,0.85)); opacity: 0; }
+      #redvig { background: radial-gradient(ellipse at 50% 50%, rgba(200,0,0,0) 45%, rgba(190,0,0,0.55) 100%); opacity: 0; }
+      #dimvig { background: radial-gradient(ellipse at 50% 55%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.6) 100%); opacity: 0; }
+      .drop { position: absolute; width: 3px; height: 70px; border-radius: 2px;
+        background: linear-gradient(180deg, rgba(200,220,255,0), rgba(200,220,255,0.75)); }
+      #rain { opacity: 0; transform: rotate(8deg) scale(1.2); }
+
+      /* characters: wrapper does enter/exit, inner img does float/zoom */
+      .char { position: absolute; left: 0; right: 0; display: flex; justify-content: center; align-items: flex-end; opacity: 0; }
+      .char .in { display: block; }
+      .char img { display: block; filter: drop-shadow(0 18px 22px rgba(0,0,0,0.28)); }
+
+      /* header zone */
+      .hdr { position: absolute; left: 0; right: 0; top: 120px; height: 200px; display: flex;
+        align-items: center; justify-content: center; gap: 36px; }
+      .hdr > * { opacity: 0; }
+      .bigtitle { font-size: 116px; line-height: 1; color: #ffd600; letter-spacing: 2px;
+        -webkit-text-stroke: 14px #111; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(0,0,0,0.25); }
+      .badge { font-size: 64px; color: #111; background: #ffd600; padding: 10px 34px 14px; border-radius: 18px;
+        border: 6px solid #111; box-shadow: 0 10px 0 #111; }
+      .chip { display: flex; align-items: center; gap: 18px; font-size: 54px; color: #ffd600; background: #101a3c;
+        padding: 14px 32px 16px; border-radius: 60px; border: 5px solid #ffd600; }
+      .stamp { font-size: 70px; color: #e3171b; padding: 8px 26px 12px; border: 9px double #e3171b; border-radius: 14px;
+        background: #fff8e8; letter-spacing: 3px; }
+      .redtag { font-size: 78px; color: #fff; background: #e3171b; padding: 8px 34px 14px; border-radius: 14px;
+        border: 6px solid #111; box-shadow: 0 10px 0 #111; }
+      .nameplate { position: absolute; left: 0; right: 0; top: 1770px; display: flex; justify-content: center; }
+      .nameplate span { opacity: 0; font-size: 70px; color: #fff; background: #111; padding: 6px 40px 12px; border-radius: 12px;
+        border-bottom: 10px solid #ffd600; }
+
+      /* captions */
+      .cap { position: absolute; left: 60px; right: 60px; top: 330px; height: 300px; display: flex; flex-wrap: wrap;
+        align-content: center; justify-content: center; column-gap: 22px; row-gap: 6px; }
+      .w { display: block; opacity: 0; }
+      .wi { display: block; font-size: 84px; line-height: 1.15; padding: 2px 14px 10px; border-radius: 16px;
+        color: #fff; -webkit-text-stroke: 12px #111; paint-order: stroke fill; }
+      .cap.yel .wi { color: #ffd600; }
+
+      /* police tape */
+      .tape { position: absolute; left: -200px; width: 1480px; height: 96px; background: #ffd600; border-top: 8px solid #111;
+        border-bottom: 8px solid #111; display: flex; align-items: center; overflow: hidden; white-space: nowrap;
+        font-size: 50px; color: #111; letter-spacing: 3px; opacity: 0; }
+
+      /* stopwatch */
+      #watch { position: absolute; left: 0; right: 0; top: 70px; display: flex; justify-content: center; opacity: 0; }
+      #sochtxt { position: absolute; left: 60px; right: 60px; top: 420px; text-align: center; font-size: 92px; color: #ffd600;
+        -webkit-text-stroke: 13px #111; paint-order: stroke fill; line-height: 1.12; }
+      #sochtxt span { opacity: 0; }
+
+      #cta { position: absolute; left: 0; right: 0; top: 1630px; display: flex; justify-content: center; }
+      #cta span { opacity: 0; font-size: 60px; color: #111; background: #ffd600; padding: 12px 36px 16px; border-radius: 50px;
+        border: 6px solid #111; box-shadow: 0 9px 0 #111; }
+      #brand { display: flex; align-items: center; gap: 26px; }
+      #brand img { width: 170px; height: 170px; }
+      #brand span { font-size: 68px; color: #111; }
+
+      #wipe { position: absolute; top: -300px; width: 700px; height: 2600px; left: -1300px; background: #ffd600;
+        border-left: 14px solid #111; border-right: 14px solid #111; transform: rotate(14deg); }
+      #flash { background: #fff; opacity: 0; }
+      #redflash { background: #e3171b; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="41.31" data-width="1080" data-height="1920">
+      <audio id="mix" src="assets/mix.wav" data-start="0" data-duration="41.31" data-track-index="5" data-volume="1"></audio>
+      <div id="cam">
+        <img id="bg" src="assets/BG_MAIN.png" alt="" />
+        <div id="night" class="layer"></div>
+        <div id="rain" class="layer"></div>
+        <div id="chars" class="layer"></div>
+        <div id="tapes" class="layer"></div>
+        <div id="redvig" class="layer"></div>
+        <div id="dimvig" class="layer"></div>
+        <div id="hdrs" class="layer"></div>
+        <div id="caps" class="layer"></div>
+        <div id="watch">
+          <svg width="250" height="290" viewBox="0 0 250 290">
+            <rect x="105" y="0" width="40" height="30" rx="6" fill="#111" />
+            <rect x="185" y="38" width="30" height="20" rx="5" fill="#111" transform="rotate(40 200 48)" />
+            <circle cx="125" cy="160" r="118" fill="#111" />
+            <circle cx="125" cy="160" r="102" fill="#fff8e1" />
+            <circle id="ring" cx="125" cy="160" r="88" fill="none" stroke="#ffd600" stroke-width="18"
+              stroke-dasharray="553" stroke-dashoffset="553" transform="rotate(-90 125 160)" />
+            <g id="ticks"></g>
+            <line id="hand" x1="125" y1="160" x2="125" y2="82" stroke="#e3171b" stroke-width="9" stroke-linecap="round" />
+            <circle cx="125" cy="160" r="12" fill="#111" />
+            <text id="count" x="125" y="228" text-anchor="middle" font-family="ShivBlack" font-size="44" fill="#111">3</text>
+          </svg>
+        </div>
+        <div id="sochtxt"></div>
+        <div id="cta"><span>Sahi answer kal PIN hoga</span></div>
+      </div>
+      <div id="wipe"></div>
+      <div id="flash" class="layer"></div>
+      <div id="redflash" class="layer"></div>
+    </div>
+    <script>
+      const END = 41.31;
+      // ---------- scenes (same images + timing as cases\20-007 Mithai ka Dabba.csv) ----------
+      // h = character height px, bottom = px from screen bottom, enter: none|pop|left|right|rise
+      const SCENES = [
+        { img: "S04", s: 0.0, e: 2.61, h: 820, bottom: 140, enter: "none" },
+        { img: "S01", s: 2.61, e: 5.03, h: 1000, bottom: 140, enter: "pop" },
+        { img: "S12", s: 5.03, e: 13.19, h: 1000, bottom: 140, enter: "pop" },
+        { img: "C002_ARYAN", s: 13.19, e: 15.58, h: 720, bottom: 260, enter: "drop" },
+        { img: "C010_SUNITA", s: 15.58, e: 19.6, h: 880, bottom: 170, enter: "left" },
+        { img: "C010_MAHESH", s: 19.6, e: 24.38, h: 880, bottom: 170, enter: "right" },
+        { img: "G_RAMU", s: 24.38, e: 27.98, h: 880, bottom: 170, enter: "left" },
+        { img: "S16", s: 27.98, e: 30.82, h: 1130, bottom: 0, enter: "rise", push: 1.08 },
+        { img: "S02", s: 30.82, e: 33.82, h: 1000, bottom: 140, enter: "pop", push: 1.14 },
+        { img: "S06", s: 33.82, e: 35.79, h: 1000, bottom: 140, enter: "pop" },
+        { img: "C2007_OPTIONS", s: 35.79, e: 38.69, h: 760, bottom: 330, enter: "pop" },
+        { img: "S16", s: 38.69, e: END, h: 1130, bottom: 0, enter: "rise", noexit: true },
+      ];
+      // ---------- word-by-word captions (Roman), timing from Whisper on the final voice ----------
+      const P = [
+        [["8%", 0.0, 0.62], ["log", 0.62, 1.0], ["ye", 1.0, 1.1], ["case", 1.1, 1.4]],
+        [["NAHI", 1.4, 1.64], ["suljha", 1.64, 1.96], ["paaye...", 1.96, 2.26]],
+        [["Clue", 2.26, 2.82], ["isi", 2.82, 3.08], ["video", 3.08, 3.4], ["mein", 3.4, 3.6], ["hai.", 3.6, 3.8]],
+        [["DHYAAN", 3.8, 4.42], ["se", 4.42, 4.58], ["dekhna!", 4.58, 4.98]],
+        [["Teen", 4.98, 5.6], ["din", 5.6, 5.78], ["se", 5.78, 5.94], ["BAARISH...", 5.94, 6.32]],
+        [["raat", 6.32, 7.12], ["9", 7.12, 7.4], ["baje", 7.4, 7.62]],
+        [["nadi", 7.62, 7.86], ["ka", 7.86, 8.0], ["PUL", 8.0, 8.24], ["doob", 8.24, 8.48], ["gaya", 8.48, 8.78]],
+        [["aur", 8.78, 9.26], ["subah", 9.26, 9.54], ["tak", 9.54, 9.7], ["BAND", 9.7, 10.0], ["raha", 10.0, 10.36]],
+        [["Gaon", 10.36, 10.92], ["aane", 10.92, 11.2], ["ka", 11.2, 11.36]],
+        [["ek", 11.36, 11.52], ["hi", 11.52, 11.68], ["raasta", 11.68, 12.06], ["hai...", 12.06, 12.24]],
+        [["wahi", 12.24, 12.86], ["PUL", 12.86, 13.14]],
+        [["MANOJ", 13.14, 13.88], ["10", 13.88, 14.08], ["se", 14.08, 14.24], ["11", 14.24, 14.56]],
+        [["ke", 14.56, 14.7], ["beech", 14.7, 14.96], ["MARE", 14.96, 15.26], ["mile!", 15.26, 15.52]],
+        [["Sunita", 15.52, 16.36], ["boli...", 16.36, 16.6]],
+        [["\"Main", 16.6, 17.1], ["MANDIR", 17.1, 17.42], ["mein", 17.42, 17.62], ["thi.", 17.62, 17.72]],
+        [["Baarish", 17.72, 18.48], ["ki", 18.48, 18.62], ["wajah", 18.62, 18.84], ["se", 18.84, 18.98]],
+        [["wahin", 18.98, 19.18], ["ruk", 19.18, 19.28], ["gayi.\"", 19.28, 19.48]],
+        [["Mahesh", 19.48, 20.24], ["bola...", 20.24, 20.52]],
+        [["\"Main", 20.52, 21.08], ["9:30", 21.08, 21.96], ["par", 21.96, 22.16]],
+        [["sheher", 22.16, 22.44], ["se", 22.44, 22.58], ["lauta,", 22.58, 22.9]],
+        [["MITHAI", 22.9, 23.62], ["ka", 23.62, 23.74], ["dabba", 23.74, 24.0], ["lekar.\"", 24.0, 24.32]],
+        [["Ramu", 24.32, 25.04], ["dar", 25.04, 25.22], ["ke", 25.22, 25.38], ["maare", 25.38, 25.64]],
+        [["BHAAG", 25.64, 25.9], ["gaya", 25.9, 26.16], ["tha...", 26.16, 26.38]],
+        [["subah", 26.38, 27.0], ["PADOSI", 27.0, 27.38], ["ke", 27.38, 27.48], ["ghar", 27.48, 27.66], ["mila.", 27.66, 27.94]],
+        [["Ek", 27.94, 28.56], ["aadmi", 28.56, 28.88], ["us", 28.88, 29.08], ["raat", 29.08, 29.3]],
+        [["wahan", 29.3, 29.54], ["PAHUNCH", 29.54, 29.8], ["hi", 29.8, 29.98]],
+        [["NAHI", 29.98, 30.16], ["sakta", 30.16, 30.42], ["tha!", 30.42, 30.62]],
+        [["Detective", 33.8, 34.44], ["Shivam", 34.44, 34.72], ["ne...", 34.72, 34.88]],
+        [["KAATIL", 34.88, 35.2], ["pakad", 35.2, 35.48], ["liya!", 35.48, 35.72]],
+        [["Answer", 35.72, 36.16], ["COMMENT", 36.16, 36.48], ["karo!", 36.48, 36.68]],
+        [["Sahi", 36.68, 37.3], ["answer", 37.3, 37.6], ["kal", 37.6, 37.82], ["PIN", 37.82, 38.02], ["hoga", 38.02, 38.36]],
+        [["Shivam", 38.36, 39.1], ["ki", 39.1, 39.24], ["nazar", 39.24, 39.56], ["se", 39.56, 39.94]],
+        [["koi", 39.94, 40.5], ["nahi", 40.5, 40.74], ["bachta.", 40.74, 41.14]],
+      ];
+
+      // ---------- helpers ----------
+      const $ = (id) => document.getElementById(id);
+      const el = (tag, cls, html, parent) => {
+        const e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (html != null) e.innerHTML = html;
+        if (parent) parent.appendChild(e);
+        return e;
+      };
+      let seed = 7;
+      const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+
+      gsap.defaults({ immediateRender: false });
+      const tl = gsap.timeline({ paused: true });
+
+      // background slow drift
+      tl.fromTo("#bg", { scale: 1 }, { scale: 1.12, duration: END, ease: "none" }, 0);
+
+      // ---------- characters ----------
+      SCENES.forEach((sc, i) => {
+        const w = el("div", "char", null, $("chars"));
+        w.style.bottom = sc.bottom + "px";
+        w.style.transformOrigin = "50% 100%";
+        const inner = el("div", "in", null, w);
+        inner.style.transformOrigin = "50% 70%";
+        const im = el("img", null, null, inner);
+        im.src = "assets/" + sc.img + ".png";
+        im.style.height = sc.h + "px";
+        if (sc.img === "C2007_OPTIONS") { im.style.height = "auto"; im.style.width = "940px"; }
+        const d = sc.e - sc.s;
+        const enters = {
+          none: [{ opacity: 1 }, { opacity: 1, duration: 0.01 }],
+          pop: [{ opacity: 0, scale: 0.55, y: 60 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.8)" }],
+          rise: [{ opacity: 0, y: 420 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }],
+          drop: [{ opacity: 0, y: -160, rotation: -4 }, { opacity: 1, y: 0, rotation: 0, duration: 0.5, ease: "bounce.out" }],
+          left: [{ opacity: 0, x: -900, skewX: 14 }, { opacity: 1, x: 0, skewX: 0, duration: 0.42, ease: "power4.out" }],
+          right: [{ opacity: 0, x: 900, skewX: -14 }, { opacity: 1, x: 0, skewX: 0, duration: 0.42, ease: "power4.out" }],
+        };
+        const [from, to] = enters[sc.enter];
+        tl.fromTo(w, from, to, sc.s);
+        // idle motion
+        if (sc.push) tl.fromTo(inner, { scale: 1 }, { scale: sc.push, duration: d, ease: "power1.inOut" }, sc.s);
+        else tl.fromTo(inner, { y: 0 }, { y: -14, duration: d / 2, ease: "sine.inOut", yoyo: true, repeat: 1 }, sc.s);
+        if (!sc.noexit) {
+          const out = sc.enter === "left" ? { x: 900, skewX: -10 } : sc.enter === "right" ? { x: -900, skewX: 10 } : { scale: 0.8, y: 30 };
+          tl.to(w, { opacity: 0, duration: 0.16, ease: "power2.in", ...out }, sc.e - 0.16);
+        }
+        // camera punch on every scene change
+        if (i > 0) tl.fromTo("#cam", { scale: 1.06 }, { scale: 1, duration: 0.32, ease: "power2.out" }, sc.s);
+      });
+
+      // ---------- captions ----------
+      P.forEach((ph, i) => {
+        const box = el("div", "cap", null, $("caps"));
+        const s0 = ph[0][1];
+        const last = ph[ph.length - 1][2];
+        const next = i + 1 < P.length ? P[i + 1][0][1] : END;
+        const pEnd = Math.min(next, last + 0.7);
+        ph.forEach(([txt, ws, we]) => {
+          const w = el("span", "w", null, box);
+          const wi = el("span", "wi", null, w);
+          wi.textContent = txt;
+          tl.fromTo(w, { opacity: 0, y: 26, scale: 0.7 }, { opacity: 1, y: 0, scale: 1, duration: 0.14, ease: "back.out(2.5)" }, ws);
+          // sirf khaas (CAPS) shabd highlight: bolte waqt peela dabba, baad mein peela text
+          if (/[A-Z]{2,}/.test(txt) && txt === txt.toUpperCase()) {
+            tl.set(wi, { backgroundColor: "#ffd600", color: "#111111", webkitTextStrokeWidth: "0px" }, ws);
+            tl.fromTo(wi, { scale: 1 }, { scale: 1.16, duration: 0.1, ease: "power2.out", yoyo: true, repeat: 1 }, ws);
+            tl.set(wi, { backgroundColor: "rgba(0,0,0,0)", color: "#ffd600", webkitTextStrokeWidth: "12px" }, Math.max(we, ws + 0.3));
+          }
+        });
+        tl.to(box, { opacity: 0, y: -18, duration: 0.12, ease: "power1.in" }, pEnd - 0.12);
+      });
+
+      // ---------- header graphics ----------
+      const hdr = (s, e) => {
+        const h = el("div", "hdr", null, $("hdrs"));
+        return h;
+      };
+      const stampIn = (node, t, rot) => {
+        tl.fromTo(node, { opacity: 0, scale: 2.4, rotation: rot - 8 }, { opacity: 1, scale: 1, rotation: rot, duration: 0.22, ease: "power4.in" }, t);
+        tl.fromTo("#cam", { x: -14, y: 8 }, { x: 0, y: 0, duration: 0.25, ease: "elastic.out(1,0.3)" }, t + 0.22);
+      };
+      const fadeOut = (node, t) => tl.to(node, { opacity: 0, scale: 0.85, duration: 0.15, ease: "power2.in" }, t - 0.15);
+
+      // hook: KILLER KAUN? stamp
+      let h = hdr();
+      let n = el("div", "bigtitle", "KILLER KAUN?", h);
+      stampIn(n, 0.05, -3);
+      tl.to(n, { scale: 1.05, duration: 0.5, yoyo: true, repeat: 3, ease: "sine.inOut" }, 0.4);
+      fadeOut(n, 2.61);
+
+      // case file chip
+      h = hdr();
+      n = el("div", "chip", "CASE FILE #20-007", h);
+      tl.fromTo(n, { opacity: 0, x: -500 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 2.7);
+      fadeOut(n, 5.03);
+
+      // night setting: clock chip + PUL BAND stamp
+      h = hdr();
+      const clockSvg =
+        '<svg width="58" height="58" viewBox="0 0 58 58"><circle cx="29" cy="29" r="25" fill="none" stroke="#ffd600" stroke-width="6"/>' +
+        '<line x1="29" y1="29" x2="29" y2="13" stroke="#ffd600" stroke-width="6" stroke-linecap="round"/>' +
+        '<line class="mh" x1="29" y1="29" x2="17" y2="29" stroke="#ffd600" stroke-width="6" stroke-linecap="round"/></svg>';
+      n = el("div", "chip", clockSvg + "<span>RAAT 9 BAJE</span>", h);
+      tl.fromTo(n, { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)" }, 6.4);
+      const n2 = el("div", "stamp", "PUL BAND", hdr());
+      stampIn(n2, 9.7, -6);
+      fadeOut(n, 7.75);
+      fadeOut(n2, 10.6);
+
+      // crime scene
+      h = hdr();
+      n = el("div", "redtag", "CRIME SCENE", h);
+      tl.fromTo(n, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.4)" }, 13.25);
+      tl.to(n, { opacity: 0.55, duration: 0.2, yoyo: true, repeat: 7, ease: "steps(1)" }, 13.7);
+      fadeOut(n, 15.58);
+
+      // suspects: badge + name plate
+      [["SUSPECT 1/3", "SUNITA", 15.58, 19.6, -1], ["SUSPECT 2/3", "MAHESH", 19.6, 24.38, 1], ["SUSPECT 3/3", "RAMU", 24.38, 27.98, -1]].forEach(
+        ([b, name, s, e, dir]) => {
+          const hh = hdr();
+          const bd = el("div", "badge", b, hh);
+          tl.fromTo(bd, { opacity: 0, y: -140, rotation: dir * 8 }, { opacity: 1, y: 0, rotation: dir * -2, duration: 0.45, ease: "back.out(2)" }, s + 0.1);
+          fadeOut(bd, e);
+          const np = el("div", "nameplate", null, $("hdrs"));
+          const sp = el("span", null, name, np);
+          tl.fromTo(sp, { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.3, ease: "power3.out" }, s + 0.3);
+          fadeOut(sp, e);
+        }
+      );
+
+      // clue moment
+      h = hdr();
+      n = el("div", "badge", "DHYAAN DO!", h);
+      tl.fromTo(n, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.5)" }, 28.0);
+      tl.to(n, { scale: 1.1, duration: 0.3, yoyo: true, repeat: 7, ease: "sine.inOut" }, 28.4);
+      fadeOut(n, 30.82);
+
+      // case solved stamp
+      h = hdr();
+      n = el("div", "stamp", "CASE SOLVED", h);
+      n.style.fontSize = "84px";
+      stampIn(n, 34.9, -7);
+      fadeOut(n, 35.79);
+
+      // CTA header
+      h = hdr();
+      n = el("div", "bigtitle", "1, 2 ya 3?", h);
+      n.style.fontSize = "120px";
+      stampIn(n, 35.85, 0);
+      fadeOut(n, 38.69);
+      tl.fromTo("#cta span", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(2)" }, 36.6);
+      tl.to("#cta span", { scale: 1.08, duration: 0.35, yoyo: true, repeat: 3, ease: "sine.inOut" }, 37.0);
+      tl.to("#cta span", { opacity: 0, duration: 0.15 }, 38.54);
+
+      // end brand
+      h = hdr();
+      n = el("div", null, null, h);
+      n.id = "brand";
+      n.innerHTML = '<img src="assets/LOGO_ROUND.png" alt="" /><span>@theshivamiq</span>';
+      tl.fromTo(n, { opacity: 0, y: -80 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, 38.8);
+
+      // ---------- night + rain (rain only on the baarish line) ----------
+      tl.to("#night", { opacity: 1, duration: 0.4 }, 5.03);
+      tl.to("#night", { opacity: 0, duration: 0.4 }, 15.4);
+      for (let i = 0; i < 110; i++) {
+        const d = el("div", "drop", null, $("rain"));
+        d.style.left = Math.round(rnd() * 1300 - 110) + "px";
+        const sp = 0.45 + rnd() * 0.3;
+        const off = rnd() * sp;
+        const reps = Math.ceil((8.81 - 5.03) / sp) + 1;
+        tl.fromTo(d, { y: -200 }, { y: 2100, duration: sp, ease: "none", repeat: reps }, 5.03 - off);
+      }
+      tl.to("#rain", { opacity: 1, duration: 0.3 }, 5.03);
+      tl.to("#rain", { opacity: 0, duration: 0.4 }, 8.81);
+
+      // ---------- crime scene: police tape + red heartbeat ----------
+      const tapeTxt = "CRIME SCENE &#9679; DO NOT CROSS &#9679; ".repeat(4);
+      const t1 = el("div", "tape", tapeTxt, $("tapes"));
+      t1.style.top = "770px";
+      const t2 = el("div", "tape", tapeTxt, $("tapes"));
+      t2.style.top = "1690px";
+      tl.fromTo(t1, { opacity: 1, x: -1500, rotation: -9 }, { x: 0, rotation: -9, duration: 0.4, ease: "power3.out" }, 13.3);
+      tl.fromTo(t2, { opacity: 1, x: 1500, rotation: 7 }, { x: 0, rotation: 7, duration: 0.4, ease: "power3.out" }, 13.45);
+      tl.to([t1, t2], { opacity: 0, duration: 0.15 }, 15.43);
+      tl.fromTo("#redflash", { opacity: 0.55 }, { opacity: 0, duration: 0.45 }, 13.19);
+      for (let k = 0; k < 3; k++) {
+        tl.fromTo("#redvig", { opacity: 0 }, { opacity: 1, duration: 0.12, yoyo: true, repeat: 1 }, 13.3 + k * 0.75);
+        tl.fromTo("#redvig", { opacity: 0 }, { opacity: 0.7, duration: 0.1, yoyo: true, repeat: 1 }, 13.55 + k * 0.75);
+      }
+
+      // ---------- Shivam soch: stopwatch 3 sec ----------
+      const ticks = $("ticks");
+      for (let k = 0; k < 12; k++) {
+        const a = (k * 30 * Math.PI) / 180;
+        const ln = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        ln.setAttribute("x1", 125 + Math.sin(a) * 96); ln.setAttribute("y1", 160 - Math.cos(a) * 96);
+        ln.setAttribute("x2", 125 + Math.sin(a) * 84); ln.setAttribute("y2", 160 - Math.cos(a) * 84);
+        ln.setAttribute("stroke", "#111"); ln.setAttribute("stroke-width", "5");
+        ticks.appendChild(ln);
+      }
+      tl.fromTo("#watch", { opacity: 0, scale: 0.3, rotation: -30 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.35, ease: "back.out(2)" }, 30.82);
+      tl.fromTo("#ring", { attr: { "stroke-dashoffset": 553 } }, { attr: { "stroke-dashoffset": 0 }, duration: 3, ease: "none" }, 30.82);
+      gsap.set("#hand", { svgOrigin: "125 160" });
+      for (let k = 1; k <= 15; k++) tl.to("#hand", { rotation: k * 24, duration: 0.05, ease: "power4.out" }, 30.82 + k * 0.2 - 0.05);
+      tl.set("#count", { textContent: "3" }, 30.82);
+      tl.set("#count", { textContent: "2" }, 31.82);
+      tl.set("#count", { textContent: "1" }, 32.82);
+      for (const t of [31.82, 32.82]) tl.fromTo("#watch", { scale: 1.12 }, { scale: 1, duration: 0.3, ease: "power2.out" }, t);
+      tl.to("#watch", { opacity: 0, scale: 0.6, duration: 0.15 }, 33.67);
+      tl.to("#dimvig", { opacity: 1, duration: 0.4 }, 30.82);
+      tl.to("#dimvig", { opacity: 0, duration: 0.15 }, 33.67);
+      const soch = $("sochtxt");
+      "Shivam SOCH raha hai...".split("").forEach((c, k) => {
+        const sp = el("span", null, c, soch);
+        if (c === " ") { sp.remove(); soch.appendChild(document.createTextNode(" ")); return; }
+        tl.fromTo(sp, { opacity: 0 }, { opacity: 1, duration: 0.01 }, 31.4 + k * 0.045);
+      });
+      tl.to(soch, { opacity: 0, duration: 0.15 }, 33.67);
+
+      // ---------- flash + wipes ----------
+      tl.fromTo("#flash", { opacity: 0.9 }, { opacity: 0, duration: 0.35, ease: "power2.out" }, 33.82);
+      [15.58, 19.6, 24.38].forEach((t) => {
+        tl.fromTo("#wipe", { x: 0 }, { x: 2800, duration: 0.36, ease: "power2.inOut" }, t - 0.18);
+      });
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

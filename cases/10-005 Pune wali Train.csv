@@ -1,0 +1,43 @@
+asset_id,start,end,position,size,text,effect,sfx,color,focus
+STYLE,0.00,1.00,,,rise,,,,
+C002_ARYAN,0.00,4.05,center,40,,nopop+night,,,
+,0.00,4.05,,90,KILLER KAUN?,nopop,,yellow,
+,0.13,2.15,,,"Teen dost, teen
+BAHAANE...",,,red,
+,2.15,4.05,,,"...par EK bahaana
+chal hi nahi sakta",,,red,
+S04,4.05,6.90,center,55,"Clue isi video
+mein hai.
+Dhyaan se dekhna!",,whoosh,yellow,
+P_CALENDAR,6.90,9.65,center,34,"Shahar aur PUNE ke
+beech sirf EK train",,,,
+P_CALENDAR,9.65,11.23,center,34,"Wo bhi sirf
+mahine ki...",,,,
+P_CALENDAR,11.23,13.74,center,34,"1 aur 15 TAREEKH
+ki raat!",,,yellow,
+C002_ARYAN,13.74,15.15,center,40,8 TAREEKH ki raat...,night,heartbeat,,
+C002_ARYAN,15.15,16.50,center,40,"ARYAN ghar mein
+MARA mila!",night,,red,
+C002_ARYAN,16.50,17.75,center,40,CHAI mein ZEHAR tha,night,,red,
+C004_AMIT,17.75,20.55,center,45,SUSPECT 1/3,,swish,yellow,
+,17.75,18.66,,,AMIT,,,,
+,18.66,20.55,,,"""Us raat dost ki
+SHAADI mein tha""",,,,
+C002_KUNAL,20.55,24.48,center,45,SUSPECT 2/3,,swish,yellow,
+,20.55,21.85,,,KUNAL,,,,
+,21.85,24.48,,,"""Office mein AKELA
+kaam kar raha tha""",,,,
+C007_VIKRAM,24.48,29.01,center,45,SUSPECT 3/3,,swish,yellow,
+,24.48,25.46,,,VIKRAM,,,,
+,25.46,26.58,,,"""8 tareekh ko...""",,,,
+,26.58,29.01,,,"""...PUNE wali train
+mein so raha tha""",,,,
+S03,29.01,30.88,center,55,"Shivam ne kaatil
+pakad liya!",flash+music_off,whoosh,yellow,
+,30.52,30.88,,,,,boom,,
+C1005_OPTIONS,30.88,33.53,center,38,"Killer kaun?
+1, 2 ya 3?
+Comment karo!",,ding,,
+,30.88,33.53,,56,Sahi answer kal pin hoga,,,yellow,
+S16,33.53,36.46,center,60,"Shivam ki nazar se
+koi nahi bachta.",noout,whoosh,,

@@ -1,0 +1,93 @@
+# =====================================================================
+#  SAB PE SHAK – SETTINGS  (yahan number / rang / path badlo, code mat chhuo)
+#  Format:  naam = value   # chhota note
+#  Rang (color) hamesha #RRGGBB mein, jaise #FFD400
+#  Haan / Nahi wali settings mein sirf Haan ya Nahi likho
+# =====================================================================
+
+# ---------- FOLDERS ----------
+series_folder   = C:\Users\Hp\Desktop\reels story\Sab Pe Shak   # Excel + SS-001... story folders yahan
+excel_file      = theshivamiq_sab_pe_shak_v2.xlsx                # Excel ka naam (series_folder ke andar)
+common_folder   = auto                                           # auto = "reels story" mein _common khud dhoondho, warna poora path likho
+extra_png_folders = C:\Users\Hp\Desktop\theshivamiq code\assets ; C:\Users\Hp\Desktop\reels story\Common   # Part ke images\ mein PNG na mile to yahan bhi dhoondho ( ; se alag ). Khaali = sirf Part folder
+cover_bg        = COVER_SS_BG.png                                # cover ka background (series_folder ke andar; _cover\ mein bhi dhoondhta hai)
+
+# ---------- VIDEO ----------
+fps             = 30          # frame per second
+bitrate_mbps    = 14          # video quality (12–16 theek hai)
+cover_seconds   = 0.5         # reel ke shuru mein cover kitni der dikhe (0 = cover nahi)
+
+# ---------- FONT / TEXT ----------
+font_file       = Poppins-Bold.ttf   # _common mein ye font. Na mile to Windows ka Arial Bold lagega
+text_outline_px = 6           # text ke chaaron taraf kaala outline (px)
+color_normal    = #FFFFFF     # aam text (safed)
+color_clue      = #FFD400     # CLUE text (peela)
+color_twist     = #E53935     # TWIST text (laal)
+color_outline   = #111111     # outline ka rang
+size_HOOK       = 92          # HOOK text ka size
+size_CLUE       = 76          # CLUE text ka size
+size_TWIST      = 88          # TWIST text ka size
+size_NAME       = 72          # suspect naam ka size
+size_RECAP      = 70          # "Pichhle part mein..." ka size
+size_CTA        = 66          # CTA text ka size
+size_SIGN       = 66          # aakhri signature text ka size
+size_other      = 70          # baaki text ka size
+name_y          = 16          # suspect ki naam patti screen ki kitni % oonchai par (upar, chehre se pehle)
+text_y_top      = 22          # "top" wala text screen ki kitni % oonchai par (upar 15% mein text nahi aata)
+text_y_center   = 60          # "center" wala text (characters ke chehre se neeche, taaki chehra na dhake)
+text_y_bottom   = 64          # "bottom" wala text
+safe_top        = 15          # upar itne % mein koi text nahi
+safe_bottom     = 20          # neeche itne % mein koi text nahi
+
+# ---------- LEVEL BADGE ----------
+level_badge     = Nahi        # Haan = top-left 'LEVEL 6/10' dikhao, Nahi = mat dikhao (user ne 2026-10-15 hataya)
+level_size      = 46          # "LEVEL 6/10" ka size
+level_x         = 4           # left se kitni % door
+level_bg        = #FFD400     # badge ka rang
+level_text      = #111111     # badge ke text ka rang
+
+# ---------- SUBTITLE (Caption Script Roman) ----------
+subtitle_on       = Haan      # subtitle dikhana hai?
+subtitle_y        = 72        # screen ki kitni % oonchai par
+subtitle_size     = 64        # subtitle ka size
+subtitle_max_words = 7        # ek baar mein max shabd (lambi line apne aap tukdon mein)
+subtitle_word_pop = Haan      # Haan = shabd bolte hi ek-ek karke aayein (naya HyperFrames style), Nahi = poori line ek saath
+subtitle_active_word = Haan   # Haan = jo shabd bola ja raha hai wo peela (#FFE600) + thoda bada (2026-10-15)
+
+# ---------- IMAGES ----------
+pos_L           = 25          # L = x 25%
+pos_C           = 50          # C = x 50%
+pos_R           = 75          # R = x 75%
+char_feet_y     = 80          # character ke pair screen ki kitni % oonchai par
+prop_center_y   = 45          # prop (P_ wali image) ka center kitni % par
+image_gap_px    = 30          # ek shot mein 2-3 images hon to unke beech kam se kam itna gap (px), chipkein nahi
+edge_margin_px  = 40          # image screen ke kinare se kam se kam itni door
+remove_white_bg = Haan        # safed background wali PNG ka background apne aap hatao
+float_idle      = Haan        # character halka sa upar-neeche saans le (HyperFrames style)
+camera_punch    = Haan        # har naye shot par halka camera jhatka
+
+# ---------- ANIMATION ----------
+pop_peak_time   = 0.15        # pop-in: itne sec mein 108% tak
+pop_peak_scale  = 108         # pop-in ka sabse bada size %
+pop_end_time    = 0.25        # pop-in: itne sec mein 100% par ruk jaaye
+zoom_end        = 110         # zoom-in: shot ke end tak itna % bada
+fade_time       = 0.3         # fade kitne sec
+shake_time      = 0.3         # shake kitne sec
+shake_px        = 14          # shake kitna tez (px)
+
+# ---------- AUDIO ----------
+voice_volume    = 100         # voice %
+music_volume    = 10          # MUSIC_MAIN % (poori reel)
+music_duck      = 6           # "duck" wale shot mein music %
+sfx_volume      = 70          # SFX %
+overlay_opacity = 25          # night / fog overlay kitna gehra %
+
+# ---------- TIMING ----------
+whisper_model   = small       # small = tez, medium = zyada sahi (dheema)
+cue_early       = 0.10        # image cue shabd se itne sec pehle aaye
+tail_extra      = 0           # voice khatam hone ke baad wale shot mein itne sec aur jodo
+
+# ---------- BAAKI ----------
+skip_missing     = Haan       # koi PNG / voice / SFX na mile to us Part ko chhod do (missing_report.txt mein likho)
+make_all_skip_done = Haan     # make_all: jis Part ki reel pehle se bani hai use dobara mat banao
+update_excel     = Haan       # reel banne ke baad "Story Status" sheet mein "Video bani?" = Haan (sheet ho tabhi)

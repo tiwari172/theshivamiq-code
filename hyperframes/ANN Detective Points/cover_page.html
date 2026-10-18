@@ -1,0 +1,34 @@
+<!doctype html>
+<html><head><meta charset="UTF-8" />
+<style>
+  @font-face { font-family: "ShivBlack"; src: url("assets/fonts/MAIN.ttf"); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #000; font-family: "ShivBlack", sans-serif; }
+  .abs { position: absolute; }
+  #bg { inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+  #dark { inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(60,46,10,0.5) 0%, rgba(6,6,4,0.9) 62%, rgba(0,0,0,0.97) 100%); }
+  #rays { left: -400px; top: 100px; width: 1880px; height: 1880px; opacity: .18;
+    background: repeating-conic-gradient(from 0deg at 50% 50%, #F5C542 0 6deg, rgba(0,0,0,0) 6deg 18deg); border-radius: 50%;
+    -webkit-mask-image: radial-gradient(circle, #000 20%, rgba(0,0,0,0) 62%); }
+  .t { left: 30px; right: 30px; text-align: center; -webkit-text-stroke: 14px #111; paint-order: stroke fill; line-height: 1.02; }
+  .pill { font-size: 54px; color: #111; background: #F5C542; border: 6px solid #111; border-radius: 40px; padding: 6px 28px 12px; box-shadow: 0 8px 0 #111; }
+  .coin { width: 120px; height: 120px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff3b0, #F5C542 45%, #a67c00);
+    border: 6px solid #7a5a00; color: #7a5a00; font-size: 66px; text-align: center; line-height: 106px; }
+</style></head>
+<body>
+  <img id="bg" class="abs" src="assets/BG_MAIN.png" />
+  <div id="dark" class="abs"></div>
+  <div id="rays" class="abs"></div>
+  <div class="abs t" style="top:140px;font-size:72px;color:#fff;-webkit-text-stroke:10px #111">AB HAR COMMENT KI<br>KEEMAT HAI</div>
+  <img class="abs" src="assets/S2_03.png" style="left:60px;top:420px;height:980px" />
+  <svg class="abs" style="left:560px;top:430px" width="420" height="480" viewBox="0 0 250 290"><rect x="105" y="0" width="40" height="30" rx="6" fill="#111"/>
+    <circle cx="125" cy="160" r="118" fill="#111"/><circle cx="125" cy="160" r="102" fill="#fff8e1"/>
+    <line x1="125" y1="160" x2="170" y2="96" stroke="#e53935" stroke-width="9" stroke-linecap="round"/><circle cx="125" cy="160" r="12" fill="#111"/>
+    <text x="125" y="232" text-anchor="middle" font-family="ShivBlack" font-size="34" fill="#111">30s</text></svg>
+  <div class="abs t" style="top:930px;left:520px;right:20px;font-size:150px;color:#F5C542;-webkit-text-stroke:16px #111;transform:rotate(-6deg)">+10</div>
+  <div class="abs coin" style="left:840px;top:330px;transform:rotate(15deg)">P</div>
+  <div class="abs coin" style="left:520px;top:1150px;transform:rotate(-12deg)">P</div>
+  <div class="abs t" style="top:1300px;font-size:150px;color:#fff;-webkit-text-stroke:18px #111;transform:rotate(-3deg)">DETECTIVE</div>
+  <div class="abs t" style="top:1450px;font-size:210px;color:#F5C542;-webkit-text-stroke:20px #111;transform:rotate(-3deg)">POINTS</div>
+  <div class="abs" style="left:0;right:0;top:1720px;display:flex;justify-content:center"><div class="pill">TOP 3 = SHIVAM KE PARTNER</div></div>
+</body></html>

@@ -1,0 +1,27 @@
+Privacy Policy – theshivamiq comment checker
+Last updated: 18 October 2026
+
+1. Who we are
+"theshivamiq comment checker" is a private tool run by the owner of the Instagram account @theshivamiq. It is used only by that account owner. It is not a public app and nobody else can log in to it.
+
+2. What data the tool reads
+Using the official Instagram API, the tool reads only data from the @theshivamiq account itself:
+- the account's own posts and reels (caption, link, date, like/comment counts and insights)
+- public comments and replies left on those posts (commenter's Instagram username, comment text and time)
+The tool does not read private messages, passwords, email addresses, phone numbers, follower lists or any data from other accounts.
+
+3. Why the data is used
+Comments are checked against the correct answer of each detective quiz reel so that the account owner can count correct answers, make a leaderboard of top players and give them shoutouts. Post insights are used only to see how each reel performed.
+
+4. Storage and sharing
+The data is saved only on the account owner's personal computer in a spreadsheet. It is not sold, rented or shared with anyone, and it is not used for advertising. A public shoutout may mention the Instagram username of a top player, which is already public on Instagram.
+
+5. How long data is kept
+Data is kept as long as the leaderboard is running. It can be deleted at any time.
+
+6. Deleting your data
+If you commented on @theshivamiq and want your username and comments removed from the leaderboard, send a Direct Message to @theshivamiq on Instagram or an email to the address below with the subject "Delete my data". Your data will be removed within 7 days. Deleting your comment on Instagram also stops it from being counted in future.
+
+7. Contact
+Instagram: @theshivamiq
+Email: [adarshquizzes@gmail.com]

@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>H01-002 Do Minute ka Andhera - HF</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "ShivBlack";
+        src: url("assets/fonts/ariblk.ttf") format("truetype");
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root {
+        position: relative; width: 100%; height: 100%; overflow: hidden; background: #000;
+        font-family: "ShivBlack", sans-serif; color: #fff;
+      }
+      #hook { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      #story { position: absolute; inset: 0; opacity: 0; overflow: hidden; background: #f6ecd6; }
+      .layer { position: absolute; inset: 0; }
+      .mult { mix-blend-mode: multiply; }
+      #cam { position: absolute; inset: 0; transform-origin: 50% 55%; }
+      #bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      #night { background: radial-gradient(ellipse at 50% 40%, rgba(20,34,90,0.55), rgba(4,8,30,0.85)); opacity: 0; }
+      #black { background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0.86), rgba(0,0,0,0.97)); opacity: 0; }
+      #dimvig { background: radial-gradient(ellipse at 50% 55%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.6) 100%); opacity: 0; }
+      .drip { position: absolute; top: 0; background: #a50d14; border-radius: 0 0 40px 40px; height: 0; }
+
+      .char { position: absolute; left: 0; right: 0; display: flex; justify-content: center; align-items: flex-end; opacity: 0; }
+      .char .in { display: block; }
+      .char img { display: block; filter: drop-shadow(0 18px 22px rgba(0,0,0,0.28)); }
+
+      .hdr { position: absolute; left: 0; right: 0; top: 120px; height: 200px; display: flex;
+        align-items: center; justify-content: center; gap: 36px; }
+      .hdr > * { opacity: 0; }
+      .bigtitle { font-size: 116px; line-height: 1; color: #ffd600; letter-spacing: 2px;
+        -webkit-text-stroke: 14px #111; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(0,0,0,0.25); }
+      .badge { font-size: 64px; color: #111; background: #ffd600; padding: 10px 34px 14px; border-radius: 18px;
+        border: 6px solid #111; box-shadow: 0 10px 0 #111; }
+      .chip { display: flex; align-items: center; gap: 18px; font-size: 54px; color: #ffd600; background: #101a3c;
+        padding: 14px 32px 16px; border-radius: 60px; border: 5px solid #ffd600; }
+      .stamp { font-size: 70px; color: #e3171b; padding: 8px 26px 12px; border: 9px double #e3171b; border-radius: 14px;
+        background: #fff8e8; letter-spacing: 3px; }
+      .redtag { font-size: 78px; color: #fff; background: #e3171b; padding: 8px 34px 14px; border-radius: 14px;
+        border: 6px solid #111; box-shadow: 0 10px 0 #111; }
+      .nameplate { position: absolute; left: 0; right: 0; top: 1770px; display: flex; justify-content: center; }
+      .nameplate span { opacity: 0; font-size: 70px; color: #fff; background: #111; padding: 6px 40px 12px; border-radius: 12px;
+        border-bottom: 10px solid #ffd600; }
+
+      .cap { position: absolute; left: 60px; right: 60px; top: 330px; height: 300px; display: flex; flex-wrap: wrap;
+        align-content: center; justify-content: center; column-gap: 22px; row-gap: 6px; }
+      .w { display: block; opacity: 0; }
+      .wi { display: block; font-size: 84px; line-height: 1.15; padding: 2px 14px 10px; border-radius: 16px;
+        color: #fff; -webkit-text-stroke: 12px #111; paint-order: stroke fill; }
+
+      .tape { position: absolute; left: -200px; width: 1480px; height: 96px; background: #ffd600; border-top: 8px solid #111;
+        border-bottom: 8px solid #111; display: flex; align-items: center; overflow: hidden; white-space: nowrap;
+        font-size: 50px; color: #111; letter-spacing: 3px; opacity: 0; }
+
+      #watch { position: absolute; left: 0; right: 0; top: 70px; display: flex; justify-content: center; opacity: 0; }
+      #sochtxt { position: absolute; left: 60px; right: 60px; top: 420px; text-align: center; font-size: 92px; color: #ffd600;
+        -webkit-text-stroke: 13px #111; paint-order: stroke fill; line-height: 1.12; }
+      #sochtxt span { opacity: 0; }
+
+      #cta { position: absolute; left: 0; right: 0; top: 1630px; display: flex; justify-content: center; }
+      #cta span { opacity: 0; font-size: 60px; color: #111; background: #ffd600; padding: 12px 36px 16px; border-radius: 50px;
+        border: 6px solid #111; box-shadow: 0 9px 0 #111; }
+      #brand { display: flex; align-items: center; gap: 26px; }
+      #brand img { width: 170px; height: 170px; }
+      #brand span { font-size: 68px; color: #111; }
+
+      #wipe { position: absolute; top: -300px; width: 700px; height: 2600px; left: -1300px; background: #ffd600;
+        border-left: 14px solid #111; border-right: 14px solid #111; transform: rotate(14deg); }
+      #flash { background: #fff; opacity: 0; }
+      #redflash { background: #e3171b; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="60.94" data-width="1080" data-height="1920">
+      <audio id="mix" src="assets/mix.wav" data-start="0" data-duration="60.94" data-track-index="5" data-volume="1"></audio>
+      <video id="hook" class="clip" src="assets/hook.mp4" data-start="0" data-duration="4.5" data-track-index="1" muted playsinline></video>
+      <div id="story">
+        <div id="cam">
+          <img id="bg" src="assets/BG_MAIN.png" alt="" />
+          <div id="night" class="layer"></div>
+          <div id="crime" class="layer"></div>
+          <div id="chars" class="layer"></div>
+          <div id="tapes" class="layer"></div>
+          <div id="black" class="layer"></div>
+          <div id="dimvig" class="layer"></div>
+          <div id="hdrs" class="layer"></div>
+          <div id="caps" class="layer"></div>
+          <div id="watch">
+            <svg width="250" height="290" viewBox="0 0 250 290">
+              <rect x="105" y="0" width="40" height="30" rx="6" fill="#111" />
+              <rect x="185" y="38" width="30" height="20" rx="5" fill="#111" transform="rotate(40 200 48)" />
+              <circle cx="125" cy="160" r="118" fill="#111" />
+              <circle cx="125" cy="160" r="102" fill="#fff8e1" />
+              <circle id="ring" cx="125" cy="160" r="88" fill="none" stroke="#ffd600" stroke-width="18"
+                stroke-dasharray="553" stroke-dashoffset="553" transform="rotate(-90 125 160)" />
+              <g id="ticks"></g>
+              <line id="hand" x1="125" y1="160" x2="125" y2="82" stroke="#e3171b" stroke-width="9" stroke-linecap="round" />
+              <circle cx="125" cy="160" r="12" fill="#111" />
+              <text id="count" x="125" y="228" text-anchor="middle" font-family="ShivBlack" font-size="44" fill="#111">3</text>
+            </svg>
+          </div>
+          <div id="sochtxt"></div>
+          <div id="cta"><span>Sahi answer kal PIN hoga</span></div>
+        </div>
+        <div id="wipe"></div>
+        <div id="flash" class="layer"></div>
+        <div id="redflash" class="layer"></div>
+      </div>
+    </div>
+    <script>
+      // ===================== DATA (voice-time; cartoon OFF sec par shuru) =====================
+      const OFF = 4.7;
+      const END = 56.24;
+      const CASE = "H01-002";
+      // h = height px, w = width px (chaudi image), bottom = px from bottom
+      const SCENES = [
+        { img: "G_CR_VICTIM_MAROON_CUT", s: 0.0, e: 4.62, w: 980, bottom: 300, enter: "fade" },
+        { img: "S12", s: 4.62, e: 7.18, h: 1000, bottom: 140, enter: "pop" },
+        { img: "S08", s: 7.18, e: 12.12, h: 1000, bottom: 140, enter: "pop" },
+        { img: "G_CR_VICTIM_MAROON_CUT", s: 12.12, e: 16.5, w: 980, bottom: 300, enter: "drop" },
+        { img: "S05", s: 16.5, e: 18.79, h: 1000, bottom: 140, enter: "pop" },
+        { img: "P_PHONE_STONE_CUT", s: 18.79, e: 27.24, w: 820, bottom: 260, enter: "drop" },
+        { img: "S05", s: 27.24, e: 32.34, h: 1000, bottom: 140, enter: "pop" },
+        { img: "G_CR_VIKRAM_CUT", s: 32.34, e: 35.09, h: 1000, bottom: 140, enter: "left" },
+        { img: "G_UMPIRE_CUT", s: 35.09, e: 37.47, h: 1000, bottom: 140, enter: "right" },
+        { img: "G_CR_KEEPER_CUT", s: 37.47, e: 39.87, h: 1000, bottom: 140, enter: "left" },
+        { img: "G_CIVIL_GREEN_CUT", s: 39.87, e: 42.84, h: 1000, bottom: 140, enter: "right" },
+        { img: "P_PHONE_STONE_CUT", s: 42.84, e: 45.74, w: 820, bottom: 260, enter: "pop", push: 1.1 },
+        { img: "S02", s: 45.74, e: 48.74, h: 1000, bottom: 140, enter: "pop", push: 1.14 },
+        { img: "S06", s: 48.74, e: 50.66, h: 1000, bottom: 140, enter: "pop" },
+        { img: "CH01_002_OPTIONS", s: 50.66, e: 53.4, w: 960, bottom: 330, enter: "pop" },
+        { img: "S16", s: 53.4, e: END, h: 1130, bottom: 0, enter: "rise", noexit: true },
+      ];
+
+      const P = [
+        [["Gully", 0.21, 0.37], ["cricket", 0.41, 0.67], ["mein", 0.71, 0.82]],
+        [["girna", 0.86, 1.12], ["aam", 1.2, 1.35], ["baat", 1.42, 1.65], ["hai...", 1.69, 2.2]],
+        [["Lekin", 2.23, 2.42], ["us", 2.49, 2.64], ["din", 2.71, 2.86], ["jo", 2.9, 3.01], ["GIRA...", 3.05, 3.39]],
+        [["wo", 3.49, 3.98], ["UTHA", 4.02, 4.17], ["hi", 4.21, 4.32], ["nahi!", 4.35, 4.55]],
+        [["Clue", 4.67, 5.06], ["isi", 5.14, 5.36], ["video", 5.4, 5.63], ["mein", 5.65, 5.74], ["hai.", 5.78, 5.97]],
+        [["DHYAAN", 6.07, 6.57], ["se", 6.64, 6.76], ["dekhna!", 6.77, 7.16]],
+        [["Shaam", 7.2, 7.72], ["saat", 7.84, 8.03], ["baje,", 8.08, 8.48]],
+        [["aakhri", 8.74, 9.04], ["over.", 9.12, 9.41]],
+        [["Achanak", 9.49, 10.1], ["BIJLI", 10.13, 10.43], ["chali", 10.47, 10.66], ["gayi...", 10.7, 10.92]],
+        [["poore", 11.18, 11.41], ["DO", 11.48, 11.63], ["MINUTE.", 11.67, 12.09]],
+        [["Roshni", 12.17, 12.83], ["lauti", 12.87, 13.13], ["to", 13.17, 13.28]],
+        [["Aryan", 13.33, 13.58], ["pitch", 13.62, 13.81], ["ke", 13.83, 13.88], ["paas", 13.96, 14.11], ["pada", 14.16, 14.33], ["tha.", 14.41, 14.63]],
+        [["Kisi", 14.68, 15.13], ["ne", 15.14, 15.24], ["peeche", 15.28, 15.54], ["se", 15.57, 15.68]],
+        [["STUMP", 15.72, 15.98], ["maara", 16.02, 16.21], ["tha.", 16.28, 16.43]],
+        [["Maidan", 16.55, 17.21], ["par", 17.26, 17.36], ["us", 17.41, 17.51], ["waqt", 17.56, 17.74]],
+        [["sirf", 17.77, 18.03], ["PAANCH", 18.07, 18.26], ["log", 18.3, 18.48], ["the.", 18.52, 18.78]],
+        [["Sahil", 18.8, 19.4], ["ne", 19.43, 19.54], ["khud", 19.58, 19.77], ["apna", 19.82, 20.03]],
+        [["PHONE", 20.05, 20.22], ["police", 20.25, 20.51], ["ko", 20.55, 20.63], ["de", 20.65, 20.74], ["diya.", 20.81, 21.43]],
+        [["Phone", 21.47, 21.73], ["ek", 21.75, 21.8], ["patthar", 21.88, 22.17], ["par", 22.22, 22.32], ["tika", 22.36, 22.55], ["tha,", 22.62, 22.84]],
+        [["aur", 22.9, 23.26], ["VIDEO", 23.3, 23.56], ["chaalu", 23.64, 23.86], ["thi.", 23.9, 24.2]],
+        [["Andhere", 24.46, 24.8], ["mein", 24.82, 24.91], ["dikha", 24.95, 25.21], ["to", 25.25, 25.32], ["kuch", 25.34, 25.51], ["nahi,", 25.56, 25.89]],
+        [["par", 26.15, 26.24], ["AAWAAZ", 26.29, 26.62], ["chalti", 26.68, 26.92], ["rahi.", 26.97, 27.22]],
+        [["Un", 27.27, 27.68], ["do", 27.75, 27.9], ["minute", 27.94, 28.2], ["mein...", 28.24, 28.8]],
+        [["Vikram", 28.84, 29.1], ["chilla", 29.17, 29.47], ["raha", 29.49, 29.62], ["tha,", 29.73, 30.0]],
+        [["Bhola", 30.32, 30.58], ["aur", 30.63, 30.73], ["Pintu", 30.76, 31.1]],
+        [["aapas", 31.15, 31.32], ["mein", 31.36, 31.47], ["baat", 31.55, 31.7], ["kar", 31.75, 31.85], ["rahe", 31.9, 32.0], ["the.", 32.07, 32.3]],
+        [["Vikram", 32.37, 32.97], ["bola...", 33.01, 33.65]],
+        [["\"Main", 33.71, 33.79], ["non-striker", 33.87, 34.47], ["end", 34.51, 34.62], ["par", 34.67, 34.77], ["tha.\"", 34.85, 35.11]],
+        [["Bhola", 35.11, 35.64], ["bola...", 35.72, 36.09]],
+        [["\"Main", 36.09, 36.49], ["stump", 36.56, 36.79], ["ke", 36.86, 36.98], ["paas", 36.99, 37.16], ["tha.\"", 37.24, 37.49]],
+        [["Pintu", 37.49, 38.0], ["bola...", 38.04, 38.68]],
+        [["\"Main", 38.77, 38.91], ["keeping", 38.96, 39.24], ["kar", 39.27, 39.31], ["raha", 39.36, 39.54], ["tha.\"", 39.61, 39.84]],
+        [["Sahil", 39.89, 40.47], ["bola...", 40.5, 41.15]],
+        [["\"Main", 41.15, 41.28], ["boundary", 41.32, 41.65], ["par", 41.7, 41.8]],
+        [["video", 41.84, 42.1], ["bana", 42.15, 42.32], ["raha", 42.35, 42.47], ["tha.\"", 42.54, 42.81]],
+        [["Un", 43.07, 43.17], ["do", 43.24, 43.39], ["minute", 43.43, 43.69], ["mein", 43.73, 43.84]],
+        [["sab", 43.89, 43.99], ["sunai", 44.03, 44.29], ["diye...", 44.33, 44.59]],
+        [["lekin......", 44.69, 45.54]],
+        [["Detective", 48.93, 49.19], ["Shivam", 49.27, 49.49], ["ne...", 49.57, 49.71]],
+        [["KAATIL", 49.75, 50.01], ["pakad", 50.09, 50.39], ["liya!", 50.42, 50.61]],
+        [["Answer", 50.66, 51.08], ["COMMENT", 51.08, 51.42], ["karo!", 51.42, 51.6]],
+        [["Sahi", 51.92, 52.24], ["answer", 52.24, 52.52], ["kal", 52.52, 52.74], ["PIN", 52.74, 52.94], ["hoga", 52.94, 53.28]],
+        [["Shivam", 53.38, 54.04], ["ki", 54.04, 54.18], ["nazar", 54.18, 54.5], ["se", 54.5, 55.02]],
+        [["koi", 55.02, 55.42], ["nahi", 55.42, 55.7], ["bachta.", 55.7, 56.06]],
+      ];
+
+      const T = {
+        hook: [0.1, 4.62],
+        caseChip: [4.7, 7.15],
+        chips: [["clock", "SHAAM 7 BAJE", 7.25, 8.75], ["", "5 LOG", 18.0, 18.79], ["clock", "2 MINUTE", 27.3, 28.6]],
+        stamps: [["BATTI GUL!", 10.13, 11.3, -6]],
+        crime: [12.2, 16.5],
+        suspects: [["SUSPECT 1/4", "VIKRAM", 32.34, 35.09], ["SUSPECT 2/4", "BHOLA", 35.09, 37.47], ["SUSPECT 3/4", "PINTU", 37.47, 39.87], ["SUSPECT 4/4", "SAHIL", 39.87, 42.84]],
+        dhyaan: [42.9, 45.74],
+        soch: 45.74,
+        solved: [49.75, 50.66],
+        options: [50.66, 53.4, "1, 2, 3 ya 4?"],
+        ctaPill: 51.92,
+        brand: 53.5,
+        night: [[7.18, 9.6, 0.7], [12.12, 16.5, 1], [24.4, 27.3, 1]],
+        black: [[9.49, 12.12]],
+        relight: 12.14,
+      };
+      // ===================== /DATA =====================
+
+      const $ = (id) => document.getElementById(id);
+      const el = (tag, cls, html, parent, css) => {
+        const e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (html != null) e.innerHTML = html;
+        if (css) Object.assign(e.style, css);
+        if (parent) parent.appendChild(e);
+        return e;
+      };
+      let seed = 7;
+      const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+
+      gsap.defaults({ immediateRender: false });
+      const root = gsap.timeline({ paused: true });
+      const tl = gsap.timeline();
+
+      // hook clip -> 0.2s black -> cartoon
+      root.fromTo("#story", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" }, OFF);
+
+      tl.fromTo("#bg", { scale: 1 }, { scale: 1.12, duration: END, ease: "none" }, 0);
+
+      // ---------- characters ----------
+      SCENES.filter((s) => !s.skip).forEach((sc, i) => {
+        const w = el("div", "char", null, $("chars"));
+        w.style.bottom = sc.bottom + "px";
+        w.style.transformOrigin = "50% 100%";
+        const inner = el("div", "in", null, w);
+        inner.style.transformOrigin = "50% 70%";
+        const im = el("img", null, null, inner);
+        im.src = "assets/" + sc.img + ".png";
+        if (sc.w) im.style.width = sc.w + "px"; else im.style.height = sc.h + "px";
+        const d = sc.e - sc.s;
+        const enters = {
+          none: [{ opacity: 1 }, { opacity: 1, duration: 0.01 }],
+          fade: [{ opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }],
+          pop: [{ opacity: 0, scale: 0.55, y: 60 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.8)" }],
+          rise: [{ opacity: 0, y: 420 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }],
+          drop: [{ opacity: 0, y: -160, rotation: -4 }, { opacity: 1, y: 0, rotation: 0, duration: 0.5, ease: "bounce.out" }],
+          left: [{ opacity: 0, x: -900, skewX: 14 }, { opacity: 1, x: 0, skewX: 0, duration: 0.42, ease: "power4.out" }],
+          right: [{ opacity: 0, x: 900, skewX: -14 }, { opacity: 1, x: 0, skewX: 0, duration: 0.42, ease: "power4.out" }],
+        };
+        const [from, to] = enters[sc.enter];
+        tl.fromTo(w, from, to, sc.s);
+        if (sc.push) tl.fromTo(inner, { scale: 1 }, { scale: sc.push, duration: d, ease: "power1.inOut" }, sc.s);
+        else tl.fromTo(inner, { y: 0 }, { y: -14, duration: d / 2, ease: "sine.inOut", yoyo: true, repeat: 1 }, sc.s);
+        if (!sc.noexit) {
+          const out = sc.enter === "left" ? { x: 900, skewX: -10 } : sc.enter === "right" ? { x: -900, skewX: 10 } : { scale: 0.8, y: 30 };
+          tl.to(w, { opacity: 0, duration: 0.16, ease: "power2.in", ...out }, sc.e - 0.16);
+        }
+        if (i > 0) tl.fromTo("#cam", { scale: 1.06 }, { scale: 1, duration: 0.32, ease: "power2.out" }, sc.s);
+      });
+
+      // ---------- captions ----------
+      P.forEach((ph, i) => {
+        const box = el("div", "cap", null, $("caps"));
+        const last = ph[ph.length - 1][2];
+        const next = i + 1 < P.length ? P[i + 1][0][1] : END;
+        const pEnd = Math.min(next, last + 0.7);
+        ph.forEach(([txt, ws, we]) => {
+          const w = el("span", "w", null, box);
+          const wi = el("span", "wi", null, w);
+          wi.textContent = txt;
+          tl.fromTo(w, { opacity: 0, y: 26, scale: 0.7 }, { opacity: 1, y: 0, scale: 1, duration: 0.14, ease: "back.out(2.5)" }, ws);
+          if (/[A-Z]{2,}/.test(txt) && txt === txt.toUpperCase()) {
+            tl.set(wi, { backgroundColor: "#ffd600", color: "#111111", webkitTextStrokeWidth: "0px" }, ws);
+            tl.fromTo(wi, { scale: 1 }, { scale: 1.16, duration: 0.1, ease: "power2.out", yoyo: true, repeat: 1 }, ws);
+            tl.set(wi, { backgroundColor: "rgba(0,0,0,0)", color: "#ffd600", webkitTextStrokeWidth: "12px" }, Math.max(we, ws + 0.3));
+          }
+        });
+        tl.to(box, { opacity: 0, y: -18, duration: 0.12, ease: "power1.in" }, pEnd - 0.12);
+      });
+
+      // ---------- header graphics ----------
+      const hdr = () => el("div", "hdr", null, $("hdrs"));
+      const stampIn = (node, t, rot) => {
+        tl.fromTo(node, { opacity: 0, scale: 2.4, rotation: rot - 8 }, { opacity: 1, scale: 1, rotation: rot, duration: 0.22, ease: "power4.in" }, t);
+        tl.fromTo("#cam", { x: -14, y: 8 }, { x: 0, y: 0, duration: 0.25, ease: "elastic.out(1,0.3)" }, t + 0.22);
+      };
+      const fadeOut = (node, t) => tl.to(node, { opacity: 0, scale: 0.85, duration: 0.15, ease: "power2.in" }, t - 0.15);
+
+      let n = el("div", "bigtitle", "KILLER KAUN?", hdr());
+      stampIn(n, T.hook[0], -3);
+      tl.to(n, { scale: 1.05, duration: 0.5, yoyo: true, repeat: 5, ease: "sine.inOut" }, T.hook[0] + 0.4);
+      fadeOut(n, T.hook[1]);
+
+      n = el("div", "chip", "CASE FILE #" + CASE, hdr());
+      tl.fromTo(n, { opacity: 0, x: -500 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, T.caseChip[0]);
+      fadeOut(n, T.caseChip[1]);
+
+      const clockSvg =
+        '<svg width="58" height="58" viewBox="0 0 58 58"><circle cx="29" cy="29" r="25" fill="none" stroke="#ffd600" stroke-width="6"/>' +
+        '<line x1="29" y1="29" x2="29" y2="13" stroke="#ffd600" stroke-width="6" stroke-linecap="round"/>' +
+        '<line x1="29" y1="29" x2="17" y2="29" stroke="#ffd600" stroke-width="6" stroke-linecap="round"/></svg>';
+      T.chips.forEach(([icon, txt, s, e]) => {
+        const c = el("div", "chip", (icon === "clock" ? clockSvg : "") + "<span>" + txt + "</span>", hdr());
+        tl.fromTo(c, { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)" }, s);
+        fadeOut(c, e);
+      });
+      T.stamps.forEach(([txt, s, e, rot]) => {
+        const st = el("div", "stamp", txt, hdr());
+        stampIn(st, s, rot);
+        fadeOut(st, e);
+      });
+
+      // ---------- crime scene: template B "Khoon ki Boondein" ----------
+      {
+        const [t0, t1] = T.crime;
+        const fx = $("crime");
+        const tag = el("div", "redtag", "CRIME SCENE", hdr());
+        tl.fromTo(tag, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.4)" }, t0 + 0.05);
+        fadeOut(tag, t1);
+        const txt = "CRIME SCENE &#9679; DO NOT CROSS &#9679; ".repeat(4);
+        const tp1 = el("div", "tape", txt, $("tapes"), { top: "770px" });
+        const tp2 = el("div", "tape", txt, $("tapes"), { top: "1690px" });
+        tl.fromTo(tp1, { opacity: 1, x: -1500, rotation: -9 }, { x: 0, rotation: -9, duration: 0.4, ease: "power3.out" }, t0 + 0.1);
+        tl.fromTo(tp2, { opacity: 1, x: 1500, rotation: 7 }, { x: 0, rotation: 7, duration: 0.4, ease: "power3.out" }, t0 + 0.25);
+        tl.to([tp1, tp2], { opacity: 0, duration: 0.15 }, t1 - 0.15);
+        const grp = el("div", "layer", null, fx);
+        const band = el("div", "mult", null, grp, { position: "absolute", left: 0, right: 0, top: 0, height: "0px", background: "#a50d14" });
+        tl.to(band, { height: "70px", duration: 0.4, ease: "power2.out" }, t0 + 0.1);
+        for (let i = 0; i < 11; i++) {
+          const w = 26 + rnd() * 34;
+          const d = el("div", "drip mult", null, grp, { left: Math.round(i * 100 + rnd() * 50) + "px", width: w + "px" });
+          tl.to(d, { height: Math.round(500 + rnd() * 1500) + "px", duration: 1.4 + rnd() * 1.2, ease: "power1.in" }, t0 + 0.2 + rnd() * 0.5);
+        }
+        const curtain = el("div", "layer mult", null, grp, { background: "linear-gradient(180deg, #b3121a 0%, #b3121a 80%, rgba(179,18,26,0) 100%)", opacity: 0.6, clipPath: "inset(0 0 100% 0)" });
+        tl.to(curtain, { clipPath: "inset(0 0 0% 0)", duration: 1.6, ease: "power1.inOut" }, t0 + 1.2);
+        tl.to(grp, { opacity: 0, duration: 0.25 }, t1 - 0.2);
+      }
+
+      // suspects: badge + name plate (+ yellow wipe)
+      T.suspects.forEach(([b, name, s, e], k) => {
+        const dir = k % 2 ? 1 : -1;
+        const bd = el("div", "badge", b, hdr());
+        tl.fromTo(bd, { opacity: 0, y: -140, rotation: dir * 8 }, { opacity: 1, y: 0, rotation: dir * -2, duration: 0.45, ease: "back.out(2)" }, s + 0.1);
+        fadeOut(bd, e);
+        const np = el("div", "nameplate", null, $("hdrs"));
+        const sp = el("span", null, name, np);
+        tl.fromTo(sp, { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.3, ease: "power3.out" }, s + 0.3);
+        fadeOut(sp, e);
+        tl.fromTo("#wipe", { x: 0 }, { x: 2800, duration: 0.36, ease: "power2.inOut" }, s - 0.18);
+      });
+
+      n = el("div", "badge", "DHYAAN DO!", hdr());
+      tl.fromTo(n, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.5)" }, T.dhyaan[0]);
+      tl.to(n, { scale: 1.1, duration: 0.3, yoyo: true, repeat: 7, ease: "sine.inOut" }, T.dhyaan[0] + 0.4);
+      fadeOut(n, T.dhyaan[1]);
+
+      n = el("div", "stamp", "CASE SOLVED", hdr());
+      n.style.fontSize = "84px";
+      stampIn(n, T.solved[0], -7);
+      fadeOut(n, T.solved[1]);
+
+      n = el("div", "bigtitle", T.options[2], hdr());
+      n.style.fontSize = "112px";
+      stampIn(n, T.options[0] + 0.05, 0);
+      fadeOut(n, T.options[1]);
+      tl.fromTo("#cta span", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(2)" }, T.ctaPill);
+      tl.to("#cta span", { scale: 1.08, duration: 0.35, yoyo: true, repeat: 1, ease: "sine.inOut" }, T.ctaPill + 0.4);
+      tl.to("#cta span", { opacity: 0, duration: 0.15 }, T.options[1] - 0.15);
+
+      n = el("div", null, null, hdr());
+      n.id = "brand";
+      n.innerHTML = '<img src="assets/LOGO_ROUND.png" alt="" /><span>@theshivamiq</span>';
+      tl.fromTo(n, { opacity: 0, y: -80 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, T.brand);
+
+      // ---------- night / blackout ----------
+      T.night.forEach(([s, e, o]) => {
+        tl.to("#night", { opacity: o, duration: 0.4 }, s);
+        tl.to("#night", { opacity: 0, duration: 0.4 }, e - 0.4);
+      });
+      T.black.forEach(([s, e]) => {
+        tl.to("#black", { opacity: 1, duration: 0.12, ease: "steps(3)" }, s);
+        tl.to("#black", { opacity: 0, duration: 0.1 }, e);
+      });
+      if (T.relight != null) tl.fromTo("#flash", { opacity: 0.85 }, { opacity: 0, duration: 0.5, ease: "power2.out" }, T.relight);
+
+      // ---------- Shivam soch: stopwatch 3 sec ----------
+      {
+        const S = T.soch;
+        const ticks = $("ticks");
+        for (let k = 0; k < 12; k++) {
+          const a = (k * 30 * Math.PI) / 180;
+          const ln = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          ln.setAttribute("x1", 125 + Math.sin(a) * 96); ln.setAttribute("y1", 160 - Math.cos(a) * 96);
+          ln.setAttribute("x2", 125 + Math.sin(a) * 84); ln.setAttribute("y2", 160 - Math.cos(a) * 84);
+          ln.setAttribute("stroke", "#111"); ln.setAttribute("stroke-width", "5");
+          ticks.appendChild(ln);
+        }
+        tl.fromTo("#watch", { opacity: 0, scale: 0.3, rotation: -30 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.35, ease: "back.out(2)" }, S);
+        tl.fromTo("#ring", { attr: { "stroke-dashoffset": 553 } }, { attr: { "stroke-dashoffset": 0 }, duration: 3, ease: "none" }, S);
+        gsap.set("#hand", { svgOrigin: "125 160" });
+        for (let k = 1; k <= 15; k++) tl.to("#hand", { rotation: k * 24, duration: 0.05, ease: "power4.out" }, S + k * 0.2 - 0.05);
+        tl.set("#count", { textContent: "3" }, S);
+        tl.set("#count", { textContent: "2" }, S + 1);
+        tl.set("#count", { textContent: "1" }, S + 2);
+        for (const t of [S + 1, S + 2]) tl.fromTo("#watch", { scale: 1.12 }, { scale: 1, duration: 0.3, ease: "power2.out" }, t);
+        tl.to("#watch", { opacity: 0, scale: 0.6, duration: 0.15 }, S + 2.85);
+        tl.to("#dimvig", { opacity: 1, duration: 0.4 }, S);
+        tl.to("#dimvig", { opacity: 0, duration: 0.15 }, S + 2.85);
+        const soch = $("sochtxt");
+        "Shivam SOCH raha hai...".split("").forEach((c, k) => {
+          if (c === " ") { soch.appendChild(document.createTextNode(" ")); return; }
+          const sp = el("span", null, c, soch);
+          tl.fromTo(sp, { opacity: 0 }, { opacity: 1, duration: 0.01 }, S + 0.58 + k * 0.045);
+        });
+        tl.to(soch, { opacity: 0, duration: 0.15 }, S + 2.85);
+        tl.fromTo("#flash", { opacity: 0.9 }, { opacity: 0, duration: 0.35, ease: "power2.out" }, S + 3);
+      }
+
+      root.add(tl, OFF);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = root;
+    </script>
+  </body>
+</html>

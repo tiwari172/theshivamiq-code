@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Crime FX Templates</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face { font-family: "ShivBlack"; src: url("assets/fonts/ariblk.ttf") format("truetype"); }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #f6ecd6; }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; font-family: "ShivBlack", sans-serif; }
+      .sec { position: absolute; inset: 0; opacity: 0; overflow: hidden; }
+      .layer { position: absolute; inset: 0; }
+      .bg { position: absolute; inset: 0; width: 100%; height: 100%; }
+      .night { background: radial-gradient(ellipse at 50% 40%, rgba(20,34,90,0.55), rgba(4,8,30,0.85)); }
+      .char { position: absolute; left: 0; right: 0; display: flex; justify-content: center; align-items: flex-end; }
+      .hdr { position: absolute; left: 0; right: 0; top: 150px; height: 200px; display: flex; align-items: center; justify-content: center; }
+      .redtag { font-size: 78px; color: #fff; background: #e3171b; padding: 8px 34px 14px; border-radius: 14px; border: 6px solid #111; box-shadow: 0 10px 0 #111; }
+      .stamp { font-size: 96px; color: #e3171b; padding: 8px 30px 12px; border: 10px double #e3171b; border-radius: 14px; background: #fff8e8; letter-spacing: 3px; }
+      .badge { font-size: 76px; color: #111; background: #ffd600; padding: 10px 34px 14px; border-radius: 18px; border: 6px solid #111; box-shadow: 0 10px 0 #111; }
+      .hdr > * { opacity: 0; }
+      .label { position: absolute; left: 30px; top: 30px; font-size: 40px; color: #fff; background: #111; padding: 8px 22px 12px; border-radius: 12px; border-left: 12px solid #ffd600; }
+      .tape { position: absolute; left: -200px; width: 1480px; height: 96px; background: #ffd600; border-top: 8px solid #111; border-bottom: 8px solid #111;
+        display: flex; align-items: center; overflow: hidden; white-space: nowrap; font-size: 50px; color: #111; letter-spacing: 3px; }
+      .mult { mix-blend-mode: multiply; }
+      .drip { position: absolute; top: 0; background: #a50d14; border-radius: 0 0 40px 40px; height: 0; }
+      .tide { position: absolute; left: 0; width: 1080px; height: 2300px; top: 1920px; }
+      .tide .body { position: absolute; left: 0; right: 0; top: 110px; bottom: 0; background: #b3121a; }
+      .tide svg { position: absolute; left: 0; top: 0; }
+      .torch { background: radial-gradient(circle var(--r) at var(--x) var(--y), rgba(4,6,18,0) 0%, rgba(4,6,18,0) 62%, rgba(4,6,18,0.94) 100%); }
+      .glow { background: radial-gradient(circle var(--r) at var(--x) var(--y), rgba(255,220,120,0.35) 0%, rgba(255,220,120,0) 70%); }
+      .siren-r { background: linear-gradient(90deg, rgba(230,20,30,0.75) 0%, rgba(230,20,30,0) 55%); }
+      .siren-b { background: linear-gradient(270deg, rgba(30,80,255,0.75) 0%, rgba(30,80,255,0) 55%); }
+      .foot { position: absolute; width: 34px; height: 62px; border-radius: 50% 50% 45% 45%; background: #3b2a1e; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="18" data-width="1080" data-height="1920">
+      <audio id="mix" src="assets/mix.wav" data-start="0" data-duration="18" data-track-index="5" data-volume="1"></audio>
+    </div>
+    <script>
+      gsap.defaults({ immediateRender: false });
+      const tl = gsap.timeline({ paused: true });
+      const root = document.getElementById("root");
+      const el = (tag, cls, html, parent, style) => {
+        const e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (html != null) e.innerHTML = html;
+        if (style) Object.assign(e.style, style);
+        parent.appendChild(e);
+        return e;
+      };
+      let seed = 11;
+      const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+      const D = 3;
+
+      function section(t0, label) {
+        const s = el("div", "sec", null, root);
+        tl.set(s, { opacity: 1 }, t0);
+        tl.set(s, { opacity: 0 }, t0 + D);
+        el("img", "bg", null, s).src = "assets/BG_MAIN.png";
+        return s;
+      }
+      function addLabel(s, txt) { el("div", "label", txt, s); }
+
+      // ---------------- MURDER common ----------------
+      function murderBase(t0) {
+        const s = section(t0);
+        el("div", "layer night", null, s);
+        const fx = el("div", "layer", null, s);
+        const c = el("div", "char", null, s, { bottom: "260px" });
+        const im = el("img", null, null, c, { height: "720px" });
+        im.src = "assets/C002_ARYAN.png";
+        tl.fromTo(c, { y: -160, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "bounce.out" }, t0);
+        const txt = "CRIME SCENE &#9679; DO NOT CROSS &#9679; ".repeat(4);
+        const t1 = el("div", "tape", txt, s, { top: "770px" });
+        const t2 = el("div", "tape", txt, s, { top: "1690px" });
+        tl.fromTo(t1, { x: -1500, rotation: -9 }, { x: 0, rotation: -9, duration: 0.4, ease: "power3.out" }, t0 + 0.1);
+        tl.fromTo(t2, { x: 1500, rotation: 7 }, { x: 0, rotation: 7, duration: 0.4, ease: "power3.out" }, t0 + 0.25);
+        const h = el("div", "hdr", null, s);
+        const tag = el("div", "redtag", "CRIME SCENE", h);
+        tl.fromTo(tag, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.4)" }, t0 + 0.05);
+        return { s, fx, c };
+      }
+
+      // A: Lal Ghera — kinaron se laal dheere dheere andar aata hai, poori screen laal ho jaati hai
+      {
+        const t0 = 0;
+        const { s, fx } = murderBase(t0);
+        const ring = el("div", null, null, fx, {
+          position: "absolute", left: "-1080px", top: "-1920px", width: "3240px", height: "5760px",
+          background: "radial-gradient(ellipse at 50% 50%, rgba(160,0,10,0) 0%, rgba(160,0,10,0) 16%, rgba(150,0,10,0.8) 26%, rgba(90,0,5,0.92) 40%)",
+        });
+        tl.fromTo(ring, { scale: 2.6 }, { scale: 1.05, duration: 2.6, ease: "power1.inOut" }, t0 + 0.15);
+        const tint = el("div", "layer mult", null, fx, { background: "#c4161e", opacity: 0 });
+        tl.to(tint, { opacity: 0.55, duration: 2.2, ease: "power1.in" }, t0 + 0.6);
+        addLabel(s, "MURDER A: Lal Ghera");
+      }
+
+      // B: Khoon ki Boondein — upar se khoon tapakta hai, phir laal parda neeche tak
+      {
+        const t0 = 3;
+        const { s, fx } = murderBase(t0);
+        const band = el("div", "mult", null, fx, { position: "absolute", left: 0, right: 0, top: 0, height: "0px", background: "#a50d14" });
+        tl.to(band, { height: "70px", duration: 0.4, ease: "power2.out" }, t0 + 0.1);
+        for (let i = 0; i < 11; i++) {
+          const w = 26 + rnd() * 34;
+          const d = el("div", "drip mult", null, fx, { left: Math.round(i * 100 + rnd() * 50) + "px", width: w + "px" });
+          tl.to(d, { height: Math.round(500 + rnd() * 1500) + "px", duration: 1.4 + rnd() * 1.2, ease: "power1.in" }, t0 + 0.2 + rnd() * 0.5);
+        }
+        const curtain = el("div", "layer mult", null, fx, { background: "linear-gradient(180deg, #b3121a 0%, #b3121a 80%, rgba(179,18,26,0) 100%)", opacity: 0.6, clipPath: "inset(0 0 100% 0)" });
+        tl.to(curtain, { clipPath: "inset(0 0 0% 0)", duration: 1.6, ease: "power1.inOut" }, t0 + 1.2);
+        addLabel(s, "MURDER B: Khoon ki Boondein");
+      }
+
+      // C: Lal Lehar — neeche se laal lehar uthti hai aur poori screen bhar deti hai
+      {
+        const t0 = 6;
+        const { s, fx, c } = murderBase(t0);
+        const tide = el("div", "tide mult", null, fx, { opacity: 0.7 });
+        tide.innerHTML =
+          '<svg width="2160" height="120" viewBox="0 0 2160 120"><path fill="#b3121a" d="M0 60 Q 135 0 270 60 T 540 60 T 810 60 T 1080 60 T 1350 60 T 1620 60 T 1890 60 T 2160 60 V 120 H 0 Z"/></svg><div class="body"></div>';
+        tl.to(tide, { y: -2050, duration: 2.6, ease: "power1.inOut" }, t0 + 0.2);
+        tl.fromTo(tide.querySelector("svg"), { x: 0 }, { x: -540, duration: 0.9, ease: "none", repeat: 3 }, t0);
+        // dil ki dhadkan: body halka sa phoolta hai (blink nahi)
+        tl.fromTo(c, { scale: 1 }, { scale: 1.04, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 5, transformOrigin: "50% 100%" }, t0 + 0.6);
+        addLabel(s, "MURDER C: Lal Lehar");
+      }
+
+      // ---------------- CHORI common ----------------
+      function choriBase(t0) {
+        const s = section(t0);
+        const c = el("div", "char", null, s, { bottom: "260px" });
+        const im = el("img", null, null, c, { height: "520px" });
+        im.src = "assets/P_SAFE.png";
+        tl.fromTo(c, { scale: 0.6, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: "back.out(1.8)", transformOrigin: "50% 100%" }, t0);
+        const fx = el("div", "layer", null, s);
+        const h = el("div", "hdr", null, s);
+        return { s, fx, c, h };
+      }
+
+      // X: Torch ki Roshni — andhere mein torch ghoom kar khaali tijori dhoondhti hai
+      {
+        const t0 = 9;
+        const { s, fx, h } = choriBase(t0);
+        const dark = el("div", "layer torch", null, fx);
+        const glow = el("div", "layer glow", null, fx);
+        [dark, glow].forEach((n) => { n.style.setProperty("--x", "160px"); n.style.setProperty("--y", "700px"); n.style.setProperty("--r", "330px"); });
+        tl.to([dark, glow], { "--x": "880px", "--y": "1050px", duration: 0.7, ease: "sine.inOut" }, t0 + 0.1);
+        tl.to([dark, glow], { "--x": "540px", "--y": "1400px", duration: 0.6, ease: "power2.out" }, t0 + 0.8);
+        tl.to([dark, glow], { "--r": "900px", duration: 0.8, ease: "power2.inOut" }, t0 + 2.0);
+        const st = el("div", "stamp", "GAYAB!", h);
+        tl.fromTo(st, { opacity: 0, scale: 2.4, rotation: -14 }, { opacity: 1, scale: 1, rotation: -6, duration: 0.22, ease: "power4.in" }, t0 + 1.4);
+        addLabel(s, "CHORI X: Torch ki Roshni");
+      }
+
+      // Y: Police Siren — laal aur neeli roshni dheere dheere jhoolti hai
+      {
+        const t0 = 12;
+        const { s, fx, h } = choriBase(t0);
+        const r = el("div", "layer siren-r", null, fx, { opacity: 0 });
+        const b = el("div", "layer siren-b", null, fx, { opacity: 0 });
+        tl.fromTo(r, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 4 }, t0 + 0.1);
+        tl.fromTo(b, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "sine.inOut", yoyo: true, repeat: 3 }, t0 + 0.7);
+        const bd = el("div", "redtag", "CHORI!", h);
+        tl.fromTo(bd, { opacity: 0, y: -160 }, { opacity: 1, y: 0, duration: 0.45, ease: "back.out(2)" }, t0 + 0.9);
+        addLabel(s, "CHORI Y: Police Siren");
+      }
+
+      // Z: Khaali Jagah — jo cheez gayab hai uski dotted outline + "?" + chor ke pairon ke nishaan
+      {
+        const t0 = 15;
+        const { s, fx, h } = choriBase(t0);
+        const svg = el("div", "layer", null, fx);
+        svg.innerHTML =
+          '<svg width="1080" height="1920"><rect id="zbox" x="398" y="1300" width="150" height="110" rx="12" fill="rgba(255,214,0,0.18)" stroke="#ffd600" stroke-width="8" stroke-dasharray="22 14" pathLength="520" stroke-dashoffset="520"/>' +
+          '<text id="zq" x="473" y="1385" text-anchor="middle" font-family="ShivBlack" font-size="84" fill="#ffd600" stroke="#111" stroke-width="10" paint-order="stroke" opacity="0">?</text></svg>';
+        const box = svg.querySelector("#zbox");
+        tl.to(box, { attr: { "stroke-dashoffset": 0 }, duration: 0.7, ease: "power1.inOut" }, t0 + 0.4);
+        tl.fromTo(svg.querySelector("#zq"), { opacity: 0, scale: 0.2, svgOrigin: "473 1360" }, { opacity: 1, scale: 1, svgOrigin: "473 1360", duration: 0.3, ease: "back.out(3)" }, t0 + 1.0);
+        for (let k = 0; k < 7; k++) {
+          const f = el("div", "foot", null, fx, { left: 600 + k * 75 + "px", top: (k % 2 ? 1730 : 1785) - k * 18 + "px", transform: "rotate(75deg)" });
+          tl.to(f, { opacity: 0.85, duration: 0.08 }, t0 + 1.0 + k * 0.18);
+        }
+        const bd = el("div", "badge", "KYA GAYAB HUA?", h);
+        tl.fromTo(bd, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.5)" }, t0 + 0.2);
+        addLabel(s, "CHORI Z: Khaali Jagah");
+      }
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

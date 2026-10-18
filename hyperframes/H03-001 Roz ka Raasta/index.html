@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>H03-001 Roz ka Raasta - HF</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "ShivBlack";
+        src: url("assets/fonts/ariblk.ttf") format("truetype");
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1080px; height: 1920px; overflow: hidden; background: #000; }
+      #root {
+        position: relative; width: 100%; height: 100%; overflow: hidden; background: #000;
+        font-family: "ShivBlack", sans-serif; color: #fff;
+      }
+      #hook { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      #story { position: absolute; inset: 0; opacity: 0; overflow: hidden; background: #f6ecd6; }
+      .layer { position: absolute; inset: 0; }
+      .mult { mix-blend-mode: multiply; }
+      #cam { position: absolute; inset: 0; transform-origin: 50% 55%; }
+      #bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+      #night { background: radial-gradient(ellipse at 50% 40%, rgba(20,34,90,0.55), rgba(4,8,30,0.85)); opacity: 0; }
+      #black { background: radial-gradient(ellipse at 50% 45%, rgba(0,0,0,0.86), rgba(0,0,0,0.97)); opacity: 0; }
+      #dimvig { background: radial-gradient(ellipse at 50% 55%, rgba(0,0,0,0) 35%, rgba(0,0,0,0.6) 100%); opacity: 0; }
+      .drip { position: absolute; top: 0; background: #a50d14; border-radius: 0 0 40px 40px; height: 0; }
+
+      .char { position: absolute; left: 0; right: 0; display: flex; justify-content: center; align-items: flex-end; opacity: 0; }
+      .char .in { display: block; }
+      .char img { display: block; filter: drop-shadow(0 18px 22px rgba(0,0,0,0.28)); }
+
+      .hdr { position: absolute; left: 0; right: 0; top: 120px; height: 200px; display: flex;
+        align-items: center; justify-content: center; gap: 36px; }
+      .hdr > * { opacity: 0; }
+      .bigtitle { font-size: 116px; line-height: 1; color: #ffd600; letter-spacing: 2px;
+        -webkit-text-stroke: 14px #111; paint-order: stroke fill; text-shadow: 0 10px 0 rgba(0,0,0,0.25); }
+      .badge { font-size: 64px; color: #111; background: #ffd600; padding: 10px 34px 14px; border-radius: 18px;
+        border: 6px solid #111; box-shadow: 0 10px 0 #111; }
+      .chip { display: flex; align-items: center; gap: 18px; font-size: 54px; color: #ffd600; background: #101a3c;
+        padding: 14px 32px 16px; border-radius: 60px; border: 5px solid #ffd600; }
+      .stamp { font-size: 70px; color: #e3171b; padding: 8px 26px 12px; border: 9px double #e3171b; border-radius: 14px;
+        background: #fff8e8; letter-spacing: 3px; }
+      .redtag { font-size: 78px; color: #fff; background: #e3171b; padding: 8px 34px 14px; border-radius: 14px;
+        border: 6px solid #111; box-shadow: 0 10px 0 #111; }
+      .nameplate { position: absolute; left: 0; right: 0; top: 1770px; display: flex; justify-content: center; }
+      .nameplate span { opacity: 0; font-size: 70px; color: #fff; background: #111; padding: 6px 40px 12px; border-radius: 12px;
+        border-bottom: 10px solid #ffd600; }
+
+      .cap { position: absolute; left: 60px; right: 60px; top: 330px; height: 300px; display: flex; flex-wrap: wrap;
+        align-content: center; justify-content: center; column-gap: 22px; row-gap: 6px; }
+      .w { display: block; opacity: 0; }
+      .wi { display: block; font-size: 84px; line-height: 1.15; padding: 2px 14px 10px; border-radius: 16px;
+        color: #fff; -webkit-text-stroke: 12px #111; paint-order: stroke fill; }
+
+      .tape { position: absolute; left: -200px; width: 1480px; height: 96px; background: #ffd600; border-top: 8px solid #111;
+        border-bottom: 8px solid #111; display: flex; align-items: center; overflow: hidden; white-space: nowrap;
+        font-size: 50px; color: #111; letter-spacing: 3px; opacity: 0; }
+
+      #watch { position: absolute; left: 0; right: 0; top: 70px; display: flex; justify-content: center; opacity: 0; }
+      #sochtxt { position: absolute; left: 60px; right: 60px; top: 420px; text-align: center; font-size: 92px; color: #ffd600;
+        -webkit-text-stroke: 13px #111; paint-order: stroke fill; line-height: 1.12; }
+      #sochtxt span { opacity: 0; }
+
+      #cta { position: absolute; left: 0; right: 0; top: 1630px; display: flex; justify-content: center; }
+      #cta span { opacity: 0; font-size: 60px; color: #111; background: #ffd600; padding: 12px 36px 16px; border-radius: 50px;
+        border: 6px solid #111; box-shadow: 0 9px 0 #111; }
+      #brand { display: flex; align-items: center; gap: 26px; }
+      #brand img { width: 170px; height: 170px; }
+      #brand span { font-size: 68px; color: #111; }
+
+      #wipe { position: absolute; top: -300px; width: 700px; height: 2600px; left: -1300px; background: #ffd600;
+        border-left: 14px solid #111; border-right: 14px solid #111; transform: rotate(14deg); }
+      #flash { background: #fff; opacity: 0; }
+      #redflash { background: #e3171b; opacity: 0; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="64.91" data-width="1080" data-height="1920">
+      <audio id="mix" src="assets/mix.wav" data-start="0" data-duration="64.91" data-track-index="5" data-volume="1"></audio>
+      <video id="hook" class="clip" src="assets/hook.mp4" data-start="0" data-duration="10" data-track-index="1" muted playsinline></video>
+      <div id="story">
+        <div id="cam">
+          <img id="bg" src="assets/BG_MAIN.png" alt="" />
+          <div id="night" class="layer"></div>
+          <div id="crime" class="layer"></div>
+          <div id="chars" class="layer"></div>
+          <div id="tapes" class="layer"></div>
+          <div id="black" class="layer"></div>
+          <div id="dimvig" class="layer"></div>
+          <div id="hdrs" class="layer"></div>
+          <div id="caps" class="layer"></div>
+          <div id="watch">
+            <svg width="250" height="290" viewBox="0 0 250 290">
+              <rect x="105" y="0" width="40" height="30" rx="6" fill="#111" />
+              <rect x="185" y="38" width="30" height="20" rx="5" fill="#111" transform="rotate(40 200 48)" />
+              <circle cx="125" cy="160" r="118" fill="#111" />
+              <circle cx="125" cy="160" r="102" fill="#fff8e1" />
+              <circle id="ring" cx="125" cy="160" r="88" fill="none" stroke="#ffd600" stroke-width="18"
+                stroke-dasharray="553" stroke-dashoffset="553" transform="rotate(-90 125 160)" />
+              <g id="ticks"></g>
+              <line id="hand" x1="125" y1="160" x2="125" y2="82" stroke="#e3171b" stroke-width="9" stroke-linecap="round" />
+              <circle cx="125" cy="160" r="12" fill="#111" />
+              <text id="count" x="125" y="228" text-anchor="middle" font-family="ShivBlack" font-size="44" fill="#111">3</text>
+            </svg>
+          </div>
+          <div id="sochtxt"></div>
+          <div id="cta"><span>COMMENT + FOLLOW karo</span></div>
+        </div>
+        <div id="wipe"></div>
+        <div id="flash" class="layer"></div>
+        <div id="redflash" class="layer"></div>
+      </div>
+    </div>
+    <script>
+      // ===================== DATA (voice-time; cartoon OFF sec par shuru) =====================
+      const OFF = 10.2;
+      const END = 54.71;
+      const CASE = "H03-001";
+      // h = height px, w = width px (chaudi image), bottom = px from bottom
+      const SCENES = [
+        { img: "G_V_WOMAN_SAREE_CUT", s: 0.0, e: 5.3, w: 980, bottom: 300, enter: "fade" },
+        { img: "S12", s: 5.3, e: 8.29, h: 1000, bottom: 140, enter: "pop" },
+        { img: "S10", s: 8.29, e: 10.25, h: 1000, bottom: 140, enter: "left" },
+        { img: "P_MATKA_CUT", s: 10.25, e: 12.33, w: 720, bottom: 300, enter: "drop" },
+        { img: "G_V_WOMAN_SAREE_CUT", s: 12.33, e: 16.81, w: 980, bottom: 300, enter: "drop" },
+        { img: "S15", s: 16.81, e: 19.1, h: 1000, bottom: 140, enter: "pop" },
+        { img: "G_M_YELLOW_KURTA_CUT", s: 19.1, e: 24.66, h: 1000, bottom: 140, enter: "left" },
+        { img: "G_M_GAMCHHA_CUT", s: 24.66, e: 29.06, h: 1000, bottom: 140, enter: "right" },
+        { img: "G_W_ORANGE_KURTI_CUT", s: 29.06, e: 36.07, h: 1000, bottom: 140, enter: "left" },
+        { img: "G_M_MILKMAN_CUT", s: 36.07, e: 42.12, h: 1000, bottom: 140, enter: "right", push: 1.06 },
+        { img: "S02", s: 42.12, e: 45.12, h: 1000, bottom: 140, enter: "pop", push: 1.14 },
+        { img: "S06", s: 45.12, e: 46.98, h: 1000, bottom: 140, enter: "pop" },
+        { img: "CH03_001_OPTIONS", s: 46.98, e: 51.86, w: 960, bottom: 330, enter: "pop" },
+        { img: "S16", s: 51.86, e: END, h: 1130, bottom: 0, enter: "rise", noexit: true },
+      ];
+
+      const P = [
+        [["Roz", 0.07, 0.3], ["ka", 0.34, 0.41], ["raasta", 0.43, 0.82]],
+        [["sabse", 0.9, 1.2], ["KHATARNAK", 1.23, 1.64], ["hota", 1.72, 1.94], ["hai...", 1.98, 2.28]],
+        [["...kyunki", 2.28, 2.76], ["us", 2.8, 2.9], ["par", 2.98, 3.13]],
+        [["aap", 3.4, 3.95], ["AANKH", 4.03, 4.25], ["BAND", 4.33, 4.55]],
+        [["karke", 4.61, 4.78], ["chalte", 4.85, 5.11], ["hain!", 5.13, 5.3]],
+        [["Clue", 5.43, 5.93], ["isi", 6.01, 6.23], ["video", 6.27, 6.56], ["mein", 6.58, 6.68], ["hai.", 6.71, 6.9]],
+        [["DHYAAN", 7.01, 7.61], ["se", 7.65, 7.76], ["dekhna.", 7.8, 8.21]],
+        [["Sheela", 8.29, 8.87], ["roz", 8.94, 9.21], ["subah", 9.22, 9.47]],
+        [["paanch", 9.5, 9.69], ["baje", 9.77, 9.99]],
+        [["talab", 10.25, 10.74], ["se", 10.78, 10.89], ["paani", 10.93, 11.19]],
+        [["bharne", 11.24, 11.49], ["jaati", 11.53, 11.71], ["thi.", 11.79, 12.07]],
+        [["Us", 12.33, 12.4], ["subah", 12.47, 12.77], ["wo", 12.81, 12.92]],
+        [["TALAB", 12.96, 13.22], ["mein", 13.26, 13.37], ["mili.", 13.41, 14.0]],
+        [["Raat", 14.05, 14.27], ["bhar", 14.35, 14.5], ["BAARISH", 14.53, 14.8], ["hui", 14.83, 14.95], ["thi,", 14.98, 15.62]],
+        [["pagdandi", 15.7, 16.14], ["geeli", 16.18, 16.44], ["thi.", 16.52, 16.81]],
+        [["Sab", 17.1, 17.24], ["ne", 17.26, 17.38], ["kaha -", 17.45, 17.75]],
+        [["paanv", 18.04, 18.21], ["PHISAL", 18.24, 18.5], ["gaya", 18.55, 18.69], ["hoga.", 18.71, 19.03]],
+        [["Mohan", 19.1, 19.63], ["bola...", 19.67, 20.01]],
+        [["\"Zameen", 20.43, 20.68], ["ka", 20.75, 20.9], ["jhagda", 20.94, 21.13], ["tha,", 21.24, 21.8]],
+        [["par", 21.85, 21.95], ["main", 21.99, 22.1], ["paanch", 22.14, 22.32], ["baje", 22.4, 22.62]],
+        [["tak", 22.65, 22.7], ["soya", 22.77, 22.99], ["tha.", 23.07, 23.22]],
+        [["Ghar", 23.35, 23.8], ["wale", 23.83, 24.09], ["gawaah", 24.13, 24.32], ["hain.\"", 24.39, 24.66]],
+        [["Ramu", 24.66, 25.25], ["bola...", 25.28, 25.69]],
+        [["\"Main", 25.95, 26.03], ["raat", 26.06, 26.25], ["bhar", 26.33, 26.48]],
+        [["khet", 26.55, 26.7], ["ki", 26.78, 26.89], ["jhonpdi", 26.91, 27.23], ["mein", 27.25, 27.3], ["tha.", 27.38, 27.6]],
+        [["Subah", 27.65, 28.22], ["chhe", 28.29, 28.44], ["baje", 28.49, 28.66], ["utha.\"", 28.71, 28.96]],
+        [["Kamla", 29.06, 29.57], ["boli...", 29.64, 30.3]],
+        [["\"Main", 30.31, 30.48], ["uske", 30.51, 30.66], ["thodi", 30.7, 30.89], ["der", 30.93, 31.04]],
+        [["baad", 31.11, 31.26], ["nikli", 31.3, 31.56], ["thi.", 31.64, 32.4]],
+        [["Geeli", 32.44, 32.7], ["pagdandi", 32.74, 33.15], ["par", 33.2, 33.3]],
+        [["uske", 33.35, 33.6], ["nishano", 33.63, 33.97], ["ke", 34.04, 34.19], ["aage", 34.22, 34.42]],
+        [["nange", 34.64, 35.09], ["paanv", 35.13, 35.31], ["ke", 35.35, 35.43]],
+        [["nishan", 35.44, 35.69], ["the.\"", 35.8, 36.07]],
+        [["Bhola", 36.07, 36.63], ["bola...", 36.7, 37.39]],
+        [["\"Gaon", 37.52, 37.69], ["mein", 37.72, 37.84], ["sab", 37.89, 37.99], ["chappal", 38.06, 38.4]],
+        [["pehente", 38.43, 38.66], ["hain", 38.68, 38.73], ["saheb...", 38.77, 39.48]],
+        [["bas", 39.55, 39.7], ["khet", 39.74, 39.93], ["ki", 39.96, 40.08], ["jhonpdi", 40.15, 40.45], ["wale", 40.48, 40.71]],
+        [["nange", 40.73, 40.97], ["paanv", 41.01, 41.16], ["ghoomte", 41.17, 41.49], ["hain.\"", 41.53, 42.03]],
+        [["Detective", 45.19, 45.43], ["Shivam", 45.51, 45.81], ["ne...", 45.84, 45.96]],
+        [["KATIL", 45.99, 46.25], ["pakad", 46.33, 46.59], ["liya!", 46.61, 46.93]],
+        [["Katil", 46.98, 47.48], ["kaun?", 47.48, 47.78]],
+        [["COMMENT", 48.04, 48.48], ["karo.", 48.48, 48.78]],
+        [["Aur", 48.78, 49.3], ["aisi", 49.3, 49.54], ["hi", 49.54, 49.66]],
+        [["detective", 49.66, 50.04], ["stories", 50.04, 50.42], ["ke", 50.42, 50.58], ["liye", 50.58, 51.06]],
+        [["FOLLOW", 51.06, 51.56], ["karo.", 51.56, 51.86]],
+        [["Shivam", 51.86, 52.5], ["ki", 52.5, 52.64], ["nazar", 52.64, 52.96], ["se", 52.96, 53.46]],
+        [["koi", 53.46, 53.9], ["nahi", 53.9, 54.18], ["bachta.", 54.18, 54.52]],
+      ];
+
+      const T = {
+        hook: [0.1, 5.3],
+        caseChip: [5.45, 8.21],
+        chips: [["clock", "SUBAH 5 BAJE", 9.5, 10.25]],
+        stamps: [["PAANV PHISLA?", 18.04, 19.1, -6]],
+        crime: [12.33, 16.81],
+        suspects: [["SUSPECT 1/4", "MOHAN", 19.1, 24.66], ["SUSPECT 2/4", "RAMU", 24.66, 29.06], ["SUSPECT 3/4", "KAMLA", 29.06, 36.07], ["SUSPECT 4/4", "BHOLA", 36.07, 42.12]],
+        dhyaan: null, // is story mein "lekin......" wali clue line nahi hai
+        soch: 42.12,
+        solved: [45.99, 46.98],
+        options: [46.98, 51.86, "1, 2, 3 ya 4?"],
+        ctaPill: 48.04,
+        brand: 51.95,
+        night: [[8.29, 16.81, 0.55]],
+        black: [],
+        relight: null,
+      };
+      // ===================== /DATA =====================
+
+      const $ = (id) => document.getElementById(id);
+      const el = (tag, cls, html, parent, css) => {
+        const e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (html != null) e.innerHTML = html;
+        if (css) Object.assign(e.style, css);
+        if (parent) parent.appendChild(e);
+        return e;
+      };
+      let seed = 7;
+      const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+
+      gsap.defaults({ immediateRender: false });
+      const root = gsap.timeline({ paused: true });
+      const tl = gsap.timeline();
+
+      // hook clip -> 0.2s black -> cartoon
+      root.fromTo("#story", { opacity: 0 }, { opacity: 1, duration: 0.25, ease: "power1.out" }, OFF);
+
+      tl.fromTo("#bg", { scale: 1 }, { scale: 1.12, duration: END, ease: "none" }, 0);
+
+      // ---------- characters ----------
+      SCENES.filter((s) => !s.skip).forEach((sc, i) => {
+        const w = el("div", "char", null, $("chars"));
+        w.style.bottom = sc.bottom + "px";
+        w.style.transformOrigin = "50% 100%";
+        const inner = el("div", "in", null, w);
+        inner.style.transformOrigin = "50% 70%";
+        const im = el("img", null, null, inner);
+        im.src = "assets/" + sc.img + ".png";
+        if (sc.w) im.style.width = sc.w + "px"; else im.style.height = sc.h + "px";
+        const d = sc.e - sc.s;
+        const enters = {
+          none: [{ opacity: 1 }, { opacity: 1, duration: 0.01 }],
+          fade: [{ opacity: 0, scale: 1.08 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" }],
+          pop: [{ opacity: 0, scale: 0.55, y: 60 }, { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: "back.out(1.8)" }],
+          rise: [{ opacity: 0, y: 420 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }],
+          drop: [{ opacity: 0, y: -160, rotation: -4 }, { opacity: 1, y: 0, rotation: 0, duration: 0.5, ease: "bounce.out" }],
+          left: [{ opacity: 0, x: -900, skewX: 14 }, { opacity: 1, x: 0, skewX: 0, duration: 0.42, ease: "power4.out" }],
+          right: [{ opacity: 0, x: 900, skewX: -14 }, { opacity: 1, x: 0, skewX: 0, duration: 0.42, ease: "power4.out" }],
+        };
+        const [from, to] = enters[sc.enter];
+        tl.fromTo(w, from, to, sc.s);
+        if (sc.push) tl.fromTo(inner, { scale: 1 }, { scale: sc.push, duration: d, ease: "power1.inOut" }, sc.s);
+        else tl.fromTo(inner, { y: 0 }, { y: -14, duration: d / 2, ease: "sine.inOut", yoyo: true, repeat: 1 }, sc.s);
+        if (!sc.noexit) {
+          const out = sc.enter === "left" ? { x: 900, skewX: -10 } : sc.enter === "right" ? { x: -900, skewX: 10 } : { scale: 0.8, y: 30 };
+          tl.to(w, { opacity: 0, duration: 0.16, ease: "power2.in", ...out }, sc.e - 0.16);
+        }
+        if (i > 0) tl.fromTo("#cam", { scale: 1.06 }, { scale: 1, duration: 0.32, ease: "power2.out" }, sc.s);
+      });
+
+      // ---------- captions ----------
+      P.forEach((ph, i) => {
+        const box = el("div", "cap", null, $("caps"));
+        const last = ph[ph.length - 1][2];
+        const next = i + 1 < P.length ? P[i + 1][0][1] : END;
+        const pEnd = Math.min(next, last + 0.7);
+        ph.forEach(([txt, ws, we]) => {
+          const w = el("span", "w", null, box);
+          const wi = el("span", "wi", null, w);
+          wi.textContent = txt;
+          tl.fromTo(w, { opacity: 0, y: 26, scale: 0.7 }, { opacity: 1, y: 0, scale: 1, duration: 0.14, ease: "back.out(2.5)" }, ws);
+          if (/[A-Z]{2,}/.test(txt) && txt === txt.toUpperCase()) {
+            tl.set(wi, { backgroundColor: "#ffd600", color: "#111111", webkitTextStrokeWidth: "0px" }, ws);
+            tl.fromTo(wi, { scale: 1 }, { scale: 1.16, duration: 0.1, ease: "power2.out", yoyo: true, repeat: 1 }, ws);
+            tl.set(wi, { backgroundColor: "rgba(0,0,0,0)", color: "#ffd600", webkitTextStrokeWidth: "12px" }, Math.max(we, ws + 0.3));
+          }
+        });
+        tl.to(box, { opacity: 0, y: -18, duration: 0.12, ease: "power1.in" }, pEnd - 0.12);
+      });
+
+      // ---------- header graphics ----------
+      const hdr = () => el("div", "hdr", null, $("hdrs"));
+      const stampIn = (node, t, rot) => {
+        tl.fromTo(node, { opacity: 0, scale: 2.4, rotation: rot - 8 }, { opacity: 1, scale: 1, rotation: rot, duration: 0.22, ease: "power4.in" }, t);
+        tl.fromTo("#cam", { x: -14, y: 8 }, { x: 0, y: 0, duration: 0.25, ease: "elastic.out(1,0.3)" }, t + 0.22);
+      };
+      const fadeOut = (node, t) => tl.to(node, { opacity: 0, scale: 0.85, duration: 0.15, ease: "power2.in" }, t - 0.15);
+
+      let n = el("div", "bigtitle", "KILLER KAUN?", hdr());
+      stampIn(n, T.hook[0], -3);
+      tl.to(n, { scale: 1.05, duration: 0.5, yoyo: true, repeat: 5, ease: "sine.inOut" }, T.hook[0] + 0.4);
+      fadeOut(n, T.hook[1]);
+
+      n = el("div", "chip", "CASE FILE #" + CASE, hdr());
+      tl.fromTo(n, { opacity: 0, x: -500 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, T.caseChip[0]);
+      fadeOut(n, T.caseChip[1]);
+
+      const clockSvg =
+        '<svg width="58" height="58" viewBox="0 0 58 58"><circle cx="29" cy="29" r="25" fill="none" stroke="#ffd600" stroke-width="6"/>' +
+        '<line x1="29" y1="29" x2="29" y2="13" stroke="#ffd600" stroke-width="6" stroke-linecap="round"/>' +
+        '<line x1="29" y1="29" x2="17" y2="29" stroke="#ffd600" stroke-width="6" stroke-linecap="round"/></svg>';
+      T.chips.forEach(([icon, txt, s, e]) => {
+        const c = el("div", "chip", (icon === "clock" ? clockSvg : "") + "<span>" + txt + "</span>", hdr());
+        tl.fromTo(c, { opacity: 0, y: -60 }, { opacity: 1, y: 0, duration: 0.35, ease: "back.out(2)" }, s);
+        fadeOut(c, e);
+      });
+      T.stamps.forEach(([txt, s, e, rot]) => {
+        const st = el("div", "stamp", txt, hdr());
+        stampIn(st, s, rot);
+        fadeOut(st, e);
+      });
+
+      // ---------- crime scene: template B "Khoon ki Boondein" ----------
+      {
+        const [t0, t1] = T.crime;
+        const fx = $("crime");
+        const tag = el("div", "redtag", "CRIME SCENE", hdr());
+        tl.fromTo(tag, { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.3, ease: "back.out(2.4)" }, t0 + 0.05);
+        fadeOut(tag, t1);
+        const txt = "CRIME SCENE &#9679; DO NOT CROSS &#9679; ".repeat(4);
+        const tp1 = el("div", "tape", txt, $("tapes"), { top: "770px" });
+        const tp2 = el("div", "tape", txt, $("tapes"), { top: "1690px" });
+        tl.fromTo(tp1, { opacity: 1, x: -1500, rotation: -9 }, { x: 0, rotation: -9, duration: 0.4, ease: "power3.out" }, t0 + 0.1);
+        tl.fromTo(tp2, { opacity: 1, x: 1500, rotation: 7 }, { x: 0, rotation: 7, duration: 0.4, ease: "power3.out" }, t0 + 0.25);
+        tl.to([tp1, tp2], { opacity: 0, duration: 0.15 }, t1 - 0.15);
+        const grp = el("div", "layer", null, fx);
+        const band = el("div", "mult", null, grp, { position: "absolute", left: 0, right: 0, top: 0, height: "0px", background: "#a50d14" });
+        tl.to(band, { height: "70px", duration: 0.4, ease: "power2.out" }, t0 + 0.1);
+        for (let i = 0; i < 11; i++) {
+          const w = 26 + rnd() * 34;
+          const d = el("div", "drip mult", null, grp, { left: Math.round(i * 100 + rnd() * 50) + "px", width: w + "px" });
+          tl.to(d, { height: Math.round(500 + rnd() * 1500) + "px", duration: 1.4 + rnd() * 1.2, ease: "power1.in" }, t0 + 0.2 + rnd() * 0.5);
+        }
+        const curtain = el("div", "layer mult", null, grp, { background: "linear-gradient(180deg, #b3121a 0%, #b3121a 80%, rgba(179,18,26,0) 100%)", opacity: 0.6, clipPath: "inset(0 0 100% 0)" });
+        tl.to(curtain, { clipPath: "inset(0 0 0% 0)", duration: 1.6, ease: "power1.inOut" }, t0 + 1.2);
+        tl.to(grp, { opacity: 0, duration: 0.25 }, t1 - 0.2);
+      }
+
+      // suspects: badge + name plate (+ yellow wipe)
+      T.suspects.forEach(([b, name, s, e], k) => {
+        const dir = k % 2 ? 1 : -1;
+        const bd = el("div", "badge", b, hdr());
+        tl.fromTo(bd, { opacity: 0, y: -140, rotation: dir * 8 }, { opacity: 1, y: 0, rotation: dir * -2, duration: 0.45, ease: "back.out(2)" }, s + 0.1);
+        fadeOut(bd, e);
+        const np = el("div", "nameplate", null, $("hdrs"));
+        const sp = el("span", null, name, np);
+        tl.fromTo(sp, { opacity: 0, scaleX: 0 }, { opacity: 1, scaleX: 1, duration: 0.3, ease: "power3.out" }, s + 0.3);
+        fadeOut(sp, e);
+        tl.fromTo("#wipe", { x: 0 }, { x: 2800, duration: 0.36, ease: "power2.inOut" }, s - 0.18);
+      });
+
+      if (T.dhyaan) {
+        n = el("div", "badge", "DHYAAN DO!", hdr());
+        tl.fromTo(n, { opacity: 0, scale: 0.3 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2.5)" }, T.dhyaan[0]);
+        tl.to(n, { scale: 1.1, duration: 0.3, yoyo: true, repeat: 7, ease: "sine.inOut" }, T.dhyaan[0] + 0.4);
+        fadeOut(n, T.dhyaan[1]);
+      }
+
+      n = el("div", "stamp", "CASE SOLVED", hdr());
+      n.style.fontSize = "84px";
+      stampIn(n, T.solved[0], -7);
+      fadeOut(n, T.solved[1]);
+
+      n = el("div", "bigtitle", T.options[2], hdr());
+      n.style.fontSize = "112px";
+      stampIn(n, T.options[0] + 0.05, 0);
+      fadeOut(n, T.options[1]);
+      tl.fromTo("#cta span", { opacity: 0, y: 80 }, { opacity: 1, y: 0, duration: 0.4, ease: "back.out(2)" }, T.ctaPill);
+      tl.to("#cta span", { scale: 1.08, duration: 0.35, yoyo: true, repeat: 1, ease: "sine.inOut" }, T.ctaPill + 0.4);
+      tl.to("#cta span", { opacity: 0, duration: 0.15 }, T.options[1] - 0.15);
+
+      n = el("div", null, null, hdr());
+      n.id = "brand";
+      n.innerHTML = '<img src="assets/LOGO_ROUND.png" alt="" /><span>@theshivamiq</span>';
+      tl.fromTo(n, { opacity: 0, y: -80 }, { opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.8)" }, T.brand);
+
+      // ---------- night / blackout ----------
+      T.night.forEach(([s, e, o]) => {
+        tl.to("#night", { opacity: o, duration: 0.4 }, s);
+        tl.to("#night", { opacity: 0, duration: 0.4 }, e - 0.4);
+      });
+      T.black.forEach(([s, e]) => {
+        tl.to("#black", { opacity: 1, duration: 0.12, ease: "steps(3)" }, s);
+        tl.to("#black", { opacity: 0, duration: 0.1 }, e);
+      });
+      if (T.relight != null) tl.fromTo("#flash", { opacity: 0.85 }, { opacity: 0, duration: 0.5, ease: "power2.out" }, T.relight);
+
+      // ---------- Shivam soch: stopwatch 3 sec ----------
+      {
+        const S = T.soch;
+        const ticks = $("ticks");
+        for (let k = 0; k < 12; k++) {
+          const a = (k * 30 * Math.PI) / 180;
+          const ln = document.createElementNS("http://www.w3.org/2000/svg", "line");
+          ln.setAttribute("x1", 125 + Math.sin(a) * 96); ln.setAttribute("y1", 160 - Math.cos(a) * 96);
+          ln.setAttribute("x2", 125 + Math.sin(a) * 84); ln.setAttribute("y2", 160 - Math.cos(a) * 84);
+          ln.setAttribute("stroke", "#111"); ln.setAttribute("stroke-width", "5");
+          ticks.appendChild(ln);
+        }
+        tl.fromTo("#watch", { opacity: 0, scale: 0.3, rotation: -30 }, { opacity: 1, scale: 1, rotation: 0, duration: 0.35, ease: "back.out(2)" }, S);
+        tl.fromTo("#ring", { attr: { "stroke-dashoffset": 553 } }, { attr: { "stroke-dashoffset": 0 }, duration: 3, ease: "none" }, S);
+        gsap.set("#hand", { svgOrigin: "125 160" });
+        for (let k = 1; k <= 15; k++) tl.to("#hand", { rotation: k * 24, duration: 0.05, ease: "power4.out" }, S + k * 0.2 - 0.05);
+        tl.set("#count", { textContent: "3" }, S);
+        tl.set("#count", { textContent: "2" }, S + 1);
+        tl.set("#count", { textContent: "1" }, S + 2);
+        for (const t of [S + 1, S + 2]) tl.fromTo("#watch", { scale: 1.12 }, { scale: 1, duration: 0.3, ease: "power2.out" }, t);
+        tl.to("#watch", { opacity: 0, scale: 0.6, duration: 0.15 }, S + 2.85);
+        tl.to("#dimvig", { opacity: 1, duration: 0.4 }, S);
+        tl.to("#dimvig", { opacity: 0, duration: 0.15 }, S + 2.85);
+        const soch = $("sochtxt");
+        "Shivam SOCH raha hai...".split("").forEach((c, k) => {
+          if (c === " ") { soch.appendChild(document.createTextNode(" ")); return; }
+          const sp = el("span", null, c, soch);
+          tl.fromTo(sp, { opacity: 0 }, { opacity: 1, duration: 0.01 }, S + 0.58 + k * 0.045);
+        });
+        tl.to(soch, { opacity: 0, duration: 0.15 }, S + 2.85);
+        tl.fromTo("#flash", { opacity: 0.9 }, { opacity: 0, duration: 0.35, ease: "power2.out" }, S + 3);
+      }
+
+      root.add(tl, OFF);
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = root;
+    </script>
+  </body>
+</html>

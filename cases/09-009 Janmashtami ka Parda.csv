@@ -1,0 +1,46 @@
+asset_id,start,end,position,size,text,effect,sfx,color,focus
+STYLE,0.00,1.00,,,slide,,,,
+P_MATKI,0.00,4.78,center,35,,nopop+night,,,
+,0.00,4.78,,90,CHOR KAUN?,nopop,,yellow,
+,0.07,3.01,,,"99% log is case
+mein FAIL hue",,,red,
+,3.01,4.78,,,Tum 1% wale ho?,,,red,
+S02,4.78,7.55,center,55,"Clue isi video
+mein hai.
+Dhyaan se dekhna!",,whoosh,yellow,
+C006_GUPTA,7.55,9.82,center,45,JANMASHTAMI...,,,,
+C006_GUPTA,9.82,12.47,center,45,"Raat 12 baje
+KANHA ka janm",,,yellow,
+C006_GUPTA,12.47,15.30,center,45,"Phir mandir ke
+PARDE band",,,,
+S11,15.30,17.11,center,55,"Subah Shivam ne
+bataya...",,paper,,
+S11,17.11,19.54,center,55,"CHAANDI ki ek cheez
+CHORI hui!",,heartbeat,red,
+S11,19.54,20.99,center,55,"KYA? ye kisi ko
+nahi bataya",,,yellow,
+S11,20.99,23.43,center,55,"Parde ke andar sirf
+SHIVAM ne dekha",,,,
+G_SHANTI,23.43,26.89,center,45,SUSPECT 1/3,,swish,yellow,
+,23.43,24.84,,,SHANTI BAI,,,,
+,24.84,26.89,,,"""Raat bhar BHAJAN
+ga rahi thi sahab""",,,,
+C005_VICKY,26.89,30.37,center,45,SUSPECT 2/3,,swish,yellow,
+,26.89,27.85,,,VICKY,,,,
+,27.85,28.60,,,"""Chori?""",,,,
+,28.60,30.37,,,"""Kanha ki murti
+to salaamat hai na?""",,,,
+C006_RAJAT,30.37,34.94,center,45,SUSPECT 3/3,,swish,yellow,
+,30.37,31.46,,,RAJAT,,,,
+,31.46,32.44,,,"""Haaye...""",,,,
+,32.44,34.94,,,"""Ab hamare Kanha ke
+honth soone lagenge""",,,,
+S06,34.94,36.77,center,55,"Shivam ne chor
+pakad liya!",flash+music_off,whoosh,yellow,
+,36.18,36.77,,,,,boom,,
+C909_OPTIONS,36.77,39.74,center,38,"Chor kaun?
+1, 2 ya 3?
+Comment karo!",,ding,,
+,36.77,39.74,,56,Sahi answer kal pin hoga,,,yellow,
+S16,39.74,42.40,center,60,"Shivam ki nazar se
+koi nahi bachta.",noout,whoosh,,

@@ -1,0 +1,43 @@
+asset_id,start,end,position,size,text,effect,sfx,color,focus
+STYLE,0.00,1.00,,,rise,,,,
+C010_RAMESH,0.00,2.98,center,35,,nopop+night,,,
+,0.00,2.98,,90,KILLER KAUN?,nopop,,yellow,
+,0.06,1.15,,,Train ka ye case...,,,red,
+,1.15,2.98,,,"...AADHE log GALAT
+solve karte hain",,,red,
+S04,2.98,5.60,center,55,"Clue isi video
+mein hai.
+Dhyaan se dekhna!",,whoosh,yellow,
+P_TRAIN_COACH_IN,5.60,16.96,,,,bg,,,
+S10,5.60,7.93,center,55,"Raat ki TRAIN mein
+announcement...",,whoosh,,
+S10,7.93,9.61,center,55,"Train 2 GHANTE
+LATE hai!",,,yellow,
+S10,9.61,12.19,center,55,"Devgarh station ab
+raat DEDH BAJE",,,yellow,
+C010_RAMESH,12.19,13.49,center,35,SAADHE BAARAH baje...,night,heartbeat,,
+C010_RAMESH,13.49,15.42,center,35,"RAMESH ji berth
+par MARE mile!",night,,red,
+C010_RAMESH,15.42,16.96,center,35,ZEHAR diya gaya tha,night,,red,
+C010_SUNITA,16.96,20.24,center,45,SUSPECT 1/3,,swish,yellow,
+,16.96,18.69,,,SUNITA (patni),,,,
+,18.69,20.24,,,"""Main us waqt
+BATHROOM mein thi""",,,,
+G_RAMU,20.24,23.79,center,45,SUSPECT 2/3,,swish,yellow,
+,20.24,21.60,,,RAMU (naukar),,,,
+,21.60,23.79,,,"""Neeche FARSH par
+so raha tha sahab""",,,,
+C010_MAHESH,23.79,28.85,center,45,SUSPECT 3/3,,swish,yellow,
+,23.79,25.48,,,MAHESH (partner),,,,
+,25.48,26.75,,,"""Saadhe 12 baje...""",,,,
+,26.75,28.85,,,"""...main DEVGARH par
+CHAI pee raha tha""",,,,
+S03,28.85,30.71,center,55,"Shivam ne kaatil
+pakad liya!",flash+music_off,whoosh,yellow,
+,30.40,30.71,,,,,boom,,
+C1001_OPTIONS,30.71,33.37,center,38,"Killer kaun?
+1, 2 ya 3?
+Comment karo!",,ding,,
+,30.71,33.37,,56,Sahi answer kal pin hoga,,,yellow,
+S16,33.37,36.29,center,60,"Shivam ki nazar se
+koi nahi bachta.",noout,whoosh,,

@@ -1,0 +1,44 @@
+# Secrets - kabhi GitHub par nahi
+elevenlabs_key.txt
+elevenlabs_voice.txt
+.env
+**/.env
+comment_checker/data/
+comment_checker/verified.txt
+**/token*.json
+**/client_secret*.json
+**/credentials*.json
+
+# Badi / media files - sirf laptop par
+assets/
+voice/
+music/
+sfx/
+output/
+work/
+cases_pending/
+*.png
+*.jpg
+*.jpeg
+*.webp
+*.gif
+*.mp4
+*.mov
+*.mp3
+*.wav
+*.m4a
+*.ttf
+*.xlsx
+*.xls
+
+# Kachra
+__pycache__/
+*.pyc
+*.log
+*.bak
+*.backup*
+**/excel_backup/
+**/node_modules/
+**/renders/
+**/seg/
+.claude/

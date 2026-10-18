@@ -1,0 +1,556 @@
+"""Detective Shivam Rank Bot (Telegram)
+Follower: /start -> Instagram username -> code reel par comment -> Telegram join -> YouTube screenshot
+-> sab sahi to verified.txt mein naam + rank milta hai.  /rank se apna rank.
+Chalao: run_bot.bat  (window khuli rakho)
+"""
+import os, re, sys, json, time, random, subprocess
+from datetime import datetime, timedelta, timezone
+import requests
+import ig_api
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+DATA = os.path.join(HERE, "data")
+STATE = os.path.join(DATA, "bot_state.json")
+RANKS = os.path.join(DATA, "ranks.json")
+VERIFIED = os.path.join(HERE, "verified.txt")
+CHANNEL = "@theshivamiq"
+TG_LINK = "https://t.me/theshivamiq"
+YT_LINK = "https://www.youtube.com/@theshivamiq?sub_confirmation=1"
+IG_LINK = "https://www.instagram.com/theshivamiq/"
+CHECKER_HOUR = 9          # roz subah 9 baje (IST) leaderboard update
+SHAK_PER_DAY = 15
+IG_CHECK = False          # Instagram code comment wala check (False = admin khud naam dekhta hai)
+IST = timezone(timedelta(hours=5, minutes=30))
+
+
+def log(*a):
+    print(datetime.now().strftime("%H:%M:%S"), *a, flush=True)
+
+
+# ------------------------------------------------------------ token / telegram
+def bot_token():
+    with open(ig_api.ENV, encoding="utf-8-sig") as f:
+        for line in f:
+            if line.strip().startswith("TG_BOT_TOKEN="):
+                return line.split("=", 1)[1].strip()
+    sys.exit(".env mein TG_BOT_TOKEN nahi mila")
+
+
+TOKEN = bot_token()
+
+
+def tg(method, _timeout=30, _files=None, **params):
+    for k, v in list(params.items()):
+        if isinstance(v, (dict, list)):
+            params[k] = json.dumps(v)
+    try:
+        r = requests.post("https://api.telegram.org/bot%s/%s" % (TOKEN, method), data=params, files=_files, timeout=_timeout)
+        d = r.json()
+    except Exception as e:      # message mein URL (token) ho sakta hai, isliye sirf type
+        log("Telegram connection problem:", type(e).__name__)
+        return None
+    if not d.get("ok"):
+        log("Telegram error (%s): %s" % (method, d.get("description")))
+        return None
+    return d.get("result")
+
+
+def send(chat, text, buttons=None):
+    p = {"chat_id": chat, "text": text, "parse_mode": "HTML", "disable_web_page_preview": True}
+    if buttons:
+        p["reply_markup"] = {"inline_keyboard": buttons}
+    return tg("sendMessage", **p)
+
+
+# ------------------------------------------------------------ state
+def load(p, default):
+    try:
+        with open(p, encoding="utf-8") as f:
+            return json.load(f)
+    except (OSError, ValueError):
+        return default
+
+
+def save_state(st):
+    os.makedirs(DATA, exist_ok=True)
+    tmp = STATE + ".new"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(st, f, ensure_ascii=False, indent=1)
+    os.replace(tmp, STATE)
+
+
+def verified_set():
+    out = set()
+    try:
+        for line in open(VERIFIED, encoding="utf-8-sig"):
+            line = line.split("#")[0].strip().lstrip("@").lower()
+            if line:
+                out.add(line)
+    except OSError:
+        pass
+    return out
+
+
+def add_verified(ig):
+    if ig.lower() in verified_set():
+        return
+    with open(VERIFIED, "a", encoding="utf-8") as f:
+        f.write("\n" + ig.lower() + "   # bot " + datetime.now(IST).strftime("%Y-%m-%d"))
+
+
+# ------------------------------------------------------------ checks
+_scan_cache = {"t": 0, "since": None, "found": {}}
+
+
+CODE_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"   # O/0, I/1/L jaise confuse karne wale nahi
+
+
+def make_code():
+    """6 akshar, bina dash/space: jaise K7M2QX (kam se kam 2 number + 2 letter)"""
+    while True:
+        c = "".join(random.choice(CODE_CHARS) for _ in range(6))
+        if sum(ch.isdigit() for ch in c) >= 2 and sum(ch.isalpha() for ch in c) >= 2:
+            return c
+
+
+def codes_in(text):
+    t = (text or "").upper()
+    out = set(re.findall(r"(?<![A-Z0-9])[A-Z0-9]{6}(?![A-Z0-9])", t))
+    out |= set(re.findall(r"SHIVAM\s*[-_ ]?\s*(\d{4})", t))      # purana format
+    return out
+
+
+def scan_codes(since):
+    """Haal ki reels ke comments (aur replies) mein code dhoondo -> {code: set(usernames)}"""
+    c = _scan_cache
+    if time.time() - c["t"] < 60 and c["since"] and c["since"] <= since:
+        return c["found"]
+    found = {}
+    fields = "id,text,timestamp,from{username},replies{id,text,timestamp,from{username}}"
+    try:
+        # saari reels (har reel ke sirf naye comments – purane aate hi ruk jaata hai)
+        media = ig_api.get_all("me/media", {"fields": "id,timestamp", "limit": 50})
+        tok = ig_api.load_token()
+        for m in media:
+            data = ig_api.get(m["id"] + "/comments", {"fields": fields, "limit": 50}, tok)
+            pages = 0
+            while True:
+                old = False
+                for cm in data.get("data", []):
+                    for x in [cm] + (cm.get("replies") or {}).get("data", []):
+                        t = datetime.strptime(x["timestamp"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
+                        if t < since:
+                            if x is cm:
+                                old = True
+                            continue
+                        u = ((x.get("from") or {}).get("username") or "").lower()
+                        for code in codes_in(x.get("text")):
+                            found.setdefault(code, set()).add(u)
+                nxt = data.get("paging", {}).get("next")
+                pages += 1
+                if old or not nxt or pages >= 6:
+                    break
+                after = re.search(r"after=([^&]+)", nxt)
+                if not after:
+                    break
+                data = ig_api.get(m["id"] + "/comments", {"fields": fields, "limit": 50,
+                                                          "after": requests.utils.unquote(after.group(1))}, tok)
+    except ig_api.IGError as e:
+        log("Instagram check nahi hua:", e)
+    c.update(t=time.time(), since=since, found=found)
+    return found
+
+
+def in_channel(user_id):
+    r = tg("getChatMember", chat_id=CHANNEL, user_id=user_id)
+    if not r:
+        return False
+    return r.get("status") in ("creator", "administrator", "member") or \
+        (r.get("status") == "restricted" and r.get("is_member"))
+
+
+# ------------------------------------------------------------ rank text
+def rank_text(ig):
+    rk = load(RANKS, {})
+    d = rk.get("users", {}).get(ig.lower())
+    if not d:
+        return ("🔍 <b>@%s</b> ka abhi koi sahi jawab nahi mila.\n"
+                "Har case par comment karo: naam ya number (jaise <b>Kallu</b> ya <b>3</b>).\n"
+                "<i>Data update: %s</i>") % (ig, rk.get("updated", "-"))
+    ok = ig.lower() in verified_set()
+    if ok:
+        rank = d["rank"] or "Abhi koi rank nahi (3 sahi par Junior Detective)"
+    else:
+        rank = ("🔒 " + d["would"] + " (verify poora karo to milega)") if d["would"] else \
+            "Abhi koi rank nahi (3 sahi par Junior Detective)"
+    return ("🕵️ <b>@%s</b>\n\n"
+            "🏅 Rank: <b>%s</b>\n"
+            "⭐ Kul points: <b>%d</b>  (leaderboard #%d)\n"
+            "📅 Is hafte points: <b>%d</b>  |  Pichhle hafte: <b>%d</b>\n"
+            "✅ Kul sahi: <b>%d</b>\n"
+            "🔥 Din streak: <b>%d</b> din (sabse lambi %d)  |  Reel streak: %d\n\n"
+            "⚡ Jaldi jawab = zyada points: reel ke baad 30 sec mein sahi = +10, 1 min = +8 ... 1 ghante tak bonus.\n"
+            "🥇 Reel par pehle 3 sahi = +10 / +7 / +5\n"
+            "<i>Data update: %s</i>") % (
+        d["name"], rank, d.get("pts", 0), d["pos"], d.get("pts_live", 0), d.get("pts_week", 0), d["sahi"],
+        d.get("day_streak", 0), d.get("best_day_streak", 0), d["streak"], rk.get("updated", "-"))
+
+
+# ------------------------------------------------------------ flow
+def status_msg(st, uid):
+    u = st["users"][uid]
+    tick = lambda b: "✅" if b else "⬜"
+    btn = [[{"text": "✈️ Telegram join", "url": TG_LINK}, {"text": "▶️ YouTube subscribe", "url": YT_LINK}],
+           [{"text": "🔄 Check karo", "callback_data": "check"}]]
+    if not IG_CHECK:
+        text = ("🕵️ <b>Detective Verification</b> – @%s\n\n"
+                "%s <b>1. Telegram:</b> channel join karo\n"
+                "%s <b>2. YouTube:</b> subscribe karo aur uska <b>screenshot</b> yahan bhejo%s\n"
+                "👤 <b>3. Instagram:</b> manual verification – admin khud tumhara account check karega "
+                "(tumhe kuch nahi karna)\n\n"
+                "Telegram + YouTube karke <b>Check karo</b> dabao.") % (
+            u["ig"], tick(u.get("tg_ok")), tick(u.get("yt_ok")),
+            " (check ho raha hai ⏳)" if u.get("yt_wait") and not u.get("yt_ok") else "")
+        return text, btn
+    text = ("🕵️ <b>Detective Verification</b> – @%s\n\n"
+            "%s <b>1. Instagram:</b> ye code meri kisi bhi reel par comment karo:\n"
+            "      <code>%s</code>  (sirf ye 6 akshar – tap karke copy karo)\n"
+            "%s <b>2. Telegram:</b> channel join karo\n"
+            "%s <b>3. YouTube:</b> subscribe karo aur uska <b>screenshot</b> yahan bhejo%s\n\n"
+            "Teeno karke <b>Check karo</b> dabao.") % (
+        u["ig"], tick(u.get("ig_ok")), u["code"], tick(u.get("tg_ok")), tick(u.get("yt_ok")),
+        " (check ho raha hai ⏳)" if u.get("yt_wait") and not u.get("yt_ok") else "")
+    btn = [[{"text": "📸 Instagram", "url": IG_LINK}, {"text": "✈️ Telegram join", "url": TG_LINK}],
+           [{"text": "▶️ YouTube subscribe", "url": YT_LINK}],
+           [{"text": "🔄 Check karo", "callback_data": "check"}]]
+    return text, btn
+
+
+def finish_if_done(st, uid, chat):
+    u = st["users"][uid]
+    if (u.get("ig_ok") or not IG_CHECK) and u.get("tg_ok") and u.get("yt_ok") and not u.get("done"):
+        u["done"] = True
+        add_verified(u["ig"])
+        save_state(st)
+        send(chat, "🎉 <b>Verified!</b> Ab tum officially Shivam ki team mein ho.\n\n" + rank_text(u["ig"]))
+        log("VERIFIED:", u["ig"])
+
+
+def do_check(st, uid, chat):
+    u = st["users"][uid]
+    if IG_CHECK and not u.get("ig_ok"):
+        since = datetime.fromisoformat(u["code_at"]) - timedelta(minutes=5)
+        users = scan_codes(since).get(u["code"], set())
+        if u["ig"].lower() in users:
+            u["ig_ok"] = True
+    u["tg_ok"] = bool(in_channel(int(uid)))
+    save_state(st)
+    text, btn = status_msg(st, uid)
+    miss = []
+    if IG_CHECK and not u.get("ig_ok"):
+        miss.append("Instagram code comment nahi mila. Dhyaan do: (1) usi account se comment karo jo username diya, (2) reply nahi, seedha comment karo, (3) account private hai to comment nahi dikhta – kuch der public karke comment karo. Comment ke 1-2 minute baad dobara Check karo.")
+    if not u.get("tg_ok"):
+        miss.append("Telegram channel join nahi dikha")
+    if not u.get("yt_ok"):
+        miss.append("YouTube screenshot bhejo" if not u.get("yt_wait") else "YouTube screenshot check ho raha hai")
+    if miss:
+        text += "\n\n❗ " + "\n❗ ".join(miss)
+    send(chat, text, btn)
+    finish_if_done(st, uid, chat)
+
+
+def handle_message(st, msg):
+    chat = msg["chat"]["id"]
+    if msg["chat"].get("type") != "private":
+        return
+    uid = str(msg["from"]["id"])
+    text = (msg.get("text") or "").strip()
+    u = st["users"].get(uid)
+
+    # ---- admin
+    if text.startswith("/admin"):
+        if text.split()[-1] == st["admin_pin"]:
+            st["admin"] = chat
+            save_state(st)
+            send(chat, "✅ Aap admin ho. YouTube screenshots aur roz ka leaderboard yahin aayega.\n"
+                       "/update – abhi leaderboard banao\n/shak – shak wale comments\n"
+                       "/week – Somvaar wali report\n/month – mahine ki report\n"
+                       "/pending – baaki YouTube screenshots\n/stats – ginti")
+        return
+    if chat == st.get("admin"):
+        if text == "/stats":
+            us = st["users"].values()
+            send(chat, "Kul: %d | Verified: %d | YT pending: %d" % (
+                len(st["users"]), sum(1 for x in us if x.get("done")), sum(1 for x in us if x.get("yt_wait") and not x.get("yt_ok"))))
+            return
+        if text == "/shak":
+            send_shak(st, SHAK_PER_DAY)
+            return
+        if text in ("/week", "/month"):
+            st.pop("week_report" if text == "/week" else "month_report", None)
+            send_reports(st, datetime.now(IST), force_week=text == "/week", force_month=text == "/month")
+            return
+        if text == "/update":
+            send(chat, "⏳ Leaderboard update ho raha hai (2-5 minute)...")
+            maybe_run_checker(st, force=True)
+            return
+        if text == "/pending":
+            n = 0
+            for xid, x in st["users"].items():
+                if x.get("yt_wait") and not x.get("yt_ok") and x.get("yt_photo"):
+                    forward_yt(st, xid)
+                    n += 1
+            if not n:
+                send(chat, "Koi screenshot baaki nahi.")
+            return
+
+    # ---- rank
+    if text.startswith("/rank"):
+        parts = text.split()
+        ig = parts[1].lstrip("@") if len(parts) > 1 else (u or {}).get("ig")
+        if not ig:
+            send(chat, "Apna Instagram username likho, jaise:\n<code>/rank riya_123</code>")
+        else:
+            send(chat, rank_text(ig))
+        return
+
+    if text.startswith("/start") or text == "/help" or not u:
+        if u and u.get("done"):
+            send(chat, "Tum already verified ho ✅\n\n" + rank_text(u["ig"]))
+            return
+        st["users"][uid] = {"step": "ig", "name": msg["from"].get("first_name", "")}
+        save_state(st)
+        send(chat, "🕵️ <b>Detective Shivam ki team mein swagat hai!</b>\n\n"
+                   "Rank (Junior / Senior / Detective of the Week / Shivam ka Partner) paane ke liye ye kaam:\n"
+                   + ("1️⃣ Instagram par ek code comment\n2️⃣ Telegram channel join\n3️⃣ YouTube subscribe\n\n" if IG_CHECK
+                      else "1️⃣ Telegram channel join\n2️⃣ YouTube subscribe (screenshot)\n"
+                           "3️⃣ Instagram – manual verification (admin check karega)\n\n") +
+                   "Shuru karo: apna <b>Instagram username</b> bhejo (bina @ ke).\n\n"
+                   "Sirf rank dekhna hai? <code>/rank username</code>")
+        return
+
+    # ---- screenshot
+    if msg.get("photo"):
+        if not u or not u.get("ig"):
+            send(chat, "Pehle apna Instagram username bhejo.")
+            return
+        u["yt_photo"] = msg["photo"][-1]["file_id"]
+        u["yt_wait"] = True
+        save_state(st)
+        send(chat, "📸 Screenshot mil gaya. Check hone ke baad bata denge ✅")
+        forward_yt(st, uid)
+        return
+
+    # ---- instagram username
+    if u.get("step") == "ig" or (not u.get("ig_ok") and re.fullmatch(r"@?[A-Za-z0-9._]{2,30}", text)):
+        ig = text.lstrip("@").lower()
+        if not re.fullmatch(r"[a-z0-9._]{2,30}", ig):
+            send(chat, "Ye sahi Instagram username nahi lag raha. Sirf username bhejo, jaise <code>riya_123</code>")
+            return
+        for xid, x in st["users"].items():
+            if xid != uid and x.get("ig") == ig and (x.get("ig_ok") or x.get("done")):
+                send(chat, "@%s pehle se kisi aur ne verify kar liya hai. Galti lage to admin ko batao." % ig)
+                return
+        u.update(ig=ig, step="tasks", code=make_code(),
+                 code_at=datetime.now(timezone.utc).isoformat(), ig_ok=False)
+        save_state(st)
+        text, btn = status_msg(st, uid)
+        send(chat, text, btn)
+        return
+
+    send(chat, "Status dekhne ke liye <b>Check karo</b> dabao, ya /rank likho.", status_msg(st, uid)[1])
+
+
+def forward_yt(st, uid):
+    adm = st.get("admin")
+    u = st["users"][uid]
+    if not adm:
+        log("YouTube screenshot aaya (@%s) – admin set nahi hai, /admin PIN bhejo" % u.get("ig"))
+        return
+    tg("sendPhoto", chat_id=adm, photo=u["yt_photo"],
+       caption="Naya detective: @%s\nInstagram: https://www.instagram.com/%s/\n"
+               "Screenshot mein YouTube subscribed dikh raha hai, aur Instagram naam sahi lag raha hai?" % (
+                   u.get("ig"), u.get("ig")),
+       reply_markup={"inline_keyboard": [[{"text": "✅ Sahi", "callback_data": "yt_ok:" + uid},
+                                          {"text": "❌ Galat", "callback_data": "yt_no:" + uid}]]})
+
+
+def handle_callback(st, cb):
+    data = cb.get("data", "")
+    chat = cb["message"]["chat"]["id"]
+    uid = str(cb["from"]["id"])
+    tg("answerCallbackQuery", callback_query_id=cb["id"])
+    if data == "check" and uid in st["users"] and st["users"][uid].get("ig"):
+        do_check(st, uid, chat)
+    elif data.startswith("sk:") and chat == st.get("admin"):
+        _, cid, v = data.split(":")
+        save_decision(cid, "SAHI" if v == "S" else "GALAT")
+        tg("editMessageReplyMarkup", chat_id=chat, message_id=cb["message"]["message_id"],
+           reply_markup={"inline_keyboard": [[{"text": "✔ " + ("Sahi" if v == "S" else "Galat") +
+                                               " (agle update mein judega)", "callback_data": "x"}]]})
+    elif data.startswith(("yt_ok:", "yt_no:")) and chat == st.get("admin"):
+        xid = data.split(":", 1)[1]
+        x = st["users"].get(xid)
+        if not x:
+            return
+        if data.startswith("yt_ok"):
+            x["yt_ok"] = True
+            save_state(st)
+            send(chat, "✅ @%s YouTube pass" % x.get("ig"))
+            send(int(xid), "▶️ YouTube subscribe confirm ho gaya ✅")
+            do_check(st, xid, int(xid))
+        else:
+            x["yt_wait"] = False
+            x.pop("yt_photo", None)
+            save_state(st)
+            send(chat, "❌ @%s YouTube reject" % x.get("ig"))
+            send(int(xid), "❌ Screenshot mein subscribe nahi dikha. Subscribe karke naya screenshot bhejo.",
+                 [[{"text": "▶️ YouTube subscribe", "url": YT_LINK}]])
+
+
+# ------------------------------------------------------------ checker roz
+def maybe_run_checker(st, force=False):
+    now = datetime.now(IST)
+    today = now.strftime("%Y-%m-%d")
+    if not force and (st.get("checker_day") == today or now.hour < CHECKER_HOUR):
+        return
+    log("Comment checker chala raha hoon (leaderboard update)...")
+    env = dict(os.environ, PYTHONIOENCODING="utf-8")
+    r = subprocess.run([sys.executable, "-u", os.path.join(HERE, "checker.py")], cwd=HERE, env=env,
+                       stdin=subprocess.DEVNULL, capture_output=True, text=True, encoding="utf-8", errors="replace")
+    out = (r.stdout or "").strip().splitlines()
+    log("Checker khatam (code %s)\n%s" % (r.returncode, "\n".join(out[-4:])))
+    st["checker_day"] = today
+    save_state(st)
+    adm = st.get("admin")
+    if not adm:
+        return
+    if r.returncode != 0:
+        send(adm, "⚠️ Comment checker mein problem:\n<code>%s</code>" % "\n".join(out[-6:])[-800:])
+        return
+    res = [l.strip() for l in out if " : jawab" in l or "Partner:" in l or "Week:" in l or "shoutout" in l]
+    send(adm, "📊 <b>Aaj ka leaderboard</b>\n<code>%s</code>" % "\n".join(res[:6] + res[-3:]))
+    xl = os.path.join(HERE, "leaderboard.xlsx")
+    try:
+        with open(xl, "rb") as f:
+            tg("sendDocument", _timeout=120, _files={"document": ("leaderboard_%s.xlsx" % today, f)}, chat_id=adm)
+    except OSError:
+        pass
+    send_shak(st, SHAK_PER_DAY)
+    if not force:
+        send_reports(st, now)
+
+
+# ------------------------------------------------------------ Somvaar / mahine ki report (reel banane ke liye)
+def _rows(rows, unit):
+    out = []
+    for i, (nm, v, sahi, ok, dst) in enumerate(rows, 1):
+        out.append("%d. @%s – <b>%d</b> points (%d sahi, 🔥%d din)%s" % (i, nm, v, sahi, dst, "" if ok else "  ⚠️ verify nahi"))
+    return "\n".join(out) or "–"
+
+
+def send_reports(st, now, force_week=False, force_month=False):
+    adm = st.get("admin")
+    rp = load(os.path.join(DATA, "report.json"), {})
+    if not adm or not rp:
+        return
+    today = now.strftime("%Y-%m-%d")
+    if (now.weekday() == 0 or force_week) and st.get("week_report") != today:
+        dow = rp.get("dow_verified") or "(koi verified nahi)"
+        txt = ("📅 <b>SOMVAAR REPORT</b> – hafta %s\n\n"
+               "🔍 <b>Detective of the Week:</b> @%s\n"
+               "%s"
+               "\n<b>Hafte ke Top 10:</b>\n%s\n\n"
+               "Is hafte %d jawab aaye • Seniors: %d • Juniors: %d • Verified: %d\n\n"
+               "👉 Ye message Claude ko forward karo – aaj shaam ki reel ban jaayegi.") % (
+            rp["week_label"], dow,
+            ("(Sabse zyada sahi: @%s – abhi verified nahi)\n" % rp["dow_any"]) if rp.get("dow_any") and rp.get("dow_any") != rp.get("dow_verified") else "",
+            _rows(rp.get("week_top", []), "sahi"), rp.get("week_jawab", 0), rp.get("seniors", 0), rp.get("juniors", 0), rp.get("verified", 0))
+        send(adm, txt)
+        st["week_report"] = today
+    if (now.day == 1 or force_month) and st.get("month_report") != today:
+        txt = ("🗓️ <b>MAHINE KI REPORT</b> – %s\n\n"
+               "👑 <b>Shivam ka Partner:</b> @%s%s\n\n"
+               "<b>Mahine ke Top 10:</b>\n%s\n\n"
+               "<b>Ab tak ke Top 10 (kul):</b>\n%s\n\n"
+               "👉 Ye message Claude ko forward karo – mahine ki badi reel ban jaayegi.") % (
+            rp["month_label"], rp.get("partner_verified") or "(koi verified nahi)",
+            ("\n(Sabse zyada kul sahi: @%s – abhi verified nahi)" % rp["partner_any"]) if rp.get("partner_any") and rp.get("partner_any") != rp.get("partner_verified") else "",
+            _rows(rp.get("month_top", []), "sahi"), _rows(rp.get("all_top", []), "sahi"))
+        send(adm, txt)
+        st["month_report"] = today
+    save_state(st)
+
+
+# ------------------------------------------------------------ shak wale comments (admin faisla)
+def send_shak(st, limit):
+    adm = st.get("admin")
+    pend = load(os.path.join(DATA, "shak_pending.json"), [])
+    sent = set(st.setdefault("shak_sent", []))
+    todo = [x for x in pend if x["cid"] not in sent][:limit]
+    if not adm:
+        return
+    if not todo:
+        send(adm, "🤔 Koi naya shak wala comment nahi.")
+        return
+    left = len([x for x in pend if x["cid"] not in sent]) - len(todo)
+    send(adm, "🤔 <b>%d shak wale comments</b> – har ek par Sahi/Galat dabao.%s" % (
+        len(todo), ("\n(%d aur baaki: /shak)" % left) if left > 0 else ""))
+    for x in todo:
+        send(adm, "📁 Case <b>%s</b>  (sahi: %s / no. %s)\n👤 @%s\n💬 %s" % (
+            x["case"], x["answer"], x["number"], x["u"], x["text"].replace("&", "&amp;").replace("<", "&lt;")),
+            [[{"text": "✅ Sahi", "callback_data": "sk:%s:S" % x["cid"]},
+              {"text": "❌ Galat", "callback_data": "sk:%s:G" % x["cid"]}]])
+        st["shak_sent"].append(x["cid"])
+    st["shak_sent"] = st["shak_sent"][-5000:]
+    save_state(st)
+
+
+def save_decision(cid, verdict):
+    p = os.path.join(DATA, "state.json")
+    cst = load(p, {})
+    cst.setdefault("decisions", {})[cid] = verdict
+    tmp = p + ".new"
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(cst, f, ensure_ascii=False)
+    os.replace(tmp, p)
+
+
+def main():
+    st = load(STATE, {})
+    st.setdefault("users", {})
+    st.setdefault("offset", 0)
+    if "admin_pin" not in st:
+        st["admin_pin"] = "%06d" % random.randint(0, 999999)
+    save_state(st)
+    me = tg("getMe")
+    if not me:
+        sys.exit("Bot token kaam nahi kar raha.")
+    tg("setMyCommands", commands=[{"command": "start", "description": "Verify karo aur rank pao"},
+                                  {"command": "rank", "description": "Apna rank dekho"}])
+    log("Bot chalu: @%s  (ye window khuli rakho)" % me["username"])
+    if not st.get("admin"):
+        log(">>> Admin banne ke liye apne Telegram se bot ko bhejo:  /admin %s" % st["admin_pin"])
+    while True:
+        try:
+            maybe_run_checker(st)
+        except Exception as e:
+            log("Checker problem:", type(e).__name__, e)
+        res = tg("getUpdates", _timeout=70, offset=st["offset"], timeout=50)
+        ups = res or []
+        for up in ups:
+            st["offset"] = up["update_id"] + 1
+            try:
+                if "message" in up:
+                    handle_message(st, up["message"])
+                elif "callback_query" in up:
+                    handle_callback(st, up["callback_query"])
+            except Exception as e:
+                log("Message handle nahi hua:", type(e).__name__, e)
+            save_state(st)
+        if res is None:
+            time.sleep(5)
+
+
+if __name__ == "__main__":
+    main()

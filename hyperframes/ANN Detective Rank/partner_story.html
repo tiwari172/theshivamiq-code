@@ -1,0 +1,44 @@
+<!doctype html>
+<!-- Partner story (1080x1920). URL ke # ke baad: name=...&badge=...&line1=...&line2=...&rank=... -->
+<html><head><meta charset="UTF-8" />
+<style>
+  @font-face { font-family: "ShivBlack"; src: url("assets/fonts/MAIN.ttf"); }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 1080px; height: 1920px; overflow: hidden; background: #000; font-family: "ShivBlack", sans-serif; }
+  .abs { position: absolute; }
+  #bg { inset: 0; width: 1080px; height: 1920px; object-fit: cover; }
+  #dark { inset: 0; background: radial-gradient(ellipse at 50% 48%, rgba(60,46,10,0.55) 0%, rgba(8,7,4,0.9) 62%, rgba(0,0,0,0.98) 100%); }
+  #rays { left: -400px; top: 150px; width: 1880px; height: 1880px; opacity: .22;
+    background: repeating-conic-gradient(from 0deg at 50% 50%, #F5C542 0 6deg, rgba(0,0,0,0) 6deg 18deg); border-radius: 50%;
+    -webkit-mask-image: radial-gradient(circle, #000 20%, rgba(0,0,0,0) 62%); }
+  .t { left: 30px; right: 30px; text-align: center; -webkit-text-stroke: 14px #111; paint-order: stroke fill; line-height: 1.02; }
+  #frame { left: 70px; top: 1210px; width: 940px; border-radius: 34px; background: linear-gradient(160deg,#2b2210,#14110a);
+    border: 9px solid #F5C542; box-shadow: 0 0 70px rgba(245,197,66,.6), 0 24px 40px rgba(0,0,0,.6); text-align: center; padding: 26px 20px 30px; }
+  #name { font-family: "Segoe UI", Arial, sans-serif; font-weight: 900; font-size: 74px; color: #fff; }
+  .l { font-size: 44px; color: #F5C542; margin-top: 10px; }
+  #brand { left: 0; right: 0; top: 1700px; display: flex; justify-content: center; align-items: center; gap: 20px; }
+  #brand span { font-size: 50px; color: #fff; -webkit-text-stroke: 8px #111; paint-order: stroke fill; }
+  .em { font-family: "Segoe UI Emoji", sans-serif; }
+</style></head>
+<body>
+  <img id="bg" class="abs" src="assets/BG_MAIN.png" />
+  <div id="dark" class="abs"></div>
+  <div id="rays" class="abs"></div>
+  <img class="abs" src="assets/S2_07.png" style="left:310px;top:330px;height:930px" />
+  <div class="abs t" id="badge" style="top:120px;font-size:120px;color:#F5C542;-webkit-text-stroke:16px #111">SHIVAM KA<br>PARTNER</div>
+  <div class="abs" id="frame">
+    <div class="em" id="em" style="font-size:96px;line-height:1">👑</div>
+    <div id="name">@name</div>
+    <div class="l" id="line1"></div>
+    <div class="l" id="line2" style="color:#ddd;font-size:38px"></div>
+  </div>
+  <div class="abs" id="brand"><img src="assets/LOGO_ROUND.png" style="width:110px;height:110px" /><span>@theshivamiq</span></div>
+  <script>
+    const q = Object.fromEntries(new URLSearchParams(location.hash.slice(1)));
+    if (q.name) document.getElementById("name").textContent = "@" + q.name;
+    if (q.badge) document.getElementById("badge").innerHTML = q.badge.replace("|", "<br>");
+    if (q.em) document.getElementById("em").textContent = q.em;
+    document.getElementById("line1").textContent = q.line1 || "";
+    document.getElementById("line2").textContent = q.line2 || "";
+  </script>
+</body></html>

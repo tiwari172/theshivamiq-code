@@ -1,0 +1,98 @@
+===========================================================
+YOUTUBE API AUDIT FORM - STEP BY STEP (theshivamiq)
+===========================================================
+Kyun: Jab tak audit pass nahi hota, script se upload hui har video
+"Private (locked)" rehti hai - na public hoti hai, na schedule.
+Audit FREE hai. Jawab aane mein aam taur par kuch hafte lagte hain (pakka time nahi).
+Note: Google form ke sawaal kabhi kabhi badal deta hai - naam thoda alag dikhe to
+sabse milta-julta option chuno.
+
+-----------------------------------------------------------
+STEP 0 - PEHLE YE TAYYAR RAKHO
+-----------------------------------------------------------
+[ ] Google Cloud project ban chuka ho, YouTube Data API v3 enable ho,
+    OAuth consent screen "In production" ho (SETUP.md step 4).
+[ ] Project NUMBER (ID nahi, number):
+    console.cloud.google.com -> upar project select -> Dashboard / Home ->
+    "Project info" box -> "Project number" (12 digit jaisa) copy karke rakho.
+[ ] Apne YouTube channel ka link (jaise https://www.youtube.com/@theshivamiq).
+[ ] Ek PRIVACY POLICY page ka link. Google aksar maangta hai.
+    Aasaan tareeka: sites.google.com -> naya site -> ek page par likho:
+      "theshivamiq uploader is a private tool used only by the owner of the
+       theshivamiq YouTube channel to upload and schedule its own videos.
+       It does not collect, store or share any data of other users.
+       OAuth tokens are stored only on the owner's personal computer.
+       Contact: <aapka email>"
+    -> Publish -> link copy karo.
+    Isi link ko OAuth consent screen (Branding) mein "Privacy policy link" mein bhi daal do.
+[ ] 3-4 screenshots (ya 1-2 min ki screen recording):
+    1) "1 DRY RUN.bat" chalne par black window ka output
+    2) Excel "Post Schedule" sheet (bina personal data ke)
+    3) YouTube Studio mein uploaded video (Private + Scheduled)
+    4) Google login wala "Allow" screen
+    Recording ke liye Windows key + Alt + R (Xbox Game Bar) ya OBS.
+
+-----------------------------------------------------------
+STEP 1 - FORM KHOLO
+-----------------------------------------------------------
+Browser mein ye link kholo (wahi Google account jiska channel/project hai):
+  https://support.google.com/youtube/contact/yt_api_form
+
+Pehla sawaal "reason / kya chahiye" jaisa hoga. Chuno:
+  -> "I want to have an audit" / "Audit only" / "Lift private-lock restriction"
+     (Quota extension NAHI chahiye - 6 video roz kaafi hai.)
+
+-----------------------------------------------------------
+STEP 2 - JAWAB KYA LIKHNA HAI (copy-paste kar sakte ho)
+-----------------------------------------------------------
+Organization / Company name : theshivamiq (individual creator)
+Contact name / email        : aapka naam + email
+Website                     : aapka YouTube channel link
+Google Cloud project number : STEP 0 wala number
+API client name             : theshivamiq uploader
+Kaun use karega             : "Internal use only - only the channel owner"
+Kitne users                 : 1
+Kaun si API / scope         : YouTube Data API v3,
+                              https://www.googleapis.com/auth/youtube.upload
+Kya data store karte ho     : "Only the uploaded video ID, saved in my own local
+                              Excel file. No user data is collected or shared."
+
+Use case / description (English mein, copy karo):
+-----------------------------------------------------------
+I run the YouTube channel "theshivamiq" (short murder-mystery stories).
+I built a small private Python script that runs only on my own Windows
+laptop when I start it manually. It reads my own Excel sheet and uploads
+my own Shorts to my own channel using videos.insert, with
+privacyStatus=private and a publishAt time, so they go public at the
+scheduled time. Maximum 6 uploads per day. No other users, no third-party
+channels, no data collection, no scraping. OAuth tokens stay on my
+computer. I request the audit so that videos uploaded through my
+project are not locked as private.
+-----------------------------------------------------------
+
+Screenshots / video : STEP 0 wale attach karo (ya Google Drive link
+                      "Anyone with the link can view" karke do).
+Privacy policy link  : STEP 0 wala link.
+Terms of Service     : maange to wahi Google Site par ek "Terms" page bana
+                      kar link do (2-3 line: "Personal tool, owner use only").
+
+Aakhir mein policies wale checkbox padh kar tick karo -> Submit.
+
+-----------------------------------------------------------
+STEP 3 - SUBMIT KE BAAD
+-----------------------------------------------------------
+- Email aayega (kabhi spam folder mein bhi). YouTube API team sawaal
+  pooch sakti hai - jaldi aur seedha jawab do, isi txt ki baatein use karo.
+- Woh "YouTube API Services Terms / Developer Policies" follow karne ko
+  bol sakte hain - is tool mein koi problem wali cheez nahi hai.
+- Approve hone ka email aaye -> "2 TEST 1 VIDEO.bat" se ek video daalo ->
+  Studio mein check karo ki lock nahi hai aur "Scheduled" dikh raha hai.
+- Tab tak: videos haath se upload karo (title/description/tags Excel se copy).
+
+-----------------------------------------------------------
+DHYAAN RAHE
+-----------------------------------------------------------
+- client_secret.json / token.json kabhi form mein ya kisi ko mat bhejna.
+- Form mein jhooth mat likhna (jaise users zyada batana) - audit reject ho sakta hai.
+- Reject ho jaaye to email mein wajah hogi - Claude ko dikhao, theek karke dobara bharo.
+===========================================================

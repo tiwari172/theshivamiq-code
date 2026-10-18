@@ -1,0 +1,15 @@
+asset_id,start,end,position,size,text,effect
+S16,0,6.3,center,60,Itna aasaan case...\nfail hue to dost hasenge!,
+P_CAKE5,6.3,9.9,center,45,Vikas & Anjali\nShaadi ki 5vi Saalgirah,
+P_CAKE5,9.9,12.5,center,45,11:00 PM\nParty khatam,
+C001_VIKAS,12.5,17.7,center,50,2:00 AM\nVikas mare mile,night
+S01,17.7,20.9,center,55,Detective Shivam,
+G_RAMU,20.9,25.0,center,55,"RAMU (Naukar)\n""Kitchen mein bartan dho raha tha""",
+C001_ROHIT,25.0,29.6,center,55,"ROHIT (Dost)\n""Guest room mein so raha tha""",
+G_BHOLA,29.6,33.6,center,55,"BHOLA (Driver)\n""Bahar gaadi saaf kar raha tha""",
+C001_ANJALI,33.6,41.6,center,55,,zoom
+,33.6,38.5,,,"ANJALI (Patni)\n""11:30 se so rahi thi...""",
+,38.5,41.6,,,"""Cheekh sunkar\nabhi uthi hoon""",
+S03,41.6,46.3,center,55,Ek nazar...\naur killer pakda!,music_off
+S01,46.3,49.5,center,55,Shivam ki nazar se\nkoi nahi bachta.,
+S17,49.5,53.66,center,60,Answer comment karo!\nSahi answer kal pin hoga,
