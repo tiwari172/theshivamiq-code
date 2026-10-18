@@ -36,7 +36,7 @@ if ($mode -eq "up") {
     Write-Host "answer_key.xlsx + reel_case_fix.txt server par bhej raha hoon..."
     # server wali answer_key ki ek copy (answer_key.prev.xlsx) - galti se purani file chali jaaye to wapas mil sake
     cmd /c "$ssh `"cp -f bot/answer_key.xlsx bot/answer_key.prev.xlsx 2>/dev/null; true`""
-    scp -i "$key" -o BatchMode=yes "$here\answer_key.xlsx" "$here\reel_case_fix.txt" "shivam@${ip}:bot/"
+    scp -i "$key" -o BatchMode=yes "$here\answer_key.xlsx" "$here\reel_case_fix.txt" "$here\answers_extra.txt" "shivam@${ip}:bot/"
     Check $LASTEXITCODE "answer_key bhejna"
 }
 if ($mode -eq "down" -or $mode -eq "both") {

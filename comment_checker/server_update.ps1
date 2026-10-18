@@ -7,7 +7,7 @@ $ErrorActionPreference = "Stop"
 $ip = "35.222.83.100"
 $key = "$env:USERPROFILE\.ssh\shivam_gcp"
 $here = Split-Path -Parent $MyInvocation.MyCommand.Path
-$files = "checker.py", "tg_bot.py", "answer_key.py", "ig_api.py", "textmatch.py", "yt_ocr.py"
+$files = "checker.py", "tg_bot.py", "answer_key.py", "ig_api.py", "textmatch.py", "yt_ocr.py", "answers_extra.txt"
 
 function Check($code, $what) {
     if ($code -ne 0) {
@@ -38,7 +38,8 @@ if ($mode -eq "wapas") {
     Check $LASTEXITCODE "Code bhejna"
 
     Write-Host "3) Code check (syntax)..."
-    Remote "cd ~/bot && (./venv/bin/python -m py_compile $list || python3 -m py_compile $list) && echo Code theek hai"
+    $pyList = (($files | Where-Object { $_ -like "*.py" }) -join " ")
+    Remote "cd ~/bot && (./venv/bin/python -m py_compile $pyList || python3 -m py_compile $pyList) && echo Code theek hai"
     Check $LASTEXITCODE "Code check - kuch gadbad, 'wapas' chalao"
 
     Write-Host "4) Bot restart..."

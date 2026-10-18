@@ -211,6 +211,8 @@ class Case:
                     self.number = n
                     break
         self.max_n = max([n for n, _ in self.suspects] + [self.number, 0])
+        # screen par 1-2-3 card nahi tha (answers_extra "number nahi") -> comment ke number answer nahi
+        self.use_numbers = not row.get("No Numbers")
         # har suspect ke pehchaan wale shabd
         alias = defaultdict(set)
         for n, lab in self.suspects:
@@ -247,7 +249,7 @@ class Case:
         return self._verdict(self._hits(text))
 
     def _hits(self, text):
-        strong, weak = tm.numbers_detail(text, self.max_n)
+        strong, weak = tm.numbers_detail(text, self.max_n) if self.use_numbers else ([], [])
         hits = set()
         for w in tm.tokens(text):
             if w in tm.STOP or w.isdigit():

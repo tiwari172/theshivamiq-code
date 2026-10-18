@@ -1,0 +1,7 @@
+# case | sahi answer | suspects (comma) | number nahi = screen par 1-2-3 card nahi tha
+# Naya SS case: py answer_key.py ss  (Part 2 caption ki "pakad liya... Naam!" line se), phir suspects saaf kar do.
+SS-001 | Rohit | Mummy, Papa, Behen Pinky, Ramu, Sharma Aunty, Bhaiya Rohit | number nahi
+SS-002 | Vishal | Beti Meera, Shanti Bai, Sharma Aunty, Bhatija Vishal | number nahi
+SS-003 | Neha | Ramu, Riya, Rohit, Kunal, Bhola, Neha | number nahi
+SS-004 | Rohit | Maa, Priya, Rahul, Amit, Shanti Bai, Padosi Verma ji, Mangetar Rohit | number nahi
+SS-005 | Mahesh | Sethani Sunita, Bhola, Shanti Bai, Bhatija Rajat, Chhote bhai Mahesh | number nahi
