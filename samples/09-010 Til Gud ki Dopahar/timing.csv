@@ -1,0 +1,46 @@
+asset_id,start,end,position,size,text,effect,sfx,color,focus
+STYLE,0.00,1.00,,,rise,,,,
+C002_ARYAN,0.00,3.52,center,40,,nopop+night,,,
+,0.00,3.52,,90,KILLER KAUN?,nopop,,yellow,
+,0.14,2.64,,,"Series ka SABSE
+MUSHKIL case",,,red,
+,2.64,3.52,,,HIMMAT hai?,,,red,
+S04,3.52,6.31,center,55,"Clue isi video
+mein hai.
+Dhyaan se dekhna!",,whoosh,yellow,
+P_PATANG,6.31,7.61,center,30,MAKAR SANKRANTI...,,,,
+P_PATANG,7.61,9.55,center,30,"Mohalle mein
+til-gud ke laddoo",,,,
+P_PATANG,9.55,11.41,center,30,"Dopahar GARAM
+aur BHAARI thi...",,,,
+P_PATANG,11.41,14.00,center,30,"Ped ka ek PATTA tak
+nahi hil raha tha",,,yellow,
+C002_ARYAN,14.00,14.92,center,40,Teen baje...,night,heartbeat,,
+C002_ARYAN,14.92,17.18,center,40,"ARYAN kursi par
+MARA mila!",night,,red,
+C005_VICKY,17.18,20.49,center,45,SUSPECT 1/3,,swish,yellow,
+,17.18,18.16,,,VICKY,,,,
+,18.16,19.46,,,"""Neeche laddoo
+baant raha tha""",,,,
+,19.46,20.49,,,"""Sabne dekha!""",,,,
+C004_AMIT,20.49,24.50,center,45,SUSPECT 2/3,,swish,yellow,
+,20.49,21.43,,,AMIT,,,,
+,21.43,22.95,,,"""So raha tha bas...""",,,,
+,22.95,24.50,,,"""Mujhe GHABRAAHAT
+ho rahi hai""",,,,
+C003_BHATIJA,24.50,29.85,center,45,SUSPECT 3/3,,swish,yellow,
+,24.50,25.45,,,SONU,,,,
+,25.45,26.40,,,"""Main CHHAT par tha""",,,,
+,26.40,28.10,,,"""Meri patang itni
+oonchi thi...""",,,,
+,28.10,29.85,,,"""...neeche dekhne ka
+waqt hi nahi mila""",,,,
+S06,29.85,32.00,center,55,"Shivam ne kaatil
+pakad liya!",flash+music_off,whoosh,yellow,
+,31.07,32.00,,,,,boom,,
+C910_OPTIONS,32.00,34.97,center,38,"Killer kaun?
+1, 2 ya 3?
+Comment karo!",,ding,,
+,32.00,34.97,,56,Sahi answer kal pin hoga,,,yellow,
+S16,34.97,37.63,center,60,"Shivam ki nazar se
+koi nahi bachta.",noout,whoosh,,

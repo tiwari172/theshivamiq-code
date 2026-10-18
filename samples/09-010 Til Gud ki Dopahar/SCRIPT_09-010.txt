@@ -1,0 +1,48 @@
+STORY 10 – Case 09-010: Til Gud ki Dopahar   (Category 9: 09 – Tyohaar)
+Difficulty: 10   |   Clue: Namumkin bayan   |   Purana title: Til Gud ki Dopahar (difficulty 10)
+
+========== VOICEOVER (Devanagari – ElevenLabs v3 / Claude Code isi ko use kare) ==========
+[whispers] ये इस सीरीज़ का सबसे मुश्किल केस है। हिम्मत है?
+क्लू इसी वीडियो में है। ध्यान से देखना।
+मकर संक्रांति... मोहल्ले में तिल-गुड़ के लड्डू बने।
+दोपहर गरम और भारी थी... आँगन के पेड़ का एक पत्ता तक नहीं हिल रहा था।
+तीन बजे... आर्यन अपने कमरे में कुर्सी पर मरा मिला!
+विक्की बोला... [angry] "मैं नीचे लड्डू बाँट रहा था, सबने देखा!"
+अमित बोला... [nervous] "मैं सो रहा था, बस... मुझे घबराहट हो रही है।"
+सोनू बोला... "मैं छत पर था। मेरी पतंग इतनी ऊँची थी कि नीचे देखने का वक़्त ही नहीं मिला।"
+...
+[dramatic] डिटेक्टिव शिवम ने कातिल पकड़ लिया!
+[excited] आंसर कमेंट करो, सही आंसर कल पिन होगा।
+[whispers] शिवम की नज़र से कोई नहीं बचता।
+
+========== CAPTION (Roman – video par subtitle, line-by-line) ==========
+Ye is series ka sabse mushkil case hai. Himmat hai?
+Clue isi video mein hai. Dhyaan se dekhna.
+Makar Sankranti... mohalle mein til-gud ke laddoo bane.
+Dopahar garam aur bhaari thi... aangan ke ped ka ek patta tak nahi hil raha tha.
+Teen baje... Aryan apne kamre mein kursi par mara mila!
+Vicky bola... "Main neeche laddoo baant raha tha, sabne dekha!"
+Amit bola... "Main so raha tha, bas... mujhe ghabraahat ho rahi hai."
+Sonu bola... "Main chhat par tha. Meri patang itni oonchi thi ki neeche dekhne ka waqt hi nahi mila."
+
+Detective Shivam ne kaatil pakad liya!
+Answer comment karo, sahi answer kal pin hoga.
+Shivam ki nazar se koi nahi bachta.
+
+========== SCENE ORDER ==========
+P_PATANG → C002_ARYAN → S04 → C005_VICKY → C004_AMIT → C003_BHATIJA → S12 → S17 → S06
+
+========== ANSWER (sirf tumhare liye) ==========
+Sonu. Us dopahar hawa bilkul band thi – ped ka ek patta tak nahi hil raha tha. Bina hawa ke patang oonchi udd hi nahi sakti. Amit ki ghabraahat aur akele sona sirf jhootha shak hai.
+
+========== PINNED COMMENT (post ke agle din) ==========
+🔍 Answer: Sonu – hawa band thi, patang udd hi nahi sakti thi. Kitne logon ne sahi pakda?
+
+========== IMAGES ==========
+Is folder mein hain (9): P_PATANG, C002_ARYAN, S04, C005_VICKY, C004_AMIT, C003_BHATIJA, S12, S17, S06
+Abhi banani hain (0): Koi nahi ✅
+
+========== FILE NAAM ==========
+VO_09-010.txt    <- sirf voiceover text (Claude Code / ElevenLabs API ke liye)
+voice/VO_09-010.mp3
+video/REEL_09-010.mp4
