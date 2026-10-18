@@ -37,6 +37,20 @@ if ($mode -eq "wapas") {
     scp -i "$key" -o BatchMode=yes $paths "shivam@${ip}:bot/"
     Check $LASTEXITCODE "Code bhejna"
 
+    Write-Host "2b) Stories ke SCRIPT (sahi jawab inhi se banta hai)..."
+    $stories = "C:\Users\Hp\Desktop\reels story\category"
+    $tlist = Join-Path $env:TEMP "shivam_scripts_list.txt"
+    Push-Location $stories
+    $sf = Get-ChildItem -Path "Category *\Story *\SCRIPT_*.txt" | ForEach-Object {
+        (Resolve-Path -Relative $_.FullName).Substring(2).Replace("\", "/")
+    }
+    [IO.File]::WriteAllText($tlist, (($sf -join "`n") + "`n"))
+    cmd /c "tar -cf - -T `"$tlist`" | ssh -i `"$key`" -o BatchMode=yes -o ConnectTimeout=20 shivam@$ip `"mkdir -p ~/bot/scripts && cd ~/bot/scripts && tar -xf - && find . -name 'SCRIPT_*' | wc -l`""
+    $code = $LASTEXITCODE
+    Pop-Location
+    Remove-Item $tlist -ErrorAction SilentlyContinue
+    Check $code "Scripts bhejna"
+
     Write-Host "3) Code check (syntax)..."
     $pyList = (($files | Where-Object { $_ -like "*.py" }) -join " ")
     Remote "cd ~/bot && (./venv/bin/python -m py_compile $pyList || python3 -m py_compile $pyList) && echo Code theek hai"
