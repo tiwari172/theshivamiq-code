@@ -108,9 +108,26 @@ def parse_user_time(v):
 
 
 # ---------------------------------------------------------------- Instagram se data
-def case_of(caption):
+# "Case NF-001 Part 2" – Part 2 case number ke THEEK baad hona chahiye
+# (taaki Part 1 ke caption mein "Part 2 kal aayega" likha ho to wo Part 2 na maani jaaye)
+PART2_RE = re.compile(r"case\s*#?\s*[A-Za-z0-9]+\s*-\s*\d+\s*[|,:\-–—(\[]?\s*"
+                      r"(?:part|pt\.?|भाग|पार्ट)\s*[-#:]?\s*(?:2|ii|two|२)\b", re.I)
+
+
+def case_of(caption, when=None):
+    """Caption se case: "Case 22-001" (hamesha) ya "Case NF-001" jaise naye ID (sirf POINTS_START se)."""
     m = re.search(r"[Cc]ase\s*#?\s*(\d+)\s*-\s*(\d+)", caption or "")
-    return "%02d-%03d" % (int(m.group(1)), int(m.group(2))) if m else None
+    if m:
+        return "%02d-%03d" % (int(m.group(1)), int(m.group(2)))
+    if when is not None and when < POINTS_START:
+        return None                       # purani reels ki ginti waisi hi rahe
+    m = re.search(r"[Cc]ase\s*#?\s*([A-Za-z][A-Za-z0-9]{0,5})\s*-\s*(\d{1,4})\b", caption or "")
+    return "%s-%03d" % (m.group(1).upper(), int(m.group(2))) if m else None
+
+
+def is_part2(caption, when):
+    """Part 2 = jawab wali reel (19 Oct se). Iske comment nahi ginte, aur iske post hote hi Part 1 ki ginti band."""
+    return when >= POINTS_START and bool(PART2_RE.search(caption or ""))
 
 
 def case_fixes():
@@ -136,9 +153,11 @@ def fetch_media():
     out, fix = [], case_fixes()
     for m in items:
         code = re.sub(r".*/(reel|p)/", "", m.get("permalink") or "").strip("/")
-        c = fix.get(code) or case_of(m.get("caption"))
+        when = ts(m["timestamp"]) if m.get("timestamp") else NOW
+        c = fix.get(code) or case_of(m.get("caption"), when)
         if c:
             m["case"] = c
+            m["part2"] = is_part2(m.get("caption"), when)
             out.append(m)
     return out
 
@@ -369,7 +388,8 @@ def main():
         media = fetch_media()
         for m in media:
             s = store.setdefault(m["id"], {"comments": {}})
-            s.update({k: m.get(k) for k in ("case", "timestamp", "permalink", "comments_count", "like_count")})
+            s.update({k: m.get(k) for k in ("case", "timestamp", "permalink", "comments_count", "like_count", "part2")})
+        media = [m for m in media if not m.get("part2")]   # jawab wali reel ke comment laane ki zaroorat nahi
         if args.case:
             media = [m for m in media if m["case"] == args.case]
             if not media:
@@ -409,7 +429,7 @@ def main():
     # 4) answer key (nayi cases khud judti hain)
     links = {}
     for mid, s in store.items():
-        if s.get("case"):
+        if s.get("case") and not s.get("part2"):
             links.setdefault(s["case"], s.get("permalink"))
     try:
         added = akey.add_missing(links)
@@ -419,7 +439,14 @@ def main():
         log("answer_key.xlsx khuli hai, nayi cases nahi jud payi (Excel band karke dobara chalao).")
     keyrows = akey.load()
 
-    reels = sorted([(mid, s) for mid, s in store.items() if s.get("case")], key=lambda x: x[1]["timestamp"])
+    # Part 2 (jawab wali reel) kab aayi: uske baad Part 1 par comment nahi ginte
+    reveal = {}
+    for mid, s in store.items():
+        if s.get("case") and s.get("part2"):
+            t = ts(s["timestamp"])
+            reveal[s["case"]] = min(t, reveal.get(s["case"], t))
+    reels = sorted([(mid, s) for mid, s in store.items() if s.get("case") and not s.get("part2")],
+                   key=lambda x: x[1]["timestamp"])
     if args.case:
         reels = [r for r in reels if r[1]["case"] == args.case]
 
@@ -431,6 +458,8 @@ def main():
         # reel post hone ke 24 ghante tak ke comment hi ginte hain (answer 24 ghante mein pin hota hai).
         # answer_key mein "Answer Pin Time" haath se bhara ho to wahi.
         cutoff[mid] = cases[c].pin or (ts(s["timestamp"]) + timedelta(hours=CUTOFF_HOURS))
+        if c in reveal:                    # Part 2 (jawab) pehle aa gaya to wahin tak
+            cutoff[mid] = min(cutoff[mid], reveal[c])
 
     # 5) har comment check
     per_case_user = {}          # (case,user) -> pehla jawab

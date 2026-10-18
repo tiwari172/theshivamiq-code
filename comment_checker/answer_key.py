@@ -17,7 +17,9 @@ WIDTH = [10, 45, 18, 12, 55, 30, 20, 40]
 
 
 def find_script(case):
-    cat, story = case.split("-")
+    cat, story = case.split("-", 1)
+    if not (cat.isdigit() and story.isdigit()):   # naye ID (jaise NF-001) – script haath se / answer haath se
+        return None
     folder = os.path.join(STORY_ROOT, "Category %d" % int(cat), "Story %02d" % int(story))
     files = glob.glob(os.path.join(folder, "SCRIPT_*.txt"))
     return files[0] if files else None
