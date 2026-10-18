@@ -86,3 +86,18 @@ DHYAAN RAHE
 
 Sirf CSV draft chahiye (bina render):
    py auto_csv.py "<story folder>" "<naam>" --print
+
+
+=====================================================
+  HYPERFRAMES (motion-graphics) WALI REEL – EK COMMAND
+=====================================================
+Same story, bhaari animation wala look (Training Khatam jaisa):
+
+   py make_full_hf_reel.py "C:\Users\Hp\Desktop\reels story\Category 9\Story 10" "09-010 Til Gud ki Dopahar"
+
+Steps: 1 images  2 voice  3 HF DATA (hyperframes\<naam>\hf_data.json)  4 project + mix.wav  5 render
+       6 MP4 + timing.csv story mein  7 cover
+  --dry-run   sirf batao       --from 4   DATA haath se badla ho to yahan se
+  --tak 5     render ke baad ruko (story folder mein kuch copy nahi)
+Render: output\<naam> - HF.mp4 + output\<naam> - HF CHECK.png (ek baar ZAROOR dekho).
+Poori jaankari: REPORTS\full_hf_reel.md

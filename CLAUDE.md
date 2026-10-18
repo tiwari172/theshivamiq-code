@@ -40,7 +40,7 @@ Details: `REEL_EK_COMMAND.txt`. Draft CSV ke baad bhi frame grid zaroor dekho.
   `--tak 6` = render ke baad ruko (story folder mein kuch copy nahi), `--from N` = step N se dobara, `--dry-run`. VO_MAIN.mp3 pehle se chahiye.
   auto_csv sirf DRAFT hai: CHECK.png dekho, hook caption ka tootna / CAPS emphasis haath se sudharo.
 - Helpers: `SETUP CHECK.bat` (doctor.py), `REEL STATUS.bat` (kaun si reel baaki), `CODE SYNC.bat` (GitHub sync + secret check), `CLEANUP.bat`.
-- Code GitHub par: private `tiwari172/theshivamiq-code`. Tests: `py -m pytest tests` (136 pass). Reports `REPORTS\` mein.
+- Code GitHub par: private `tiwari172/theshivamiq-code`. Tests: `py -m pytest tests` (158 pass). Reports `REPORTS\` mein.
 
 ## Reel ka structure (har reel same)
 - Hook (0–4s): bada yellow sawaal (KILLER KAUN? / CHOR KAUN? / GALTI PAKDO!) + VO ki line, image `nopop`.
@@ -100,5 +100,8 @@ Details: `REEL_EK_COMMAND.txt`. Draft CSV ke baad bhi frame grid zaroor dekho.
 ## HyperFrames (naya style) – PAKKA ENGINE, dobara mat likhna
 - Engine: `hyperframes\_ENGINE\shivam_engine.html` + `README.txt` (DATA format). Har nayi HF reel = ye file copy karo, sirf DATA bharo.
   Naya effect chahiye to engine mein optional field jodo (README update), naya engine kabhi mat likho.
+- **Normal story ki HF reel ek command mein:** `py make_full_hf_reel.py "<story folder>" "<NN Title>"` (`--dry-run`, `--from N`, `--tak N`)
+  → prep_story → build_voice → `hyperframes\<NN Title>\hf_data.json` (DRAFT) → engine copy + mix.wav → render → story folder → cover.
+  DATA theek karna ho to `hf_data.json` badlo, phir `--from 4`. Details: `REPORTS\full_hf_reel.md`.
 - Sab Pe Shak series (Excel se auto): `sab_pe_shak\` → `make_reel.bat SS-001 1`, `make_all.bat`, `make_cover.bat SS-001 1`,
   settings `sab_pe_shak\settings.txt` (user khud badalta hai). Code = `sab_pe_shak\sps.py`.
