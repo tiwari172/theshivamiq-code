@@ -1,0 +1,60 @@
+THESHIVAMIQ – YOUTUBE STORIES: NAYI CHAT KE LIYE SUMMARY (2026-10-19)
+=====================================================================
+Nayi chat mein sabse pehle ye 2 file padho:
+  1) youtube stories\NAYI CHAT - SUMMARY.txt   (ye file – ab tak kya hua)
+  2) youtube stories\RULES - Agli Batch Ke Niyam.txt   (saare niyam – inhe todna nahi)
+Master Excel (format): youtube stories\batch 1\Batch 1 - Production Sheet.xlsx (user ne khud update ki – isi jaisi har batch)
+
+DHYAAN: ye sab GitHub branch "claude/epic-pascal-i21ji4" par hai (main mein merge nahi hua).
+Nayi chat ko isi branch par kaam karna hai, ya pehle is branch ko main mein merge karwao.
+
+---------------------------------------------------------------------
+1) PLAN (short mein)
+- YouTube LONG video (10 case, ~17 min) pehle aata hai, earning ads se. Usi se 3 Shorts/Reels (2 Medium + 1 Hard).
+- Points sirf YouTube long video ke sahi-jawab comment par (format "A-011 Naam"). 10 points = Rs 1 discount coupon.
+- Coupon 1M views + 50k subscribers ke baad, har hafte. Earning ka 50% coupon budget – PUBLIC NAHI batana.
+- Like/subscribe/follow ke badle points KABHI nahi (YouTube niyam). Request kar sakte ho, inaam se mat jodo.
+- Insta ka purana points system 1-2 hafte aur chalega. Plan doc: youtube stories\YouTube Plan.pdf
+
+2) BANI HUI BATCHES
+Batch 1 (A-001..A-010) – youtube stories\batch 1\ (Excel + Cases txt)
+  A-001 Judge Sahab ki Aakhri Raat (bulb fuse) | A-002 Startup Queen ka Flat (lift band) | A-003 Godown ka Sannata (phone band)
+  A-004 Room No. 12 (geyser kharab) | A-005 Principal Madam ka Ghar (gali band) | A-006 Juhu ka Bungalow (Mumbai sunrise)
+  A-007 MLA ka Farmhouse (Rajdhani sleeper) | A-008 Coaching wale Sir (26 Jan Laal Qila) | A-009 Sahukar ki Tijori (Rs 200 note 2016)
+  A-010 Mill Maalik ki Subah (Dwarka sunrise Dec)
+  Shorts: A-001, A-006, A-005
+Batch 2 (A-011..A-020) – youtube stories\batch 2\Batch 2 - Production Sheet.xlsx
+  A-011 Bank Manager ka Bungalow (ghadi repair receipt) | A-012 Professor ka Cottage (band akhbaar) | A-013 Haveli ki Doosri Manzil (jaankari: chadar se dhaki laash)
+  A-014 Jheel Kinare ka Ghar (baarish alert) | A-015 Flat No. 704 (gate register OUT khaali) | A-016 Jodhpur ki Kothi (keypad code 78725=SURAJ)
+  A-017 Chennai ka Club House (Test mein free hit nahi) | A-018 Masale wale Seth ka Ghar (Dubai time zone) | A-019 Ek Purani File (WhatsApp video call 2015)
+  A-020 Kothi ki Aakhri Shaam (purnima par surya grahan)
+  Shorts: A-012, A-014, A-017
+YE TRICKS DOBARA MAT LENA (upar bracket mein). "Cheez band/kharab thi" Batch 1 mein 4 baar aa chuki – ab kam se kam.
+Sunrise/suraj wali trick 2 baar ho chuki. Saal + launch date (note/WhatsApp) 2 baar ho chuki.
+
+3) AGLA KAAM
+- Agli batch = Batch 3: A-021 se A-030 (5 Medium + 3 Hard + 2 Very Hard), Excel master jaisi (13 sheets).
+- Naye patterns lo: B chitra dekho (parchhai, pairon ke nishaan, kya gayab), C number/logic (umar, paise ka hisaab, sach-jhooth),
+  D code/shabd (ulta likha, chhupa naam), F twist (do log mile hue, victim hi zimmedar).
+- Excel banane ka code: youtube stories\_tools\build_batch.py + batch2_data.py (example).
+  Nayi batch: batch3_data.py usi format mein likho -> build_batch.py mein import ka naam badlo ->
+  python build_batch.py "<Batch 1 master xlsx>" "<Batch 3 xlsx>"
+  Ye MOTION PLAN, SHORTS MOTION PLAN, Reel VO, pinned, upload, answer key sab khud bharta hai. Banne ke baad check:
+  beat 1.5-3.5 sec, sheets/columns master jaise, killer + galat-ishara wala short mein.
+
+4) BAAKI (abhi nahi hua)
+- Comment checker "A-011 Naam" format + YouTube long video ke comments + YouTube ka alag speed-points system.
+- 10 points = Rs 1 hisaab, har video par max points, mahine ka budget check, coupon list Excel.
+- Privacy policy mein YouTube jodna, public contest rules page.
+- Naye Shivam poses banana (S2_04, S2_10, S2_12, S2_09, S2_19, S2_21 zaroori) – youtube stories\Shivam Poses.xlsx (prompt ke saath).
+- Hard/Very Hard ke facts video se pehle Google par ek baar check karna.
+
+5) USER KE BAARE MEIN
+- Non-coder, Hinglish mein seedha chhota jawab. Kaam khud karo, commands mat samjhao.
+- Detective SHIVAM hi case solve karta hai (police nahi). Title/hook/caption mein clue kabhi nahi.
+- Killer ka number repeat ho sakta hai, bas ek hi number 4-5 baar na aaye.
+
+---------------------------------------------------------------------
+NAYI CHAT MEIN PEHLA MESSAGE (copy-paste):
+"youtube stories\NAYI CHAT - SUMMARY.txt aur RULES - Agli Batch Ke Niyam.txt padho (branch claude/epic-pascal-i21ji4).
+Batch 1 ki Excel master format hai. Ab Batch 3 (A-021 se A-030) usi format mein banao."

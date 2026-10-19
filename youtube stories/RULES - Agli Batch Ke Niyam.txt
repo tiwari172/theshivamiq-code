@@ -9,11 +9,15 @@ Agli har batch ki Excel ISI jaisi: same sheets, same naam, same columns:
 - YouTube LONG VIDEO (16:9) primary. Shorts/Reels (9:16) usi se bante hain, alag story nahi.
 - Ek batch = 10 case: 5 MEDIUM + 3 HARD + 2 VERY HARD, aasaan se mushkil order mein.
 - Case ID: Category + number. Batch 1 = A-001 se A-010. Agla = A-011... (ya nayi category B-001, user batayega).
-- Har case 8-10 suspects, killer ka number random (pichhli batch jaisa pattern nahi).
+- Har case 8-10 suspects.
+- KILLER KA NUMBER: har case mein alag hona zaroori NAHI (repeat ho sakta hai). Bas ek hi number baar-baar na aaye:
+  ek batch mein koi bhi number max 2-3 baar, aur pichhli batches milakar koi number 4-5 baar lagatar/zyada na ho
+  (pehle reels mein killer/chor hamesha 3 number par tha – wo galti dobara nahi). Pehla, beech, aakhri – sab jagah aaye.
+  Batch 1: 7,2,9,6,4,1,10,3,8,5 | Batch 2: 3,8,5,10,1,6,9,2,7,4
 - Detective SHIVAM hi case solve karta hai (police/inspector nahi). Poses: S2_ series (Shivam Poses sheet).
 
 2) PUZZLE NIYAM
-- Sirf EK bayaan kisi saboot / pakke fact se takraata hai = killer. Baaki sab bayaan saboot se mel khaate hain.
+- Sirf EK bayaan kisi saboot / pakke fact se takraata hai = killer. (Code wale pattern mein – jaise A-016 keypad – victim ka saboot hi naam batata hai.) Baaki sab bayaan saboot se mel khaate hain.
 - Har masoom ke paas ek shak wali baat (motive / chaku / khoon jaisa) = red herring.
 - Galat ishara: Shivam kisi masoom par shak dikhata hai (SPLIT_SCREEN / DIVE / MARKER sirf usi par).
 - HARD = ek bahar ka fact (Google karna pade). VERY HARD = video ka saboot + bahar ka fact, 2-3 kadam.
