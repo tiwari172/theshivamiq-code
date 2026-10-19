@@ -102,3 +102,6 @@ Details: `REEL_EK_COMMAND.txt`. Draft CSV ke baad bhi frame grid zaroor dekho.
   Naya effect chahiye to engine mein optional field jodo (README update), naya engine kabhi mat likho.
 - Sab Pe Shak series (Excel se auto): `sab_pe_shak\` → `make_reel.bat SS-001 1`, `make_all.bat`, `make_cover.bat SS-001 1`,
   settings `sab_pe_shak\settings.txt` (user khud badalta hai). Code = `sab_pe_shak\sps.py`.
+
+## YouTube stories (long video + shorts)
+- Niyam: `youtube stories\RULES - Agli Batch Ke Niyam.txt`. Master Excel: `youtube stories\batch 1\Batch 1 - Production Sheet.xlsx` – agli batch isi jaisi (same sheets/columns).
