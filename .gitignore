@@ -30,7 +30,7 @@ cases_pending/
 *.ttf
 *.xlsx
 *.xls
-!youtube stories/*.xlsx
+!youtube stories/**/*.xlsx
 
 # Kachra
 __pycache__/
