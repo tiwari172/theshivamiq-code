@@ -38,12 +38,12 @@ SHIVAM (galat ishara): "Damaad sahab, karza bahut bada hai na?"
 SAWAAL: KILLER KAUN?
 
 SHIVAM POSES (is case mein):
-- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
-- Saboot: S04 magnifier (khana, ghadi) | S18 switch dabana (NAYA) | S12 door dekhna (parda) | S05 notepad (bayaan)
-- Galat ishara: S03 ishara
+- Hook: S2_17 chehra close-up + S2_19 "pause karo" haath (NAYA)
+- Saboot: S2_04 magnifier (khana, ghadi) | S2_18 switch dabana (NAYA) | S2_12 door dekhna (parda) | S2_05 notepad (bayaan)
+- Galat ishara: S2_03 ishara
 - 3 sec soch + tick_fast: S02 soch
-- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
-- End: S16 "Shivam ki nazar se koi nahi bachta."
+- Sawaal / CTA: S2_21 "dhyaan se dekho" (NAYA) ya S2_17
+- End: S2_16 "Shivam ki nazar se koi nahi bachta."
 
 ---- JAWAB (sirf tumhare liye) ----
 KUNAL (no. 7). Drawing room ka eklauta bulb fuse tha (switch dabane par kuch nahi hua). "Light jala ke akhbaar padha" = jhooth.
@@ -77,12 +77,12 @@ SHIVAM (galat ishara): "Keechad wale joote... guard sahab, aapke joote dikhaiye.
 SAWAAL: KILLER KAUN?
 
 SHIVAM POSES (is case mein):
-- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
-- Saboot: S10 chalna (lobby) | S12 door dekhna (lift ka board) | S04 magnifier (joote ke nishaan) | S05 notepad
-- Galat ishara: S03 ishara
+- Hook: S2_17 chehra close-up + S2_19 "pause karo" haath (NAYA)
+- Saboot: S2_10 chalna (lobby) | S2_12 door dekhna (lift ka board) | S2_04 magnifier (joote ke nishaan) | S2_05 notepad
+- Galat ishara: S2_03 ishara
 - 3 sec soch + tick_fast: S02 soch
-- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
-- End: S16 "Shivam ki nazar se koi nahi bachta."
+- Sawaal / CTA: S2_21 "dhyaan se dekho" (NAYA) ya S2_17
+- End: S2_16 "Shivam ki nazar se koi nahi bachta."
 
 ---- JAWAB ----
 SAMEER (no. 2). Lift raat 10 se subah 6 tak band thi. "Lift se upar gaya aur lift se neeche aaya" = jhooth.
@@ -117,12 +117,12 @@ SHIVAM (galat ishara): "Chaabi sirf munim ji ke paas thi... interesting."
 SAWAAL: KILLER KAUN?
 
 SHIVAM POSES (is case mein):
-- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
-- Saboot: S09 phone (victim ka band phone) | S04 magnifier (taala) | S11 kaagaz padhna (cash box) | S05 notepad
-- Galat ishara: S03 ishara
+- Hook: S2_17 chehra close-up + S2_19 "pause karo" haath (NAYA)
+- Saboot: S2_09 phone (victim ka band phone) | S2_04 magnifier (taala) | S2_11 kaagaz padhna (cash box) | S2_05 notepad
+- Galat ishara: S2_03 ishara
 - 3 sec soch + tick_fast: S02 soch
-- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
-- End: S16 "Shivam ki nazar se koi nahi bachta."
+- Sawaal / CTA: S2_21 "dhyaan se dekho" (NAYA) ya S2_17
+- End: S2_16 "Shivam ki nazar se koi nahi bachta."
 
 ---- JAWAB ----
 DEVENDRA (no. 9). Phone 8:40 se band tha (battery khatam). 9:15 par call aana namumkin = jhooth.
@@ -155,12 +155,12 @@ SHIVAM (galat ishara): "CCTV ki taar... electrician hi kaat sakta hai na?"
 SAWAAL: KILLER KAUN?
 
 SHIVAM POSES (is case mein):
-- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
-- Saboot: S10 chalna (corridor) | S11 kaagaz padhna (geyser wala notice) | S04 magnifier (candle stand) | S05 notepad
-- Galat ishara: S03 ishara
+- Hook: S2_17 chehra close-up + S2_19 "pause karo" haath (NAYA)
+- Saboot: S2_10 chalna (corridor) | S2_11 kaagaz padhna (geyser wala notice) | S2_04 magnifier (candle stand) | S2_05 notepad
+- Galat ishara: S2_03 ishara
 - 3 sec soch + tick_fast: S02 soch
-- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
-- End: S16 "Shivam ki nazar se koi nahi bachta."
+- Sawaal / CTA: S2_21 "dhyaan se dekho" (NAYA) ya S2_17
+- End: S2_16 "Shivam ki nazar se koi nahi bachta."
 
 ---- JAWAB ----
 HARSH (no. 6). Poore hotel ka geyser kharab tha, sirf thanda paani. "Garam shower" = jhooth.
@@ -194,12 +194,12 @@ SHIVAM (galat ishara): "Lipstick wala cup... Shalini ji, aap aakhri mehmaan thi.
 SAWAAL: KILLER KAUN?
 
 SHIVAM POSES (is case mein):
-- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
-- Saboot: S10 chalna (pandal wali gali) | S12 door dekhna (raasta band board) | S04 magnifier (chai ke cup) | S05 notepad
-- Galat ishara: S03 ishara
+- Hook: S2_17 chehra close-up + S2_19 "pause karo" haath (NAYA)
+- Saboot: S2_10 chalna (pandal wali gali) | S2_12 door dekhna (raasta band board) | S2_04 magnifier (chai ke cup) | S2_05 notepad
+- Galat ishara: S2_03 ishara
 - 3 sec soch + tick_fast: S02 soch
-- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
-- End: S16 "Shivam ki nazar se koi nahi bachta."
+- Sawaal / CTA: S2_21 "dhyaan se dekho" (NAYA) ya S2_17
+- End: S2_16 "Shivam ki nazar se koi nahi bachta."
 
 ---- JAWAB ----
 AMAR (no. 4). Gali shaam 6 se raat 11 tak pandal ki wajah se band thi. "Car se seedha darwaze tak aaya" = jhooth.
@@ -234,12 +234,12 @@ SHIVAM (galat ishara): "Geele pair pool se seedha andar aaye the... coach sahab?
 SAWAAL: KILLER KAUN?
 
 SHIVAM POSES (is case mein):
-- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
-- Saboot: S15 jeb mein haath (bungalow) | S04 magnifier (geele pair) | S11 kaagaz padhna (akhbaar) | S05 notepad
-- Galat ishara: S03 ishara
+- Hook: S2_17 chehra close-up + S2_19 "pause karo" haath (NAYA)
+- Saboot: S2_01 khada (jeb mein haath) (bungalow) | S2_04 magnifier (geele pair) | S2_11 kaagaz padhna (akhbaar) | S2_05 notepad
+- Galat ishara: S2_03 ishara
 - 3 sec soch + tick_fast: S02 soch
-- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
-- End: S16 "Shivam ki nazar se koi nahi bachta."
+- Sawaal / CTA: S2_21 "dhyaan se dekho" (NAYA) ya S2_17
+- End: S2_16 "Shivam ki nazar se koi nahi bachta."
 
 ---- JAWAB ----
 VIKRAM (no. 1). Mumbai India ke WEST coast par hai. Marine Drive ka samundar pashchim mein hai, isliye wahan suraj samundar mein DOOBTA hai, ugta nahi. "Samundar se ugta suraj" = jhooth.
@@ -276,12 +276,12 @@ SHIVAM (galat ishara): "Kutte ko khana bodyguard ne diya... aur kutta behosh."
 SAWAAL: KILLER KAUN?
 
 SHIVAM POSES (is case mein):
-- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
-- Saboot: S10 chalna (farmhouse) | S09 phone (CCTV footage) | S04 magnifier (jale kaagaz) | S05 notepad
-- Galat ishara: S03 ishara
+- Hook: S2_17 chehra close-up + S2_19 "pause karo" haath (NAYA)
+- Saboot: S2_10 chalna (farmhouse) | S2_09 phone (CCTV footage) | S2_04 magnifier (jale kaagaz) | S2_05 notepad
+- Galat ishara: S2_03 ishara
 - 3 sec soch + tick_fast: S02 soch
-- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
-- End: S16 "Shivam ki nazar se koi nahi bachta."
+- Sawaal / CTA: S2_21 "dhyaan se dekho" (NAYA) ya S2_17
+- End: S2_16 "Shivam ki nazar se koi nahi bachta."
 
 ---- JAWAB ----
 OMKAR (no. 10). Rajdhani Express poori AC train hai, usme SLEEPER coach hota hi nahi. AC coach ki khidkiyan band (sealed) hoti hain, khul nahi sakti. Ticket kharida tha, par train mein nahi tha.
@@ -316,12 +316,12 @@ SHIVAM (galat ishara): "Fail hua student... gussa bahut tha, Lucky?"
 SAWAAL: KILLER KAUN?
 
 SHIVAM POSES (is case mein):
-- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
-- Saboot: S01 khada (office) | S11 kaagaz padhna (calendar) | S04 magnifier (ruler) | S05 notepad
-- Galat ishara: S03 ishara
+- Hook: S2_17 chehra close-up + S2_19 "pause karo" haath (NAYA)
+- Saboot: S2_01 khada (office) | S2_11 kaagaz padhna (calendar) | S2_04 magnifier (ruler) | S2_05 notepad
+- Galat ishara: S2_03 ishara
 - 3 sec soch + tick_fast: S02 soch
-- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
-- End: S16 "Shivam ki nazar se koi nahi bachta."
+- Sawaal / CTA: S2_21 "dhyaan se dekho" (NAYA) ya S2_17
+- End: S2_16 "Shivam ki nazar se koi nahi bachta."
 
 ---- JAWAB ----
 RAGHAV (no. 3). Pradhan Mantri Laal Qile se 15 AUGUST (Swatantrata Diwas) ko bhashan dete hain. 26 January (Gantantra Diwas) ko Kartavya Path par parade hoti hai, Laal Qile se PM ka bhashan nahi hota.
@@ -356,12 +356,12 @@ SHIVAM (galat ishara): "Tijori ki chaabi sirf bete ke paas... Ashish?"
 SAWAAL: KILLER KAUN?
 
 SHIVAM POSES (is case mein):
-- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
-- Saboot: S10 chalna (pandal ke paas) | S12 door dekhna (banner) | S04 magnifier (tijori) | S05 notepad
-- Galat ishara: S03 ishara
+- Hook: S2_17 chehra close-up + S2_19 "pause karo" haath (NAYA)
+- Saboot: S2_10 chalna (pandal ke paas) | S2_12 door dekhna (banner) | S2_04 magnifier (tijori) | S2_05 notepad
+- Galat ishara: S2_03 ishara
 - 3 sec soch + tick_fast: S02 soch
-- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
-- End: S16 "Shivam ki nazar se koi nahi bachta."
+- Sawaal / CTA: S2_21 "dhyaan se dekho" (NAYA) ya S2_17
+- End: S2_16 "Shivam ki nazar se koi nahi bachta."
 
 ---- JAWAB ----
 EKNATH (no. 8). Teen kadam:
@@ -401,12 +401,12 @@ SHIVAM (galat ishara): "Bonnet abhi tak garam hai... Chirag, itni subah kahan ga
 SAWAAL: KILLER KAUN?
 
 SHIVAM POSES (is case mein):
-- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
-- Saboot: S15 jeb mein haath (bungalow) | S11 kaagaz padhna (calendar) | S04 magnifier (chashma) | S05 notepad
-- Galat ishara: S03 ishara
+- Hook: S2_17 chehra close-up + S2_19 "pause karo" haath (NAYA)
+- Saboot: S2_01 khada (jeb mein haath) (bungalow) | S2_11 kaagaz padhna (calendar) | S2_04 magnifier (chashma) | S2_05 notepad
+- Galat ishara: S2_03 ishara
 - 3 sec soch + tick_fast: S02 soch
-- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
-- End: S16 "Shivam ki nazar se koi nahi bachta."
+- Sawaal / CTA: S2_21 "dhyaan se dekho" (NAYA) ya S2_17
+- End: S2_16 "Shivam ki nazar se koi nahi bachta."
 
 ---- JAWAB ----
 KISHORE (no. 5). Teen kadam:
@@ -419,12 +419,20 @@ Kyun nahi: Chirag ka garam bonnet uske gym se laut aane se mel khaata hai. Baaki
 
 
 =====================================================================
-NAYE SHIVAM POSES (banane hain) – baaki sab purane (S01-S17) se chal jaayega
-- S18: Shivam light ka switch dabata hua (Case 1)
-- S19: Shivam camera ki taraf haath dikhata "RUKO / PAUSE karo" (har case ka hook)
-- S20: Shivam dono haath upar, khushi se announce karta (agli video mein winners / jawab batate waqt)
-- S21: Shivam do ungliyan apni aankhon ki taraf "dhyaan se dekho" (sawaal ke time)
-- S22: Shivam mez par jhuk kar saboot dekhta hua, side view (crime scene ke liye, S04 ka variety)
+NAYE SHIVAM POSES (S2 look) – bane hue: S2_01, 02, 03, 05, 06, 07, 11, 16, 17
+Ye banane hain (same look: kaala trench coat, kaala shirt, maroon tie, kaala chashma, moonchh, green background, poora shareer):
+ZAROORI (har case mein lagenge)
+- S2_04 Magnifier: ek haath mein magnifying glass, thoda aage jhuk kar neeche dekhta hua
+- S2_10 Chalna: side view, ek pair aage, coat hilta hua
+- S2_12 Gaur se dekhna: side view, haath kamar par, saamne kisi cheez (board/darwaza) ko dekhta
+- S2_09 Phone: ek haath mein phone, screen ko dekhta hua
+- S2_19 Ruko/Pause: camera ki taraf seedhi hatheli aage, serious chehra
+- S2_21 Dhyaan se dekho: do ungliyan apne chashme ki taraf, phir camera ki taraf ishara
+ACHHA HO TO
+- S2_08 Chaunkna: muh khula, bhauhein upar, haath thode upar (agli video mein jawab ke time)
+- S2_20 Announce: dono haath phaila kar khushi se (winners batate waqt)
+- S2_18 Switch dabana: deewar ke switch par ungli (sirf Case 1, warna S2_12 se chal jaayega)
+- S2_22 Jhuk kar dekhna: mez par jhuka hua, side view (S2_04 ki jagah variety)
 
 =====================================================================
 FACT CHECK (video se pehle ek baar khud Google kar lena)
