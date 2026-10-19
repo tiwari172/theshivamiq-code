@@ -1,0 +1,74 @@
+THESHIVAMIQ – YOUTUBE STORIES: AGLI BATCH KE NIYAM (sabse updated)
+===============================================================
+MASTER FILE: youtube stories\batch 1\Batch 1 - Production Sheet.xlsx (user ne update ki, 2026-10-19)
+Agli har batch ki Excel ISI jaisi: same sheets, same naam, same columns:
+  Start Here | Script + Timing | MOTION PLAN | MOTION CODES | Shorts + Reels | SHORTS MOTION PLAN |
+  Image Prompts | Shivam Poses | SFX + Motion | Pinned + Jawab | Upload Details | Cover Design | Answer Key
+
+1) FORMAT
+- YouTube LONG VIDEO (16:9) primary. Shorts/Reels (9:16) usi se bante hain, alag story nahi.
+- Ek batch = 10 case: 5 MEDIUM + 3 HARD + 2 VERY HARD, aasaan se mushkil order mein.
+- Case ID: Category + number. Batch 1 = A-001 se A-010. Agla = A-011... (ya nayi category B-001, user batayega).
+- Har case 8-10 suspects, killer ka number random (pichhli batch jaisa pattern nahi).
+- Detective SHIVAM hi case solve karta hai (police/inspector nahi). Poses: S2_ series (Shivam Poses sheet).
+
+2) PUZZLE NIYAM
+- Sirf EK bayaan kisi saboot / pakke fact se takraata hai = killer. Baaki sab bayaan saboot se mel khaate hain.
+- Har masoom ke paas ek shak wali baat (motive / chaku / khoon jaisa) = red herring.
+- Galat ishara: Shivam kisi masoom par shak dikhata hai (SPLIT_SCREEN / DIVE / MARKER sirf usi par).
+- HARD = ek bahar ka fact (Google karna pade). VERY HARD = video ka saboot + bahar ka fact, 2-3 kadam.
+- Fact hamesha pakka aur Google par milne wala. Answer Key mein "kyun" + search line.
+- Pattern VARIETY: ek batch mein ek pattern max 2 baar (40 patterns ki list: A jhooth pakdo, B chitra dekho,
+  C number/logic, D code/shabd, E alag sawaal, F twist). Batch 1 mein "cheez band/kharab thi" 4 baar aa gaya – dobara nahi.
+- Jawab screen par KABHI nahi. Jawab agle Sunday ki video ki shuruaat mein.
+
+3) TITLE / HOOK / CAPTION
+- Title = case ID + victim/jagah + suspense. Clue KABHI nahi (jaise "Fuse Bulb", "Peela Note" galat the).
+- Hook = sirf suspense ("8 log, 8 bayaan... aur ek jhooth"). Hook mein suspect ki ginti short ke hisaab se badlo.
+- Shorts/Insta title + caption mein bhi clue nahi.
+
+4) SABOOT
+- Saboot KABHI bole nahi jaate: Saboot rows ka VO + Caption KHAALI, Sec = 1.5, sirf tasveer, sab ek jaise.
+- Saboot ke time ek "jagah-set" line (saboot ka naam nahi): "Drawing room mein sab kuch waisa hi tha... Shivam ne har cheez par nazar daali."
+- VO mein koi line clue ka sach/jhooth na bataye ("switch dabaya, kuch nahi hua", "battery khatam" jaisi lines NAHI). Clue sirf tasveer mein.
+- Clue wale saboot par koi alag zoom / gola / peela NAHI.
+
+5) VOICE
+- Long video: ElevenLabs, har line ka alag tukda (narrator Rudra + har suspect ki apni awaaz), speed 1.05. Galti par sirf wahi tukda dobara.
+- Reel: poori story EK BAAR mein (Rudra, eleven_v4, stability 0.45, speed 1.05 + purana tighten). Reel 55-60 sec.
+- Reel VO mein NAHI: "bole/boli", motive line (sirf SUSPECT card par), "ab suniye sabke bayaan", jo photo mein dikhe
+  ("haath laal"), galat-ishara line, saboot, "full video/link bio" line.
+- Bayaan mein emotion tag ([annoyed] [nervous] [calm]...), har suspect ko koi tag – killer alag na lage.
+- Reel end: 3 sec chup -> PAKAD_LIYA_HI + CTA_HI + SIGNATURE_HI (purani files, dobara nahi banti).
+- Soch ke 3 sec chup (Shivam SOCH + tick_fast + PAUSE_HINT).
+
+6) MOTION
+- MOTION PLAN (16:9) + SHORTS MOTION PLAN (9:16): har Script line ko 2.5-3.5 sec ke beats mein (Beat = line no. + .1/.2/.3).
+- MOTION column mein sirf MOTION CODES sheet ke code ('+' jodo, '->' ek ke baad ek). Naya effect: "NEW: <description>".
+- Har case ka hook (SLAM_TITLE / TYPE_HOOK / SPLIT_FLAP+GLITCH) aur Shivam entry (SLIDE_R / SILHOUETTE_REVEAL / DOOR_LIGHT) baari-baari alag.
+- Saboot = EVIDENCE_TRAY montage (sab same). Suspect = INTERROGATION + SUSPECT_CARD -> STATEMENT_SLIP -> SLIP_FLIP (sab same).
+- HARD/VERY HARD title card par WARNING_STRIP. CASE_HUD poore case mein.
+- Screen text max 3-4 shabd, Roman. SFX sirf line ke pehle beat par. Music: normal / DUCK / OFF (OFF sirf soch + pakad liya).
+- Captions word-level, bolta shabd peela #FFE600. Style: dark case-file desk, film grain + vignette.
+- (Laptop par: py yt_motion_plan.py "<Excel>" Script sheet se MOTION PLAN bana deta hai.)
+
+7) SHORTS
+- Har batch se 3 short: 2 MEDIUM + 1 HARD (Very Hard ka short nahi). Har short mein 5 suspect, killer + galat-ishara wala hamesha.
+- Short ka apna hook. Reel max 90 sec. Jawab short mein KABHI nahi. Short ke comments par points nahi.
+
+8) COVER
+- Har case ka 9:16 cover: dark Shivam S2_17 close-up, chashme mein laal '?', kaala background, upar 'CASE A-00n' + level,
+  beech case ka title, neeche KILLER KAUN?. Shivam ka glow = level ka rang (Medium hara, Hard naranji, Very Hard laal).
+- YouTube thumbnail: "99% LOG FAIL!" + "10 KAATIL PAKDO", case ka naam/clue kabhi nahi.
+
+9) PINNED / COMMENTS
+- Comment format: "A-001 Naam". Long video pinned = format + points rule (like/subscribe se points nahi).
+- Post karte hi (short/reel): "Kaatil kaun? Jawab agle Sunday. POINTS sirf full video par".
+- Jawab ke baad (short/reel): jawab + 1 line kyun + "Jisne sahi pakda tha, is comment ko LIKE karo!".
+
+10) FOLDERS (Claude Code banata hai)
+youtube stories\Batch N\ : Excel + "00 Intro + Outro"\ + har case "A-00n <Title>"\ (script, VO, logic, motion csv, images, cover)
+ + "YouTube Reels Story"\R1..R3 (shorts).
+
+11) SAFE CONTENT
+- Victim image mein khoon/ghav nahi. CRIME_TAPE theek, khoon ki boondein nahi. Points sirf sahi jawab par (YouTube niyam).
