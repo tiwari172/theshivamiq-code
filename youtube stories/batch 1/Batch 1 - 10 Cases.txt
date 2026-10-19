@@ -1,6 +1,7 @@
 THESHIVAMIQ – LONG VIDEO 01 – 10 CASES
 =====================================
 Mix: 5 MEDIUM + 3 HARD + 2 VERY HARD  (video mein isi order mein, aasaan se mushkil)
+Har case ko DETECTIVE SHIVAM solve karta hai (police nahi). Saboot Shivam khud dhoondhta, padhta aur dikhata hai.
 Har case: HOOK -> SABOOT (pehle, casually, 1-1 sec) -> BAYAAN (8-10 suspects) -> SHIVAM ka galat ishara -> SAWAAL
 Niyam: sirf EK bayaan kisi saboot / pakke fact se takraata hai = killer. Baaki sab bayaan saboot se mel khaate hain.
 Har masoom ke paas ek "shak wali baat" (red herring) hai. Killer ka number har case mein alag.
@@ -15,13 +16,13 @@ CASE 01 – "Fuse Bulb"            | MEDIUM | Pattern: Jhooth pakdo (roshni) | L
 #####################################################################
 HOOK: "Ek bayaan mein andhera chhupa hai. Dikh raha hai?"
 
-SABOOT (Shivam kamre mein ghoomta hai):
+SABOOT (Detective Shivam kamre mein ghoomta hai):
 - Retired Judge Harish Saxena drawing room ki kursi par mare mile. Maut raat 9:15 se 9:45 ke beech.
 - Mez par aadha khaya khana. Deewar ghadi 9:30 dikha rahi hai.
 - Sink mein khoon wala tauliya. Rasoi ka bada chaku gayab.
 - Shivam drawing room ka switch dabata hai... kuch nahi hota. Upar kaala pada bulb. Wo aage badh jaata hai.
 - Khidki ka parda phata hua. Mez par judge sahab ka chashma.
-- (Inspector, chalte-chalte:) "Drawing room mein bas yahi ek light hai sahab."
+- (Detective Shivam, chalte-chalte, khud se:) "Is kamre mein bas yahi ek light hai."
 
 BAYAAN:
 1. Beti Ananya (jaaydaad ka jhagda): "Main upar apne kamre mein online class le rahi thi."
@@ -36,6 +37,14 @@ BAYAAN:
 SHIVAM (galat ishara): "Damaad sahab, karza bahut bada hai na?"
 SAWAAL: KILLER KAUN?
 
+SHIVAM POSES (is case mein):
+- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
+- Saboot: S04 magnifier (khana, ghadi) | S18 switch dabana (NAYA) | S12 door dekhna (parda) | S05 notepad (bayaan)
+- Galat ishara: S03 ishara
+- 3 sec soch + tick_fast: S02 soch
+- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
+- End: S16 "Shivam ki nazar se koi nahi bachta."
+
 ---- JAWAB (sirf tumhare liye) ----
 KUNAL (no. 7). Drawing room ka eklauta bulb fuse tha (switch dabane par kuch nahi hua). "Light jala ke akhbaar padha" = jhooth.
 Kyun nahi: baaki kisi ka bayaan kisi saboot se nahi takraata. Chaku (Dinu), khoon jaisa laal (Lakhan), karza (Gaurav), case (Bedi), jaaydaad (Ananya) = sirf shak.
@@ -46,7 +55,7 @@ CASE 02 – "14vi Manzil"          | MEDIUM | Pattern: Jhooth pakdo (jagah) | Gu
 #####################################################################
 HOOK: "Killer ne ek button dabaya... jo dabta hi nahi tha."
 
-SABOOT:
+SABOOT (Detective Shivam ki nazar se):
 - Startup owner Meher Kapoor 14th floor ke flat mein mari mili. Maut raat 11:00 se 11:30.
 - Building ki lobby: lift ke darwaze par chhota sa board – "UNDER MAINTENANCE: raat 10 se subah 6". (Camera 1 sec ruk kar aage.)
 - Flat mein toota wine glass. Balcony ka darwaza khula.
@@ -67,6 +76,14 @@ BAYAAN:
 SHIVAM (galat ishara): "Keechad wale joote... guard sahab, aapke joote dikhaiye."
 SAWAAL: KILLER KAUN?
 
+SHIVAM POSES (is case mein):
+- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
+- Saboot: S10 chalna (lobby) | S12 door dekhna (lift ka board) | S04 magnifier (joote ke nishaan) | S05 notepad
+- Galat ishara: S03 ishara
+- 3 sec soch + tick_fast: S02 soch
+- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
+- End: S16 "Shivam ki nazar se koi nahi bachta."
+
 ---- JAWAB ----
 SAMEER (no. 2). Lift raat 10 se subah 6 tak band thi. "Lift se upar gaya aur lift se neeche aaya" = jhooth.
 Kyun nahi: Tanvi, Imran, Varun ne seedhiyan batayi (lift band se mel khaata hai). Baaki ke bayaan kisi saboot se nahi takraate.
@@ -77,9 +94,9 @@ CASE 03 – "Aakhri Call"          | MEDIUM | Pattern: Jhooth pakdo (phone) | In
 #####################################################################
 HOOK: "Mare hue aadmi ne phone kiya... ya kisi ne jhooth bola?"
 
-SABOOT:
+SABOOT (Detective Shivam ki nazar se):
 - Kapda vyapari Ramesh Jain godown mein mare mile. Maut raat 9:00 se 10:00.
-- Inspector unka phone uthata hai: screen kaali. "Battery khatam, 8:40 se band hai." Phone wapas thaile mein.
+- Detective Shivam unka phone uthata hai: screen kaali. "Battery khatam... 8:40 se band hai." Phone wapas mez par.
 - Godown ka taala toota nahi, chaabi se khula.
 - Kapde ke thaan bikhre. Cash box khaali.
 - Farsh par chai ka glass.
@@ -99,6 +116,14 @@ BAYAAN:
 SHIVAM (galat ishara): "Chaabi sirf munim ji ke paas thi... interesting."
 SAWAAL: KILLER KAUN?
 
+SHIVAM POSES (is case mein):
+- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
+- Saboot: S09 phone (victim ka band phone) | S04 magnifier (taala) | S11 kaagaz padhna (cash box) | S05 notepad
+- Galat ishara: S03 ishara
+- 3 sec soch + tick_fast: S02 soch
+- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
+- End: S16 "Shivam ki nazar se koi nahi bachta."
+
 ---- JAWAB ----
 DEVENDRA (no. 9). Phone 8:40 se band tha (battery khatam). 9:15 par call aana namumkin = jhooth.
 Kyun nahi: Nirmala ki 8:30 wali call phone band hone se pehle ki hai, isliye mel khaati hai. Baaki sab sirf shak.
@@ -109,7 +134,7 @@ CASE 04 – "Shimla ka Toota Shower" | MEDIUM | Pattern: Jhooth pakdo (cheez kha
 #####################################################################
 HOOK: "Thand mein ek aadmi ne bahut garam jhooth bola."
 
-SABOOT:
+SABOOT (Detective Shivam ki nazar se):
 - Hotel maalik Vinod Thakur room 12 mein mare mile. Maut subah 7:00 se 7:30.
 - Corridor ki deewar par chhota sa kaagaz: "Geyser kharab hai. Aaj sirf thanda paani. Maafi." (Shivam ki nazar 1 sec.)
 - Room mein geela tauliya.
@@ -129,6 +154,14 @@ BAYAAN:
 SHIVAM (galat ishara): "CCTV ki taar... electrician hi kaat sakta hai na?"
 SAWAAL: KILLER KAUN?
 
+SHIVAM POSES (is case mein):
+- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
+- Saboot: S10 chalna (corridor) | S11 kaagaz padhna (geyser wala notice) | S04 magnifier (candle stand) | S05 notepad
+- Galat ishara: S03 ishara
+- 3 sec soch + tick_fast: S02 soch
+- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
+- End: S16 "Shivam ki nazar se koi nahi bachta."
+
 ---- JAWAB ----
 HARSH (no. 6). Poore hotel ka geyser kharab tha, sirf thanda paani. "Garam shower" = jhooth.
 Kyun nahi: Zubair ka bayaan (geyser ka part lene gaya) saboot se mel khaata hai. Baaki sab sirf shak.
@@ -139,7 +172,7 @@ CASE 05 – "Pandal wali Gali"     | MEDIUM | Pattern: Jhooth pakdo (raasta) | J
 #####################################################################
 HOOK: "Ek gaadi wahan pahunchi... jahan gaadi ja hi nahi sakti thi."
 
-SABOOT:
+SABOOT (Detective Shivam ki nazar se):
 - Principal Kiran Sethi apne ghar mein mari mili. Maut raat 8:30 se 9:00.
 - Shivam gali mein aata hai: gali ke muhane par shaadi ka pandal, board – "Raasta band: shaam 6 se raat 11". Band baaja, bheed.
 - Ghar ke darwaze par chaku ke nishaan.
@@ -150,7 +183,7 @@ BAYAAN:
 1. Teacher Shalini (lipstick wala cup): "Main 8 baje chai par aayi thi, 8:20 par chali gayi."
 2. Beta Kartik: "Main pandal wali shaadi mein naach raha tha."
 3. Driver Mohan: "Gaadi gali ke bahar khadi ki aur paidal aaya."
-4. Devar Amar: "Main 8:45 par apni car se seedha ghar ke darwaze tak aaya, dekha darwaza khula hai, to police ko phone kiya."
+4. Devar Amar: "Main 8:45 par apni car se seedha ghar ke darwaze tak aaya, dekha darwaza khula hai, to Detective Shivam ko phone kiya."
 5. Padosi Gupta ji: "Main shaadi mein tha."
 6. Tuition student Ritik (fail kiya gaya tha): "Main 8:30 tak tuition padh kar gaya."
 7. Naukrani Basanti: "Main aaj chhutti par thi."
@@ -159,6 +192,14 @@ BAYAAN:
 
 SHIVAM (galat ishara): "Lipstick wala cup... Shalini ji, aap aakhri mehmaan thi."
 SAWAAL: KILLER KAUN?
+
+SHIVAM POSES (is case mein):
+- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
+- Saboot: S10 chalna (pandal wali gali) | S12 door dekhna (raasta band board) | S04 magnifier (chai ke cup) | S05 notepad
+- Galat ishara: S03 ishara
+- 3 sec soch + tick_fast: S02 soch
+- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
+- End: S16 "Shivam ki nazar se koi nahi bachta."
 
 ---- JAWAB ----
 AMAR (no. 4). Gali shaam 6 se raat 11 tak pandal ki wajah se band thi. "Car se seedha darwaze tak aaya" = jhooth.
@@ -170,7 +211,7 @@ CASE 06 – "Samundar ka Suraj"    | HARD | Pattern: Bahar ka fact (geography) |
 #####################################################################
 HOOK: "Is case ka jawab Google mein hai... par sawaal kya hai, wo dhoondhna padega."
 
-SABOOT:
+SABOOT (Detective Shivam ki nazar se):
 - Builder Prakash Shetty Juhu ke bungalow mein mare mile. Maut subah 6:30 se 7:00.
 - Toota flower vase. Pool ke paas geele pairon ke nishaan.
 - Gate par 6 baje ka akhbaar pada hai.
@@ -192,6 +233,14 @@ BAYAAN:
 SHIVAM (galat ishara): "Geele pair pool se seedha andar aaye the... coach sahab?"
 SAWAAL: KILLER KAUN?
 
+SHIVAM POSES (is case mein):
+- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
+- Saboot: S15 jeb mein haath (bungalow) | S04 magnifier (geele pair) | S11 kaagaz padhna (akhbaar) | S05 notepad
+- Galat ishara: S03 ishara
+- 3 sec soch + tick_fast: S02 soch
+- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
+- End: S16 "Shivam ki nazar se koi nahi bachta."
+
 ---- JAWAB ----
 VIKRAM (no. 1). Mumbai India ke WEST coast par hai. Marine Drive ka samundar pashchim mein hai, isliye wahan suraj samundar mein DOOBTA hai, ugta nahi. "Samundar se ugta suraj" = jhooth.
 Search: "Mumbai sunrise over sea possible?" / "Marine Drive sunset direction".
@@ -204,7 +253,7 @@ CASE 07 – "Rajdhani ki Khidki"   | HARD | Pattern: Bahar ka fact (railway) | D
 #####################################################################
 HOOK: "Train ka ticket asli tha. Kahani nakli."
 
-SABOOT:
+SABOOT (Detective Shivam ki nazar se):
 - Purane MLA Brijesh Tomar apne farmhouse par mare mile. Maut raat 10:00 se 11:00.
 - Gate ka CCTV: 10:15 par ek gaadi andar aayi, number plate dhundhli.
 - Gun ka dabba khaali.
@@ -226,6 +275,14 @@ BAYAAN:
 SHIVAM (galat ishara): "Kutte ko khana bodyguard ne diya... aur kutta behosh."
 SAWAAL: KILLER KAUN?
 
+SHIVAM POSES (is case mein):
+- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
+- Saboot: S10 chalna (farmhouse) | S09 phone (CCTV footage) | S04 magnifier (jale kaagaz) | S05 notepad
+- Galat ishara: S03 ishara
+- 3 sec soch + tick_fast: S02 soch
+- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
+- End: S16 "Shivam ki nazar se koi nahi bachta."
+
 ---- JAWAB ----
 OMKAR (no. 10). Rajdhani Express poori AC train hai, usme SLEEPER coach hota hi nahi. AC coach ki khidkiyan band (sealed) hoti hain, khul nahi sakti. Ticket kharida tha, par train mein nahi tha.
 Search: "Rajdhani Express sleeper class hai kya?" / "AC coach window open?"
@@ -237,7 +294,7 @@ CASE 08 – "26 January ka Bhashan" | HARD | Pattern: Bahar ka fact (desh) | Pat
 #####################################################################
 HOOK: "Ek deshbhakt bayaan... jo desh ka hi niyam tod raha hai."
 
-SABOOT:
+SABOOT (Detective Shivam ki nazar se):
 - Coaching owner Alok Choudhary apne office mein mare mile. Maut 26 January, subah 8:30 se 9:15.
 - Mez par tiranga aur jalebi ki plate.
 - Deewar calendar par 26 January par gol ghera.
@@ -258,6 +315,14 @@ BAYAAN:
 SHIVAM (galat ishara): "Fail hua student... gussa bahut tha, Lucky?"
 SAWAAL: KILLER KAUN?
 
+SHIVAM POSES (is case mein):
+- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
+- Saboot: S01 khada (office) | S11 kaagaz padhna (calendar) | S04 magnifier (ruler) | S05 notepad
+- Galat ishara: S03 ishara
+- 3 sec soch + tick_fast: S02 soch
+- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
+- End: S16 "Shivam ki nazar se koi nahi bachta."
+
 ---- JAWAB ----
 RAGHAV (no. 3). Pradhan Mantri Laal Qile se 15 AUGUST (Swatantrata Diwas) ko bhashan dete hain. 26 January (Gantantra Diwas) ko Kartavya Path par parade hoti hai, Laal Qile se PM ka bhashan nahi hota.
 Search: "26 January ko PM Laal Qile se bhashan dete hain?"
@@ -269,7 +334,7 @@ CASE 09 – "Peela Note"           | VERY HARD | Pattern: Saboot + bahar ka fact
 #####################################################################
 HOOK: "Is case mein paisa bolta hai... bas uski bhasha samajhni padegi."
 
-SABOOT:
+SABOOT (Detective Shivam ki nazar se):
 - Shivam pandal ke paas se guzarta hai: banner – "Ganpati Bappa Morya – Navyuvak Mandal – 2016". Dhol, modak. (Banner 1 sec.)
 - Sahukar Dattatray Kulkarni apne ghar ke daftar mein mare mile. Maut raat 9:30 se 10:00.
 - Tijori khuli. Mez par modak ki plate.
@@ -290,6 +355,14 @@ BAYAAN:
 SHIVAM (galat ishara): "Tijori ki chaabi sirf bete ke paas... Ashish?"
 SAWAAL: KILLER KAUN?
 
+SHIVAM POSES (is case mein):
+- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
+- Saboot: S10 chalna (pandal ke paas) | S12 door dekhna (banner) | S04 magnifier (tijori) | S05 notepad
+- Galat ishara: S03 ishara
+- 3 sec soch + tick_fast: S02 soch
+- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
+- End: S16 "Shivam ki nazar se koi nahi bachta."
+
 ---- JAWAB ----
 EKNATH (no. 8). Teen kadam:
 1) Pandal ka banner = saal 2016 (Ganesh Chaturthi 2016 = 5 September 2016).
@@ -305,7 +378,7 @@ CASE 10 – "Dwarka ka Suraj"      | VERY HARD | Pattern: Saboot + bahar ka fact
 #####################################################################
 HOOK: "Ek bhakt ne bhagwan ke naam par jhooth bola. Kaun?"
 
-SABOOT:
+SABOOT (Detective Shivam ki nazar se):
 - Mill maalik Jayant Parikh apne bungalow mein mare mile. Maut subah 6:00 se 6:30.
 - Mez par table calendar, "15 December" par gol ghera. (Camera ghoomte hue 1 sec.)
 - Chai ka cup, thanda.
@@ -327,6 +400,14 @@ BAYAAN:
 SHIVAM (galat ishara): "Bonnet abhi tak garam hai... Chirag, itni subah kahan gaye the?"
 SAWAAL: KILLER KAUN?
 
+SHIVAM POSES (is case mein):
+- Hook: S17 chehra close-up + S19 "pause karo" haath (NAYA)
+- Saboot: S15 jeb mein haath (bungalow) | S11 kaagaz padhna (calendar) | S04 magnifier (chashma) | S05 notepad
+- Galat ishara: S03 ishara
+- 3 sec soch + tick_fast: S02 soch
+- Sawaal / CTA: S21 "dhyaan se dekho" (NAYA) ya S17
+- End: S16 "Shivam ki nazar se koi nahi bachta."
+
 ---- JAWAB ----
 KISHORE (no. 5). Teen kadam:
 1) Calendar = 15 December (sardi).
@@ -336,6 +417,14 @@ Matlab "6 baje ugte suraj ko jal chadhaya" = jhooth.
 Search: "Dwarka sunrise time December".
 Kyun nahi: Chirag ka garam bonnet uske gym se laut aane se mel khaata hai. Baaki sab sirf shak.
 
+
+=====================================================================
+NAYE SHIVAM POSES (banane hain) – baaki sab purane (S01-S17) se chal jaayega
+- S18: Shivam light ka switch dabata hua (Case 1)
+- S19: Shivam camera ki taraf haath dikhata "RUKO / PAUSE karo" (har case ka hook)
+- S20: Shivam dono haath upar, khushi se announce karta (agli video mein winners / jawab batate waqt)
+- S21: Shivam do ungliyan apni aankhon ki taraf "dhyaan se dekho" (sawaal ke time)
+- S22: Shivam mez par jhuk kar saboot dekhta hua, side view (crime scene ke liye, S04 ka variety)
 
 =====================================================================
 FACT CHECK (video se pehle ek baar khud Google kar lena)
