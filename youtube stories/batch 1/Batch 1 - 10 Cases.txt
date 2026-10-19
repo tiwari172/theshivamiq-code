@@ -8,13 +8,14 @@ Har masoom ke paas ek "shak wali baat" (red herring) hai. Killer ka number har c
 Jawab video mein KABHI nahi. Jawab agle hafte ki video ki shuruaat mein.
 VO (Devanagari) video banate waqt isi se likhenge. Captions Roman Hinglish.
 
-Killer ka number:  C1=7  C2=2  C3=9  C4=6  C5=4  C6=1  C7=10  C8=3  C9=8  C10=5
+Case ID: Category A, A-001 se A-010. Title/hook/caption mein clue KABHI nahi.
+Killer ka number:  A-001=7  A-002=2  A-003=9  A-004=6  A-005=4  A-006=1  A-007=10  A-008=3  A-009=8  A-010=5
 
 
 #####################################################################
-CASE 01 – "Fuse Bulb"            | MEDIUM | Pattern: Jhooth pakdo (roshni) | Lucknow
+CASE A-001 – "Judge Sahab ki Aakhri Raat" | MEDIUM | Pattern: Jhooth pakdo (roshni) | Lucknow
 #####################################################################
-HOOK: "Ek bayaan mein andhera chhupa hai. Dikh raha hai?"
+HOOK: "8 log, 8 bayaan... aur ek jhooth. Pakad sakoge?"
 
 SABOOT (Detective Shivam kamre mein ghoomta hai):
 - Retired Judge Harish Saxena drawing room ki kursi par mare mile. Maut raat 9:15 se 9:45 ke beech.
@@ -51,9 +52,9 @@ Kyun nahi: baaki kisi ka bayaan kisi saboot se nahi takraata. Chaku (Dinu), khoo
 
 
 #####################################################################
-CASE 02 – "14vi Manzil"          | MEDIUM | Pattern: Jhooth pakdo (jagah) | Gurugram
+CASE A-002 – "Startup Queen ka Flat" | MEDIUM | Pattern: Jhooth pakdo (jagah) | Gurugram
 #####################################################################
-HOOK: "Killer ne ek button dabaya... jo dabta hi nahi tha."
+HOOK: "Saboot tumhare saamne hai. Dekha?"
 
 SABOOT (Detective Shivam ki nazar se):
 - Startup owner Meher Kapoor 14th floor ke flat mein mari mili. Maut raat 11:00 se 11:30.
@@ -90,9 +91,9 @@ Kyun nahi: Tanvi, Imran, Varun ne seedhiyan batayi (lift band se mel khaata hai)
 
 
 #####################################################################
-CASE 03 – "Aakhri Call"          | MEDIUM | Pattern: Jhooth pakdo (phone) | Indore
+CASE A-003 – "Godown ka Sannata" | MEDIUM | Pattern: Jhooth pakdo (phone) | Indore
 #####################################################################
-HOOK: "Mare hue aadmi ne phone kiya... ya kisi ne jhooth bola?"
+HOOK: "10 suspects. Sirf 1 kaatil. 10 second mein batao."
 
 SABOOT (Detective Shivam ki nazar se):
 - Kapda vyapari Ramesh Jain godown mein mare mile. Maut raat 9:00 se 10:00.
@@ -130,9 +131,9 @@ Kyun nahi: Nirmala ki 8:30 wali call phone band hone se pehle ki hai, isliye mel
 
 
 #####################################################################
-CASE 04 – "Shimla ka Toota Shower" | MEDIUM | Pattern: Jhooth pakdo (cheez kharab) | Shimla
+CASE A-004 – "Room No. 12" | MEDIUM | Pattern: Jhooth pakdo (cheez kharab) | Shimla
 #####################################################################
-HOOK: "Thand mein ek aadmi ne bahut garam jhooth bola."
+HOOK: "Is kamre mein sab sach bol rahe hain... ek ke siwa."
 
 SABOOT (Detective Shivam ki nazar se):
 - Hotel maalik Vinod Thakur room 12 mein mare mile. Maut subah 7:00 se 7:30.
@@ -168,9 +169,9 @@ Kyun nahi: Zubair ka bayaan (geyser ka part lene gaya) saboot se mel khaata hai.
 
 
 #####################################################################
-CASE 05 – "Pandal wali Gali"     | MEDIUM | Pattern: Jhooth pakdo (raasta) | Jaipur
+CASE A-005 – "Principal Madam ka Ghar" | MEDIUM | Pattern: Jhooth pakdo (raasta) | Jaipur
 #####################################################################
-HOOK: "Ek gaadi wahan pahunchi... jahan gaadi ja hi nahi sakti thi."
+HOOK: "9 log. Ek raat. Ek kaatil."
 
 SABOOT (Detective Shivam ki nazar se):
 - Principal Kiran Sethi apne ghar mein mari mili. Maut raat 8:30 se 9:00.
@@ -207,9 +208,9 @@ Kyun nahi: Driver Mohan ne gaadi bahar khadi ki (mel khaata hai). Baaki sab sirf
 
 
 #####################################################################
-CASE 06 – "Samundar ka Suraj"    | HARD | Pattern: Bahar ka fact (geography) | Mumbai
+CASE A-006 – "Juhu ka Bungalow" | HARD | Pattern: Bahar ka fact (geography) | Mumbai
 #####################################################################
-HOOK: "Is case ka jawab Google mein hai... par sawaal kya hai, wo dhoondhna padega."
+HOOK: "Ye case sirf 1% log solve karte hain."
 
 SABOOT (Detective Shivam ki nazar se):
 - Builder Prakash Shetty Juhu ke bungalow mein mare mile. Maut subah 6:30 se 7:00.
@@ -249,9 +250,9 @@ Note: killer pehle number par hai. Log "pehle wala to ho hi nahi sakta" sochenge
 
 
 #####################################################################
-CASE 07 – "Rajdhani ki Khidki"   | HARD | Pattern: Bahar ka fact (railway) | Delhi
+CASE A-007 – "MLA ka Farmhouse" | HARD | Pattern: Bahar ka fact (railway) | Delhi
 #####################################################################
-HOOK: "Train ka ticket asli tha. Kahani nakli."
+HOOK: "Poora parivaar shak ke ghere mein. Kaatil kaun?"
 
 SABOOT (Detective Shivam ki nazar se):
 - Purane MLA Brijesh Tomar apne farmhouse par mare mile. Maut raat 10:00 se 11:00.
@@ -290,9 +291,9 @@ Kyun nahi: baaki kisi ka bayaan kisi fact se nahi takraata. Gun (Kamal), kutta (
 
 
 #####################################################################
-CASE 08 – "26 January ka Bhashan" | HARD | Pattern: Bahar ka fact (desh) | Patna
+CASE A-008 – "Coaching wale Sir" | HARD | Pattern: Bahar ka fact (desh) | Patna
 #####################################################################
-HOOK: "Ek deshbhakt bayaan... jo desh ka hi niyam tod raha hai."
+HOOK: "Sabke paas bahana hai. Par ek bahana jhootha hai."
 
 SABOOT (Detective Shivam ki nazar se):
 - Coaching owner Alok Choudhary apne office mein mare mile. Maut 26 January, subah 8:30 se 9:15.
@@ -330,9 +331,9 @@ Kyun nahi: Lucky ka Gandhi Maidan parade (Patna mein 26 Jan ko hoti hai) mel kha
 
 
 #####################################################################
-CASE 09 – "Peela Note"           | VERY HARD | Pattern: Saboot + bahar ka fact (2-3 kadam) | Pune
+CASE A-009 – "Sahukar ki Tijori" | VERY HARD | Pattern: Saboot + bahar ka fact (2-3 kadam) | Pune
 #####################################################################
-HOOK: "Is case mein paisa bolta hai... bas uski bhasha samajhni padegi."
+HOOK: "Sabse mushkil case mein aapka swagat hai."
 
 SABOOT (Detective Shivam ki nazar se):
 - Shivam pandal ke paas se guzarta hai: banner – "Ganpati Bappa Morya – Navyuvak Mandal – 2016". Dhol, modak. (Banner 1 sec.)
@@ -374,9 +375,9 @@ Kyun nahi: baaki kisi ka bayaan kisi fact se nahi takraata. Chaabi (Ashish), dho
 
 
 #####################################################################
-CASE 10 – "Dwarka ka Suraj"      | VERY HARD | Pattern: Saboot + bahar ka fact (2-3 kadam) | Ahmedabad
+CASE A-010 – "Mill Maalik ki Subah" | VERY HARD | Pattern: Saboot + bahar ka fact (2-3 kadam) | Ahmedabad
 #####################################################################
-HOOK: "Ek bhakt ne bhagwan ke naam par jhooth bola. Kaun?"
+HOOK: "Aakhri case. Ab tak ka sabse kathin. Himmat hai?"
 
 SABOOT (Detective Shivam ki nazar se):
 - Mill maalik Jayant Parikh apne bungalow mein mare mile. Maut subah 6:00 se 6:30.
