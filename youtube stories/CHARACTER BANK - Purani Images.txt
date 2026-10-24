@@ -1,0 +1,51 @@
+CHARACTER BANK – purani images (2026-10-24, Drive "Assets" folder se dekh kar likhi)
+=================================================================================
+Nayi batch mein suspect/victim ke liye PEHLE yahan dekho. Image wahi naam se laptop ke assets\ mein hai.
+_CUT = safed background hata hua version (wahi use karo jab list mein _CUT likha ho).
+G_ wale naam wale characters (G_KALLU, G_SHANTI, G_TANVI...) ka naam story mein bhi wahi rakho.
+C011–C020 wale zyada-tar videshi (western) look ke hain – Indian story mein kam lo.
+Ek batch mein ek image max 2 baar.
+
+--- VICTIM (leti / jhuki hui) ---
+Kursi/sofa par: C001_VIKAS (kurta, lakdi ki kursi) | C002_ARYAN (neeli shirt, kursi) | C04-008_GUPTA_SLUMPED (buzurg, safed kurta, kursi)
+  C08-004_MR_RATHI, C08-007_KAPOOR (buzurg, kaali leather armchair, sweater-vest) | C17-001_SETH (buzurg, Nehru jacket, mez par sir)
+Zameen par: C04-010_ARJUN (aadmi, aasmani shirt) | G_V_MAN_BLUE_CUT | G_V_MAN_CHECK_CUT (laal check shirt) | G_V_MAN_GREY_CUT
+  G_V_MAN_SHERWANI_CUT (buzurg, beige sherwani) | G_V_WOMAN_SAREE_CUT (aurat, hari saree) | C007_KAVYA (aurat) | C016_ANNA (aadmi, hara sweater)
+  G_CR_VICTIM_BLUE_CUT / G_CR_VICTIM_MAROON_CUT (cricketer, bat ke saath)
+Bistar/charpai/sofa: C004_SNEHA (aurat, bed) | C005_NEHA (aurat, sofa) | C008_NEHA (safed kapde, bed) | C010_RAMESH (buzurg, bed upar se)
+  C04-009_KAMLA, C03-003_DADI, C03-009_TAIJI_PATTI(_CUT) (buzurg, bed) | C06-005_BUZURG, C17-008_TRUCKER (charpai) | C015_SOPHIA, C018_OLIVIA (videshi aurat)
+
+--- AADMI (jawan, khade) ---
+C001_ROHIT pajama, ubaasi | C002_KUNAL kaali t-shirt, namaste | C003_BHATIJA grey t-shirt, ishara | C004_AMIT hari shirt, haath hilata
+C005_VICKY safed shirt, khaki pant | C005_VICKY_KEY_CUT chaabi ke saath (driver) | C005_PINTU_WET / G_PINTU delivery boy laal topi, parcel
+C006_RAJAT / C04-008_RAJAT_BANDAGE bhoori jacket | C007_NIKHIL safed shirt, phone | C007_VIKRAM check shirt, daadhi
+C10-004_DEEPAK aasmani shirt, haath baandhe | C10-008_KARAN safed shirt | C18-003_PRATEEK baniyaan, shorts | C18-007_SAHIL neeli jacket
+C03-003_VICKY safed shirt | G_SAMEER safed shirt | G_CIVIL_BLACK/GREEN/RED_CUT t-shirt | G_CR_ROHIT_CUT neeli shirt
+G_CR_MANOJ_CUT / G_CR_KEEPER_CUT / G_CR_VIKRAM_CUT cricketer | G_M_BLUE_JACKET_A/B_CUT | G_M_BLUE_SHIRT_CUT | G_M_BROWN_JACKET_CUT
+G_M_CAMERA_CUT video camera, daadhi | G_M_CHAI_CUT ketli | G_M_GREY_HOODIE_CUT | G_M_LIGHTMAN_CUT backpack | G_M_GAMCHHA_CUT mazdoor, gamchha
+G_M_APRON_CUT apron (cook/dukaan) | G_M_ARCHER_A/B/C_CUT kurta + dhanush | G_DAVE courier (bhoori vardi, parcel) | G_CHAIWALA ketli
+C008_AJAY sofa par phone (baitha) | C008_GUEST alaav ke paas (baitha) | C020_NOAH mez par likhta (baitha)
+Videshi look: C012_RYAN, C013_SON, C014_BROTHER, C014_PARTNER (suitcase), C015_MARCO (gym, towel), C015_RICHARD (golf), C016_PAUL (fate kapde),
+  C017_BESTMAN, C017_LUCAS (grey suit), C017_CHEF (chef), C018_BOYFRIEND (gym bag), C018_MARK (leather jacket), C018_USHER (waiter), C019_GREG (press mic),
+  C020_BROTHER (hoodie, pareshaan), C020_ROOMMATE, C011_TOM (shirt-tie)
+
+--- AADMI (umar wale) ---
+C003_VAKIL vakil kaala coat | C009_JOSHI navy suit, sir pakde | C010_MAHESH / C12-010_MAHESH hara kurta | C003_SURAJ(_CUT) peela kurta, kaagaz
+C004_PADOSI sherwani + laal pagdi | C006_GUPTA mez par likhte (baitha) | C008_MANAGER suit, mez | C002_CATERER apron | C008_WAITER tray
+C16-001_DRMEHTA doctor (safed coat) | G_TTE kaala coat, clipboard | G_UMPIRE_CUT umpire | G_M_GUARD_CUT / G_BAHADUR khaki guard, lathi
+G_M_MILKMAN_CUT / C06-007_BALLU doodhwala | G_M_OLD_GLASSES_CUT ganja buzurg, ishara | G_M_OLD_NOGLASSES_CUT | G_M_TORN_CUT daadhi, paalthi (baitha)
+G_M_YELLOW_KURTA_CUT peela kurta-dhoti | G_RAMU buzurg, tiffin | G_BHOLA safed topi, rasoiya | G_HARIYA gaon ke buzurg, lathi | G_KALLU_CUT Rajasthani laal pagdi
+G_KALLU_GHODI_CUT ghodi ke saath | G_ALFRED butler | G_BABA saadhu | C013_LAWYER (videshi buzurg)
+
+--- AURAT ---
+C001_ANJALI laal saree (jawan) | C002_POOJA peela salwar, thaali | C002_RIYA(_CUT) gulaabi suit, dari hui (ladki) | C004_BEHEN jeans, phone
+C004_MAA neeli saree, chinta | C010_SUNITA laal saree, thaali | G_KAMLA naarangi saree, matka (gaon) | G_SHANTI hari saree, thaila (kaamwali)
+G_SHARMA_AUNTY gulaabi saree, phone | G_TANVI neeli jacket (jawan) | G_ROSA kaamwali, apron, sabzi thaile | G_W_MAROON_SAREE_CUT | G_W_ORANGE_KURTI_CUT | G_W_PINK_SUIT_CUT
+Videshi look: C011_EMMA, C012_SARAH, C013_VANESSA, C014_CLAIRE, C017_BRIDE, C018_SISTER (tablet), C019_COWORKER (navy suit, file),
+  C019_FRIEND, C019_MOTHER, C011_LANDLADY, C012_ADAMS, C020_CHLOE
+
+--- JODI / GROUP ---
+C009_COURT, C009_MEERA_ROHAN (jodi) | G_FRIENDS_LAUGH (3 dost)
+
+ABHI NAHI HAIN (nayi banani padegi): Sikh/Punjabi pagdi wale, nurse, doctor aurat, khiladi aurat (tennis/badminton/golf),
+  school uniform wala bachcha, police-free "detective" assistants, North-East look.

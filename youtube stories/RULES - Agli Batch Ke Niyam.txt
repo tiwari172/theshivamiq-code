@@ -78,6 +78,7 @@ youtube stories\Batch N\ : Excel + "00 Intro + Outro"\ + har case "A-00n <Title>
  + "YouTube Reels Story"\R1..R3 (shorts).
 
 11) PURANI IMAGES PEHLE (kam se kam nayi image)
+   -> Pehle "CHARACTER BANK - Purani Images.txt" padho (har image ka look likha hai). Victim ko sirf leti/jhuki image, suspect ko khadi image. Ek batch mein ek image max 2 baar.
 - User ke paas 100-200 character + props images hain (G_ generic, C_ purani stories, P_ props). Har batch mein pehle inhi se match karo.
 - Data file mein REUSE dict (batch3_data.py dekho): suspect -> purani asset, victim -> purani, saboot -> purana P_.
 - G_ naam wale (Bhola, Ramu, Shanti, Kamla, Bahadur, Hariya, Sharma Aunty...) use karo to suspect ka NAAM bhi wahi rakho.
