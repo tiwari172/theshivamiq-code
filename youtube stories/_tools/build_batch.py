@@ -20,7 +20,8 @@ SAFE = " Peaceful pose, YouTube-safe: no blood, no wounds."
 FEMALE = {"Kavita", "Sunita", "Shobha", "Rashmi", "Champa", "Devi", "Anjali", "Tanishka", "Munni", "Sneha", "Komal", "Lata", "Miss", "Mrs",
           "Meenakshi", "Divya", "Mary", "Lakshmi", "Keerthi", "Jennifer", "Mariam", "Leela", "Sarla", "Payal", "Radha", "Sudha",
           "Priya", "Suman", "Aditi", "Swati", "Meena", "Tara", "Saina", "Urmila", "Kritika", "Shanta", "Naziya", "Zoya", "Raziya",
-          "Neha", "Riya", "Pooja", "Sujata", "Anita", "Simran", "Anu", "Kamini", "Gomti", "Gargi", "Surabhi", "Hemlata", "Shanti", "Kamla"}
+          "Neha", "Riya", "Pooja", "Sujata", "Anita", "Simran", "Anu", "Kamini", "Gomti", "Gargi", "Surabhi", "Hemlata", "Shanti", "Kamla",
+          "Rekha", "Tanvi", "Nisha", "Geeta", "Rosa", "Kavya", "Sharda"}
 HOOKS = ["SLAM_TITLE + SHAKE", "TYPE_HOOK", "SPLIT_FLAP + GLITCH"]
 ENTRIES = ["SLIDE_R", "SILHOUETTE_REVEAL", "DOOR_LIGHT"]
 _W = "पहले दूसरे तीसरे चौथे पाँचवें छठे सातवें आठवें नौवें दसवें ग्यारहवें बारहवें तेरहवें चौदहवें पंद्रहवें सोलहवें सत्रहवें अठारहवें उन्नीसवें बीसवें इक्कीसवें बाईसवें तेईसवें चौबीसवें पच्चीसवें छब्बीसवें सत्ताईसवें अट्ठाईसवें उनतीसवें तीसवें इकतीसवें बत्तीसवें तैंतीसवें चौंतीसवें पैंतीसवें छत्तीसवें सैंतीसवें अड़तीसवें उनतालीसवें चालीसवें".split()
@@ -83,7 +84,7 @@ for i, c in enumerate(CASES):
             note="ASLI CLUE (sirf aapke liye) | VO nahi (sirf tasveer)" if s[3] else "VO nahi (sirf tasveer)", d=1.5, extra={"c": c, "i": i, "k": k, "K": len(c["saboot"])})
     add(tag, "Bayaan shuru", "अब सुनिए सबके बयान।", "Ab suno sabke bayaan.", f"{N} SUSPECTS", c["bg"][0], "S2_05", "punch", "pop2", extra={"c": c, "i": i, "N": N})
     for k, s in enumerate(c["suspects"], 1):
-        vo = s[0] + "। " + (s[1] + "। " if s[1] else "") + ("बोलीं... " if is_f(s[3]) else "बोले... ") + s[2]
+        vo = s[0] + ("। " + s[1] if s[1] else "") + "... " + s[2]
         screen = f"SUSPECT {k}/{N}\n{s[3]}" + (f"\n({s[4]})" if s[4] else "")
         add(tag, f"Suspect {k}", vo, f"\"{s[5]}\"", screen, sa(c, s), "", "popup (rise / slide, baari-baari), naam yellow upar, quote neeche",
             "pop" if k % 2 else "pop2", "yellow", note="KILLER (sirf aapke liye)" if k == c["killer"] else "", extra={"c": c, "i": i, "k": k, "N": N})
@@ -197,8 +198,8 @@ srows, smrows = [], []
 for sn, (cn, keep, hk) in enumerate(SHORTS, 1):
     c = [x for x in CASES if x["n"] == cn][0]; tag = c["tag"]; L = f"R{sn} {c['id']}"
     order = [f"Hook (short wala): {hk[0]} / {hk[1]}"]
-    if MIN_TAGS:   # tag sirf jahan zaroori: hook par [whispers], baaki saadi line (suspect par tag nahi – killer alag na lage)
-        vo_lines = [f"[whispers] {hk[0]}", c["setup"][0][0].rstrip("।") + "!", c["setup"][1][0], c["entry"][0], c["jagah"][0]]
+    if MIN_TAGS:   # tag sirf jahan zaroori: hook par [whispers] + maut wali line par [serious], baaki saadi line (suspect par tag nahi – killer alag na lage)
+        vo_lines = [f"[whispers] {hk[0]}", c["setup"][0][0].rstrip("।") + "!", "[serious] " + c["setup"][1][0], c["entry"][0], c["jagah"][0]]
     else:
         vo_lines = [f"[whispers] {hk[0]}", c["setup"][0][0].rstrip("।") + "!", "[serious] " + c["setup"][1][0], c["entry"][0], "[thoughtful] " + c["jagah"][0]]
     for k in keep:

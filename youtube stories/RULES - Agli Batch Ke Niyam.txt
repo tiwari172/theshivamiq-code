@@ -88,3 +88,16 @@ youtube stories\Batch N\ : Excel + "00 Intro + Outro"\ + har case "A-00n <Title>
 
 12) SAFE CONTENT
 - Victim image mein khoon/ghav nahi. CRIME_TAPE theek, khoon ki boondein nahi. Points sirf sahi jawab par (YouTube niyam).
+
+13) REEL SCRIPT CHECKLIST (user, 2026-10-24) – har batch ke baad: python _tools\check_batch.py <data module>  ("SAB THEEK" aana chahiye)
+- Kaatil ki line baaki jitni lambi (10-15 shabd), same banawat/tone. "!", "kya nazara tha", "maza aa gaya" jaisi extra baat kisi ko nahi.
+  Time ek line mein ho to sab lines mein ho.
+- Har masoom ki line MAUT KE TIME + JAGAH ke saath padho – us waqt ye kaam sach mein ho sakta hai? (raat ko dhoop/safari/retreat nahi,
+  monument ka band din, shop/lighting ka time). Shak sirf MOTIVE se (card par), line ke jhooth se nahi. Sirf EK bayaan galat.
+- Naam + shehar title / card / VO / caption / image / Answer Key mein same. G_ image ho to data mein hi wahi naam likho (REUSE rename mat karo).
+- Tag: sirf hook [whispers] + maut wali line [serious]. "Pakad liya" purani file, uspar tag nahi.
+- "bole/boli" kahin nahi (narration mein bhi) – "sabne kaha".
+- Kaatil ka card number ek batch mein max 2 baar, 1-5 sab aayein. Kaatil ko bhi kabhi motive do (motive-less = kaatil, ye pattern na bane).
+- Ek pattern max 2-3 baar: date+fact, time ka fact, time ka hisaab, do logon ka takraav, cheez thi hi nahi, tasveer mein galti, code, record.
+- GK fact 100% pakka + Answer Key mein search line. Ek se zyada matlab wale shabd se bacho ("sher" -> "babbar sher").
+- Code/saboot wale case: jagah/setup line mein clue wali cheez ka naam nahi ("ek ishara chhoda tha" theek hai).
