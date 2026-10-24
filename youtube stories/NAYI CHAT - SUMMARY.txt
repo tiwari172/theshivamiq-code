@@ -35,6 +35,7 @@ Batch 3 (A-021..A-030) – "BAHAR KA BAYAAN" (sab fact bolte, ek galat) – yout
   A-027 Itihaas Museum (Gateway 1947 galat) | A-028 Hospital (AB+ universal donor galat) | A-029 Banaras Bank wale Seth (2 Oct bank khula galat)
   A-030 Taaron wala Observatory (21 June sabse lambi raat galat)
   Shorts: A-021, A-022, A-027
+  SIRF 10 REELS wali Excel: batch 3\Batch 3 - 10 Reels.xlsx (banane ka code: _tools\batch3_reels.py + _tools\reels_only.py)
 YE TRICKS DOBARA MAT LENA (upar bracket mein). "Cheez band/kharab thi" Batch 1 mein 4 baar aa chuki – ab kam se kam.
 Sunrise/suraj wali trick 2 baar ho chuki. Saal + launch date (note/WhatsApp) 2 baar ho chuki.
 
