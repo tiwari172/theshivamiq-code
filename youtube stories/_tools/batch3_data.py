@@ -359,3 +359,22 @@ REUSE = {
  ("P",27,"P_A027_CCTV"):"P_CCTV_MONITOR", ("P",28,"P_A028_STETHO"):"P_STETHOSCOPE", ("P",29,"P_A029_SAFE"):"P_TIJORI",
  ("P",29,"P_A029_GLASS"):"P_THAALI_LASSI", ("P",29,"P_A029_CHASHMA"):"P_BROKEN_GLASSES_CUT", ("P",30,"P_A030_FLASK"):"P_STEEL_THERMOS",
 }
+
+# ---------------- HOOK: SIRF SUSPENSE, KOI ISHARA NAHI (user, 2026-10-24) ----------------
+# Hook mein jhooth kis cheez ka hai (shehar, samundar, khel, itihaas, taareekh, aasmaan...) KABHI nahi. {d}/{r} = suspect ginti.
+HOOKS = {
+ 21: ("{d} लोग। {d} बहाने। सिर्फ़ एक कातिल।", "{r} log. {r} bahane. Sirf ek kaatil.", "KILLER KAUN?"),
+ 22: ("रात नौ बजे... एक चीख़। और {d} लोग शक के घेरे में।", "Raat 9 baje... ek cheekh. Aur {r} log shak ke ghere mein.", "{r} SHAK"),
+ 23: ("{d} चेहरे। सब मासूम दिखते हैं... एक नहीं है।", "{r} chehre. Sab maasoom dikhte hain... ek nahi hai.", "EK NAKAAB"),
+ 24: ("{d} लोग। सबके पास पक्का बहाना। फिर कातिल कौन?", "{r} log. Sabke paas pakka bahana. Phir kaatil kaun?", "KAATIL KAUN?"),
+ 25: ("एक मौत। {d} शक। और सिर्फ़ एक सच।", "Ek maut. {r} shak. Aur sirf ek sach.", "EK SACH"),
+ 26: ("ध्यान से सुनना... इनमें से एक झूठ बोल रहा है।", "Dhyaan se sunna... inme se ek jhooth bol raha hai.", "1 JHOOTHA"),
+ 27: ("{d} लोग। {d} कहानियाँ। एक कहानी में कातिल छुपा है।", "{r} log. {r} kahaniyan. Ek kahani mein kaatil chhupa hai.", "KAATIL CHHUPA HAI"),
+ 28: ("निन्यानवे परसेंट लोग यहाँ ग़लत नाम लेते हैं। तुम?", "99% log yahan galat naam lete hain. Tum?", "99% FAIL"),
+ 29: ("सबसे मुश्किल केस। {d} लोग। एक झूठ।", "Sabse mushkil case. {r} log. Ek jhooth.", "VERY HARD"),
+ 30: ("शिवम को बस एक लाइन लगी... तुम्हें कितनी लगेंगी?", "Shivam ko bas ek line lagi... tumhe kitni lagengi?", "1 LINE"),
+}
+NUM = {5: "पाँच", 8: "आठ", 9: "नौ", 10: "दस"}
+def hook_for(n, cnt): return tuple(x.format(d=NUM[cnt], r=cnt) for x in HOOKS[n])
+for _c in CASES: _c["hook"] = hook_for(_c["n"], len(_c["suspects"]))
+SHORTS = [(n, keep, hook_for(n, len(keep))) for n, keep, _h in SHORTS]

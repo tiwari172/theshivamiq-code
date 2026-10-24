@@ -32,6 +32,7 @@ Agli har batch ki Excel ISI jaisi: same sheets, same naam, same columns:
 3) TITLE / HOOK / CAPTION
 - Title = case ID + victim/jagah + suspense. Clue KABHI nahi (jaise "Fuse Bulb", "Peela Note" galat the).
 - Hook = sirf suspense ("8 log, 8 bayaan... aur ek jhooth"). Hook mein suspect ki ginti short ke hisaab se badlo.
+- HOOK MEIN ISHARA BHI NAHI (user, 2026-10-24): jhooth kis cheez ka hai (shehar/safar, samundar/lehar, khel, itihaas, taareekh, aasmaan, report...) hook ya screen text mein KABHI nahi. Sirf "kaatil kaun / ek jhooth / 99% fail" jaisa suspense. Batch 3 ke HOOKS (batch3_data.py) example hain.
 - Shorts/Insta title + caption mein bhi clue nahi.
 
 4) SABOOT

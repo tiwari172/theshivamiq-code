@@ -9,10 +9,10 @@ Images/motion/caption: 'Batch 3 - 10 Reels.xlsx' (Shorts + Reels, SHORTS MOTION 
 ------------------------------------------------------------
 REEL 1 | Case A-021: Raipur ka Mill Maalik (MEDIUM) | ~63 sec
 Suspect card: 1/5 Beta Rahul | 2/5 Manager Joshi | 3/5 Bhai Naresh | 4/5 Driver Bablu | 5/5 Bhatiji Aditi
-Screen hook: JHOOTHA SAFAR
+Screen hook: KILLER KAUN?
 
 VO (ElevenLabs mein ye paste karo, END line chhod kar):
-[whispers] पाँच लोग। पाँच शहर। एक झूठा सफ़र।
+[whispers] पाँच लोग। पाँच बहाने। सिर्फ़ एक कातिल।
 रायपुर। मिल मालिक कमलेश अग्रवाल, अपने बंगले के स्टडी रूम में मरे मिले!
 मौत रात आठ से नौ के बीच। घर के सब लोग बोले, हम तो शहर से बाहर थे।
 डिटेक्टिव शिवम बंगले पहुँचे।
@@ -26,12 +26,12 @@ VO (ElevenLabs mein ye paste karo, END line chhod kar):
 PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
 
 ------------------------------------------------------------
-REEL 2 | Case A-022: Samundar wala Resort (MEDIUM) | ~60 sec
+REEL 2 | Case A-022: Samundar wala Resort (MEDIUM) | ~61 sec
 Suspect card: 1/5 Partner Reddy | 2/5 Manager D'Souza | 3/5 Patni Lata | 4/5 Lifeguard Johnny | 5/5 Receptionist Meena
-Screen hook: GALAT LEHER
+Screen hook: 5 SHAK
 
 VO (ElevenLabs mein ye paste karo, END line chhod kar):
-[whispers] पाँच लोग। पाँच किनारे। एक ग़लत लहर।
+[whispers] रात नौ बजे... एक चीख़। और पाँच लोग शक के घेरे में।
 विशाखापट्टनम। रिज़ॉर्ट मालिक श्रीनिवास राव, अपने ऑफ़िस में मरे मिले!
 मौत रात नौ से दस के बीच। सबने कहा, हम अलग-अलग समुंदर किनारे छुट्टी पर थे।
 डिटेक्टिव शिवम रिज़ॉर्ट पहुँचे।
@@ -45,12 +45,12 @@ VO (ElevenLabs mein ye paste karo, END line chhod kar):
 PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
 
 ------------------------------------------------------------
-REEL 3 | Case A-023: Sports Club ka Locker Room (MEDIUM) | ~62 sec
+REEL 3 | Case A-023: Sports Club ka Locker Room (MEDIUM) | ~63 sec
 Suspect card: 1/5 Hockey coach Gill | 2/5 Kabaddi khiladi Bala | 3/5 Football referee Mathew | 4/5 Shatranj khiladi Vinayak | 5/5 Volleyball captain Ajinkya
-Screen hook: EK BEIMAAN
+Screen hook: EK NAKAAB
 
 VO (ElevenLabs mein ye paste karo, END line chhod kar):
-[whispers] दस खिलाड़ी। एक खेल। एक बेईमान।
+[whispers] पाँच चेहरे। सब मासूम दिखते हैं... एक नहीं है।
 पुणे। स्पोर्ट्स क्लब के प्रेसिडेंट विजय देशमुख, लॉकर रूम में मरे मिले!
 मौत शाम पाँच से छह के बीच। उस वक़्त क्लब में हर कोई कोई न कोई खेल खेल रहा था।
 डिटेक्टिव शिवम क्लब पहुँचे।
@@ -64,12 +64,12 @@ VO (ElevenLabs mein ye paste karo, END line chhod kar):
 PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
 
 ------------------------------------------------------------
-REEL 4 | Case A-024: Science Teacher ka Ghar (MEDIUM) | ~64 sec
+REEL 4 | Case A-024: Science Teacher ka Ghar (MEDIUM) | ~65 sec
 Suspect card: 1/5 Patni Urmila | 2/5 Beta Aman | 3/5 Tuition student Kritika | 4/5 Kirayedaar Sanjay | 5/5 Kaamwali Shanti
-Screen hook: EK BAAT JHOOTHI
+Screen hook: KAATIL KAUN?
 
 VO (ElevenLabs mein ye paste karo, END line chhod kar):
-[whispers] आठ बयान। आठ बातें। एक बात झूठी।
+[whispers] पाँच लोग। सबके पास पक्का बहाना। फिर कातिल कौन?
 जबलपुर। साइंस टीचर रमेश पांडे, अपने घर में मरे मिले!
 मौत रात आठ से नौ के बीच। घर के सब लोग अपने-अपने काम में लगे थे।
 डिटेक्टिव शिवम घर पहुँचे।
@@ -85,10 +85,10 @@ PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल �
 ------------------------------------------------------------
 REEL 5 | Case A-025: Jungle Safari wale Sahab (MEDIUM) | ~60 sec
 Suspect card: 1/5 Assistant Rohit | 2/5 Partner Vivek | 3/5 Patni Naziya | 4/5 Guide Bhupendra | 5/5 Beti Zoya
-Screen hook: JHOOTHI SAFARI
+Screen hook: EK SACH
 
 VO (ElevenLabs mein ye paste karo, END line chhod kar):
-[whispers] नौ लोग। नौ जंगल। एक झूठी सफ़ारी।
+[whispers] एक मौत। पाँच शक। और सिर्फ़ एक सच।
 भोपाल। वाइल्डलाइफ़ फ़ोटोग्राफ़र इम्तियाज़ ख़ान, अपने बंगले में मरे मिले!
 मौत रात नौ से दस के बीच। सबने कहा, हम अलग-अलग जंगल सफ़ारी पर थे।
 डिटेक्टिव शिवम बंगले पहुँचे।
@@ -102,12 +102,12 @@ VO (ElevenLabs mein ye paste karo, END line chhod kar):
 PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
 
 ------------------------------------------------------------
-REEL 6 | Case A-026: Pahadon wala Homestay (HARD) | ~62 sec
+REEL 6 | Case A-026: Pahadon wala Homestay (HARD) | ~63 sec
 Suspect card: 1/5 Trekker Anshul | 2/5 Blogger Neha | 3/5 Photographer Parth | 4/5 Cook Dorjee | 5/5 Guide Vikram
-Screen hook: NAKSHA GALAT
+Screen hook: 1 JHOOTHA
 
 VO (ElevenLabs mein ye paste karo, END line chhod kar):
-[whispers] नौ मुसाफ़िर। नौ सफ़र। एक नक़्शा ग़लत।
+[whispers] ध्यान से सुनना... इनमें से एक झूठ बोल रहा है।
 गंगटोक। होमस्टे के मालिक छेरिंग भूटिया, अपने होमस्टे में मरे मिले!
 मौत रात आठ से नौ के बीच। सारे मेहमान बोले, हम घूमकर अभी लौटे हैं।
 डिटेक्टिव शिवम होमस्टे पहुँचे।
@@ -123,10 +123,10 @@ PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल �
 ------------------------------------------------------------
 REEL 7 | Case A-027: Itihaas Museum ka Curator (HARD) | ~62 sec
 Suspect card: 1/5 Assistant curator Pooja | 2/5 Guard Harihar | 3/5 Antique dealer Malhotra | 4/5 Photographer Anita | 5/5 Beta Abhijit
-Screen hook: ITIHAAS GAWAH
+Screen hook: KAATIL CHHUPA HAI
 
 VO (ElevenLabs mein ye paste karo, END line chhod kar):
-[whispers] पाँच लोग। पाँच इमारतें। इतिहास झूठ नहीं बोलता।
+[whispers] पाँच लोग। पाँच कहानियाँ। एक कहानी में कातिल छुपा है।
 भुवनेश्वर। म्यूज़ियम के क्यूरेटर डॉ. बिजय महापात्रा, म्यूज़ियम हॉल में मरे मिले!
 मौत दोपहर दो से तीन के बीच। सब बोले, हम उस वक़्त अलग-अलग इमारतें देखने गए थे।
 डिटेक्टिव शिवम म्यूज़ियम पहुँचे।
@@ -140,12 +140,12 @@ VO (ElevenLabs mein ye paste karo, END line chhod kar):
 PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
 
 ------------------------------------------------------------
-REEL 8 | Case A-028: Hospital ka Doosra Floor (HARD) | ~67 sec
+REEL 8 | Case A-028: Hospital ka Doosra Floor (HARD) | ~68 sec
 Suspect card: 1/5 Gym trainer Jassi | 2/5 Ortho doctor Bajwa | 3/5 Dentist Dr. Rashmi | 4/5 Nurse Simran | 5/5 Businessman Dhillon
-Screen hook: NAKLI REPORT
+Screen hook: 99% FAIL
 
 VO (ElevenLabs mein ye paste karo, END line chhod kar):
-[whispers] आठ लोग। आठ रिपोर्ट। एक रिपोर्ट नक़ली।
+[whispers] निन्यानवे परसेंट लोग यहाँ ग़लत नाम लेते हैं। तुम?
 लुधियाना। हॉस्पिटल के मालिक डॉ. हरजीत ग्रेवाल, अपने केबिन में मरे मिले!
 मौत रात दस से ग्यारह के बीच। सब बोले, हम हॉस्पिटल के अलग-अलग विभाग में थे।
 डिटेक्टिव शिवम हॉस्पिटल पहुँचे।
@@ -159,12 +159,12 @@ VO (ElevenLabs mein ye paste karo, END line chhod kar):
 PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
 
 ------------------------------------------------------------
-REEL 9 | Case A-029: Banaras Bank wale Seth (VERY HARD) | ~58 sec
+REEL 9 | Case A-029: Banaras Bank wale Seth (VERY HARD) | ~57 sec
 Suspect card: 1/5 Munim Ramdayal | 2/5 Beta Ashok | 3/5 Bahu Kamini | 4/5 Bhatija Raju | 5/5 Driver Sheru
-Screen hook: TAAREEKH?
+Screen hook: VERY HARD
 
 VO (ElevenLabs mein ye paste karo, END line chhod kar):
-[whispers] सबके पास पक्का बहाना... पर तारीख़ कुछ और कहती है।
+[whispers] सबसे मुश्किल केस। पाँच लोग। एक झूठ।
 कानपुर। सेठ रामनिवास गुप्ता, अपनी गद्दी पर मरे मिले!
 मौत सुबह ग्यारह से बारह के बीच।
 डिटेक्टिव शिवम हवेली पहुँचे।
@@ -180,10 +180,10 @@ PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल �
 ------------------------------------------------------------
 REEL 10 | Case A-030: Taaron wala Observatory (VERY HARD) | ~61 sec
 Suspect card: 1/5 Assistant Tanmay | 2/5 Beti Gargi | 3/5 School teacher Bisht | 4/5 Engineer Surabhi | 5/5 Padosi Kundan
-Screen hook: AASMAAN GAWAH
+Screen hook: 1 LINE
 
 VO (ElevenLabs mein ye paste karo, END line chhod kar):
-[whispers] आख़िरी केस। दस लोग। आसमान सब देख रहा था।
+[whispers] शिवम को बस एक लाइन लगी... तुम्हें कितनी लगेंगी?
 नैनीताल। खगोल वैज्ञानिक डॉ. प्रकाश जोशी, अपनी वेधशाला में मरे मिले!
 मौत रात नौ से दस के बीच।
 डिटेक्टिव शिवम वेधशाला पहुँचे।
