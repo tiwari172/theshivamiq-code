@@ -20,7 +20,7 @@ SAFE = " Peaceful pose, YouTube-safe: no blood, no wounds."
 FEMALE = {"Kavita", "Sunita", "Shobha", "Rashmi", "Champa", "Devi", "Anjali", "Tanishka", "Munni", "Sneha", "Komal", "Lata", "Miss", "Mrs",
           "Meenakshi", "Divya", "Mary", "Lakshmi", "Keerthi", "Jennifer", "Mariam", "Leela", "Sarla", "Payal", "Radha", "Sudha",
           "Priya", "Suman", "Aditi", "Swati", "Meena", "Tara", "Saina", "Urmila", "Kritika", "Shanta", "Naziya", "Zoya", "Raziya",
-          "Neha", "Riya", "Pooja", "Sujata", "Anita", "Simran", "Anu", "Kamini", "Gomti", "Gargi", "Surabhi", "Hemlata"}
+          "Neha", "Riya", "Pooja", "Sujata", "Anita", "Simran", "Anu", "Kamini", "Gomti", "Gargi", "Surabhi", "Hemlata", "Shanti", "Kamla"}
 HOOKS = ["SLAM_TITLE + SHAKE", "TYPE_HOOK", "SPLIT_FLAP + GLITCH"]
 ENTRIES = ["SLIDE_R", "SILHOUETTE_REVEAL", "DOOR_LIGHT"]
 _W = "पहले दूसरे तीसरे चौथे पाँचवें छठे सातवें आठवें नौवें दसवें ग्यारहवें बारहवें तेरहवें चौदहवें पंद्रहवें सोलहवें सत्रहवें अठारहवें उन्नीसवें बीसवें इक्कीसवें बाईसवें तेईसवें चौबीसवें पच्चीसवें छब्बीसवें सत्ताईसवें अट्ठाईसवें उनतीसवें तीसवें इकतीसवें बत्तीसवें तैंतीसवें चौंतीसवें पैंतीसवें छत्तीसवें सैंतीसवें अड़तीसवें उनतालीसवें चालीसवें".split()
@@ -35,6 +35,23 @@ def short(rn):
     return t[-1]
 def is_f(rn): return any(w in FEMALE for w in rn.replace('.', '').split())
 def aid(tag, rn): return f"{tag}_{short(rn).upper().replace(chr(39), '')}"
+REUSE = getattr(_D, "REUSE", {})
+REUSED = set()          # purani image wale asset id
+for _c in CASES:
+    _c["suspects"] = [list(x) for x in _c["suspects"]]
+    for _k, _s in enumerate(_c["suspects"], 1):
+        _r = REUSE.get(("S", _c["n"], _k))
+        if _r:
+            if _r[1]: _s[0], _s[3] = _r[1], _r[2]
+            _s.append(_r[0]); REUSED.add(_r[0])
+    _v = REUSE.get(("V", _c["n"]))
+    if _v: _c["victim"] = (_v, _c["victim"][1]); REUSED.add(_v)
+    _c["saboot"] = [((REUSE.get(("P", _c["n"], x[0])) or x[0]),) + tuple(x[1:]) for x in _c["saboot"]]
+    for x in _c["saboot"]:
+        if REUSE.get(("P", _c["n"], x[0])) is None and x[0] in REUSE.values(): REUSED.add(x[0])
+    for _key, _val in REUSE.items():
+        if _key[0] == "P" and _key[1] == _c["n"]: REUSED.add(_val)
+def sa(c, s): return s[8] if len(s) > 8 else aid(c["tag"], s[3])
 def dur(vo, mn=1.8, wps=2.6, pad=0.35): return round(max(mn, len(vo.split()) / wps + pad), 1)
 def ts(t): t = int(round(t)); return f"{t // 60}:{t % 60:02d}"
 
@@ -67,9 +84,9 @@ for i, c in enumerate(CASES):
     for k, s in enumerate(c["suspects"], 1):
         vo = s[0] + "। " + (s[1] + "। " if s[1] else "") + ("बोलीं... " if is_f(s[3]) else "बोले... ") + s[2]
         screen = f"SUSPECT {k}/{N}\n{s[3]}" + (f"\n({s[4]})" if s[4] else "")
-        add(tag, f"Suspect {k}", vo, f"\"{s[5]}\"", screen, aid(tag, s[3]), "", "popup (rise / slide, baari-baari), naam yellow upar, quote neeche",
+        add(tag, f"Suspect {k}", vo, f"\"{s[5]}\"", screen, sa(c, s), "", "popup (rise / slide, baari-baari), naam yellow upar, quote neeche",
             "pop" if k % 2 else "pop2", "yellow", note="KILLER (sirf aapke liye)" if k == c["killer"] else "", extra={"c": c, "i": i, "k": k, "N": N})
-    add(tag, "Galat ishara", c["galat"][0], c["galat"][1], "", aid(tag, c["suspects"][c["galat"][2] - 1][3]), "S2_03",
+    add(tag, "Galat ishara", c["galat"][0], c["galat"][1], "", sa(c, c["suspects"][c["galat"][2] - 1]), "S2_03",
         "Shivam + us suspect side-by-side, halka zoom", "swish", extra={"c": c, "i": i})
     add(tag, "Soch (3 sec)", "", "Shivam SOCH\nraha hai...", "Shivam SOCH\nraha hai...", "", "S2_02", "zoom+music_off, +1s aur +2s par khaali music_off rows",
         "tick_fast", "yellow", d=3.0, extra={"c": c, "i": i})
@@ -208,7 +225,7 @@ for sn, (cn, keep, hk) in enumerate(SHORTS, 1):
                              "polaroid 90% chaudai beech", "", "slide up" if j == 0 else "cut", "swish" if j == 0 else "", "normal", RULE_S] for j, (vo, s) in enumerate(jparts)])
     for j, k in enumerate(keep, 1):
         s = c["suspects"][k - 1]; bn += 1
-        R = fake(f"Suspect {j}/{len(keep)}", f"\"{s[5]}\"", rd(s[2]) + 0.6, aid(tag, s[3]), "-",
+        R = fake(f"Suspect {j}/{len(keep)}", f"\"{s[5]}\"", rd(s[2]) + 0.6, sa(c, s), "-",
                  f"SUSPECT {j}/{len(keep)}\n{s[3]}" + (f"\n({s[4]})" if s[4] else ""), k=j, N=len(keep))
         R["r"][2] = "Suspect"; sb(f"Suspect {j}/{len(keep)}", motion_beats(R, True))
     bn += 1; sb("Soch (3 sec)", motion_beats(fake("Soch (3 sec)", "", 3.0, "", "S2_02"), True))
@@ -226,13 +243,14 @@ for sn, (cn, keep, hk) in enumerate(SHORTS, 1):
 irows = [list(r) for r in list(M["Image Prompts"].iter_rows(values_only=True))[1:] if str(r[0]).startswith(("BG_INTRO", "CARD_"))]
 for c in CASES:
     tag = c["tag"]
+    OLD = "PEHLE SE HAI (purani image, nayi mat banao) – ek baar dekh lo look role se mel khaata hai"
     irows.append([c["bg"][0], tag, "Background", c["bg"][1], STYLE + c["bg"][1] + ". No people, no text. Make 16:9 (1920x1080) and 9:16 (1080x1920)."])
-    irows.append([c["victim"][0], tag, "Victim", c["victim"][1], STYLE + c["victim"][1] + "." + SAFE + GREEN])
+    irows.append([c["victim"][0], tag, "Victim", c["victim"][1], OLD if c["victim"][0] in REUSED else STYLE + c["victim"][1] + "." + SAFE + GREEN])
     for s in c["saboot"]:
         txt = " Text on the board/paper/screen must be clearly readable exactly as written." if "'" in s[1] else ""
-        irows.append([s[0], tag, "Saboot (prop)", s[1], STYLE + s[1] + "." + txt + " Close-up object, centered." + GREEN])
+        irows.append([s[0], tag, "Saboot (prop)", s[1], OLD if s[0] in REUSED else STYLE + s[1] + "." + txt + " Close-up object, centered." + GREEN])
     for s in c["suspects"]:
-        irows.append([aid(tag, s[3]), tag, "Suspect", s[3] + (f" ({s[4]})" if s[4] else ""), STYLE + s[6] + ". Full body, standing, facing camera." + GREEN])
+        irows.append([sa(c, s), tag, "Suspect", s[3] + (f" ({s[4]})" if s[4] else ""), OLD if len(s) > 8 else STYLE + s[6] + ". Full body, standing, facing camera." + GREEN])
 
 # ------------------------------------------------------------------ PINNED / UPLOAD / ANSWER
 prow = [list(list(M["Pinned + Jawab"].iter_rows(values_only=True))[1])]
@@ -293,12 +311,16 @@ refill("Script + Timing", [R["r"] for R in rows], sfill)
 refill("MOTION PLAN", mrows)
 refill("Shorts + Reels", srows)
 refill("SHORTS MOTION PLAN", smrows)
-refill("Image Prompts", irows, lambda r: "FFF4C2" if r[2].value == "Saboot (prop)" else None)
+refill("Image Prompts", irows, lambda r: "C6EFCE" if str(r[4].value).startswith("PEHLE SE HAI") else ("FFF4C2" if r[2].value == "Saboot (prop)" else None))
+_new = {r[0] for r in irows if not str(r[4]).startswith(("PEHLE SE HAI", "Design in Canva"))}
+_old = {r[0] for r in irows if str(r[4]).startswith("PEHLE SE HAI")}
+IMG_NOTE = f"Image Prompts sheet: HARA = purani image (nayi mat banao) – {len(_old)} alag images reuse. Baaki {len(_new)} nayi banani hain (BG_ wale long video 16:9 ke liye)."
 refill("Pinned + Jawab", prow)
 refill("Upload Details", urows)
 refill("Answer Key", arows, lambda r: "FDE2E2")
 # Start Here
 sh = wb["Start Here"]
+if REUSE: sh.append(["Images", IMG_NOTE])
 for row in sh.iter_rows(min_row=2):
     k, v = row[0].value, row[1].value or ""
     v = v.replace("Batch 1 (YouTube Long Video 01)", f"Batch {BATCH} (YouTube Long Video {BATCH:02d})")
