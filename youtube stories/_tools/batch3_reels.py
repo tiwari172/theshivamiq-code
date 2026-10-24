@@ -2,6 +2,7 @@
 # Har reel: 5 suspect = killer + galat-ishara wala + purani image wale (taaki nayi image kam bane).
 from batch3_data import *
 from batch3_data import CASES, REUSE, SHORTS as _OLD
+MIN_TAGS = True   # VO mein tag sirf hook par
 _old = {s[0]: s for s in _OLD}
 SHORTS = []
 for _c in CASES:

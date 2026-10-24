@@ -45,7 +45,7 @@ Agli har batch ki Excel ISI jaisi: same sheets, same naam, same columns:
 - Reel: poori story EK BAAR mein (Rudra, eleven_v4, stability 0.45, speed 1.05 + purana tighten). Reel 55-60 sec.
 - Reel VO mein NAHI: "bole/boli", motive line (sirf SUSPECT card par), "ab suniye sabke bayaan", jo photo mein dikhe
   ("haath laal"), galat-ishara line, saboot, "full video/link bio" line.
-- Bayaan mein emotion tag ([annoyed] [nervous] [calm]...), har suspect ko koi tag – killer alag na lage.
+- EMOTION TAG KAM SE KAM (user ne kaha, 2026-10-24): sirf hook par [whispers]. Suspect ke bayaan par koi tag nahi (killer alag na lage). Jahan sach mein zaroori ho wahi tag.
 - Reel end: 3 sec chup -> PAKAD_LIYA_HI + CTA_HI + SIGNATURE_HI (purani files, dobara nahi banti).
 - Soch ke 3 sec chup (Shivam SOCH + tick_fast + PAUSE_HINT).
 

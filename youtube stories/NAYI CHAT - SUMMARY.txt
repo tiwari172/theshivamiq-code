@@ -1,9 +1,30 @@
-THESHIVAMIQ – YOUTUBE STORIES: NAYI CHAT KE LIYE SUMMARY (2026-10-19)
+THESHIVAMIQ – YOUTUBE STORIES: NAYI CHAT KE LIYE SUMMARY (PART 2, 2026-10-24)
 =====================================================================
 Nayi chat mein sabse pehle ye 2 file padho:
   1) youtube stories\NAYI CHAT - SUMMARY.txt   (ye file – ab tak kya hua)
   2) youtube stories\RULES - Agli Batch Ke Niyam.txt   (saare niyam – inhe todna nahi)
 Master Excel (format): youtube stories\batch 1\Batch 1 - Production Sheet.xlsx (user ne khud update ki – isi jaisi har batch)
+
+
+---------------------------------------------------------------------
+0) PART 2 – SABSE NAYA (2026-10-24) – PEHLE YE PADHO
+- USER KA PLAN ABHI: sirf REELS (long video abhi nahi). ElevenLabs credit 26 Oct tak khatam karna hai
+  -> 24-25 Oct mein bahut saari reels ki VO banwani hai. Script yahan banti hai, VO/render user ki LOCAL laptop chat karti hai.
+- Batch 3 ki 10 reels (A-021..A-030, har case ki ek, 5 suspect, ~60 sec):
+    batch 3\Batch 3 - 10 Reels.xlsx          (images, motion, captions, pinned, upload, answer key)
+    batch 3\Batch 3 - 10 Reels VO SCRIPT.txt (ElevenLabs mein paste karne wali VO, + answer key)
+  Sirf 16 nayi image: A023_GILL, A028_DHILLON/RASHMI/SIMRAN + 12 saboot (2 calendar = clue, zaroori). Baaki 69 purani.
+- EMOTION TAG KAM SE KAM: sirf hook par [whispers]. Suspect ke bayaan par tag nahi.
+- Reel captions/pinned mein "full video / link bio / points" NAHI. Sirf "Kaatil ka naam comment karo! Sahi jawab kal pin hoga."
+- Purani images: youtube stories\CHARACTER BANK - Purani Images.txt (149 character ka look). Victim = sirf leti/jhuki image.
+  Batch 3 ka REUSE mapping batch3_data.py mein (dekh kar banaya). Ek batch mein ek image max 2 baar.
+- Agar user ko ye reel type pasand aaye -> aur reels banao (nayi stories, BAHAR KA BAYAAN ya dusre pattern):
+    1) _tools\batch4_data.py (batch3_data.py jaisa, REUSE ke saath CHARACTER BANK se)
+    2) _tools\batch4_reels.py (batch3_reels.py copy, import batch4_data) – MIN_TAGS = True
+    3) python build_batch.py "../batch 1/Batch 1 - Production Sheet.xlsx" tmp.xlsx batch4_reels
+       python reels_only.py tmp.xlsx "../batch 4/Batch 4 - 10 Reels.xlsx"
+       python reels_vo_script.py "../batch 4/Batch 4 - 10 Reels.xlsx" "../batch 4/Batch 4 - 10 Reels VO SCRIPT.txt" batch4_reels
+  Case ID aage: A-031 se. Killer number list RULES mein (B3: 5,3,8,6,2,9,4,7,1,10) – koi number 4-5 baar nahi.
 
 DHYAAN: ye sab GitHub branch "claude/epic-pascal-i21ji4" par hai (main mein merge nahi hua).
 Nayi chat ko isi branch par kaam karna hai, ya pehle is branch ko main mein merge karwao.
@@ -63,5 +84,6 @@ Sunrise/suraj wali trick 2 baar ho chuki. Saal + launch date (note/WhatsApp) 2 b
 
 ---------------------------------------------------------------------
 NAYI CHAT MEIN PEHLA MESSAGE (copy-paste):
-"youtube stories\NAYI CHAT - SUMMARY.txt aur RULES - Agli Batch Ke Niyam.txt padho (branch claude/epic-pascal-i21ji4).
-Batch 1 ki Excel master format hai. Ab Batch 4 (A-031 se A-040) usi format mein banao."
+"youtube stories\NAYI CHAT - SUMMARY.txt (section 0 PART 2 pehle) aur RULES - Agli Batch Ke Niyam.txt padho
+(branch claude/epic-pascal-i21ji4). Abhi sirf REELS banani hain, ElevenLabs credit 26 Oct tak khatam karna hai.
+Batch 4 ki 10 reels (A-031 se A-040) batch3_reels jaise banao: Excel + VO SCRIPT txt, tag kam se kam, purani images pehle."

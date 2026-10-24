@@ -1,0 +1,210 @@
+THESHIVAMIQ – BATCH 3: 10 REELS KI VO SCRIPT
+============================================================
+Voice: ElevenLabs, Rudra, eleven_v4, stability 0.45, speed 1.05. Har reel ki VO EK BAAR mein banao, phir purana tighten.
+Emotion tag KAM SE KAM: sirf hook par [whispers]. Suspect ke bayaan par koi tag nahi (killer alag na lage).
+'⏸ 3 sec chup' = yahan voice mein 3 sec khaali (build_voice khud daalta hai). End wali 3 files purani hain – dobara MAT banao.
+Saboot kabhi bole nahi jaate (sirf tasveer). Jawab reel mein kabhi nahi.
+Images/motion/caption: 'Batch 3 - 10 Reels.xlsx' (Shorts + Reels, SHORTS MOTION PLAN, Image Prompts).
+
+------------------------------------------------------------
+REEL 1 | Case A-021: Raipur ka Mill Maalik (MEDIUM) | ~63 sec
+Suspect card: 1/5 Beta Rahul | 2/5 Manager Joshi | 3/5 Bhai Naresh | 4/5 Driver Bablu | 5/5 Bhatiji Aditi
+Screen hook: JHOOTHA SAFAR
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] पाँच लोग। पाँच शहर। एक झूठा सफ़र।
+रायपुर। मिल मालिक कमलेश अग्रवाल, अपने बंगले के स्टडी रूम में मरे मिले!
+मौत रात आठ से नौ के बीच। घर के सब लोग बोले, हम तो शहर से बाहर थे।
+डिटेक्टिव शिवम बंगले पहुँचे।
+स्टडी रूम में सफ़र की तस्वीरें लगी थीं। शिवम ने हर चीज़ पर नज़र डाली।
+बेटा राहुल... "मैं हैदराबाद में था। हुसैन सागर झील में बुद्ध की बड़ी मूर्ति के पास बोटिंग कर रहा था।"
+मैनेजर जोशी... "मैं आगरा में था। यमुना किनारे ताज महल देखकर लौटा।"
+भाई नरेश... "मैं दिल्ली में था। क़ुतुब मीनार देख रहा था... शाहजहाँ ने क्या कमाल की चीज़ बनवाई है!"
+ड्राइवर बबलू... "मैं जयपुर में था। गुलाबी शहर में हवा महल के सामने चाय पी।"
+भतीजी अदिति... "मैं मैसूर में थी। मैसूर पैलेस की रोशनी देख रही थी।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 2 | Case A-022: Samundar wala Resort (MEDIUM) | ~60 sec
+Suspect card: 1/5 Partner Reddy | 2/5 Manager D'Souza | 3/5 Patni Lata | 4/5 Lifeguard Johnny | 5/5 Receptionist Meena
+Screen hook: GALAT LEHER
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] पाँच लोग। पाँच किनारे। एक ग़लत लहर।
+विशाखापट्टनम। रिज़ॉर्ट मालिक श्रीनिवास राव, अपने ऑफ़िस में मरे मिले!
+मौत रात नौ से दस के बीच। सबने कहा, हम अलग-अलग समुंदर किनारे छुट्टी पर थे।
+डिटेक्टिव शिवम रिज़ॉर्ट पहुँचे।
+ऑफ़िस में समुंदर की हवा आ रही थी। शिवम ने हर चीज़ पर नज़र डाली।
+पार्टनर रेड्डी... "मैं गोवा के बागा बीच पर था। अरब सागर की लहरें देख रहा था।"
+मैनेजर डिसूज़ा... "मैं ओडिशा में पुरी के बीच पर था। अरब सागर का पानी इतना साफ़ था, मज़ा आ गया!"
+पत्नी लता... "मैं कन्याकुमारी में थी, जहाँ तीन समुंदर मिलते हैं।"
+लाइफ़गार्ड जॉनी... "मैं अंडमान के हैवलॉक द्वीप पर डाइविंग सिखा रहा था।"
+रिसेप्शनिस्ट मीना... "मैं यहीं विशाखापट्टनम के आर.के. बीच पर थी, बंगाल की खाड़ी के किनारे।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 3 | Case A-023: Sports Club ka Locker Room (MEDIUM) | ~62 sec
+Suspect card: 1/5 Hockey coach Gill | 2/5 Kabaddi khiladi Bala | 3/5 Football referee Mathew | 4/5 Shatranj khiladi Vinayak | 5/5 Volleyball captain Ajinkya
+Screen hook: EK BEIMAAN
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] दस खिलाड़ी। एक खेल। एक बेईमान।
+पुणे। स्पोर्ट्स क्लब के प्रेसिडेंट विजय देशमुख, लॉकर रूम में मरे मिले!
+मौत शाम पाँच से छह के बीच। उस वक़्त क्लब में हर कोई कोई न कोई खेल खेल रहा था।
+डिटेक्टिव शिवम क्लब पहुँचे।
+लॉकर रूम में ट्रॉफ़ियाँ बिखरी थीं। शिवम ने हर चीज़ पर नज़र डाली।
+हॉकी कोच गिल... "मैं मैदान पर हॉकी मैच करवा रहा था। दोनों टीमों में ग्यारह-ग्यारह खिलाड़ी।"
+कबड्डी खिलाड़ी बाला... "मैं कबड्डी खेल रहा था। कोर्ट पर हर टीम के सात खिलाड़ी।"
+फ़ुटबॉल रेफ़री मैथ्यू... "मैं फ़ुटबॉल मैच में रेफ़री था। नब्बे मिनट का पूरा मैच।"
+शतरंज खिलाड़ी विनायक... "मैं शतरंज टूर्नामेंट में था। चौंसठ ख़ानों वाला बोर्ड।"
+वॉलीबॉल कप्तान अजिंक्य... "मैं वॉलीबॉल मैच खेल रहा था। हमारी टीम के ग्यारह के ग्यारह खिलाड़ी कोर्ट पर थे, पूरा ज़ोर लगा दिया!"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 4 | Case A-024: Science Teacher ka Ghar (MEDIUM) | ~64 sec
+Suspect card: 1/5 Patni Urmila | 2/5 Beta Aman | 3/5 Tuition student Kritika | 4/5 Kirayedaar Sanjay | 5/5 Kaamwali Shanti
+Screen hook: EK BAAT JHOOTHI
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] आठ बयान। आठ बातें। एक बात झूठी।
+जबलपुर। साइंस टीचर रमेश पांडे, अपने घर में मरे मिले!
+मौत रात आठ से नौ के बीच। घर के सब लोग अपने-अपने काम में लगे थे।
+डिटेक्टिव शिवम घर पहुँचे।
+घर में किताबें और ग्लोब रखे थे। शिवम ने हर चीज़ पर नज़र डाली।
+पत्नी उर्मिला... "मैं रसोई में दाल बना रही थी, प्रेशर कुकर में दाल जल्दी गल जाती है।"
+बेटा अमन... "मैं फ़्रिज में बर्फ़ जमा रहा था। पानी शून्य डिग्री पर जमता है।"
+ट्यूशन स्टूडेंट कृतिका... "मैं होमवर्क कर रही थी। पृथ्वी सूरज का एक चक्कर लगभग तीन सौ पैंसठ दिन में लगाती है।"
+किरायेदार संजय... "मैं चाय के लिए पानी गरम कर रहा था। पचास डिग्री पर पानी उबलने लगा, तो चाय पत्ती डाल दी।"
+कामवाली शांति... "मैं कपड़े सुखा रही थी, धूप में कपड़े जल्दी सूखते हैं।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 5 | Case A-025: Jungle Safari wale Sahab (MEDIUM) | ~60 sec
+Suspect card: 1/5 Assistant Rohit | 2/5 Partner Vivek | 3/5 Patni Naziya | 4/5 Guide Bhupendra | 5/5 Beti Zoya
+Screen hook: JHOOTHI SAFARI
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] नौ लोग। नौ जंगल। एक झूठी सफ़ारी।
+भोपाल। वाइल्डलाइफ़ फ़ोटोग्राफ़र इम्तियाज़ ख़ान, अपने बंगले में मरे मिले!
+मौत रात नौ से दस के बीच। सबने कहा, हम अलग-अलग जंगल सफ़ारी पर थे।
+डिटेक्टिव शिवम बंगले पहुँचे।
+दीवारों पर जानवरों की तस्वीरें थीं। शिवम ने हर चीज़ पर नज़र डाली।
+असिस्टेंट रोहित... "मैं गुजरात के गिर जंगल में था। वहाँ एशियाई शेर देखे।"
+पार्टनर विवेक... "मैं उत्तराखंड के जिम कॉर्बेट में था। जीप सफ़ारी में दो बब्बर शेर दिखे, क्या नज़ारा था!"
+पत्नी नाज़िया... "मैं असम के काज़ीरंगा में थी। एक सींग वाला गैंडा देखा।"
+गाइड कल्लू... "मैं राजस्थान के रणथंभौर में था, बाघ के पीछे जीप दौड़ा रहा था।"
+बेटी ज़ोया... "मैं सुंदरबन में थी। रॉयल बंगाल टाइगर के पैरों के निशान देखे।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 6 | Case A-026: Pahadon wala Homestay (HARD) | ~62 sec
+Suspect card: 1/5 Trekker Anshul | 2/5 Blogger Neha | 3/5 Photographer Parth | 4/5 Cook Dorjee | 5/5 Guide Vikram
+Screen hook: NAKSHA GALAT
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] नौ मुसाफ़िर। नौ सफ़र। एक नक़्शा ग़लत।
+गंगटोक। होमस्टे के मालिक छेरिंग भूटिया, अपने होमस्टे में मरे मिले!
+मौत रात आठ से नौ के बीच। सारे मेहमान बोले, हम घूमकर अभी लौटे हैं।
+डिटेक्टिव शिवम होमस्टे पहुँचे।
+होमस्टे में आग जल रही थी। शिवम ने हर चीज़ पर नज़र डाली।
+ट्रेकर अंशुल... "मैं लेह से लौटा हूँ। वहाँ हवा इतनी पतली है कि साँस फूल जाती है।"
+ब्लॉगर तन्वी... "मैं मेघालय के चेरापूंजी से आई, दुनिया की सबसे ज़्यादा बारिश वाली जगहों में से एक।"
+फ़ोटोग्राफ़र पार्थ... "मैं कच्छ के रण में था, सफ़ेद नमक का रेगिस्तान।"
+कुक दोरजी... "मैं कर्नाटक के हम्पी गया था, विजयनगर साम्राज्य के खंडहर।"
+गाइड विक्रम... "मैं तो यहीं सिक्किम में नाथुला दर्रे पर टूरिस्ट ले गया था, जहाँ भारत की सीमा नेपाल से लगती है।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 7 | Case A-027: Itihaas Museum ka Curator (HARD) | ~62 sec
+Suspect card: 1/5 Assistant curator Pooja | 2/5 Guard Harihar | 3/5 Antique dealer Malhotra | 4/5 Photographer Anita | 5/5 Beta Abhijit
+Screen hook: ITIHAAS GAWAH
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] पाँच लोग। पाँच इमारतें। इतिहास झूठ नहीं बोलता।
+भुवनेश्वर। म्यूज़ियम के क्यूरेटर डॉ. बिजय महापात्रा, म्यूज़ियम हॉल में मरे मिले!
+मौत दोपहर दो से तीन के बीच। सब बोले, हम उस वक़्त अलग-अलग इमारतें देखने गए थे।
+डिटेक्टिव शिवम म्यूज़ियम पहुँचे।
+हॉल में पुरानी मूर्तियाँ खड़ी थीं। शिवम ने हर चीज़ पर नज़र डाली।
+असिस्टेंट क्यूरेटर पूजा... "मैं कर्नाटक के बीजापुर में गोल गुम्बज देख रही थी।"
+गार्ड हरिहर... "मैं कोलकाता के विक्टोरिया मेमोरियल गया था।"
+एंटीक डीलर मल्होत्रा... "मैं मुंबई में गेटवे ऑफ़ इंडिया पर था, जो उन्नीस सौ सैंतालीस में आज़ादी की ख़ुशी में बना था।"
+फ़ोटोग्राफ़र अनीता... "मैं कोणार्क के सूर्य मंदिर में थी, जो रथ के आकार का है।"
+बेटा अभिजीत... "मैं दिल्ली में इंडिया गेट पर था, पहले विश्व युद्ध के शहीदों की याद में बना।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 8 | Case A-028: Hospital ka Doosra Floor (HARD) | ~67 sec
+Suspect card: 1/5 Gym trainer Jassi | 2/5 Ortho doctor Bajwa | 3/5 Dentist Dr. Rashmi | 4/5 Nurse Simran | 5/5 Businessman Dhillon
+Screen hook: NAKLI REPORT
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] आठ लोग। आठ रिपोर्ट। एक रिपोर्ट नक़ली।
+लुधियाना। हॉस्पिटल के मालिक डॉ. हरजीत ग्रेवाल, अपने केबिन में मरे मिले!
+मौत रात दस से ग्यारह के बीच। सब बोले, हम हॉस्पिटल के अलग-अलग विभाग में थे।
+डिटेक्टिव शिवम हॉस्पिटल पहुँचे।
+केबिन में फ़ाइलें और दवाइयाँ बिखरी थीं। शिवम ने हर चीज़ पर नज़र डाली।
+जिम ट्रेनर जस्सी... "मैं हॉस्पिटल के फ़िज़ियो जिम में था। आराम में दिल एक मिनट में साठ से सौ बार धड़कता है।"
+ऑर्थो डॉक्टर बाजवा... "मैं एक्स-रे देख रहा था। शरीर की सबसे लंबी हड्डी जाँघ की हड्डी होती है।"
+डेंटिस्ट डॉ. रश्मि... "मैं डेंटल क्लिनिक में थी। बड़े इंसान के बत्तीस दाँत होते हैं।"
+नर्स सिमरन... "मैं वार्ड में बुख़ार नाप रही थी। सामान्य शरीर का तापमान लगभग सैंतीस डिग्री होता है।"
+बिज़नेसमैन ढिल्लों... "मैं ब्लड बैंक में था। मेरा ग्रुप एबी पॉज़िटिव है, जो यूनिवर्सल डोनर होता है, इसलिए उन्होंने तुरंत मेरा ख़ून ले लिया।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 9 | Case A-029: Banaras Bank wale Seth (VERY HARD) | ~58 sec
+Suspect card: 1/5 Munim Ramdayal | 2/5 Beta Ashok | 3/5 Bahu Kamini | 4/5 Bhatija Raju | 5/5 Driver Sheru
+Screen hook: TAAREEKH?
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] सबके पास पक्का बहाना... पर तारीख़ कुछ और कहती है।
+कानपुर। सेठ रामनिवास गुप्ता, अपनी गद्दी पर मरे मिले!
+मौत सुबह ग्यारह से बारह के बीच।
+डिटेक्टिव शिवम हवेली पहुँचे।
+गद्दी पर बही-खाते खुले पड़े थे। शिवम ने हर चीज़ पर नज़र डाली।
+मुनीम रामदयाल... "मैं ग्यारह से बारह बजे तक एसबीआई ब्रांच में सेठ जी का कैश जमा कर रहा था। कैशियर ने पाँच मिनट में काम कर दिया।"
+बेटा अशोक... "मैं पंजाबी ढाबे पर मक्के की रोटी और सरसों का साग खा रहा था।"
+बहू कामिनी... "मैं उडुपी होटल में मसाला डोसा खा रही थी, कर्नाटक की ख़ास डिश।"
+भतीजा राजू... "मैं लखनऊ गया था, टुंडे के कबाब खाने।"
+ड्राइवर शेरू... "मैं हैदराबादी बिरयानी लेने गया था।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 10 | Case A-030: Taaron wala Observatory (VERY HARD) | ~61 sec
+Suspect card: 1/5 Assistant Tanmay | 2/5 Beti Gargi | 3/5 School teacher Bisht | 4/5 Engineer Surabhi | 5/5 Padosi Kundan
+Screen hook: AASMAAN GAWAH
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] आख़िरी केस। दस लोग। आसमान सब देख रहा था।
+नैनीताल। खगोल वैज्ञानिक डॉ. प्रकाश जोशी, अपनी वेधशाला में मरे मिले!
+मौत रात नौ से दस के बीच।
+डिटेक्टिव शिवम वेधशाला पहुँचे।
+वेधशाला में तारों के नक़्शे लगे थे। शिवम ने हर चीज़ पर नज़र डाली।
+असिस्टेंट तन्मय... "मैं प्लैनेटेरियम में बच्चों को बता रहा था, मंगल को लाल ग्रह कहते हैं।"
+बेटी गार्गी... "मैं दूरबीन से शनि के छल्ले देख रही थी।"
+स्कूल टीचर बिष्ट... "मैं बच्चों को पढ़ा रहा था, बृहस्पति सौरमंडल का सबसे बड़ा ग्रह है।"
+इंजीनियर सुरभि... "मैं इसरो का वीडियो देख रही थी, चंद्रयान तीन चाँद के दक्षिणी ध्रुव के पास उतरा था।"
+पड़ोसी कुंदन... "उस रात साल की सबसे लंबी रात थी। मैं नौ से दस बजे तक छत पर बैठा तारे गिन रहा था।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+============================================================
+ANSWER KEY (SIRF AAPKE LIYE – screen par kabhi nahi, agle din pinned comment)
+A-021: Bhai Naresh (card par 3/5) – NARESH (no. 5). Qutub Minar Shah Jahan ne nahi banwaya – ise Qutb-ud-din Aibak ne shuru kiya, Iltutmish ne poora kiya. Wo Delhi gaya hi nahi tha. (Baaki sab fact sahi: Hussain Sagar Buddha, Howrah Bridge-Hooghly, Taj-Yamuna, Swarn Mandir langar, Hawa Mahal Jaipur, Dashashwamedh aarti, Mysore Palace.)
+A-022: Manager D'Souza (card par 2/5) – D'SOUZA (no. 3). Puri (Odisha) BANGAL KI KHAADI ke kinare hai, Arab Sagar par nahi. Wo Puri gaya hi nahi tha. (Baaki sahi: Baga-Goa Arab Sagar, Marina-Bangal ki khaadi, Kochi fishing nets, Kanyakumari teen samundar, Havelock-Andaman, Pamban pul, Diu qila Arab Sagar, RK beach.)
+A-023: Volleyball captain Ajinkya (card par 5/5) – AJINKYA (no. 8). Volleyball mein court par har team ke sirf 6 khiladi hote hain, 11 nahi. (Baaki sahi: hockey 11, kabaddi 7, football 90 min, Wimbledon grass, chess 64 khaane, basketball 5, T20 20 over, golf 18 hole.)
+A-024: Kirayedaar Sanjay (card par 4/5) – SANJAY (no. 6). Paani 100 degree par ubalta hai, 50 par nahi. Wo chai bana hi nahi raha tha. (Baaki sahi: pressure cooker, 0 degree par barf, 365 din, paudhe oxygen, chaand ki apni roshni nahi, dhoop, main switch.)
+A-025: Partner Vivek (card par 2/5) – VIVEK (no. 2). Jungli babbar sher (lion) India mein sirf Gujarat ke GIR mein hote hain. Jim Corbett mein baagh (tiger) hote hain, sher nahi. (Baaki sahi: Gir-sher, Kaziranga-ek seeng gainda, Ranthambore-baagh, Sundarbans-Royal Bengal tiger, Bharatpur-pakshi, Periyar-haathi, Chilika-dolphin.)
+A-026: Guide Vikram (card par 5/5) – VIKRAM (no. 9). Nathu La darra Bharat aur CHEEN (Tibet) ki seema par hai, Nepal se nahi. Wo Nathu La gaya hi nahi tha. (Baaki sahi: Leh patli hawa, Cherrapunji baarish, Rann of Kutch namak, Majuli-Brahmaputra, Lonar ulka jheel, Shimla summer capital, Dholavira Harappa, Hampi Vijayanagar.)
+A-027: Antique dealer Malhotra (card par 3/5) – MALHOTRA (no. 4). Gateway of India 1947 mein nahi bana – ye 1924 mein poora hua, King George V ke 1911 ke aagman ki yaad mein. (Baaki sahi: Gol Gumbaz Bijapur, Victoria Memorial Kolkata, Charminar-Quli Qutb Shah, Laal Qila-Shah Jahan, Sanchi-Ashok, Konark rath, Statue of Unity-Patel, India Gate-WW1, Jallianwala Bagh Amritsar.)
+A-028: Businessman Dhillon (card par 5/5) – DHILLON (no. 7). AB positive UNIVERSAL RECIPIENT hota hai (sabse le sakta hai). Universal donor O negative hota hai. Wo blood bank gaya hi nahi tha. (Baaki sahi: dil 60-100/min, femur sabse lambi haddi, 32 daant, tvacha sabse bada ang, 37 degree, hemoglobin laal, oxygen-CO2.)
+A-029: Munim Ramdayal (card par 1/5) – RAMDAYAL (no. 1). 1) Calendar: 2 OCTOBER. 2) 2 October = Gandhi Jayanti, rashtriya chhutti – BANK BAND hote hain. 3) 'SBI mein cash jama kiya' = jhooth. (Baaki sahi: makki-sarson Punjab, masala dosa Udupi-Karnataka, Tunde kebab Lucknow, Hyderabadi biryani, rasgulla Bangal, dhokla Gujarat, Thaggu ke laddoo Kanpur, Sarafa bazaar Indore.)
+A-030: Padosi Kundan (card par 5/5) – KUNDAN (no. 10). 1) Calendar: 21 JUNE. 2) 21 June ko India (uttari golardh) mein saal ka sabse LAMBA DIN aur sabse CHHOTI RAAT hoti hai. 3) 'Saal ki sabse lambi raat' = jhooth. (Baaki sahi: Mangal laal grah, Shani ke chhalle, Brihaspati sabse bada, Chandrayaan-3 dakshini dhruv, Dhruv tara uttar, roshni ~8 min, Shukra subah-shaam ka tara, chaand akela upgrah, Budh sabse paas.)

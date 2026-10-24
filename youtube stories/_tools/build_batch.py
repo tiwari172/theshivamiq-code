@@ -36,6 +36,7 @@ def short(rn):
 def is_f(rn): return any(w in FEMALE for w in rn.replace('.', '').split())
 def aid(tag, rn): return f"{tag}_{short(rn).upper().replace(chr(39), '')}"
 REUSE = getattr(_D, "REUSE", {})
+MIN_TAGS = getattr(_D, "MIN_TAGS", False)   # True = VO mein emotion tag kam se kam
 REUSED = set()          # purani image wale asset id
 for _c in CASES:
     _c["suspects"] = [list(x) for x in _c["suspects"]]
@@ -196,10 +197,14 @@ srows, smrows = [], []
 for sn, (cn, keep, hk) in enumerate(SHORTS, 1):
     c = [x for x in CASES if x["n"] == cn][0]; tag = c["tag"]; L = f"R{sn} {c['id']}"
     order = [f"Hook (short wala): {hk[0]} / {hk[1]}"]
-    vo_lines = [f"[whispers] {hk[0]}", c["setup"][0][0].rstrip("।") + "!", "[serious] " + c["setup"][1][0], c["entry"][0], "[thoughtful] " + c["jagah"][0]]
+    if MIN_TAGS:   # tag sirf jahan zaroori: hook par [whispers], baaki saadi line (suspect par tag nahi – killer alag na lage)
+        vo_lines = [f"[whispers] {hk[0]}", c["setup"][0][0].rstrip("।") + "!", c["setup"][1][0], c["entry"][0], c["jagah"][0]]
+    else:
+        vo_lines = [f"[whispers] {hk[0]}", c["setup"][0][0].rstrip("।") + "!", "[serious] " + c["setup"][1][0], c["entry"][0], "[thoughtful] " + c["jagah"][0]]
     for k in keep:
-        s = c["suspects"][k - 1]; vo_lines.append(f"{s[0]}... {s[7]} \"{s[2]}\"")
+        s = c["suspects"][k - 1]; vo_lines.append(f"{s[0]}... \"{s[2]}\"" if MIN_TAGS else f"{s[0]}... {s[7]} \"{s[2]}\"")
     vo_lines += ["⏸ 3 sec chup (Shivam soch)",
+                 "PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]"] if MIN_TAGS else ["⏸ 3 sec chup (Shivam soch)",
                  "[dramatic] डिटेक्टिव शिवम ने कातिल पकड़ लिया!  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)"]
     order += ["Kahani", "Maut ka time", "Shivam entry"] + [f"Saboot {k}" for k in range(1, len(c["saboot"]) + 1)]
     order += [f"Suspect {k} -> SUSPECT {j}/{len(keep)}" for j, k in enumerate(keep, 1)] + ["Soch (3 sec)", "Pakad liya + CTA + Signature (purani files)"]

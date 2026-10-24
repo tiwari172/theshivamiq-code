@@ -67,6 +67,7 @@ S = {
  "PRIMARY": "Is batch mein sirf reels (Insta + YouTube Shorts dono par same).",
  "Shorts niyam": "10 reel, har case ki ek. Har reel mein 5 suspect – kaatil + galat-ishara wala hamesha. Baaki suspect wo liye jinki image pehle se hai. Jawab reel mein KABHI nahi.",
  "Folders": "youtube stories\\batch 3\\ : Excel + 'YouTube Reels Story'\\R1..R10 (har reel ka VO, csv, images, cover).",
+ "Reel VO niyam": "Reel VO poori story EK BAAR mein (Rudra, eleven_v4, stability 0.45, speed 1.05 + purana tighten). EMOTION TAG KAM SE KAM: sirf hook par [whispers], baaki saadi line – suspect ke bayaan par koi tag nahi (killer alag na lage). VO mein NAHI: 'bole/boli', motive line, galat-ishara line, saboot ka naam, 'full video/link bio'. End: 3 sec chup -> PAKAD_LIYA_HI + CTA_HI + SIGNATURE_HI (purani files, dobara nahi banti).",
  "Images": f"Image Prompts sheet: HARA = purani image (nayi mat banao) – {old} purani. Sirf {len(new)} nayi banani hain: {', '.join(new)}.",
 }
 drop = {"Script chat ke liye", "Motion"}
