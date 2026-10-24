@@ -13,7 +13,7 @@ Agli har batch ki Excel ISI jaisi: same sheets, same naam, same columns:
 - KILLER KA NUMBER: har case mein alag hona zaroori NAHI (repeat ho sakta hai). Bas ek hi number baar-baar na aaye:
   ek batch mein koi bhi number max 2-3 baar, aur pichhli batches milakar koi number 4-5 baar lagatar/zyada na ho
   (pehle reels mein killer/chor hamesha 3 number par tha – wo galti dobara nahi). Pehla, beech, aakhri – sab jagah aaye.
-  Batch 1: 7,2,9,6,4,1,10,3,8,5 | Batch 2: 3,8,5,10,1,6,9,2,7,4
+  Batch 1: 7,2,9,6,4,1,10,3,8,5 | Batch 2: 3,8,5,10,1,6,9,2,7,4 | Batch 3: 5,3,8,6,2,9,4,7,1,10
 - Detective SHIVAM hi case solve karta hai (police/inspector nahi). Poses: S2_ series (Shivam Poses sheet).
 
 2) PUZZLE NIYAM
@@ -22,6 +22,9 @@ Agli har batch ki Excel ISI jaisi: same sheets, same naam, same columns:
 - Galat ishara: Shivam kisi masoom par shak dikhata hai (SPLIT_SCREEN / DIVE / MARKER sirf usi par).
 - HARD = ek bahar ka fact (Google karna pade). VERY HARD = video ka saboot + bahar ka fact, 2-3 kadam.
 - Fact hamesha pakka aur Google par milne wala. Answer Key mein "kyun" + search line.
+- "BAHAR KA BAYAAN" style (user ko pasand, Batch 3 se): har suspect apne bayaan mein bahar ki duniya ka ek fact bolta hai
+  (jagah, khel, itihaas, science, khaana, aasmaan...). Sab fact SACH, sirf kaatil ka GALAT. Fact 100% pakka hona chahiye –
+  shak ho to mat lo. Medium = school GK, Hard = Google karna pade, Very Hard = saboot (date/jagah) + fact.
 - Pattern VARIETY: ek batch mein ek pattern max 2 baar (40 patterns ki list: A jhooth pakdo, B chitra dekho,
   C number/logic, D code/shabd, E alag sawaal, F twist). Batch 1 mein "cheez band/kharab thi" 4 baar aa gaya – dobara nahi.
 - Jawab screen par KABHI nahi. Jawab agle Sunday ki video ki shuruaat mein.

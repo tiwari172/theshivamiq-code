@@ -1,6 +1,10 @@
 import sys, os, math, shutil
 sys.path.insert(0, os.path.dirname(__file__))
-from batch2_data import CASES, SHORTS  # nayi batch: batchN_data.py banao, yahan naam badlo
+import importlib
+# Chalao: python build_batch.py "<Batch 1 master xlsx>" "<naya xlsx>" batch3_data
+_D = importlib.import_module(sys.argv[3] if len(sys.argv) > 3 else "batch2_data")
+CASES, SHORTS = _D.CASES, _D.SHORTS
+BATCH = getattr(_D, "BATCH", 2)
 from openpyxl import load_workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 
@@ -13,13 +17,18 @@ STYLE = ("Flat 2D cartoon illustration, bold black outlines, same art style as t
          "Indian setting, warm cinematic colours, no watermark. ")
 GREEN = " Plain bright green (#00FF00) background, no text, no shadow."
 SAFE = " Peaceful pose, YouTube-safe: no blood, no wounds."
-FEMALE = {"Kavita", "Sunita", "Shobha", "Rashmi", "D'Souza", "Champa", "Devi", "Anjali", "Tanishka", "Munni", "Sneha", "Komal", "Lata",
-          "Meenakshi", "Divya", "Mary", "Lakshmi", "Keerthi", "Jennifer", "Mariam", "Leela", "Sarla", "Payal", "Radha", "Sudha"}
+FEMALE = {"Kavita", "Sunita", "Shobha", "Rashmi", "Champa", "Devi", "Anjali", "Tanishka", "Munni", "Sneha", "Komal", "Lata", "Miss", "Mrs",
+          "Meenakshi", "Divya", "Mary", "Lakshmi", "Keerthi", "Jennifer", "Mariam", "Leela", "Sarla", "Payal", "Radha", "Sudha",
+          "Priya", "Suman", "Aditi", "Swati", "Meena", "Tara", "Saina", "Urmila", "Kritika", "Shanta", "Naziya", "Zoya", "Raziya",
+          "Neha", "Riya", "Pooja", "Sujata", "Anita", "Simran", "Anu", "Kamini", "Gomti", "Gargi", "Surabhi", "Hemlata"}
 HOOKS = ["SLAM_TITLE + SHAKE", "TYPE_HOOK", "SPLIT_FLAP + GLITCH"]
 ENTRIES = ["SLIDE_R", "SILHOUETTE_REVEAL", "DOOR_LIGHT"]
-ORD = {11: "ग्यारहवें", 12: "बारहवें", 13: "तेरहवें", 14: "चौदहवें", 15: "पंद्रहवें", 16: "सोलहवें", 17: "सत्रहवें", 18: "अठारहवें", 19: "उन्नीसवें", 20: "बीसवें"}
+_W = "पहले दूसरे तीसरे चौथे पाँचवें छठे सातवें आठवें नौवें दसवें ग्यारहवें बारहवें तेरहवें चौदहवें पंद्रहवें सोलहवें सत्रहवें अठारहवें उन्नीसवें बीसवें इक्कीसवें बाईसवें तेईसवें चौबीसवें पच्चीसवें छब्बीसवें सत्ताईसवें अट्ठाईसवें उनतीसवें तीसवें इकतीसवें बत्तीसवें तैंतीसवें चौंतीसवें पैंतीसवें छत्तीसवें सैंतीसवें अड़तीसवें उनतालीसवें चालीसवें".split()
+ORD = {i + 1: w for i, w in enumerate(_W)}
 for c in CASES:
     c["id"] = f"A-{c['n']:03d}"; c["tag"] = f"A{c['n']:03d}"
+A0, A1 = CASES[0]["id"], CASES[-1]["id"]
+FMT = f"{A0} Naam, {CASES[1]['id']} Naam ... {A1} Naam"
 
 def short(rn):
     t = [x.replace('.', '') for x in rn.split() if x.lower() not in ("ji", "sahab", "sir", "devi")]
@@ -99,7 +108,7 @@ def motion_beats(R, L916=False):
     if sec_name == "Title card":
         mo = "CASE_SWIPE -> FILE_OPEN" + (" + WARNING_STRIP" if c["level"] != "MEDIUM" else "")
         b(cap, d, mo, "static", "file beech mein, badge right-upar", screen, "whip-pan left", "whoosh",
-          note=f"CASE_HUD yahin se shuru: 'CASE {c['id']} | {c['n'] - 10}/10'")
+          note=f"CASE_HUD yahin se shuru: 'CASE {c['id']} | {(c['n'] - 1) % 10 + 1}/10'")
     elif sec_name == "Hook":
         hk = HOOKS[x["i"] % 3]
         for j, (vo, s) in enumerate(ch):
@@ -227,7 +236,7 @@ for c in CASES:
 
 # ------------------------------------------------------------------ PINNED / UPLOAD / ANSWER
 prow = [list(list(M["Pinned + Jawab"].iter_rows(values_only=True))[1])]
-prow[0][2] = prow[0][2].replace("A-001 Naam, A-002 Naam ... A-010 Naam", "A-011 Naam, A-012 Naam ... A-020 Naam")
+prow[0][2] = prow[0][2].replace("A-001 Naam, A-002 Naam ... A-010 Naam", FMT)
 for c in CASES:
     killer = c["suspects"][c["killer"] - 1][3]
     rest = c["reveal"][1].split("! ", 1)[1]
@@ -237,11 +246,11 @@ chap_txt = "\n".join(f"{ts(tt)} {name}" for tt, name in chapters)
 mu = list(M["Upload Details"].iter_rows(values_only=True))
 desc = [r[2] for r in mu if r[0] == "YouTube Long" and r[1] == "Description"][0]
 a, b2 = desc.index("⏱ Chapters:\n"), desc.index("\n\nContest rules")
-desc = (desc[:a] + "⏱ Chapters:\n" + chap_txt + desc[b2:]).replace("A-001 Naam, A-002 Naam ... A-010 Naam", "A-011 Naam, A-012 Naam ... A-020 Naam")
+desc = (desc[:a] + "⏱ Chapters:\n" + chap_txt + desc[b2:]).replace("A-001 Naam, A-002 Naam ... A-010 Naam", FMT)
 urows = [
- ["YouTube Long", "Title (option 1)", "10 Naye Murder Mysteries | 99% Log FAIL! Kya Aap Solve Kar Paoge? | Detective Shivam Batch 2"],
- ["YouTube Long", "Title (option 2)", "Saboot Saamne Hai, Kaatil Pakdo! 10 Cases (Part 2) | Detective Shivam"],
- ["YouTube Long", "Title (option 3)", "Sirf 1% Log Saare 10 Kaatil Pakad Paate | Hindi Mystery Quiz | Batch 2"],
+ ["YouTube Long", "Title (option 1)", f"10 Naye Murder Mysteries | 99% Log FAIL! Kya Aap Solve Kar Paoge? | Detective Shivam Batch {BATCH}"],
+ ["YouTube Long", "Title (option 2)", f"Saboot Saamne Hai, Kaatil Pakdo! 10 Cases (Part {BATCH}) | Detective Shivam"],
+ ["YouTube Long", "Title (option 3)", f"Sirf 1% Log Saare 10 Kaatil Pakad Paate | Hindi Mystery Quiz | Batch {BATCH}"],
  ["YouTube Long", "Description", desc],
 ] + [list(r) for r in mu[1:] if r[0] == "YouTube Long" and r[1] not in ("Title (option 1)", "Title (option 2)", "Title (option 3)", "Description")]
 for sn, (cn, keep, hk) in enumerate(SHORTS, 1):
@@ -249,7 +258,7 @@ for sn, (cn, keep, hk) in enumerate(SHORTS, 1):
     urows += [
      [f"YouTube Short {sn}", "Title", f"Case {c['id']}: {c['title']} | {len(keep)} Suspects, 1 Kaatil 🕵️ #shorts"],
      [f"YouTube Short {sn}", "Description", f"Case {c['id']}: {c['title']}. {len(keep)} suspects, 1 kaatil. Kaatil kaun? Baaki suspects + POINTS sirf full video mein 👉 [long video link]\n#DetectiveShivam #MurderMystery #Paheli #shorts"],
-     [f"YouTube Short {sn}", "Related video", "Short ke 'Related video' mein Batch 2 long video lagao (YouTube Studio > Short edit)"],
+     [f"YouTube Short {sn}", "Related video", f"Short ke 'Related video' mein Batch {BATCH} long video lagao (YouTube Studio > Short edit)"],
      [f"Instagram Reel {sn}", "Caption", f"🕵️ Case {c['id']}: {c['title']}\n{c['setup'][0][1]}\n{len(keep)} suspects, 1 kaatil. 99% log galat naam lete hain. Tum? Comment karo 👇\nBaaki suspects + POINTS wala muqabla YouTube full video mein (link bio mein)"],
      [f"Instagram Reel {sn}", "Hashtags", "#detectiveshivam #murdermystery #paheli #riddles #hindiriddles #mysteryreels #brainteaser #theshivamiq #crimepuzzle #reelsindia"],
      [f"Instagram Reel {sn}", "Cover text", "99% LOG FAIL! / KILLER KAUN?"],
@@ -258,7 +267,7 @@ for sn, (cn, keep, hk) in enumerate(SHORTS, 1):
      [f"Shorts + Reel {sn}", "Jawab ke baad pinned", f"'Pinned + Jawab' sheet ka aakhri column (Case {c['id']}) — purana pinned hata kar ye lagao"],
      [f"Instagram Reel {sn}", "Story", "Reel share karo + YouTube link sticker: 'Full case + points yahan'"],
     ]
-urows.append(["Release plan", "Order", "Sunday: long video (shuru mein Batch 1 ke jawab + winners) | Mon/Wed/Fri: Short 1/2/3 (YouTube + Insta) | Agla Sunday: Batch 2 ke jawab + Batch 3"])
+urows.append(["Release plan", "Order", f"Sunday: long video (shuru mein Batch {BATCH-1} ke jawab + winners) | Mon/Wed/Fri: Short 1/2/3 (YouTube + Insta) | Agla Sunday: Batch {BATCH} ke jawab + Batch {BATCH+1}"])
 arows = [[c["id"], c["title"], c["level"], c["killer"], c["suspects"][c["killer"] - 1][3], c["answer"] + f"  [Pattern: {c['pattern']}]", c["search"] or "-"] for c in CASES]
 
 # ------------------------------------------------------------------ WRITE
@@ -292,15 +301,15 @@ refill("Answer Key", arows, lambda r: "FDE2E2")
 sh = wb["Start Here"]
 for row in sh.iter_rows(min_row=2):
     k, v = row[0].value, row[1].value or ""
-    v = v.replace("Batch 1 (YouTube Long Video 01)", "Batch 2 (YouTube Long Video 02)")
-    if k == "Video": v = f"10 cases (5 Medium, 3 Hard, 2 Very Hard), A-011 se A-020. Andaazan lambai: {int(TOTAL // 60)} min {int(TOTAL % 60)} sec (asli timing voice banne ke baad)."
-    if k == "Case ID": v = "Category A: A-011 se A-020 (Batch 2). Title, hook, caption mein sirf case ID + victim/jagah + suspense. Clue KABHI nahi."
-    if k == "Comment format": v = "Har case ke end mein: 'A-011 Naam', 'A-012 Naam'... (Category A, case 011 se 020). Isse comment checker aasaani se points dega."
+    v = v.replace("Batch 1 (YouTube Long Video 01)", f"Batch {BATCH} (YouTube Long Video {BATCH:02d})")
+    if k == "Video": v = f"10 cases (5 Medium, 3 Hard, 2 Very Hard), {A0} se {A1}. Andaazan lambai: {int(TOTAL // 60)} min {int(TOTAL % 60)} sec (asli timing voice banne ke baad)."
+    if k == "Case ID": v = f"Category A: {A0} se {A1} (Batch {BATCH}). Title, hook, caption mein sirf case ID + victim/jagah + suspense. Clue KABHI nahi."
+    if k == "Comment format": v = f"Har case ke end mein: '{A0} Naam', '{CASES[1]['id']} Naam'... (Category A, {A0} se {A1}). Isse comment checker aasaani se points dega."
     row[1].value = v
 # Cover example
 for row in wb["Cover Design"].iter_rows(min_row=2):
     for cc in row:
-        if isinstance(cc.value, str): cc.value = cc.value.replace("CASE A-001 / JUDGE SAHAB KI AAKHRI RAAT / [MEDIUM]", "CASE A-011 / BANK MANAGER KA BUNGALOW / [MEDIUM]")
+        if isinstance(cc.value, str): cc.value = cc.value.replace("CASE A-001 / JUDGE SAHAB KI AAKHRI RAAT / [MEDIUM]", f"CASE {A0} / {CASES[0]['title'].upper()} / [{CASES[0]['level']}]")
 wb.active = 0
 wb.save(OUT)
 print("script", len(rows), "motion", len(mrows), "shorts motion", len(smrows), "images", len(irows), "total", ts(TOTAL),

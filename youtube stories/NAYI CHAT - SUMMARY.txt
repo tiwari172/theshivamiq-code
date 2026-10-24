@@ -29,16 +29,22 @@ Batch 2 (A-011..A-020) – youtube stories\batch 2\Batch 2 - Production Sheet.xl
   A-017 Chennai ka Club House (Test mein free hit nahi) | A-018 Masale wale Seth ka Ghar (Dubai time zone) | A-019 Ek Purani File (WhatsApp video call 2015)
   A-020 Kothi ki Aakhri Shaam (purnima par surya grahan)
   Shorts: A-012, A-014, A-017
+Batch 3 (A-021..A-030) – "BAHAR KA BAYAAN" (sab fact bolte, ek galat) – youtube stories\batch 3\Batch 3 - Production Sheet.xlsx
+  A-021 Raipur ka Mill Maalik (Qutub Minar-Shah Jahan galat) | A-022 Samundar wala Resort (Puri-Arab Sagar galat) | A-023 Sports Club (volleyball 11 galat)
+  A-024 Science Teacher ka Ghar (paani 50 degree galat) | A-025 Jungle Safari (Corbett mein sher galat) | A-026 Pahadon wala Homestay (Nathu La-Nepal galat)
+  A-027 Itihaas Museum (Gateway 1947 galat) | A-028 Hospital (AB+ universal donor galat) | A-029 Banaras Bank wale Seth (2 Oct bank khula galat)
+  A-030 Taaron wala Observatory (21 June sabse lambi raat galat)
+  Shorts: A-021, A-022, A-027
 YE TRICKS DOBARA MAT LENA (upar bracket mein). "Cheez band/kharab thi" Batch 1 mein 4 baar aa chuki – ab kam se kam.
 Sunrise/suraj wali trick 2 baar ho chuki. Saal + launch date (note/WhatsApp) 2 baar ho chuki.
 
 3) AGLA KAAM
-- Agli batch = Batch 3: A-021 se A-030 (5 Medium + 3 Hard + 2 Very Hard), Excel master jaisi (13 sheets).
+- Agli batch = Batch 4: A-031 se A-040 (5 Medium + 3 Hard + 2 Very Hard), Excel master jaisi (13 sheets).
 - Naye patterns lo: B chitra dekho (parchhai, pairon ke nishaan, kya gayab), C number/logic (umar, paise ka hisaab, sach-jhooth),
   D code/shabd (ulta likha, chhupa naam), F twist (do log mile hue, victim hi zimmedar).
 - Excel banane ka code: youtube stories\_tools\build_batch.py + batch2_data.py (example).
-  Nayi batch: batch3_data.py usi format mein likho -> build_batch.py mein import ka naam badlo ->
-  python build_batch.py "<Batch 1 master xlsx>" "<Batch 3 xlsx>"
+  Nayi batch: batch4_data.py usi format mein likho (BATCH = 4) ->
+  python build_batch.py "<Batch 1 master xlsx>" "<Batch 4 xlsx>" batch4_data
   Ye MOTION PLAN, SHORTS MOTION PLAN, Reel VO, pinned, upload, answer key sab khud bharta hai. Banne ke baad check:
   beat 1.5-3.5 sec, sheets/columns master jaise, killer + galat-ishara wala short mein.
 
@@ -57,4 +63,4 @@ Sunrise/suraj wali trick 2 baar ho chuki. Saal + launch date (note/WhatsApp) 2 b
 ---------------------------------------------------------------------
 NAYI CHAT MEIN PEHLA MESSAGE (copy-paste):
 "youtube stories\NAYI CHAT - SUMMARY.txt aur RULES - Agli Batch Ke Niyam.txt padho (branch claude/epic-pascal-i21ji4).
-Batch 1 ki Excel master format hai. Ab Batch 3 (A-021 se A-030) usi format mein banao."
+Batch 1 ki Excel master format hai. Ab Batch 4 (A-031 se A-040) usi format mein banao."
