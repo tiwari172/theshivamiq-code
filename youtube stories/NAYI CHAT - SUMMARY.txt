@@ -27,14 +27,19 @@ Master Excel (format): youtube stories\batch 1\Batch 1 - Production Sheet.xlsx (
 - BATCH 2 BHI SIRF 10 REELS mein badli (2026-10-25): batch 2\Batch 2 - 10 Reels.xlsx + VO SCRIPT.txt (data: _tools\batch2_reels.py –
   kahani batch2_data se, 5 suspect ki lines naye niyam se dobara likhi). Koi naya character nahi, sirf 15 nayi image (1 victim + 14 saboot).
   Kaatil card: 3,5,2,4,1,5,3,2,4,1. Batch 2 ki purani long-video Excel bhi folder mein padi hai (abhi use nahi).
+- BATCH 5 BAN GAYI (A-041..A-050, "ULTRA HARD" – Batch 4 se bhi mushkil): batch 5\Batch 5 - 10 Reels.xlsx + VO SCRIPT.txt
+  (data: _tools\batch5_data.py). Naya: TRAP lines (masoom ki ajeeb par sach baat). Koi naya character nahi, 13 nayi saboot image.
+  Kaatil card: 4,2,5,1,3,5,4,1,2,3. Tricks B5: daayein haath mein plaster (cheque sign), STD 022=Mumbai, raat 1-2 Delhi Metro band,
+  Onam December mein nahi (+Hornbill trap), dhool par ulta HSEKAR=RAKESH, 18-1-22-9=RAVI, carrom teen log + Monty, 9:30 par bhi chai se bhaap,
+  Howrah Bridge-Yamuna (+Matheran/Leh/Puducherry/Kanyakumari trap), kamre mein AC nahi.
 - Script check: python _tools\check_batch.py batch4_data  (RULES section 13 ka checklist khud jaanchta hai).
 - Agar user ko ye reel type pasand aaye -> aur reels banao (nayi stories, BAHAR KA BAYAAN ya dusre pattern):
-    1) _tools\batch5_data.py (batch4_data.py jaisa – seedha 5 suspect, MIN_TAGS = True, REUSE CHARACTER BANK se)
-    2) python check_batch.py batch5_data  -> SAB THEEK
-    3) python build_batch.py "../batch 1/Batch 1 - Production Sheet.xlsx" tmp.xlsx batch5_data
-       python reels_only.py tmp.xlsx "../batch 5/Batch 5 - 10 Reels.xlsx"
-       python reels_vo_script.py "../batch 5/Batch 5 - 10 Reels.xlsx" "../batch 5/Batch 5 - 10 Reels VO SCRIPT.txt" batch5_data
-  Case ID aage: A-041 se. Killer number list RULES mein (B3: 5,3,8,6,2,9,4,7,1,10) – koi number 4-5 baar nahi.
+    1) _tools\batch6_data.py (batch5_data.py jaisa – seedha 5 suspect, MIN_TAGS = True, REUSE CHARACTER BANK se)
+    2) python check_batch.py batch6_data  -> SAB THEEK
+    3) python build_batch.py "../batch 1/Batch 1 - Production Sheet.xlsx" tmp.xlsx batch6_data
+       python reels_only.py tmp.xlsx "../batch 6/Batch 6 - 10 Reels.xlsx"
+       python reels_vo_script.py "../batch 6/Batch 6 - 10 Reels.xlsx" "../batch 6/Batch 6 - 10 Reels VO SCRIPT.txt" batch6_data
+  Case ID aage: A-051 se. Killer number list RULES mein (B3: 5,3,8,6,2,9,4,7,1,10) – koi number 4-5 baar nahi.
 
 DHYAAN: ye sab GitHub branch "claude/epic-pascal-i21ji4" par hai (main mein merge nahi hua).
 Nayi chat ko isi branch par kaam karna hai, ya pehle is branch ko main mein merge karwao.
@@ -96,4 +101,4 @@ Sunrise/suraj wali trick 2 baar ho chuki. Saal + launch date (note/WhatsApp) 2 b
 NAYI CHAT MEIN PEHLA MESSAGE (copy-paste):
 "youtube stories\NAYI CHAT - SUMMARY.txt (section 0 PART 2 pehle) aur RULES - Agli Batch Ke Niyam.txt padho
 (branch claude/epic-pascal-i21ji4). Abhi sirf REELS banani hain, ElevenLabs credit 26 Oct tak khatam karna hai.
-Batch 5 ki 10 reels (A-041 se A-050) batch4_data.py jaise banao (SHORTS = 5 suspect), RULES section 13 checklist + check_batch.py pass, purani images pehle."
+Batch 6 ki 10 reels (A-051 se A-060) batch5_data.py jaise banao (SHORTS = 5 suspect), RULES section 13 checklist + check_batch.py pass, purani images pehle."

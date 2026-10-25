@@ -21,11 +21,15 @@ FEMALE = {"Kavita", "Sunita", "Shobha", "Rashmi", "Champa", "Devi", "Anjali", "T
           "Meenakshi", "Divya", "Mary", "Lakshmi", "Keerthi", "Jennifer", "Mariam", "Leela", "Sarla", "Payal", "Radha", "Sudha",
           "Priya", "Suman", "Aditi", "Swati", "Meena", "Tara", "Saina", "Urmila", "Kritika", "Shanta", "Naziya", "Zoya", "Raziya",
           "Neha", "Riya", "Pooja", "Sujata", "Anita", "Simran", "Anu", "Kamini", "Gomti", "Gargi", "Surabhi", "Hemlata", "Shanti", "Kamla",
-          "Rekha", "Tanvi", "Nisha", "Geeta", "Rosa", "Kavya", "Sharda"}
+          "Rekha", "Tanvi", "Nisha", "Geeta", "Rosa", "Kavya", "Sharda",
+          "Sonal", "Megha", "Kinjal", "Vaishali", "Pallavi", "Sunanda"}
 HOOKS = ["SLAM_TITLE + SHAKE", "TYPE_HOOK", "SPLIT_FLAP + GLITCH"]
 ENTRIES = ["SLIDE_R", "SILHOUETTE_REVEAL", "DOOR_LIGHT"]
 _W = "पहले दूसरे तीसरे चौथे पाँचवें छठे सातवें आठवें नौवें दसवें ग्यारहवें बारहवें तेरहवें चौदहवें पंद्रहवें सोलहवें सत्रहवें अठारहवें उन्नीसवें बीसवें इक्कीसवें बाईसवें तेईसवें चौबीसवें पच्चीसवें छब्बीसवें सत्ताईसवें अट्ठाईसवें उनतीसवें तीसवें इकतीसवें बत्तीसवें तैंतीसवें चौंतीसवें पैंतीसवें छत्तीसवें सैंतीसवें अड़तीसवें उनतालीसवें चालीसवें".split()
 ORD = {i + 1: w for i, w in enumerate(_W)}
+_W2 = ("इकतालीसवें बयालीसवें तैंतालीसवें चवालीसवें पैंतालीसवें छियालीसवें सैंतालीसवें अड़तालीसवें उनचासवें पचासवें "
+       "इक्यावनवें बावनवें तिरपनवें चौवनवें पचपनवें छप्पनवें सत्तावनवें अट्ठावनवें उनसठवें साठवें").split()
+ORD.update({41 + i: w for i, w in enumerate(_W2)})
 for c in CASES:
     c["id"] = f"A-{c['n']:03d}"; c["tag"] = f"A{c['n']:03d}"
 A0, A1 = CASES[0]["id"], CASES[-1]["id"]
