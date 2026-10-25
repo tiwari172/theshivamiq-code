@@ -24,6 +24,9 @@ Master Excel (format): youtube stories\batch 1\Batch 1 - Production Sheet.xlsx (
   Kaatil card: 2,4,1,5,3,3,1,4,5,2. Killer no. list B4 = wahi (5 suspect).
   Tricks used B4: Taj Friday band, June Shimla barf, Wagah retreat raat ko, Delhi-Mumbai flight 1 ghanta, mandir board 8:30 + Meena takraav,
   rasoi mein gas nahi (induction), 9:40 PM selfie mein dhoop, ulta calculator 3508=BOSE, keypad 72485=RAHUL, call log mein 9:15 call nahi.
+- BATCH 2 BHI SIRF 10 REELS mein badli (2026-10-25): batch 2\Batch 2 - 10 Reels.xlsx + VO SCRIPT.txt (data: _tools\batch2_reels.py –
+  kahani batch2_data se, 5 suspect ki lines naye niyam se dobara likhi). Koi naya character nahi, sirf 15 nayi image (1 victim + 14 saboot).
+  Kaatil card: 3,5,2,4,1,5,3,2,4,1. Batch 2 ki purani long-video Excel bhi folder mein padi hai (abhi use nahi).
 - Script check: python _tools\check_batch.py batch4_data  (RULES section 13 ka checklist khud jaanchta hai).
 - Agar user ko ye reel type pasand aaye -> aur reels banao (nayi stories, BAHAR KA BAYAAN ya dusre pattern):
     1) _tools\batch5_data.py (batch4_data.py jaisa – seedha 5 suspect, MIN_TAGS = True, REUSE CHARACTER BANK se)

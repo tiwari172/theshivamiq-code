@@ -19,11 +19,13 @@ for n, keep, hk in D.SHORTS:
         s = c["suspects"][k - 1]
         if "!" in s[2]: P.append(f"{tag}: '!' bayaan mein ({s[3]})")
         if not 8 <= w(s[2]) <= 16: P.append(f"{tag}: {s[3]} ki line {w(s[2])} shabd (10-15 chahiye)")
-    timed = [bool(re.search(r"बजे|चालीस", c["suspects"][k - 1][2])) for k in keep]
+    timed = [bool(re.search(r"बजे|बजकर|चालीस", c["suspects"][k - 1][2])) for k in keep]
     if any(timed) and not all(timed): P.append(f"{tag}: time kuch lines mein hai, kuch mein nahi")
     dev = " ".join([hk[0], c["setup"][0][0], c["setup"][1][0], c["entry"][0], c["jagah"][0]] + [c["suspects"][k - 1][2] for k in keep])
     if re.search(r"बोले|बोलीं|बोली", dev): P.append(f"{tag}: 'bole/boli' VO mein")
-    if c["city"].lower() not in c["title"].lower() or not c["setup"][0][1].upper().startswith(c["city"]): P.append(f"{tag}: shehar title/VO mein alag")
+    if c["city"].lower() not in (c["setup"][0][1] + c["setup"][1][1]).lower(): P.append(f"{tag}: shehar ({c['city']}) VO mein nahi")
+    for o in {x["city"] for x in D.CASES} - {c["city"]}:
+        if o.lower() in c["title"].lower(): P.append(f"{tag}: title mein doosra shehar ({o})")
     for k in keep:
         r = getattr(D, "REUSE", {}).get(("S", n, k))
         if r and r[1]: P.append(f"{tag}: suspect {k} ka naam REUSE se badal raha ({r[2]}) – data mein hi sahi naam likho")

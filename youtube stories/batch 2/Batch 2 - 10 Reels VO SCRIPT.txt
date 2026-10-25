@@ -1,0 +1,210 @@
+THESHIVAMIQ – BATCH 2: 10 REELS KI VO SCRIPT
+============================================================
+Voice: ElevenLabs, Rudra, eleven_v4, stability 0.45, speed 1.05. Har reel ki VO EK BAAR mein banao, phir purana tighten.
+Emotion tag KAM SE KAM: sirf hook par [whispers] + maut wali line par [serious]. Suspect ke bayaan par koi tag nahi. Pakad liya purani file hai, uspar tag nahi.
+'⏸ 3 sec chup' = yahan voice mein 3 sec khaali (build_voice khud daalta hai). End wali 3 files purani hain – dobara MAT banao.
+Saboot kabhi bole nahi jaate (sirf tasveer). Jawab reel mein kabhi nahi.
+Images/motion/caption: 'Batch 2 - 10 Reels.xlsx' (Shorts + Reels, SHORTS MOTION PLAN, Image Prompts).
+
+------------------------------------------------------------
+REEL 1 | Case A-011: Bank Manager ka Bungalow (MEDIUM) | ~61 sec
+Suspect card: 1/5 Beta Ankit | 2/5 Naukar Raghu | 3/5 Padosi Ramakant | 4/5 Driver Jagga | 5/5 Bahu Kavita
+Screen hook: EK JHOOTH
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] पाँच लोग। सबने उन्हें ज़िंदा देखा था... एक झूठ बोल रहा है।
+कानपुर। रिटायर्ड बैंक मैनेजर सुरेश टंडन, अपने बंगले के हॉल में मरे मिले!
+[serious] बीस अक्टूबर, रात नौ से साढ़े नौ के बीच।
+डिटेक्टिव शिवम बंगले पहुँचे।
+हॉल में सब कुछ बिखरा था। शिवम ने हर चीज़ पर नज़र डाली।
+बेटा अंकित... "मैं आठ बजे पापा से मिला, वो हॉल में बैठकर अख़बार पढ़ रहे थे।"
+नौकर रघु... "मैंने साढ़े सात बजे साहब को चाय दी, वो टीवी देख रहे थे।"
+पड़ोसी रमाकांत... "मैं साढ़े आठ बजे साहब से मिला, उनकी सोने की घड़ी चमक रही थी।"
+ड्राइवर जग्गा... "मैंने सात बजे साहब को घर छोड़ा, वो बहुत थके हुए लग रहे थे।"
+बहू कविता... "मैंने शाम छह बजे पापा जी को फ़ोन किया, वो ठीक थे।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 2 | Case A-012: Professor ka Cottage (MEDIUM) | ~55 sec
+Suspect card: 1/5 Patni Shobha | 2/5 Paperwala Pintu | 3/5 Doodhwala Ballu | 4/5 Mali Keshav | 5/5 Bhatija Manoj
+Screen hook: KAATIL KAUN?
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] सुबह की धुंध... और पाँच लोगों के पाँच बयान।
+देहरादून। रिटायर्ड प्रोफ़ेसर अरविंद जोशी, अपने बगीचे की कुर्सी पर मरे मिले!
+[serious] मौत सुबह साढ़े छह से साढ़े सात के बीच।
+डिटेक्टिव शिवम कॉटेज पहुँचे।
+बगीचे में सुबह की धुंध थी। शिवम ने हर चीज़ पर नज़र डाली।
+पत्नी शोभा... "मैं छह बजे मंदिर गई थी, आठ बजे लौटी।"
+पेपरवाला पिंटू... "मैंने सवा छह बजे गेट पर अख़बार डाला और निकल गया।"
+दूधवाला बल्लू... "मैंने छह बजे दूध रखा, साहब तब बगीचे में टहल रहे थे।"
+माली केशव... "मैं सात बजे तक पीछे के बगीचे में पानी दे रहा था।"
+भतीजा मनोज... "मैं सात बजे आया, चाचा जी ने अख़बार पढ़कर मुझे दिया।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 3 | Case A-013: Haveli ki Doosri Manzil (MEDIUM) | ~62 sec
+Suspect card: 1/5 Beta Vikrant | 2/5 Bhatija Ranveer | 3/5 Doctor Mehta | 4/5 Munim Girdhari | 5/5 Rasoiya Kallu
+Screen hook: EK GALTI
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] एक बंद कमरा। पाँच लोग। और एक ग़लती।
+उदयपुर। हवेली के मालिक ठाकुर भवानी सिंह, अपने कमरे में मरे मिले!
+[serious] मौत रात दस से ग्यारह के बीच। डॉक्टर ने आते ही लाश को चादर से ढककर कमरा बंद करवा दिया।
+डिटेक्टिव शिवम हवेली पहुँचे।
+हवेली में सन्नाटा था। शिवम ने हर चीज़ पर नज़र डाली।
+बेटा विक्रांत... "मैं दस से ग्यारह बजे तक नीचे दरबार हॉल में मेहमानों के साथ था।"
+भतीजा रणवीर... "मैं दस बजे से छत पर था, काका सा के सिर पर वार हुआ।"
+डॉक्टर मेहता... "मुझे ग्यारह बजे बुलाया, मैंने जाँच करके कमरा बंद करवा दिया।"
+मुनीम गिरधारी... "मैं दस से ग्यारह बजे तक अपने कमरे में खाते मिला रहा था।"
+रसोइया कल्लू... "मैंने दस बजे दूध का गिलास दिया था, तब काका सा ठीक थे।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 4 | Case A-014: Jheel Kinare ka Ghar (MEDIUM) | ~54 sec
+Suspect card: 1/5 Patni Anjali | 2/5 Student Tanishka | 3/5 Chowkidar Ramsingh | 4/5 Purana dost Himanshu | 5/5 Delivery boy Aman
+Screen hook: 5 LOG
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] पाँच लोग। एक रात। सिर्फ़ एक झूठ।
+भोपाल। संगीत टीचर नितिन सक्सेना, अपने घर में मरे मिले!
+[serious] मौत रात साढ़े नौ से दस के बीच।
+डिटेक्टिव शिवम घर पहुँचे।
+घर में संगीत का सामान बिखरा था। शिवम ने हर चीज़ पर नज़र डाली।
+पत्नी अंजलि... "मैं नौ से दस बजे तक अपनी बहन के घर पर थी।"
+स्टूडेंट तनिष्का... "मैं नौ बजे क्लास के बाद निकली और सीधे घर गई।"
+चौकीदार रामसिंह... "मैं नौ से दस बजे तक गार्ड रूम में बैठा था।"
+पुराना दोस्त हिमांशु... "मैं नौ से दस बजे तक छत पर तारे देख रहा था।"
+डिलीवरी बॉय अमन... "मैंने सवा नौ बजे गेट पर खाना दिया और लौट गया।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 5 | Case A-015: Flat No. 704 (MEDIUM) | ~58 sec
+Suspect card: 1/5 Client Vinay | 2/5 Partner Pankaj | 3/5 Guard Bahadur | 4/5 Delivery boy Sonu | 5/5 Padosi Mishra ji
+Screen hook: KILLER KAUN?
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] एक सोसाइटी। एक गेट। पाँच लोग।
+नागपुर। सीए दीपक राठी, अपने फ़्लैट नंबर सात सौ चार में मरे मिले!
+[serious] मौत रात नौ से साढ़े नौ के बीच।
+डिटेक्टिव शिवम सोसाइटी पहुँचे।
+फ़्लैट में फ़ाइलें बिखरी थीं। शिवम ने हर चीज़ पर नज़र डाली।
+क्लाइंट विनय... "मैं नौ बजे गेट से बाहर निकल गया, गार्ड ने रजिस्टर में लिखा।"
+पार्टनर पंकज... "मैं नौ बजकर पाँच मिनट पर गेट से बाहर निकल गया था।"
+गार्ड बहादुर... "मैं नौ से साढ़े नौ बजे तक पूरे वक़्त गेट पर बैठा था।"
+डिलीवरी बॉय सोनू... "मैं नौ बजकर दस मिनट पर खाना देने गया, किसी ने दरवाज़ा नहीं खोला।"
+पड़ोसी मिश्रा जी... "मैं नौ से साढ़े नौ बजे तक अपने फ़्लैट में खाना खा रहा था।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 6 | Case A-016: Jodhpur ki Kothi (HARD) | ~54 sec
+Suspect card: 1/5 Beta Digvijay | 2/5 Bahu Meenakshi | 3/5 Naukar Ramu | 4/5 Poti Divya | 5/5 Driver Suraj
+Screen hook: NAAM SAAMNE HAI
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] कातिल का नाम सामने था... किसी ने ध्यान नहीं दिया।
+जोधपुर। पुराने ज़मींदार रविंद्र सिंह राठौड़, अपनी कोठी में मरे मिले!
+[serious] मौत रात दस से ग्यारह के बीच।
+डिटेक्टिव शिवम कोठी पहुँचे।
+कोठी में पुराना रेडियो धीरे-धीरे बज रहा था। शिवम ने हर चीज़ पर नज़र डाली।
+बेटा दिग्विजय... "मैं क्लब में दोस्तों के साथ ताश खेल रहा था।"
+बहू मीनाक्षी... "मैं अपने कमरे में सो रही थी, सिर में दर्द था।"
+नौकर रामू... "मैं रसोई में रात के बर्तन धो रहा था।"
+पोती दिव्या... "मैं हॉस्टल में थी, सहेली से फ़ोन पर बात कर रही थी।"
+ड्राइवर सूरज... "मैं गेट के बाहर गाड़ी में बैठकर सो रहा था।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 7 | Case A-017: Chennai ka Club House (HARD) | ~61 sec
+Suspect card: 1/5 Patni Lakshmi | 2/5 Partner Murali | 3/5 Bhatija Arun | 4/5 Billiards coach Ravi | 5/5 Beti Keerthi
+Screen hook: EK JHOOTH
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] पाँच लोग। पाँच जगह। एक जगह झूठी।
+चेन्नई। बिज़नेसमैन के. रघुनाथन, अपने क्लब हाउस के लाउंज में मरे मिले!
+[serious] मौत दोपहर दो से तीन के बीच।
+डिटेक्टिव शिवम क्लब हाउस पहुँचे।
+क्लब हाउस में दोपहर का सन्नाटा था। शिवम ने हर चीज़ पर नज़र डाली।
+पत्नी लक्ष्मी... "मैं दो से तीन बजे तक मंदिर में थी, वहाँ भजन चल रहे थे।"
+पार्टनर मुरली... "मैं दो से तीन बजे तक ऑफ़िस में मीटिंग में था, क्लाइंट भी साथ थे।"
+भतीजा अरुण... "मैं दो से तीन बजे तक टेस्ट मैच में था, फ़्री हिट पर छक्का लगा।"
+बिलियर्ड्स कोच रवि... "मैं दो से तीन बजे तक दूसरे हॉल में बच्चों को बिलियर्ड्स सिखा रहा था।"
+बेटी कीर्ति... "मैं दो से तीन बजे तक कॉलेज में परीक्षा दे रही थी, पेपर लंबा था।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 8 | Case A-018: Masale wale Seth ka Ghar (HARD) | ~55 sec
+Suspect card: 1/5 Beta Georgy | 2/5 Partner Rasheed | 3/5 Naav wala Kuttan | 4/5 Patni Mariam | 5/5 Naukrani Shanti
+Screen hook: 5 KAHANIYAN
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] आधी रात से पहले... पाँच लोग, पाँच कहानियाँ।
+कोच्चि। मसालों के व्यापारी थॉमस वर्गीज़, अपने घर में मरे मिले!
+[serious] मौत रात ग्यारह से साढ़े ग्यारह के बीच।
+डिटेक्टिव शिवम घर पहुँचे।
+घर में काली मिर्च की ख़ुशबू फैली थी। शिवम ने हर चीज़ पर नज़र डाली।
+बेटा जॉर्जी... "मैं ग्यारह से साढ़े ग्यारह बजे तक गोदाम में स्टॉक गिन रहा था।"
+पार्टनर रशीद... "मैं दुबई में था, वहाँ साढ़े बारह बजे थॉमस को वीडियो कॉल किया।"
+नाव वाला कुट्टन... "मैं दस बजे नाव बाँधकर अपने घर चला गया था।"
+पत्नी मरियम... "मैं ग्यारह बजे तक पड़ोसन के घर पर बैठी थी।"
+नौकरानी शांति... "मैंने साढ़े दस बजे दो गिलास चाय बनाई और सो गई।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 9 | Case A-019: Ek Purani File (VERY HARD) | ~60 sec
+Suspect card: 1/5 Beta Anurag | 2/5 Bunkar Munna | 3/5 Patni Sarla | 4/5 Bhai Sudhir | 5/5 Munim Dubey
+Screen hook: PURANI FILE
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] एक पुरानी फ़ाइल। पाँच लोग। सच अब तक छुपा था।
+ये एक पुराना केस है, जो कभी सॉल्व नहीं हुआ। वाराणसी के साड़ी व्यापारी हरीश बंसल, अपने घर में मरे मिले थे!
+[serious] मौत रात दस से साढ़े दस के बीच हुई थी।
+डिटेक्टिव शिवम ने पुरानी फ़ाइल दोबारा खोली।
+पुरानी तस्वीरें, पुराने सबूत। शिवम ने हर चीज़ पर दोबारा नज़र डाली।
+बेटा अनुराग... "मैं दस बजे तक दुकान पर बैठकर हिसाब कर रहा था।"
+बुनकर मुन्ना... "मैं दस बजे तक अपने करघे पर काम कर रहा था।"
+पत्नी सरला... "मैं दस बजे तक पड़ोसन के घर पर बैठी थी।"
+भाई सुधीर... "मैंने मुंबई से दस बजे माँ को व्हाट्सऐप वीडियो कॉल किया।"
+मुनीम दुबे... "मैं नौ बजे ही दुकान बंद करके घर चला गया था।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+------------------------------------------------------------
+REEL 10 | Case A-020: Kothi ki Aakhri Shaam (VERY HARD) | ~60 sec
+Suspect card: 1/5 Trustee Biharilal | 2/5 Pujari Shastri ji | 3/5 Beta Murari | 4/5 Patni Radha | 5/5 Bhatija Kanhaiya
+Screen hook: KAATIL KAUN?
+
+VO (ElevenLabs mein ye paste karo, END line chhod kar):
+[whispers] आँगन में दीये... और पाँच लोगों के पाँच सच।
+मथुरा। मंदिर के ट्रस्टी गोविंद दास अग्रवाल, अपनी कोठी के आँगन में मरे मिले!
+[serious] मौत शाम छह से सात के बीच।
+डिटेक्टिव शिवम कोठी पहुँचे।
+आँगन में दीये जल रहे थे। शिवम ने हर चीज़ पर नज़र डाली।
+ट्रस्टी बिहारीलाल... "मैं छह से सात बजे तक मंदिर में सूर्य ग्रहण की पूजा में था।"
+पुजारी शास्त्री जी... "मैं छह से सात बजे तक मंदिर में संध्या आरती करवा रहा था।"
+बेटा मुरारी... "मैं छह से सात बजे तक अपनी दुकान पर ग्राहकों के साथ था।"
+पत्नी राधा... "मैं छह से सात बजे तक छत पर पूजा के लिए खीर रख रही थी।"
+भतीजा कन्हैया... "मैं छह से सात बजे तक दोस्तों के साथ यमुना किनारे था।"
+⏸ 3 sec chup (Shivam soch)
+PAKAD_LIYA_HI (डिटेक्टिव शिवम ने कातिल पकड़ लिया!)  +  CTA_HI (आंसर कमेंट करो, सही आंसर कल पिन होगा।)  +  SIGNATURE_HI (शिवम की नज़र से कोई नहीं बचता।)  [purani files]
+
+============================================================
+ANSWER KEY (SIRF AAPKE LIYE – screen par kabhi nahi, agle din pinned comment)
+A-011: Padosi Ramakant (card par 3/5) – RAMAKANT (no. 3). Sone ki ghadi 15 Oct se repair shop par thi (receipt: delivery 25 Oct). 20 Oct ko 'ghadi chamak rahi thi' = jhooth.
+A-012: Bhatija Manoj (card par 5/5) – MANOJ (no. 5). Akhbaar gate par rubber band aur plastic mein band pada tha – kisi ne khola hi nahi. 'Chacha ji ne akhbaar padh kar diya' = jhooth.
+A-013: Bhatija Ranveer (card par 2/5) – RANVEER (no. 2). Laash chadar se dhaki thi aur kamra band tha – sirf doctor ne jaanch ki. Ranveer ko kaise pata ki vaar SAR par hua? Sirf kaatil jaanta tha.
+A-014: Purana dost Himanshu (card par 4/5) – HIMANSHU (no. 4). Bhopal mein 9 se 10:30 tez baarish hui (IMD alert, geeli chhatri). 'Aasmaan saaf, taare chamak rahe the' = jhooth.
+A-015: Client Vinay (card par 1/5) – VINAY (no. 1). Society mein ek hi gate, oonchi deewar. Register mein Vinay ka IN 8:50 hai par OUT khaali – wo gate se bahar gaya hi nahi. Guard poore waqt gate par tha.
+A-016: Driver Suraj (card par 5/5) – SURAJ (no. 5). Purane keypad phone par 7=PQRS, 8=TUV, 2=ABC, 5=JKL. Draft 7-8-7-2-5 = S-U-R-A-J. Marne se pehle Thakur sahab ne kaatil ka naam type kiya.
+A-017: Bhatija Arun (card par 3/5) – ARUN (no. 3). Test cricket mein FREE HIT hota hi nahi – free hit sirf ODI aur T20 mein milta hai. Wo stadium mein nahi tha.
+A-018: Partner Rasheed (card par 2/5) – RASHEED (no. 2). Dubai ka time India se 1.5 ghanta PEECHHE hai. India mein raat 11 = Dubai mein raat 9:30, saadhe baarah nahi. Wo Dubai mein nahi tha.
+A-019: Bhai Sudhir (card par 4/5) – SUDHIR (no. 4). 1) File ki date: 12 March 2015. 2) WhatsApp VIDEO call Nov 2016 mein aaya (2015 mein sirf voice call). 3) 2015 mein WhatsApp video call ho hi nahi sakta = jhooth.
+A-020: Trustee Biharilal (card par 1/5) – BIHARILAL (no. 1). 1) Calendar: Sharad Purnima (poornima = poora chaand). 2) Surya grahan sirf AMAVASYA ko hota hai, poornima ko kabhi nahi. 3) 'Surya grahan ki pooja' = jhooth.
